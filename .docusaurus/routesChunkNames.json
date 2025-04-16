@@ -112,6 +112,12 @@
     ],
     "__props": "__props---blog-tags-test-10-c-e0e"
   },
+  "/search-822": {
+    "__comp": "__comp---theme-search-page-1-a-4-d6f",
+    "__context": {
+      "plugin": "plugin---search-138-688"
+    }
+  },
   "/docs-72b": {
     "__comp": "__comp---theme-docs-root-5-e-9-0b6",
     "__context": {

@@ -29,6 +29,23 @@ export default {
       "crossorigin": "anonymous"
     }
   ],
+  "plugins": [
+    [
+      "/Users/junhyun/JunhyunB.github.io/node_modules/@easyops-cn/docusaurus-search-local/dist/server/server/index.js",
+      {
+        "hashed": true,
+        "indexDocs": true,
+        "indexBlog": true,
+        "indexPages": true,
+        "docsRouteBasePath": "/docs",
+        "blogRouteBasePath": "/blog",
+        "highlightSearchTermsOnTargetPage": true,
+        "language": [
+          "en"
+        ]
+      }
+    ]
+  ],
   "presets": [
     [
       "classic",
@@ -385,7 +402,6 @@ export default {
     "static"
   ],
   "customFields": {},
-  "plugins": [],
   "themes": [],
   "scripts": [],
   "headTags": [],

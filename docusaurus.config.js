@@ -48,6 +48,24 @@ const config = {
     },
   ],
 
+  // Add the local search plugin
+  plugins: [
+    [
+      require.resolve('@easyops-cn/docusaurus-search-local'),
+      {
+        // Options
+        hashed: true,
+        indexDocs: true,
+        indexBlog: true,
+        indexPages: true,
+        docsRouteBasePath: '/docs',
+        blogRouteBasePath: '/blog',
+        highlightSearchTermsOnTargetPage: true,
+        language: ["en"],
+      },
+    ],
+  ],
+
   presets: [
     [
       'classic',

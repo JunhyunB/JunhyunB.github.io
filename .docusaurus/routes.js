@@ -73,6 +73,11 @@ export default [
     exact: true
   },
   {
+    path: '/search',
+    component: ComponentCreator('/search', '822'),
+    exact: true
+  },
+  {
     path: '/docs',
     component: ComponentCreator('/docs', '72b'),
     routes: [
