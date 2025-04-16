@@ -1,0 +1,44 @@
+{
+  "permalink": "/blog/2025/04/16/blog-post",
+  "editUrl": "https://github.com/JunhyunB/JunhyunB.github.io/tree/main/blog/2025-04-16-blog-post.md",
+  "source": "@site/blog/2025-04-16-blog-post.md",
+  "title": "블로그 쓸 때 필요한 정보",
+  "description": "Blog posts support Docusaurus Markdown features, such as MDX.",
+  "date": "2025-04-16T00:00:00.000Z",
+  "tags": [
+    {
+      "inline": true,
+      "label": "test",
+      "permalink": "/blog/tags/test"
+    }
+  ],
+  "readingTime": 0.235,
+  "hasTruncateMarker": true,
+  "authors": [
+    {
+      "name": "Jun-Hyun Bae",
+      "title": "Researcher",
+      "url": "https://github.com/JunhyunB",
+      "socials": {
+        "github": "https://github.com/JunhyunB"
+      },
+      "imageURL": "https://github.com/JunhyunB.png",
+      "key": "junhyun",
+      "page": null
+    }
+  ],
+  "frontMatter": {
+    "title": "블로그 쓸 때 필요한 정보",
+    "authors": [
+      "junhyun"
+    ],
+    "tags": [
+      "test"
+    ]
+  },
+  "unlisted": false,
+  "nextItem": {
+    "title": "Welcome",
+    "permalink": "/blog/welcome"
+  }
+}

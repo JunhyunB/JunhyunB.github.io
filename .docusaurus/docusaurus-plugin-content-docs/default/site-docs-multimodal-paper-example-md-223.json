@@ -1,0 +1,18 @@
+{
+  "id": "multimodal/paper-example",
+  "title": "CLIP: Connecting Text and Images",
+  "description": "Paper Information",
+  "source": "@site/docs/multimodal/paper-example.md",
+  "sourceDirName": "multimodal",
+  "slug": "/multimodal/paper-example",
+  "permalink": "/docs/multimodal/paper-example",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/JunhyunB/JunhyunB.github.io/tree/main/docs/multimodal/paper-example.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 1,
+  "frontMatter": {
+    "sidebar_position": 1
+  }
+}

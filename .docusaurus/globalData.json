@@ -11,23 +11,19 @@
           "mainDocId": "intro",
           "docs": [
             {
-              "id": "computer-vision/index",
-              "path": "/docs/computer-vision/",
-              "sidebar": "tutorialSidebar"
-            },
-            {
               "id": "intro",
               "path": "/docs/intro",
               "sidebar": "tutorialSidebar"
             },
             {
-              "id": "machine-learning/index",
-              "path": "/docs/machine-learning/",
+              "id": "mechanistic-interpretability/index",
+              "path": "/docs/mechanistic-interpretability/",
               "sidebar": "tutorialSidebar"
             },
             {
-              "id": "nlp/index",
-              "path": "/docs/nlp/"
+              "id": "mechanistic-interpretability/test",
+              "path": "/docs/mechanistic-interpretability/test",
+              "sidebar": "tutorialSidebar"
             },
             {
               "id": "paper-review-template",
@@ -35,36 +31,19 @@
               "sidebar": "tutorialSidebar"
             },
             {
-              "id": "tutorial-basics/congratulations",
-              "path": "/docs/tutorial-basics/congratulations"
+              "id": "trustworthy-ai/diffusion-based/index",
+              "path": "/docs/trustworthy-ai/diffusion-based/",
+              "sidebar": "tutorialSidebar"
             },
             {
-              "id": "tutorial-basics/create-a-blog-post",
-              "path": "/docs/tutorial-basics/create-a-blog-post"
+              "id": "trustworthy-ai/diffusion-based/safety-guidance",
+              "path": "/docs/trustworthy-ai/diffusion-based/safety-guidance",
+              "sidebar": "tutorialSidebar"
             },
             {
-              "id": "tutorial-basics/create-a-document",
-              "path": "/docs/tutorial-basics/create-a-document"
-            },
-            {
-              "id": "tutorial-basics/create-a-page",
-              "path": "/docs/tutorial-basics/create-a-page"
-            },
-            {
-              "id": "tutorial-basics/deploy-your-site",
-              "path": "/docs/tutorial-basics/deploy-your-site"
-            },
-            {
-              "id": "tutorial-basics/markdown-features",
-              "path": "/docs/tutorial-basics/markdown-features"
-            },
-            {
-              "id": "tutorial-extras/manage-docs-versions",
-              "path": "/docs/tutorial-extras/manage-docs-versions"
-            },
-            {
-              "id": "tutorial-extras/translate-your-site",
-              "path": "/docs/tutorial-extras/translate-your-site"
+              "id": "trustworthy-ai/index",
+              "path": "/docs/trustworthy-ai/",
+              "sidebar": "tutorialSidebar"
             }
           ],
           "draftIds": [],

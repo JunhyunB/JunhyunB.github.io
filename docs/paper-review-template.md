@@ -1,20 +1,18 @@
 ---
-sidebar_position: 999
+# slug: prt
+title: "Paper Review Template"
+tags: [template]
 ---
-
-# Paper Review Template
 
 Use this template when creating a new paper review.
 
-```markdown
+``` markdown
 ---
-sidebar_position: X
+title: "Paper Title"
+tags: [tag1, tag2, ]
 ---
-
-# Paper Title
 
 ## Paper Information
-
 - **Title**: Full title of the paper
 - **Authors**: Author 1, Author 2, etc.
 - **Conference/Journal**: Where it was published
@@ -22,39 +20,24 @@ sidebar_position: X
 - **Link**: [Paper link](https://link-to-paper.com)
 - **Code**: [GitHub repository](https://github.com/repo) (if available)
 
-## Summary
+## TL; DR
 
 A 2-3 paragraph summary of the paper's main contributions and significance.
 
-## Key Points
+## Abstract
 
-- Key point 1
-- Key point 2
-- Key point 3
 
-## Methods
+## Key Contributions
+- A
+- B
+- C
 
-Detailed explanation of the methods proposed in the paper. Include equations, diagrams, and algorithms if necessary.
+## Motivation
 
-### Subsection 1
 
-Description...
+## Method
 
-### Subsection 2
 
-Description...
+## Experimental Results
 
-## Results
-
-Summary of the experimental results. Include tables and figures if helpful.
-
-## Discussion
-
-Your analysis of the paper. What are its strengths and weaknesses? How does it compare to other papers in the field? What are potential future directions?
-
-## References
-
-- [1] Reference 1
-- [2] Reference 2
-- [3] Reference 3
-``` 
+```

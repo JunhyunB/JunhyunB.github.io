@@ -19,8 +19,8 @@
       "description": "Research notes on machine learning topics"
     }
   ],
-  "readingTime": 1.83,
-  "hasTruncateMarker": false,
+  "readingTime": 1.845,
+  "hasTruncateMarker": true,
   "authors": [
     {
       "name": "Jun-Hyun Bae",

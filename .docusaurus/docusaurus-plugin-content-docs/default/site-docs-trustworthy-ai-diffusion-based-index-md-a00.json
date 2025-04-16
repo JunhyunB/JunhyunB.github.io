@@ -1,0 +1,27 @@
+{
+  "id": "trustworthy-ai/diffusion-based/index",
+  "title": "Diffusion-based Models",
+  "description": "This section contains paper reviews related to trust and safety issues in diffusion-based generative models.",
+  "source": "@site/docs/trustworthy-ai/diffusion-based/index.md",
+  "sourceDirName": "trustworthy-ai/diffusion-based",
+  "slug": "/trustworthy-ai/diffusion-based/",
+  "permalink": "/docs/trustworthy-ai/diffusion-based/",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/JunhyunB/JunhyunB.github.io/tree/main/docs/trustworthy-ai/diffusion-based/index.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 1,
+  "frontMatter": {
+    "sidebar_position": 1
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Trustworthy AI",
+    "permalink": "/docs/trustworthy-ai/"
+  },
+  "next": {
+    "title": "Safety Guidance in Diffusion Models",
+    "permalink": "/docs/trustworthy-ai/diffusion-based/safety-guidance"
+  }
+}

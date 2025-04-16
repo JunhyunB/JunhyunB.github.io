@@ -1,0 +1,63 @@
+{
+  "permalink": "/blog/safety-guidance-diffusion-models",
+  "editUrl": "https://github.com/JunhyunB/JunhyunB.github.io/tree/main/blog/2023-06-15-safety-guidance-diffusion.md",
+  "source": "@site/blog/2023-06-15-safety-guidance-diffusion.md",
+  "title": "Safety Guidance in Diffusion Models",
+  "description": "Paper Information",
+  "date": "2023-06-15T00:00:00.000Z",
+  "tags": [
+    {
+      "inline": true,
+      "label": "trustworthy-ai",
+      "permalink": "/blog/tags/trustworthy-ai"
+    },
+    {
+      "inline": true,
+      "label": "diffusion-models",
+      "permalink": "/blog/tags/diffusion-models"
+    },
+    {
+      "inline": true,
+      "label": "safety",
+      "permalink": "/blog/tags/safety"
+    },
+    {
+      "inline": true,
+      "label": "cvpr-2023",
+      "permalink": "/blog/tags/cvpr-2023"
+    }
+  ],
+  "readingTime": 1.655,
+  "hasTruncateMarker": false,
+  "authors": [
+    {
+      "name": "Jun-Hyun Bae",
+      "title": "Researcher",
+      "url": "https://github.com/JunhyunB",
+      "socials": {
+        "github": "https://github.com/JunhyunB"
+      },
+      "imageURL": "https://github.com/JunhyunB.png",
+      "key": "junhyun",
+      "page": null
+    }
+  ],
+  "frontMatter": {
+    "slug": "safety-guidance-diffusion-models",
+    "title": "Safety Guidance in Diffusion Models",
+    "authors": [
+      "junhyun"
+    ],
+    "tags": [
+      "trustworthy-ai",
+      "diffusion-models",
+      "safety",
+      "cvpr-2023"
+    ]
+  },
+  "unlisted": false,
+  "nextItem": {
+    "title": "Welcome",
+    "permalink": "/blog/welcome"
+  }
+}

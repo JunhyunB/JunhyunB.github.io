@@ -21,13 +21,27 @@ export default {
     "path": "i18n",
     "localeConfigs": {}
   },
+  "stylesheets": [
+    {
+      "href": "https://cdn.jsdelivr.net/npm/katex@0.13.24/dist/katex.min.css",
+      "type": "text/css",
+      "integrity": "sha384-odtC+0UGzzFL/6PNoE8rX/SPcQDXBJ+uRepguP4QkPCm2LBxH3FA3y+fKSiJ+AmM",
+      "crossorigin": "anonymous"
+    }
+  ],
   "presets": [
     [
       "classic",
       {
         "docs": {
           "sidebarPath": "./sidebars.js",
-          "editUrl": "https://github.com/JunhyunB/JunhyunB.github.io/tree/main/"
+          "editUrl": "https://github.com/JunhyunB/JunhyunB.github.io/tree/main/",
+          "remarkPlugins": [
+            null
+          ],
+          "rehypePlugins": [
+            null
+          ]
         },
         "blog": {
           "showReadingTime": true,
@@ -41,6 +55,12 @@ export default {
           "editUrl": "https://github.com/JunhyunB/JunhyunB.github.io/tree/main/",
           "blogTitle": "Research Notes",
           "blogDescription": "Research notes and paper summaries",
+          "remarkPlugins": [
+            null
+          ],
+          "rehypePlugins": [
+            null
+          ],
           "onInlineTags": "warn",
           "onInlineAuthors": "warn",
           "onUntruncatedBlogPosts": "ignore"
@@ -369,7 +389,6 @@ export default {
   "themes": [],
   "scripts": [],
   "headTags": [],
-  "stylesheets": [],
   "clientModules": [],
   "titleDelimiter": "|",
   "noIndex": false,

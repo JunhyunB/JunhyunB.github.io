@@ -2,34 +2,10 @@
   "title": "Recent posts",
   "items": [
     {
-      "title": "Welcome",
-      "permalink": "/blog/welcome",
+      "title": "블로그 쓸 때 필요한 정보",
+      "permalink": "/blog/2025/04/16/blog-post",
       "unlisted": false,
-      "date": "2021-08-26T00:00:00.000Z"
-    },
-    {
-      "title": "MDX Blog Post",
-      "permalink": "/blog/mdx-blog-post",
-      "unlisted": false,
-      "date": "2021-08-01T00:00:00.000Z"
-    },
-    {
-      "title": "Welcome Docusaurus",
-      "permalink": "/blog/welcome-docusaurus-v2",
-      "unlisted": false,
-      "date": "2019-09-05T00:00:00.000Z"
-    },
-    {
-      "title": "Example Research Note",
-      "permalink": "/blog/example-research-note",
-      "unlisted": false,
-      "date": "2019-05-29T00:00:00.000Z"
-    },
-    {
-      "title": "First Blog Post",
-      "permalink": "/blog/first-blog-post",
-      "unlisted": false,
-      "date": "2019-05-28T00:00:00.000Z"
+      "date": "2025-04-16T00:00:00.000Z"
     }
   ]
 }

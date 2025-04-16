@@ -1,0 +1,24 @@
+{
+  "id": "mechanistic-interpretability/test",
+  "title": "TEst 2",
+  "description": "",
+  "source": "@site/docs/mechanistic-interpretability/test.md",
+  "sourceDirName": "mechanistic-interpretability",
+  "slug": "/mechanistic-interpretability/test",
+  "permalink": "/docs/mechanistic-interpretability/test",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/JunhyunB/JunhyunB.github.io/tree/main/docs/mechanistic-interpretability/test.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Mechanistic Interpretability",
+    "permalink": "/docs/mechanistic-interpretability/"
+  },
+  "next": {
+    "title": "Trustworthy AI",
+    "permalink": "/docs/trustworthy-ai/"
+  }
+}

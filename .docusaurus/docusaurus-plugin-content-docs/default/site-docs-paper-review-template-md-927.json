@@ -9,15 +9,23 @@
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/JunhyunB/JunhyunB.github.io/tree/main/docs/paper-review-template.md",
-  "tags": [],
+  "tags": [
+    {
+      "inline": true,
+      "label": "template",
+      "permalink": "/docs/tags/template"
+    }
+  ],
   "version": "current",
-  "sidebarPosition": 999,
   "frontMatter": {
-    "sidebar_position": 999
+    "title": "Paper Review Template",
+    "tags": [
+      "template"
+    ]
   },
   "sidebar": "tutorialSidebar",
   "previous": {
-    "title": "Machine Learning",
-    "permalink": "/docs/machine-learning/"
+    "title": "Safety Guidance in Diffusion Models",
+    "permalink": "/docs/trustworthy-ai/diffusion-based/safety-guidance"
   }
 }

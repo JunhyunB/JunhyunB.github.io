@@ -17,7 +17,7 @@
   },
   "sidebar": "tutorialSidebar",
   "next": {
-    "title": "Computer Vision",
-    "permalink": "/docs/computer-vision/"
+    "title": "Mechanistic Interpretability",
+    "permalink": "/docs/mechanistic-interpretability/"
   }
 }

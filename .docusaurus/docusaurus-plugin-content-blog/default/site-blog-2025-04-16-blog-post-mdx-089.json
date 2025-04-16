@@ -1,0 +1,43 @@
+{
+  "permalink": "/blog/2025/04/16/blog-post",
+  "editUrl": "https://github.com/JunhyunB/JunhyunB.github.io/tree/main/blog/2025-04-16-blog-post.mdx",
+  "source": "@site/blog/2025-04-16-blog-post.mdx",
+  "title": "블로그 쓸 때 필요한 정보",
+  "description": "This is my first post on Docusaurus.",
+  "date": "2025-04-16T00:00:00.000Z",
+  "tags": [
+    {
+      "inline": false,
+      "label": "test",
+      "permalink": "/blog/tags/test"
+    }
+  ],
+  "readingTime": 0.53,
+  "hasTruncateMarker": true,
+  "authors": [
+    {
+      "name": "Jun-Hyun Bae",
+      "title": "AI Researcher",
+      "url": "https://github.com/JunhyunB",
+      "socials": {
+        "github": "https://github.com/JunhyunB",
+        "linkedin": "https://www.linkedin.com/in/junhyun-bae-kr/"
+      },
+      "imageURL": "https://github.com/JunhyunB.png",
+      "key": "junhyun",
+      "page": null
+    }
+  ],
+  "frontMatter": {
+    "title": "블로그 쓸 때 필요한 정보",
+    "authors": [
+      "junhyun"
+    ],
+    "tags": [
+      "test"
+    ],
+    "description": "This is my first post on Docusaurus.",
+    "hide_table_of_contents": false
+  },
+  "unlisted": false
+}
