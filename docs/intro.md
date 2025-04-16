@@ -5,7 +5,6 @@ sidebar_position: 1
 # Tutorial Intro
 
 Let's discover **Docusaurus in less than 5 minutes**.
-한국어도 되나요?
 
 ## Getting Started
 

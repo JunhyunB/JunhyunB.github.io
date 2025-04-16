@@ -7,10 +7,10 @@ export default {
   "title": "My Site",
   "tagline": "Dinosaurs are cool",
   "favicon": "img/favicon.ico",
-  "url": "https://JunhyunB.github.io",
+  "url": "https://your-docusaurus-site.example.com",
   "baseUrl": "/",
-  "organizationName": "JunhyunB",
-  "projectName": "JunhyunB.github.io",
+  "organizationName": "facebook",
+  "projectName": "docusaurus",
   "onBrokenLinks": "throw",
   "onBrokenMarkdownLinks": "warn",
   "i18n": {
@@ -26,7 +26,7 @@ export default {
       "classic",
       {
         "docs": {
-          "sidebarPath": "./sidebars.ts",
+          "sidebarPath": "./sidebars.js",
           "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/"
         },
         "blog": {
