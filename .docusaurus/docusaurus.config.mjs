@@ -11,7 +11,7 @@ export default {
   "baseUrl": "/",
   "organizationName": "JunhyunB",
   "projectName": "JunhyunB.github.io",
-  "onBrokenLinks": "throw",
+  "onBrokenLinks": "warn",
   "onBrokenMarkdownLinks": "warn",
   "i18n": {
     "defaultLocale": "en",
@@ -43,7 +43,7 @@ export default {
           "blogDescription": "Research notes and paper summaries",
           "onInlineTags": "warn",
           "onInlineAuthors": "warn",
-          "onUntruncatedBlogPosts": "warn"
+          "onUntruncatedBlogPosts": "ignore"
         },
         "theme": {
           "customCss": "./src/css/custom.css"

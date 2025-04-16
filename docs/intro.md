@@ -32,6 +32,9 @@ Feel free to navigate through the categories in the sidebar to find papers of in
 
 Here are some of my latest paper reviews:
 
-- [Paper Title 1](/docs/category/paper-title-1) - Brief description
-- [Paper Title 2](/docs/category/paper-title-2) - Brief description
-- [Paper Title 3](/docs/category/paper-title-3) - Brief description
+<!--
+  Coming soon!
+  - [Paper Title 1](/docs/category/paper-title-1) - Brief description
+  - [Paper Title 2](/docs/category/paper-title-2) - Brief description
+  - [Paper Title 3](/docs/category/paper-title-3) - Brief description
+-->

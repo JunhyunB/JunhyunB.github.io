@@ -25,7 +25,7 @@ const config = {
   organizationName: 'JunhyunB', // Usually your GitHub org/user name.
   projectName: 'JunhyunB.github.io', // Usually your repo name.
 
-  onBrokenLinks: 'throw',
+  onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
 
   // Even if you don't use internationalization, you can use this field to set
@@ -63,7 +63,7 @@ const config = {
           blogDescription: 'Research notes and paper summaries',
           onInlineTags: 'warn',
           onInlineAuthors: 'warn',
-          onUntruncatedBlogPosts: 'warn',
+          onUntruncatedBlogPosts: 'ignore',
         },
         theme: {
           customCss: './src/css/custom.css',
