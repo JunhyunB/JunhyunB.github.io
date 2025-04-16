@@ -24,6 +24,11 @@
       "inline": true,
       "label": "neural-networks",
       "permalink": "/docs/tags/neural-networks"
+    },
+    {
+      "inline": true,
+      "label": "test_tag",
+      "permalink": "/docs/tags/test-tag"
     }
   ],
   "version": "current",
@@ -33,7 +38,8 @@
     "tags": [
       "computer-vision",
       "deep-learning",
-      "neural-networks"
+      "neural-networks",
+      "test_tag"
     ],
     "sources": [
       "neural-networks",
