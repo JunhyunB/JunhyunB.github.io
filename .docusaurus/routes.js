@@ -108,87 +108,109 @@ export default [
     exact: true
   },
   {
+    path: '/graph',
+    component: ComponentCreator('/graph', '766'),
+    exact: true
+  },
+  {
     path: '/markdown-page',
     component: ComponentCreator('/markdown-page', '3d7'),
     exact: true
   },
   {
     path: '/docs',
-    component: ComponentCreator('/docs', '733'),
+    component: ComponentCreator('/docs', '499'),
     routes: [
       {
         path: '/docs',
-        component: ComponentCreator('/docs', '7e6'),
+        component: ComponentCreator('/docs', 'c11'),
         routes: [
           {
+            path: '/docs/tags',
+            component: ComponentCreator('/docs/tags', 'fce'),
+            exact: true
+          },
+          {
+            path: '/docs/tags/ai',
+            component: ComponentCreator('/docs/tags/ai', 'bd3'),
+            exact: true
+          },
+          {
+            path: '/docs/tags/computer-vision',
+            component: ComponentCreator('/docs/tags/computer-vision', 'cd0'),
+            exact: true
+          },
+          {
+            path: '/docs/tags/deep-learning',
+            component: ComponentCreator('/docs/tags/deep-learning', '004'),
+            exact: true
+          },
+          {
+            path: '/docs/tags/image-recognition',
+            component: ComponentCreator('/docs/tags/image-recognition', '4a1'),
+            exact: true
+          },
+          {
+            path: '/docs/tags/machine-learning',
+            component: ComponentCreator('/docs/tags/machine-learning', '4c7'),
+            exact: true
+          },
+          {
+            path: '/docs/tags/neural-networks',
+            component: ComponentCreator('/docs/tags/neural-networks', '581'),
+            exact: true
+          },
+          {
             path: '/docs',
-            component: ComponentCreator('/docs', 'ba6'),
+            component: ComponentCreator('/docs', '7ca'),
             routes: [
               {
-                path: '/docs/category/tutorial---basics',
-                component: ComponentCreator('/docs/category/tutorial---basics', '20e'),
+                path: '/docs/computer-vision/',
+                component: ComponentCreator('/docs/computer-vision/', '5e1'),
                 exact: true,
-                sidebar: "tutorialSidebar"
+                sidebar: "papersSidebar"
               },
               {
-                path: '/docs/category/tutorial---extras',
-                component: ComponentCreator('/docs/category/tutorial---extras', '9ad'),
+                path: '/docs/computer-vision/example-paper',
+                component: ComponentCreator('/docs/computer-vision/example-paper', '600'),
                 exact: true,
-                sidebar: "tutorialSidebar"
+                sidebar: "papersSidebar"
+              },
+              {
+                path: '/docs/computer-vision/skip-connections',
+                component: ComponentCreator('/docs/computer-vision/skip-connections', '596'),
+                exact: true,
+                sidebar: "papersSidebar"
               },
               {
                 path: '/docs/intro',
-                component: ComponentCreator('/docs/intro', '61d'),
+                component: ComponentCreator('/docs/intro', '3af'),
                 exact: true,
-                sidebar: "tutorialSidebar"
+                sidebar: "papersSidebar"
               },
               {
-                path: '/docs/tutorial-basics/congratulations',
-                component: ComponentCreator('/docs/tutorial-basics/congratulations', '458'),
+                path: '/docs/machine-learning/',
+                component: ComponentCreator('/docs/machine-learning/', '187'),
                 exact: true,
-                sidebar: "tutorialSidebar"
+                sidebar: "papersSidebar"
               },
               {
-                path: '/docs/tutorial-basics/create-a-blog-post',
-                component: ComponentCreator('/docs/tutorial-basics/create-a-blog-post', '108'),
+                path: '/docs/machine-learning/deep-learning',
+                component: ComponentCreator('/docs/machine-learning/deep-learning', 'd16'),
                 exact: true,
-                sidebar: "tutorialSidebar"
+                sidebar: "papersSidebar"
               },
               {
-                path: '/docs/tutorial-basics/create-a-document',
-                component: ComponentCreator('/docs/tutorial-basics/create-a-document', '8fc'),
+                path: '/docs/machine-learning/neural-networks',
+                component: ComponentCreator('/docs/machine-learning/neural-networks', 'cbe'),
                 exact: true,
-                sidebar: "tutorialSidebar"
+                sidebar: "papersSidebar"
               },
               {
-                path: '/docs/tutorial-basics/create-a-page',
-                component: ComponentCreator('/docs/tutorial-basics/create-a-page', '951'),
+                path: '/docs/nlp/',
+                component: ComponentCreator('/docs/nlp/', '92c'),
                 exact: true,
-                sidebar: "tutorialSidebar"
-              },
-              {
-                path: '/docs/tutorial-basics/deploy-your-site',
-                component: ComponentCreator('/docs/tutorial-basics/deploy-your-site', '4f5'),
-                exact: true,
-                sidebar: "tutorialSidebar"
-              },
-              {
-                path: '/docs/tutorial-basics/markdown-features',
-                component: ComponentCreator('/docs/tutorial-basics/markdown-features', 'b05'),
-                exact: true,
-                sidebar: "tutorialSidebar"
-              },
-              {
-                path: '/docs/tutorial-extras/manage-docs-versions',
-                component: ComponentCreator('/docs/tutorial-extras/manage-docs-versions', '978'),
-                exact: true,
-                sidebar: "tutorialSidebar"
-              },
-              {
-                path: '/docs/tutorial-extras/translate-your-site',
-                component: ComponentCreator('/docs/tutorial-extras/translate-your-site', 'f9a'),
-                exact: true,
-                sidebar: "tutorialSidebar"
+                sidebar: "papersSidebar"
               }
             ]
           }

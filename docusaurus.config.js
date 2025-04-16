@@ -12,8 +12,8 @@ const repoName = 'junhyunb.github.io';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'junhyunb.github.io',
-  tagline: 'Dinosaurs are cool',
+  title: 'Jun-Hyun Bae',
+  tagline: 'Paper Summaries and Research Notes',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
@@ -48,7 +48,7 @@ const config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+            `https://github.com/${username}/${repoName}/edit/main/`,
         },
         blog: {
           showReadingTime: true,
@@ -59,7 +59,7 @@ const config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+            `https://github.com/${username}/${repoName}/edit/main/`,
           // Useful options to enforce blogging best practices
           onInlineTags: 'warn',
           onInlineAuthors: 'warn',
@@ -78,21 +78,22 @@ const config = {
       // Replace with your project's social card
       image: 'img/docusaurus-social-card.jpg',
       navbar: {
-        title: 'My Site',
+        title: 'Research Notes',
         logo: {
-          alt: 'My Site Logo',
+          alt: 'Site Logo',
           src: 'img/logo.svg',
         },
         items: [
           {
             type: 'docSidebar',
-            sidebarId: 'tutorialSidebar',
+            sidebarId: 'papersSidebar',
             position: 'left',
-            label: 'Tutorial',
+            label: 'Paper Summaries',
           },
           {to: '/blog', label: 'Blog', position: 'left'},
+          {to: '/graph', label: 'Knowledge Graph', position: 'left'},
           {
-            href: 'https://github.com/facebook/docusaurus',
+            href: `https://github.com/${username}`,
             label: 'GitHub',
             position: 'right',
           },
@@ -102,46 +103,33 @@ const config = {
         style: 'dark',
         links: [
           {
-            title: 'Docs',
+            title: 'Content',
             items: [
               {
-                label: 'Tutorial',
+                label: 'Paper Summaries',
                 to: '/docs/intro',
               },
-            ],
-          },
-          {
-            title: 'Community',
-            items: [
-              {
-                label: 'Stack Overflow',
-                href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-              },
-              {
-                label: 'Discord',
-                href: 'https://discordapp.com/invite/docusaurus',
-              },
-              {
-                label: 'X',
-                href: 'https://x.com/docusaurus',
-              },
-            ],
-          },
-          {
-            title: 'More',
-            items: [
               {
                 label: 'Blog',
                 to: '/blog',
               },
               {
+                label: 'Knowledge Graph',
+                to: '/graph',
+              },
+            ],
+          },
+          {
+            title: 'Connect',
+            items: [
+              {
                 label: 'GitHub',
-                href: 'https://github.com/facebook/docusaurus',
+                href: `https://github.com/${username}`,
               },
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} Jun-Hyun Bae. Built with Docusaurus.`,
       },
       prism: {
         theme: prismThemes.github,

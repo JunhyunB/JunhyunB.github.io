@@ -8,70 +8,55 @@
           "label": "Next",
           "isLast": true,
           "path": "/docs",
-          "mainDocId": "intro",
+          "mainDocId": "computer-vision/index",
           "docs": [
+            {
+              "id": "computer-vision/example-paper",
+              "path": "/docs/computer-vision/example-paper",
+              "sidebar": "papersSidebar"
+            },
+            {
+              "id": "computer-vision/index",
+              "path": "/docs/computer-vision/",
+              "sidebar": "papersSidebar"
+            },
+            {
+              "id": "computer-vision/skip-connections",
+              "path": "/docs/computer-vision/skip-connections",
+              "sidebar": "papersSidebar"
+            },
             {
               "id": "intro",
               "path": "/docs/intro",
-              "sidebar": "tutorialSidebar"
+              "sidebar": "papersSidebar"
             },
             {
-              "id": "tutorial-basics/congratulations",
-              "path": "/docs/tutorial-basics/congratulations",
-              "sidebar": "tutorialSidebar"
+              "id": "machine-learning/deep-learning",
+              "path": "/docs/machine-learning/deep-learning",
+              "sidebar": "papersSidebar"
             },
             {
-              "id": "tutorial-basics/create-a-blog-post",
-              "path": "/docs/tutorial-basics/create-a-blog-post",
-              "sidebar": "tutorialSidebar"
+              "id": "machine-learning/index",
+              "path": "/docs/machine-learning/",
+              "sidebar": "papersSidebar"
             },
             {
-              "id": "tutorial-basics/create-a-document",
-              "path": "/docs/tutorial-basics/create-a-document",
-              "sidebar": "tutorialSidebar"
+              "id": "machine-learning/neural-networks",
+              "path": "/docs/machine-learning/neural-networks",
+              "sidebar": "papersSidebar"
             },
             {
-              "id": "tutorial-basics/create-a-page",
-              "path": "/docs/tutorial-basics/create-a-page",
-              "sidebar": "tutorialSidebar"
-            },
-            {
-              "id": "tutorial-basics/deploy-your-site",
-              "path": "/docs/tutorial-basics/deploy-your-site",
-              "sidebar": "tutorialSidebar"
-            },
-            {
-              "id": "tutorial-basics/markdown-features",
-              "path": "/docs/tutorial-basics/markdown-features",
-              "sidebar": "tutorialSidebar"
-            },
-            {
-              "id": "tutorial-extras/manage-docs-versions",
-              "path": "/docs/tutorial-extras/manage-docs-versions",
-              "sidebar": "tutorialSidebar"
-            },
-            {
-              "id": "tutorial-extras/translate-your-site",
-              "path": "/docs/tutorial-extras/translate-your-site",
-              "sidebar": "tutorialSidebar"
-            },
-            {
-              "id": "/category/tutorial---basics",
-              "path": "/docs/category/tutorial---basics",
-              "sidebar": "tutorialSidebar"
-            },
-            {
-              "id": "/category/tutorial---extras",
-              "path": "/docs/category/tutorial---extras",
-              "sidebar": "tutorialSidebar"
+              "id": "nlp/index",
+              "path": "/docs/nlp/",
+              "sidebar": "papersSidebar"
             }
           ],
           "draftIds": [],
           "sidebars": {
-            "tutorialSidebar": {
+            "papersSidebar": {
               "link": {
-                "path": "/docs/intro",
-                "label": "intro"
+                "path": "/docs/computer-vision/",
+                "label": "Computer Vision Papers"
               }
             }
           }

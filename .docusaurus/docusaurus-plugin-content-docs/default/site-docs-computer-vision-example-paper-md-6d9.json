@@ -1,0 +1,65 @@
+{
+  "id": "computer-vision/example-paper",
+  "title": "ResNet: Deep Residual Learning for Image Recognition",
+  "description": "Authors: Kaiming He, Xiangyu Zhang, Shaoqing Ren, Jian Sun",
+  "source": "@site/docs/computer-vision/example-paper.md",
+  "sourceDirName": "computer-vision",
+  "slug": "/computer-vision/example-paper",
+  "permalink": "/docs/computer-vision/example-paper",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/JunhyunB/junhyunb.github.io/edit/main/docs/computer-vision/example-paper.md",
+  "tags": [
+    {
+      "inline": true,
+      "label": "computer-vision",
+      "permalink": "/docs/tags/computer-vision"
+    },
+    {
+      "inline": true,
+      "label": "deep-learning",
+      "permalink": "/docs/tags/deep-learning"
+    },
+    {
+      "inline": true,
+      "label": "neural-networks",
+      "permalink": "/docs/tags/neural-networks"
+    },
+    {
+      "inline": true,
+      "label": "image-recognition",
+      "permalink": "/docs/tags/image-recognition"
+    }
+  ],
+  "version": "current",
+  "sidebarPosition": 2,
+  "frontMatter": {
+    "sidebar_position": 2,
+    "tags": [
+      "computer-vision",
+      "deep-learning",
+      "neural-networks",
+      "image-recognition"
+    ],
+    "sources": [
+      "neural-networks",
+      "deep-learning"
+    ],
+    "references": [
+      "skip-connections",
+      "ImageNet",
+      "VGG",
+      "GoogLeNet",
+      "AlexNet"
+    ]
+  },
+  "sidebar": "papersSidebar",
+  "previous": {
+    "title": "Computer Vision Papers",
+    "permalink": "/docs/computer-vision/"
+  },
+  "next": {
+    "title": "Skip Connections",
+    "permalink": "/docs/computer-vision/skip-connections"
+  }
+}

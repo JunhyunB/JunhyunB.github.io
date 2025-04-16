@@ -1,0 +1,23 @@
+{
+  "id": "nlp/index",
+  "title": "Natural Language Processing Papers",
+  "description": "This section contains summaries of significant papers in the field of natural language processing.",
+  "source": "@site/docs/nlp/index.md",
+  "sourceDirName": "nlp",
+  "slug": "/nlp/",
+  "permalink": "/docs/nlp/",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/JunhyunB/junhyunb.github.io/edit/main/docs/nlp/index.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 1,
+  "frontMatter": {
+    "sidebar_position": 1
+  },
+  "sidebar": "papersSidebar",
+  "previous": {
+    "title": "Neural Networks",
+    "permalink": "/docs/machine-learning/neural-networks"
+  }
+}

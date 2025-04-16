@@ -4,8 +4,8 @@
  * Modify the docusaurus.config.js file at your site's root instead.
  */
 export default {
-  "title": "junhyunb.github.io",
-  "tagline": "Dinosaurs are cool",
+  "title": "Jun-Hyun Bae",
+  "tagline": "Paper Summaries and Research Notes",
   "favicon": "img/favicon.ico",
   "url": "https://JunhyunB.github.io",
   "baseUrl": "/",
@@ -27,7 +27,7 @@ export default {
       {
         "docs": {
           "sidebarPath": "./sidebars.js",
-          "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/"
+          "editUrl": "https://github.com/JunhyunB/junhyunb.github.io/edit/main/"
         },
         "blog": {
           "showReadingTime": true,
@@ -38,7 +38,7 @@ export default {
             ],
             "xslt": true
           },
-          "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/",
+          "editUrl": "https://github.com/JunhyunB/junhyunb.github.io/edit/main/",
           "onInlineTags": "warn",
           "onInlineAuthors": "warn",
           "onUntruncatedBlogPosts": "warn"
@@ -52,17 +52,17 @@ export default {
   "themeConfig": {
     "image": "img/docusaurus-social-card.jpg",
     "navbar": {
-      "title": "My Site",
+      "title": "Research Notes",
       "logo": {
-        "alt": "My Site Logo",
+        "alt": "Site Logo",
         "src": "img/logo.svg"
       },
       "items": [
         {
           "type": "docSidebar",
-          "sidebarId": "tutorialSidebar",
+          "sidebarId": "papersSidebar",
           "position": "left",
-          "label": "Tutorial"
+          "label": "Paper Summaries"
         },
         {
           "to": "/blog",
@@ -70,7 +70,12 @@ export default {
           "position": "left"
         },
         {
-          "href": "https://github.com/facebook/docusaurus",
+          "to": "/graph",
+          "label": "Knowledge Graph",
+          "position": "left"
+        },
+        {
+          "href": "https://github.com/JunhyunB",
           "label": "GitHub",
           "position": "right"
         }
@@ -81,46 +86,33 @@ export default {
       "style": "dark",
       "links": [
         {
-          "title": "Docs",
+          "title": "Content",
           "items": [
             {
-              "label": "Tutorial",
+              "label": "Paper Summaries",
               "to": "/docs/intro"
-            }
-          ]
-        },
-        {
-          "title": "Community",
-          "items": [
-            {
-              "label": "Stack Overflow",
-              "href": "https://stackoverflow.com/questions/tagged/docusaurus"
             },
-            {
-              "label": "Discord",
-              "href": "https://discordapp.com/invite/docusaurus"
-            },
-            {
-              "label": "X",
-              "href": "https://x.com/docusaurus"
-            }
-          ]
-        },
-        {
-          "title": "More",
-          "items": [
             {
               "label": "Blog",
               "to": "/blog"
             },
             {
+              "label": "Knowledge Graph",
+              "to": "/graph"
+            }
+          ]
+        },
+        {
+          "title": "Connect",
+          "items": [
+            {
               "label": "GitHub",
-              "href": "https://github.com/facebook/docusaurus"
+              "href": "https://github.com/JunhyunB"
             }
           ]
         }
       ],
-      "copyright": "Copyright © 2025 My Project, Inc. Built with Docusaurus."
+      "copyright": "Copyright © 2025 Jun-Hyun Bae. Built with Docusaurus."
     },
     "prism": {
       "theme": {

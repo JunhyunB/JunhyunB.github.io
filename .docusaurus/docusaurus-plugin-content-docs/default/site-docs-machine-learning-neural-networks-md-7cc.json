@@ -1,0 +1,58 @@
+{
+  "id": "machine-learning/neural-networks",
+  "title": "Neural Networks",
+  "description": "Neural networks are computational models inspired by the structure and function of the human brain. They consist of interconnected nodes (neurons) organized in layers that process and transform input data to produce output.",
+  "source": "@site/docs/machine-learning/neural-networks.md",
+  "sourceDirName": "machine-learning",
+  "slug": "/machine-learning/neural-networks",
+  "permalink": "/docs/machine-learning/neural-networks",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/JunhyunB/junhyunb.github.io/edit/main/docs/machine-learning/neural-networks.md",
+  "tags": [
+    {
+      "inline": true,
+      "label": "machine-learning",
+      "permalink": "/docs/tags/machine-learning"
+    },
+    {
+      "inline": true,
+      "label": "deep-learning",
+      "permalink": "/docs/tags/deep-learning"
+    },
+    {
+      "inline": true,
+      "label": "AI",
+      "permalink": "/docs/tags/ai"
+    }
+  ],
+  "version": "current",
+  "sidebarPosition": 3,
+  "frontMatter": {
+    "sidebar_position": 3,
+    "tags": [
+      "machine-learning",
+      "deep-learning",
+      "AI"
+    ],
+    "sources": [
+      "machine-learning"
+    ],
+    "references": [
+      "deep-learning",
+      "ResNet",
+      "VGG",
+      "AlexNet",
+      "skip-connections"
+    ]
+  },
+  "sidebar": "papersSidebar",
+  "previous": {
+    "title": "Deep Learning",
+    "permalink": "/docs/machine-learning/deep-learning"
+  },
+  "next": {
+    "title": "Natural Language Processing Papers",
+    "permalink": "/docs/nlp/"
+  }
+}

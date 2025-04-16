@@ -1,23 +1,27 @@
 {
   "id": "intro",
-  "title": "Tutorial Intro",
-  "description": "Let's discover Docusaurus in less than 5 minutes.",
+  "title": "Introduction",
+  "description": "Welcome to my research notes and paper summaries. This site contains my personal notes and summaries of academic papers I've read, primarily focused on my research interests.",
   "source": "@site/docs/intro.md",
   "sourceDirName": ".",
   "slug": "/intro",
   "permalink": "/docs/intro",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/intro.md",
+  "editUrl": "https://github.com/JunhyunB/junhyunb.github.io/edit/main/docs/intro.md",
   "tags": [],
   "version": "current",
   "sidebarPosition": 1,
   "frontMatter": {
     "sidebar_position": 1
   },
-  "sidebar": "tutorialSidebar",
+  "sidebar": "papersSidebar",
+  "previous": {
+    "title": "Skip Connections",
+    "permalink": "/docs/computer-vision/skip-connections"
+  },
   "next": {
-    "title": "Tutorial - Basics",
-    "permalink": "/docs/category/tutorial---basics"
+    "title": "Machine Learning Papers",
+    "permalink": "/docs/machine-learning/"
   }
 }

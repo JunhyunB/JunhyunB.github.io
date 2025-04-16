@@ -1,0 +1,57 @@
+{
+  "id": "computer-vision/skip-connections",
+  "title": "Skip Connections",
+  "description": "Skip connections (also known as shortcut connections) are a technique used in deep neural networks that allow information to bypass one or more layers. They create a path for the gradient to flow more easily through deep networks, helping to mitigate the vanishing gradient problem.",
+  "source": "@site/docs/computer-vision/skip-connections.md",
+  "sourceDirName": "computer-vision",
+  "slug": "/computer-vision/skip-connections",
+  "permalink": "/docs/computer-vision/skip-connections",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/JunhyunB/junhyunb.github.io/edit/main/docs/computer-vision/skip-connections.md",
+  "tags": [
+    {
+      "inline": true,
+      "label": "computer-vision",
+      "permalink": "/docs/tags/computer-vision"
+    },
+    {
+      "inline": true,
+      "label": "deep-learning",
+      "permalink": "/docs/tags/deep-learning"
+    },
+    {
+      "inline": true,
+      "label": "neural-networks",
+      "permalink": "/docs/tags/neural-networks"
+    }
+  ],
+  "version": "current",
+  "sidebarPosition": 3,
+  "frontMatter": {
+    "sidebar_position": 3,
+    "tags": [
+      "computer-vision",
+      "deep-learning",
+      "neural-networks"
+    ],
+    "sources": [
+      "neural-networks",
+      "deep-learning"
+    ],
+    "references": [
+      "ResNet",
+      "DenseNet",
+      "computer-vision"
+    ]
+  },
+  "sidebar": "papersSidebar",
+  "previous": {
+    "title": "ResNet: Deep Residual Learning for Image Recognition",
+    "permalink": "/docs/computer-vision/example-paper"
+  },
+  "next": {
+    "title": "Introduction",
+    "permalink": "/docs/intro"
+  }
+}
