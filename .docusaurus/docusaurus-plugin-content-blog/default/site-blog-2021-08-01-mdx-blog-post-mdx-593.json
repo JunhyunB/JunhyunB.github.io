@@ -1,6 +1,6 @@
 {
   "permalink": "/blog/mdx-blog-post",
-  "editUrl": "https://github.com/JunhyunB/junhyunb.github.io/edit/main/blog/2021-08-01-mdx-blog-post.mdx",
+  "editUrl": "https://github.com/JunhyunB/JunhyunB.github.io/tree/main/blog/2021-08-01-mdx-blog-post.mdx",
   "source": "@site/blog/2021-08-01-mdx-blog-post.mdx",
   "title": "MDX Blog Post",
   "description": "Blog posts support Docusaurus Markdown features, such as MDX.",
@@ -17,27 +17,22 @@
   "hasTruncateMarker": true,
   "authors": [
     {
-      "name": "Sébastien Lorber",
-      "title": "Docusaurus maintainer",
-      "url": "https://sebastienlorber.com",
-      "page": {
-        "permalink": "/blog/authors/all-sebastien-lorber-articles"
-      },
+      "name": "Jun-Hyun Bae",
+      "title": "Researcher",
+      "url": "https://github.com/JunhyunB",
       "socials": {
-        "x": "https://x.com/sebastienlorber",
-        "linkedin": "https://www.linkedin.com/in/sebastienlorber/",
-        "github": "https://github.com/slorber",
-        "newsletter": "https://thisweekinreact.com"
+        "github": "https://github.com/JunhyunB"
       },
-      "imageURL": "https://github.com/slorber.png",
-      "key": "slorber"
+      "imageURL": "https://github.com/JunhyunB.png",
+      "key": "junhyun",
+      "page": null
     }
   ],
   "frontMatter": {
     "slug": "mdx-blog-post",
     "title": "MDX Blog Post",
     "authors": [
-      "slorber"
+      "junhyun"
     ],
     "tags": [
       "docusaurus"
@@ -49,7 +44,7 @@
     "permalink": "/blog/welcome"
   },
   "nextItem": {
-    "title": "Long Blog Post",
-    "permalink": "/blog/long-blog-post"
+    "title": "Welcome Docusaurus",
+    "permalink": "/blog/welcome-docusaurus-v2"
   }
 }

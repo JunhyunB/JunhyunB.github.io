@@ -1,6 +1,6 @@
 {
   "permalink": "/blog/welcome",
-  "editUrl": "https://github.com/JunhyunB/junhyunb.github.io/edit/main/blog/2021-08-26-welcome/index.md",
+  "editUrl": "https://github.com/JunhyunB/JunhyunB.github.io/tree/main/blog/2021-08-26-welcome/index.md",
   "source": "@site/blog/2021-08-26-welcome/index.md",
   "title": "Welcome",
   "description": "Docusaurus blogging features are powered by the blog plugin.",
@@ -57,6 +57,17 @@
       },
       "imageURL": "https://github.com/yangshun.png",
       "key": "yangshun"
+    },
+    {
+      "name": "Jun-Hyun Bae",
+      "title": "Researcher",
+      "url": "https://github.com/JunhyunB",
+      "socials": {
+        "github": "https://github.com/JunhyunB"
+      },
+      "imageURL": "https://github.com/JunhyunB.png",
+      "key": "junhyun",
+      "page": null
     }
   ],
   "frontMatter": {
@@ -64,7 +75,8 @@
     "title": "Welcome",
     "authors": [
       "slorber",
-      "yangshun"
+      "yangshun",
+      "junhyun"
     ],
     "tags": [
       "facebook",

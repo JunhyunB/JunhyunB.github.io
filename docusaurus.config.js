@@ -12,7 +12,7 @@ import {themes as prismThemes} from 'prism-react-renderer';
 const config = {
   title: 'Jun-Hyun Bae',
   tagline: 'Paper Summaries and Research Notes',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/favicon.svg',
 
   // Set the production url of your site here
   url: 'https://JunhyunB.github.io',
@@ -23,7 +23,7 @@ const config = {
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: 'JunhyunB', // Usually your GitHub org/user name.
-  projectName: 'Research Notes', // Usually your repo name.
+  projectName: 'JunhyunB.github.io', // Usually your repo name.
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -46,7 +46,7 @@ const config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+            'https://github.com/JunhyunB/JunhyunB.github.io/tree/main/',
         },
         blog: {
           showReadingTime: true,
@@ -57,8 +57,10 @@ const config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+            'https://github.com/JunhyunB/JunhyunB.github.io/tree/main/',
           // Useful options to enforce blogging best practices
+          blogTitle: 'Research Notes',
+          blogDescription: 'Research notes and paper summaries',
           onInlineTags: 'warn',
           onInlineAuthors: 'warn',
           onUntruncatedBlogPosts: 'warn',
@@ -76,21 +78,26 @@ const config = {
       // Replace with your project's social card
       image: 'img/docusaurus-social-card.jpg',
       navbar: {
-        title: 'My Site',
+        title: 'Jun-Hyun Bae',
         logo: {
-          alt: 'My Site Logo',
+          alt: 'Jun-Hyun Bae Logo',
           src: 'img/logo.svg',
         },
         items: [
           {
+            to: '/about',
+            label: 'About Me',
+            position: 'left',
+          },
+          {
             type: 'docSidebar',
             sidebarId: 'tutorialSidebar',
             position: 'left',
-            label: 'Tutorial',
+            label: 'Paper Reviews',
           },
-          {to: '/blog', label: 'Blog', position: 'left'},
+          {to: '/blog', label: 'Research Notes', position: 'left'},
           {
-            href: 'https://github.com/facebook/docusaurus',
+            href: 'https://github.com/JunhyunB',
             label: 'GitHub',
             position: 'right',
           },
@@ -100,46 +107,34 @@ const config = {
         style: 'dark',
         links: [
           {
-            title: 'Docs',
+            title: 'Content',
             items: [
               {
-                label: 'Tutorial',
+                label: 'About Me',
+                to: '/about',
+              },
+              {
+                label: 'Paper Reviews',
                 to: '/docs/intro',
               },
-            ],
-          },
-          {
-            title: 'Community',
-            items: [
               {
-                label: 'Stack Overflow',
-                href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-              },
-              {
-                label: 'Discord',
-                href: 'https://discordapp.com/invite/docusaurus',
-              },
-              {
-                label: 'X',
-                href: 'https://x.com/docusaurus',
-              },
-            ],
-          },
-          {
-            title: 'More',
-            items: [
-              {
-                label: 'Blog',
+                label: 'Research Notes',
                 to: '/blog',
               },
+            ],
+          },
+          {
+            title: 'Connect',
+            items: [
               {
                 label: 'GitHub',
-                href: 'https://github.com/facebook/docusaurus',
+                href: 'https://github.com/JunhyunB',
               },
+              // Add more social links as needed
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} Jun-Hyun Bae. Built with Docusaurus.`,
       },
       prism: {
         theme: prismThemes.github,

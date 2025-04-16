@@ -8,20 +8,11 @@
   "permalink": "/docs/tutorial-extras/manage-docs-versions",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/JunhyunB/junhyunb.github.io/edit/main/docs/tutorial-extras/manage-docs-versions.md",
+  "editUrl": "https://github.com/JunhyunB/JunhyunB.github.io/tree/main/docs/tutorial-extras/manage-docs-versions.md",
   "tags": [],
   "version": "current",
   "sidebarPosition": 1,
   "frontMatter": {
     "sidebar_position": 1
-  },
-  "sidebar": "papersSidebar",
-  "previous": {
-    "title": "Tutorial - Extras",
-    "permalink": "/docs/category/tutorial---extras"
-  },
-  "next": {
-    "title": "Translate your site",
-    "permalink": "/docs/tutorial-extras/translate-your-site"
   }
 }

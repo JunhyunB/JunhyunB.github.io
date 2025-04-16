@@ -1,0 +1,57 @@
+{
+  "permalink": "/blog/welcome-docusaurus-v2",
+  "editUrl": "https://github.com/JunhyunB/JunhyunB.github.io/tree/main/blog/2019-09-05-hello-docusaurus.md",
+  "source": "@site/blog/2019-09-05-hello-docusaurus.md",
+  "title": "Welcome Docusaurus",
+  "description": "This is my first post on Docusaurus.",
+  "date": "2019-09-05T00:00:00.000Z",
+  "tags": [
+    {
+      "inline": false,
+      "label": "Hello",
+      "permalink": "/blog/tags/hello",
+      "description": "Hello tag description"
+    },
+    {
+      "inline": true,
+      "label": "docusaurus-v2",
+      "permalink": "/blog/tags/docusaurus-v-2"
+    }
+  ],
+  "readingTime": 0.145,
+  "hasTruncateMarker": true,
+  "authors": [
+    {
+      "name": "Jun-Hyun Bae",
+      "title": "Researcher",
+      "url": "https://github.com/JunhyunB",
+      "socials": {
+        "github": "https://github.com/JunhyunB"
+      },
+      "imageURL": "https://github.com/JunhyunB.png",
+      "key": "junhyun",
+      "page": null
+    }
+  ],
+  "frontMatter": {
+    "title": "Welcome Docusaurus",
+    "description": "This is my first post on Docusaurus.",
+    "slug": "welcome-docusaurus-v2",
+    "authors": "junhyun",
+    "tags": [
+      "hello",
+      "docusaurus-v2"
+    ],
+    "image": "https://i.imgur.com/mErPwqL.png",
+    "hide_table_of_contents": false
+  },
+  "unlisted": false,
+  "prevItem": {
+    "title": "MDX Blog Post",
+    "permalink": "/blog/mdx-blog-post"
+  },
+  "nextItem": {
+    "title": "Example Research Note",
+    "permalink": "/blog/example-research-note"
+  }
+}

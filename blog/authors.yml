@@ -21,3 +21,12 @@ slorber:
     linkedin: sebastienlorber
     github: slorber
     newsletter: https://thisweekinreact.com
+
+junhyun:
+  name: Jun-Hyun Bae
+  title: Researcher
+  url: https://github.com/JunhyunB
+  image_url: https://github.com/JunhyunB.png
+  socials:
+    github: JunhyunB
+    # Add other social media as needed

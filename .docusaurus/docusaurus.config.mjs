@@ -6,11 +6,11 @@
 export default {
   "title": "Jun-Hyun Bae",
   "tagline": "Paper Summaries and Research Notes",
-  "favicon": "img/favicon.ico",
+  "favicon": "img/favicon.svg",
   "url": "https://JunhyunB.github.io",
   "baseUrl": "/",
   "organizationName": "JunhyunB",
-  "projectName": "junhyunb.github.io",
+  "projectName": "JunhyunB.github.io",
   "onBrokenLinks": "throw",
   "onBrokenMarkdownLinks": "warn",
   "i18n": {
@@ -27,7 +27,7 @@ export default {
       {
         "docs": {
           "sidebarPath": "./sidebars.js",
-          "editUrl": "https://github.com/JunhyunB/junhyunb.github.io/edit/main/"
+          "editUrl": "https://github.com/JunhyunB/JunhyunB.github.io/tree/main/"
         },
         "blog": {
           "showReadingTime": true,
@@ -38,7 +38,9 @@ export default {
             ],
             "xslt": true
           },
-          "editUrl": "https://github.com/JunhyunB/junhyunb.github.io/edit/main/",
+          "editUrl": "https://github.com/JunhyunB/JunhyunB.github.io/tree/main/",
+          "blogTitle": "Research Notes",
+          "blogDescription": "Research notes and paper summaries",
           "onInlineTags": "warn",
           "onInlineAuthors": "warn",
           "onUntruncatedBlogPosts": "warn"
@@ -52,26 +54,26 @@ export default {
   "themeConfig": {
     "image": "img/docusaurus-social-card.jpg",
     "navbar": {
-      "title": "Research Notes",
+      "title": "Jun-Hyun Bae",
       "logo": {
-        "alt": "Site Logo",
+        "alt": "Jun-Hyun Bae Logo",
         "src": "img/logo.svg"
       },
       "items": [
         {
-          "type": "docSidebar",
-          "sidebarId": "papersSidebar",
-          "position": "left",
-          "label": "Paper Summaries"
-        },
-        {
-          "to": "/blog",
-          "label": "Blog",
+          "to": "/about",
+          "label": "About Me",
           "position": "left"
         },
         {
-          "to": "/graph",
-          "label": "Knowledge Graph",
+          "type": "docSidebar",
+          "sidebarId": "tutorialSidebar",
+          "position": "left",
+          "label": "Paper Reviews"
+        },
+        {
+          "to": "/blog",
+          "label": "Research Notes",
           "position": "left"
         },
         {
@@ -89,16 +91,16 @@ export default {
           "title": "Content",
           "items": [
             {
-              "label": "Paper Summaries",
+              "label": "About Me",
+              "to": "/about"
+            },
+            {
+              "label": "Paper Reviews",
               "to": "/docs/intro"
             },
             {
-              "label": "Blog",
+              "label": "Research Notes",
               "to": "/blog"
-            },
-            {
-              "label": "Knowledge Graph",
-              "to": "/graph"
             }
           ]
         },

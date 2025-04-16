@@ -1,23 +1,27 @@
 {
   "id": "computer-vision/index",
-  "title": "Computer Vision Papers",
-  "description": "This section contains summaries of important papers in the field of computer vision.",
+  "title": "Computer Vision",
+  "description": "This section contains paper reviews related to Computer Vision research.",
   "source": "@site/docs/computer-vision/index.md",
   "sourceDirName": "computer-vision",
   "slug": "/computer-vision/",
   "permalink": "/docs/computer-vision/",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/JunhyunB/junhyunb.github.io/edit/main/docs/computer-vision/index.md",
+  "editUrl": "https://github.com/JunhyunB/JunhyunB.github.io/tree/main/docs/computer-vision/index.md",
   "tags": [],
   "version": "current",
   "sidebarPosition": 1,
   "frontMatter": {
     "sidebar_position": 1
   },
-  "sidebar": "papersSidebar",
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Paper Reviews Introduction",
+    "permalink": "/docs/intro"
+  },
   "next": {
-    "title": "ResNet: Deep Residual Learning for Image Recognition",
-    "permalink": "/docs/computer-vision/example-paper"
+    "title": "Computer Vision",
+    "permalink": "/docs/computer-vision/"
   }
 }

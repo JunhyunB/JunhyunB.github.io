@@ -8,20 +8,11 @@
   "permalink": "/docs/tutorial-basics/congratulations",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/JunhyunB/junhyunb.github.io/edit/main/docs/tutorial-basics/congratulations.md",
+  "editUrl": "https://github.com/JunhyunB/JunhyunB.github.io/tree/main/docs/tutorial-basics/congratulations.md",
   "tags": [],
   "version": "current",
   "sidebarPosition": 6,
   "frontMatter": {
     "sidebar_position": 6
-  },
-  "sidebar": "papersSidebar",
-  "previous": {
-    "title": "Deploy your site",
-    "permalink": "/docs/tutorial-basics/deploy-your-site"
-  },
-  "next": {
-    "title": "Tutorial - Extras",
-    "permalink": "/docs/category/tutorial---extras"
   }
 }

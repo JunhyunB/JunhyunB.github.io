@@ -2,46 +2,36 @@
 sidebar_position: 1
 ---
 
-# Tutorial Intro
+# Paper Reviews Introduction
 
-Let's discover **Docusaurus in less than 5 minutes**.
+Welcome to my paper review section! Here, I summarize and analyze academic papers in various fields of research that I find interesting or important.
 
-## Getting Started
+## Categories
 
-Get started by **creating a new site**.
+The paper reviews are organized into the following categories:
 
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
+- **Computer Vision** - Object detection, segmentation, generation, and more
+- **Machine Learning** - Deep learning, reinforcement learning, and more
+- **Natural Language Processing** - Language models, transformers, and more
 
-### What you'll need
+## How to Use This Section
 
-- [Node.js](https://nodejs.org/en/download/) version 18.0 or above:
-  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
+Each paper review contains:
 
-## Generate a new site
+1. **Paper Information** - Title, authors, publication venue, year, and link to the original paper
+2. **Summary** - A concise summary of the paper's main contributions
+3. **Key Points** - The most important ideas and techniques presented
+4. **Methods** - Detailed explanation of the proposed methods
+5. **Results** - Summary of the experimental results
+6. **Discussion** - My thoughts and analysis of the paper
+7. **References** - Additional related papers
 
-Generate a new Docusaurus site using the **classic template**.
+Feel free to navigate through the categories in the sidebar to find papers of interest.
 
-The classic template will automatically be added to your project after you run the command:
+## Latest Reviews
 
-```bash
-npm init docusaurus@latest my-website classic
-```
+Here are some of my latest paper reviews:
 
-You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
-
-The command also installs all necessary dependencies you need to run Docusaurus.
-
-## Start your site
-
-Run the development server:
-
-```bash
-cd my-website
-npm run start
-```
-
-The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.
-
-The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
-
-Open `docs/intro.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.
+- [Paper Title 1](/docs/category/paper-title-1) - Brief description
+- [Paper Title 2](/docs/category/paper-title-2) - Brief description
+- [Paper Title 3](/docs/category/paper-title-3) - Brief description

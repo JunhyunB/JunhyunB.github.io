@@ -1,0 +1,23 @@
+{
+  "id": "paper-review-template",
+  "title": "Paper Review Template",
+  "description": "Use this template when creating a new paper review.",
+  "source": "@site/docs/paper-review-template.md",
+  "sourceDirName": ".",
+  "slug": "/paper-review-template",
+  "permalink": "/docs/paper-review-template",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/JunhyunB/JunhyunB.github.io/tree/main/docs/paper-review-template.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 999,
+  "frontMatter": {
+    "sidebar_position": 999
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Natural Language Processing",
+    "permalink": "/docs/nlp/"
+  }
+}

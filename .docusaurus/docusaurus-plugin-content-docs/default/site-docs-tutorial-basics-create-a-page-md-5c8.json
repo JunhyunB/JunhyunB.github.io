@@ -8,20 +8,11 @@
   "permalink": "/docs/tutorial-basics/create-a-page",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/JunhyunB/junhyunb.github.io/edit/main/docs/tutorial-basics/create-a-page.md",
+  "editUrl": "https://github.com/JunhyunB/JunhyunB.github.io/tree/main/docs/tutorial-basics/create-a-page.md",
   "tags": [],
   "version": "current",
   "sidebarPosition": 1,
   "frontMatter": {
     "sidebar_position": 1
-  },
-  "sidebar": "papersSidebar",
-  "previous": {
-    "title": "Tutorial - Basics",
-    "permalink": "/docs/category/tutorial---basics"
-  },
-  "next": {
-    "title": "Create a Document",
-    "permalink": "/docs/tutorial-basics/create-a-document"
   }
 }

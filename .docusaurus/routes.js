@@ -38,110 +38,192 @@ export default [
     exact: true
   },
   {
+    path: '/about',
+    component: ComponentCreator('/about', 'c49'),
+    exact: true
+  },
+  {
+    path: '/blog',
+    component: ComponentCreator('/blog', 'e45'),
+    exact: true
+  },
+  {
+    path: '/blog/archive',
+    component: ComponentCreator('/blog/archive', '182'),
+    exact: true
+  },
+  {
+    path: '/blog/authors',
+    component: ComponentCreator('/blog/authors', '0b7'),
+    exact: true
+  },
+  {
+    path: '/blog/authors/all-sebastien-lorber-articles',
+    component: ComponentCreator('/blog/authors/all-sebastien-lorber-articles', '0a8'),
+    exact: true
+  },
+  {
+    path: '/blog/authors/yangshun',
+    component: ComponentCreator('/blog/authors/yangshun', 'db6'),
+    exact: true
+  },
+  {
+    path: '/blog/example-research-note',
+    component: ComponentCreator('/blog/example-research-note', 'd44'),
+    exact: true
+  },
+  {
+    path: '/blog/first-blog-post',
+    component: ComponentCreator('/blog/first-blog-post', '89a'),
+    exact: true
+  },
+  {
+    path: '/blog/mdx-blog-post',
+    component: ComponentCreator('/blog/mdx-blog-post', 'e9f'),
+    exact: true
+  },
+  {
+    path: '/blog/tags',
+    component: ComponentCreator('/blog/tags', '287'),
+    exact: true
+  },
+  {
+    path: '/blog/tags/blog/tags/machine-learning',
+    component: ComponentCreator('/blog/tags/blog/tags/machine-learning', 'e3a'),
+    exact: true
+  },
+  {
+    path: '/blog/tags/blog/tags/research',
+    component: ComponentCreator('/blog/tags/blog/tags/research', '58e'),
+    exact: true
+  },
+  {
+    path: '/blog/tags/docusaurus',
+    component: ComponentCreator('/blog/tags/docusaurus', '62f'),
+    exact: true
+  },
+  {
+    path: '/blog/tags/docusaurus-v-2',
+    component: ComponentCreator('/blog/tags/docusaurus-v-2', '939'),
+    exact: true
+  },
+  {
+    path: '/blog/tags/facebook',
+    component: ComponentCreator('/blog/tags/facebook', '858'),
+    exact: true
+  },
+  {
+    path: '/blog/tags/hello',
+    component: ComponentCreator('/blog/tags/hello', '249'),
+    exact: true
+  },
+  {
+    path: '/blog/tags/hola',
+    component: ComponentCreator('/blog/tags/hola', '00d'),
+    exact: true
+  },
+  {
+    path: '/blog/welcome',
+    component: ComponentCreator('/blog/welcome', 'd2b'),
+    exact: true
+  },
+  {
+    path: '/blog/welcome-docusaurus-v2',
+    component: ComponentCreator('/blog/welcome-docusaurus-v2', '2e3'),
+    exact: true
+  },
+  {
     path: '/docs',
-    component: ComponentCreator('/docs', '719'),
+    component: ComponentCreator('/docs', 'd7b'),
     routes: [
       {
         path: '/docs',
-        component: ComponentCreator('/docs', '01d'),
+        component: ComponentCreator('/docs', '7d3'),
         routes: [
           {
-            path: '/docs/tags',
-            component: ComponentCreator('/docs/tags', 'fce'),
-            exact: true
-          },
-          {
-            path: '/docs/tags/ai',
-            component: ComponentCreator('/docs/tags/ai', 'bd3'),
-            exact: true
-          },
-          {
-            path: '/docs/tags/computer-vision',
-            component: ComponentCreator('/docs/tags/computer-vision', 'cd0'),
-            exact: true
-          },
-          {
-            path: '/docs/tags/deep-learning',
-            component: ComponentCreator('/docs/tags/deep-learning', '004'),
-            exact: true
-          },
-          {
-            path: '/docs/tags/image-recognition',
-            component: ComponentCreator('/docs/tags/image-recognition', '4a1'),
-            exact: true
-          },
-          {
-            path: '/docs/tags/machine-learning',
-            component: ComponentCreator('/docs/tags/machine-learning', '4c7'),
-            exact: true
-          },
-          {
-            path: '/docs/tags/neural-networks',
-            component: ComponentCreator('/docs/tags/neural-networks', '581'),
-            exact: true
-          },
-          {
-            path: '/docs/tags/test-tag',
-            component: ComponentCreator('/docs/tags/test-tag', '58f'),
-            exact: true
-          },
-          {
             path: '/docs',
-            component: ComponentCreator('/docs', '7ca'),
+            component: ComponentCreator('/docs', '170'),
             routes: [
               {
                 path: '/docs/computer-vision/',
-                component: ComponentCreator('/docs/computer-vision/', '5e1'),
+                component: ComponentCreator('/docs/computer-vision/', '68d'),
                 exact: true,
-                sidebar: "papersSidebar"
-              },
-              {
-                path: '/docs/computer-vision/example-paper',
-                component: ComponentCreator('/docs/computer-vision/example-paper', '600'),
-                exact: true,
-                sidebar: "papersSidebar"
-              },
-              {
-                path: '/docs/computer-vision/skip-connections',
-                component: ComponentCreator('/docs/computer-vision/skip-connections', '596'),
-                exact: true,
-                sidebar: "papersSidebar"
+                sidebar: "tutorialSidebar"
               },
               {
                 path: '/docs/intro',
-                component: ComponentCreator('/docs/intro', '3af'),
+                component: ComponentCreator('/docs/intro', '61d'),
                 exact: true,
-                sidebar: "papersSidebar"
+                sidebar: "tutorialSidebar"
               },
               {
                 path: '/docs/machine-learning/',
-                component: ComponentCreator('/docs/machine-learning/', '187'),
+                component: ComponentCreator('/docs/machine-learning/', 'b0a'),
                 exact: true,
-                sidebar: "papersSidebar"
-              },
-              {
-                path: '/docs/machine-learning/deep-learning',
-                component: ComponentCreator('/docs/machine-learning/deep-learning', 'd16'),
-                exact: true,
-                sidebar: "papersSidebar"
-              },
-              {
-                path: '/docs/machine-learning/neural-networks',
-                component: ComponentCreator('/docs/machine-learning/neural-networks', 'cbe'),
-                exact: true,
-                sidebar: "papersSidebar"
+                sidebar: "tutorialSidebar"
               },
               {
                 path: '/docs/nlp/',
-                component: ComponentCreator('/docs/nlp/', '92c'),
+                component: ComponentCreator('/docs/nlp/', 'a81'),
                 exact: true,
-                sidebar: "papersSidebar"
+                sidebar: "tutorialSidebar"
+              },
+              {
+                path: '/docs/paper-review-template',
+                component: ComponentCreator('/docs/paper-review-template', 'fc6'),
+                exact: true,
+                sidebar: "tutorialSidebar"
+              },
+              {
+                path: '/docs/tutorial-basics/congratulations',
+                component: ComponentCreator('/docs/tutorial-basics/congratulations', '70e'),
+                exact: true
+              },
+              {
+                path: '/docs/tutorial-basics/create-a-blog-post',
+                component: ComponentCreator('/docs/tutorial-basics/create-a-blog-post', '315'),
+                exact: true
+              },
+              {
+                path: '/docs/tutorial-basics/create-a-document',
+                component: ComponentCreator('/docs/tutorial-basics/create-a-document', 'f86'),
+                exact: true
+              },
+              {
+                path: '/docs/tutorial-basics/create-a-page',
+                component: ComponentCreator('/docs/tutorial-basics/create-a-page', '9f6'),
+                exact: true
+              },
+              {
+                path: '/docs/tutorial-basics/deploy-your-site',
+                component: ComponentCreator('/docs/tutorial-basics/deploy-your-site', 'b91'),
+                exact: true
+              },
+              {
+                path: '/docs/tutorial-basics/markdown-features',
+                component: ComponentCreator('/docs/tutorial-basics/markdown-features', '272'),
+                exact: true
+              },
+              {
+                path: '/docs/tutorial-extras/manage-docs-versions',
+                component: ComponentCreator('/docs/tutorial-extras/manage-docs-versions', 'a34'),
+                exact: true
+              },
+              {
+                path: '/docs/tutorial-extras/translate-your-site',
+                component: ComponentCreator('/docs/tutorial-extras/translate-your-site', '739'),
+                exact: true
               }
             ]
           }
         ]
       }
     ]
+  },
+  {
+    path: '/',
+    component: ComponentCreator('/', '2e1'),
+    exact: true
   },
   {
     path: '*',

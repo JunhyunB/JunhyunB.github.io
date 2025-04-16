@@ -1,27 +1,23 @@
 {
   "id": "intro",
-  "title": "Introduction",
-  "description": "Welcome to my research notes and paper summaries. This site contains my personal notes and summaries of academic papers I've read, primarily focused on my research interests.",
+  "title": "Paper Reviews Introduction",
+  "description": "Welcome to my paper review section! Here, I summarize and analyze academic papers in various fields of research that I find interesting or important.",
   "source": "@site/docs/intro.md",
   "sourceDirName": ".",
   "slug": "/intro",
   "permalink": "/docs/intro",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/JunhyunB/junhyunb.github.io/edit/main/docs/intro.md",
+  "editUrl": "https://github.com/JunhyunB/JunhyunB.github.io/tree/main/docs/intro.md",
   "tags": [],
   "version": "current",
   "sidebarPosition": 1,
   "frontMatter": {
     "sidebar_position": 1
   },
-  "sidebar": "papersSidebar",
-  "previous": {
-    "title": "Skip Connections",
-    "permalink": "/docs/computer-vision/skip-connections"
-  },
+  "sidebar": "tutorialSidebar",
   "next": {
-    "title": "Machine Learning Papers",
-    "permalink": "/docs/machine-learning/"
+    "title": "Computer Vision",
+    "permalink": "/docs/computer-vision/"
   }
 }

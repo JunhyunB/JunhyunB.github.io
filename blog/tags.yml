@@ -17,3 +17,38 @@ hola:
   label: Hola
   permalink: /hola
   description: Hola tag description
+
+research:
+  label: Research
+  description: General research notes and thoughts
+  permalink: /blog/tags/research
+
+paper-implementation:
+  label: Paper Implementation
+  description: Implementation details of research papers
+  permalink: /blog/tags/paper-implementation
+
+experiment:
+  label: Experiment
+  description: Experimental results and analyses
+  permalink: /blog/tags/experiment
+
+computer-vision:
+  label: Computer Vision
+  description: Research notes on computer vision topics
+  permalink: /blog/tags/computer-vision
+
+machine-learning:
+  label: Machine Learning
+  description: Research notes on machine learning topics
+  permalink: /blog/tags/machine-learning
+
+nlp:
+  label: NLP
+  description: Research notes on natural language processing topics
+  permalink: /blog/tags/nlp
+
+template:
+  label: Template
+  description: Template posts
+  permalink: /blog/tags/template

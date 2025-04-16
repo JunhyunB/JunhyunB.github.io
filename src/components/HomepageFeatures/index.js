@@ -4,38 +4,40 @@ import styles from './styles.module.css';
 
 const FeatureList = [
   {
-    title: 'Easy to Use',
-    Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
+    title: 'Paper Reviews',
+    Svg: require('@site/static/img/paper_reviews.svg').default,
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        Detailed summaries and analyses of research papers in Computer Vision, 
+        Machine Learning, and Natural Language Processing.
       </>
     ),
+    link: '/docs/intro',
   },
   {
-    title: 'Focus on What Matters',
-    Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
+    title: 'Research Notes',
+    Svg: require('@site/static/img/research_notes.svg').default,
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        Blog posts about research topics, experiments, and interesting findings 
+        from my academic journey.
       </>
     ),
+    link: '/blog',
   },
   {
-    title: 'Powered by React',
-    Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
+    title: 'About Me',
+    Svg: require('@site/static/img/about_me.svg').default,
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        Learn more about my background, research interests, and academic pursuits.
       </>
     ),
+    link: '/about',
   },
 ];
 
-function Feature({Svg, title, description}) {
+function Feature({Svg, title, description, link}) {
   return (
     <div className={clsx('col col--4')}>
       <div className="text--center">
@@ -44,6 +46,11 @@ function Feature({Svg, title, description}) {
       <div className="text--center padding-horiz--md">
         <Heading as="h3">{title}</Heading>
         <p>{description}</p>
+        <div className={styles.buttons}>
+          <a className="button button--secondary button--sm" href={link}>
+            Learn More
+          </a>
+        </div>
       </div>
     </div>
   );

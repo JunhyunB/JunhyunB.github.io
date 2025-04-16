@@ -1,27 +1,27 @@
 {
   "id": "machine-learning/index",
-  "title": "Machine Learning Papers",
-  "description": "This section contains summaries of notable papers in the field of machine learning.",
+  "title": "Machine Learning",
+  "description": "This section contains paper reviews related to Machine Learning research.",
   "source": "@site/docs/machine-learning/index.md",
   "sourceDirName": "machine-learning",
   "slug": "/machine-learning/",
   "permalink": "/docs/machine-learning/",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/JunhyunB/junhyunb.github.io/edit/main/docs/machine-learning/index.md",
+  "editUrl": "https://github.com/JunhyunB/JunhyunB.github.io/tree/main/docs/machine-learning/index.md",
   "tags": [],
   "version": "current",
-  "sidebarPosition": 1,
+  "sidebarPosition": 2,
   "frontMatter": {
-    "sidebar_position": 1
+    "sidebar_position": 2
   },
-  "sidebar": "papersSidebar",
+  "sidebar": "tutorialSidebar",
   "previous": {
-    "title": "Introduction",
-    "permalink": "/docs/intro"
+    "title": "Computer Vision",
+    "permalink": "/docs/computer-vision/"
   },
   "next": {
-    "title": "Deep Learning",
-    "permalink": "/docs/machine-learning/deep-learning"
+    "title": "Machine Learning",
+    "permalink": "/docs/machine-learning/"
   }
 }
