@@ -1,0 +1,59 @@
+{
+  "id": "mechanistic-interpretability/transformer-circuits",
+  "title": "A Mathematical Framework for Transformer Circuits",
+  "description": "Paper Information",
+  "source": "@site/docs/mechanistic-interpretability/transformer-circuits.md",
+  "sourceDirName": "mechanistic-interpretability",
+  "slug": "/mechanistic-interpretability/transformer-circuits",
+  "permalink": "/docs/mechanistic-interpretability/transformer-circuits",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/JunhyunB/JunhyunB.github.io/tree/main/docs/mechanistic-interpretability/transformer-circuits.md",
+  "tags": [
+    {
+      "inline": true,
+      "label": "transformers",
+      "permalink": "/docs/tags/transformers"
+    },
+    {
+      "inline": true,
+      "label": "mechanistic-interpretability",
+      "permalink": "/docs/tags/mechanistic-interpretability"
+    },
+    {
+      "inline": true,
+      "label": "circuits",
+      "permalink": "/docs/tags/circuits"
+    }
+  ],
+  "version": "current",
+  "frontMatter": {
+    "title": "A Mathematical Framework for Transformer Circuits",
+    "authors": [
+      "Nelson Elhage",
+      "Neel Nanda",
+      "Catherine Olsson",
+      "Tom Henighan",
+      "Nicholas Joseph",
+      "Ben Mann",
+      "Tom Brown",
+      "Dario Amodei",
+      "Sam McCandlish",
+      "Christopher Olah"
+    ],
+    "tags": [
+      "transformers",
+      "mechanistic-interpretability",
+      "circuits"
+    ]
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "TEst 2",
+    "permalink": "/docs/mechanistic-interpretability/test"
+  },
+  "next": {
+    "title": "Trustworthy AI",
+    "permalink": "/docs/trustworthy-ai/"
+  }
+}

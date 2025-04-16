@@ -20,7 +20,7 @@ export default function About() {
             <div className="margin-bottom--xl">
               <Heading as="h2">Introduction</Heading>
               <p>
-                I'm Jun-Hyun Bae, a researcher focusing on Generalization in Machine Learning.
+                I'm Jun-Hyun Bae, an AI researcher focusing on Generalization in Machine Learning.
                 I am passionate about understanding the inner workings of machine learning models.
               </p>
               <p>

@@ -1,0 +1,53 @@
+{
+  "id": "mechanistic-interpretability/induction-heads",
+  "title": "In-context Learning and Induction Heads",
+  "description": "Paper Information",
+  "source": "@site/docs/mechanistic-interpretability/induction-heads.md",
+  "sourceDirName": "mechanistic-interpretability",
+  "slug": "/mechanistic-interpretability/induction-heads",
+  "permalink": "/docs/mechanistic-interpretability/induction-heads",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/JunhyunB/JunhyunB.github.io/tree/main/docs/mechanistic-interpretability/induction-heads.md",
+  "tags": [
+    {
+      "inline": true,
+      "label": "induction-heads",
+      "permalink": "/docs/tags/induction-heads"
+    },
+    {
+      "inline": true,
+      "label": "transformers",
+      "permalink": "/docs/tags/transformers"
+    },
+    {
+      "inline": true,
+      "label": "mechanistic-interpretability",
+      "permalink": "/docs/tags/mechanistic-interpretability"
+    }
+  ],
+  "version": "current",
+  "frontMatter": {
+    "title": "In-context Learning and Induction Heads",
+    "authors": [
+      "Neel Nanda",
+      "Tom Lieberum",
+      "Catherine Olsson",
+      "Christopher Olah"
+    ],
+    "tags": [
+      "induction-heads",
+      "transformers",
+      "mechanistic-interpretability"
+    ]
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Grokking: Generalization Beyond Overfitting on Small Algorithmic Datasets",
+    "permalink": "/docs/mechanistic-interpretability/grokking"
+  },
+  "next": {
+    "title": "Sample Paper Review",
+    "permalink": "/docs/mechanistic-interpretability/sample-paper"
+  }
+}

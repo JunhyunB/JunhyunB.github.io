@@ -1,0 +1,40 @@
+{
+  "id": "sample-paper",
+  "title": "Sample Paper Review",
+  "description": "Paper Information",
+  "source": "@site/docs/sample-paper.md",
+  "sourceDirName": ".",
+  "slug": "/sample-paper",
+  "permalink": "/docs/sample-paper",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/JunhyunB/JunhyunB.github.io/tree/main/docs/sample-paper.md",
+  "tags": [
+    {
+      "inline": true,
+      "label": "sample",
+      "permalink": "/docs/tags/sample"
+    },
+    {
+      "inline": true,
+      "label": "test",
+      "permalink": "/docs/tags/test"
+    }
+  ],
+  "version": "current",
+  "frontMatter": {
+    "title": "Sample Paper Review",
+    "authors": [
+      "Test Author"
+    ],
+    "tags": [
+      "sample",
+      "test"
+    ]
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Paper Review Template",
+    "permalink": "/docs/paper-review-template"
+  }
+}

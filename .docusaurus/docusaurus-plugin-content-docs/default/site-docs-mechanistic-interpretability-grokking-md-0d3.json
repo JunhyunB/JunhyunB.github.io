@@ -1,0 +1,55 @@
+{
+  "id": "mechanistic-interpretability/grokking",
+  "title": "Grokking: Generalization Beyond Overfitting on Small Algorithmic Datasets",
+  "description": "Paper Information",
+  "source": "@site/docs/mechanistic-interpretability/grokking.md",
+  "sourceDirName": "mechanistic-interpretability",
+  "slug": "/mechanistic-interpretability/grokking",
+  "permalink": "/docs/mechanistic-interpretability/grokking",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/JunhyunB/JunhyunB.github.io/tree/main/docs/mechanistic-interpretability/grokking.md",
+  "tags": [
+    {
+      "inline": true,
+      "label": "grokking",
+      "permalink": "/docs/tags/grokking"
+    },
+    {
+      "inline": true,
+      "label": "generalization",
+      "permalink": "/docs/tags/generalization"
+    },
+    {
+      "inline": true,
+      "label": "deep-learning",
+      "permalink": "/docs/tags/deep-learning"
+    }
+  ],
+  "version": "current",
+  "frontMatter": {
+    "title": "Grokking: Generalization Beyond Overfitting on Small Algorithmic Datasets",
+    "authors": [
+      "Alec Radford",
+      "Jeffrey Wu",
+      "Rewon Child",
+      "David Luan",
+      "Dario Amodei",
+      "Ilya Sutskever"
+    ],
+    "tags": [
+      "grokking",
+      "generalization",
+      "deep-learning"
+    ]
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Another Sample Paper",
+    "permalink": "/docs/mechanistic-interpretability/another-sample"
+  },
+  "next": {
+    "title": "In-context Learning and Induction Heads",
+    "permalink": "/docs/mechanistic-interpretability/induction-heads"
+  }
+}

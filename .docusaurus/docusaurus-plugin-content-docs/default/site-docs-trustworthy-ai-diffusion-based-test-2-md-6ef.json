@@ -1,0 +1,24 @@
+{
+  "id": "trustworthy-ai/diffusion-based/test2",
+  "title": "Safety Guidance in Diffusion Models2",
+  "description": "Paper Information",
+  "source": "@site/docs/trustworthy-ai/diffusion-based/test2.md",
+  "sourceDirName": "trustworthy-ai/diffusion-based",
+  "slug": "/trustworthy-ai/diffusion-based/test2",
+  "permalink": "/docs/trustworthy-ai/diffusion-based/test2",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/JunhyunB/JunhyunB.github.io/tree/main/docs/trustworthy-ai/diffusion-based/test2.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Safety Guidance in Diffusion Models",
+    "permalink": "/docs/trustworthy-ai/diffusion-based/safety-guidance"
+  },
+  "next": {
+    "title": "Paper Review Template",
+    "permalink": "/docs/paper-review-template"
+  }
+}

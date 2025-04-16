@@ -16,8 +16,18 @@
               "sidebar": "tutorialSidebar"
             },
             {
+              "id": "mechanistic-interpretability/another-sample",
+              "path": "/docs/mechanistic-interpretability/another-sample",
+              "sidebar": "tutorialSidebar"
+            },
+            {
               "id": "mechanistic-interpretability/index",
               "path": "/docs/mechanistic-interpretability/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "mechanistic-interpretability/sample-paper",
+              "path": "/docs/mechanistic-interpretability/sample-paper",
               "sidebar": "tutorialSidebar"
             },
             {
@@ -38,6 +48,11 @@
             {
               "id": "trustworthy-ai/diffusion-based/safety-guidance",
               "path": "/docs/trustworthy-ai/diffusion-based/safety-guidance",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "trustworthy-ai/diffusion-based/test2",
+              "path": "/docs/trustworthy-ai/diffusion-based/test2",
               "sidebar": "tutorialSidebar"
             },
             {

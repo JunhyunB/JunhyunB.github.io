@@ -1,0 +1,44 @@
+{
+  "id": "mechanistic-interpretability/another-sample",
+  "title": "Another Sample Paper",
+  "description": "Paper Information",
+  "source": "@site/docs/mechanistic-interpretability/another-sample.md",
+  "sourceDirName": "mechanistic-interpretability",
+  "slug": "/mechanistic-interpretability/another-sample",
+  "permalink": "/docs/mechanistic-interpretability/another-sample",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/JunhyunB/JunhyunB.github.io/tree/main/docs/mechanistic-interpretability/another-sample.md",
+  "tags": [
+    {
+      "inline": true,
+      "label": "sample",
+      "permalink": "/docs/tags/sample"
+    },
+    {
+      "inline": true,
+      "label": "test",
+      "permalink": "/docs/tags/test"
+    }
+  ],
+  "version": "current",
+  "frontMatter": {
+    "title": "Another Sample Paper",
+    "authors": [
+      "Second Test"
+    ],
+    "tags": [
+      "sample",
+      "test"
+    ]
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Mechanistic Interpretability",
+    "permalink": "/docs/mechanistic-interpretability/"
+  },
+  "next": {
+    "title": "Sample Paper Review",
+    "permalink": "/docs/mechanistic-interpretability/sample-paper"
+  }
+}

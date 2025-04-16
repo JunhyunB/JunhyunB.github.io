@@ -1,0 +1,44 @@
+{
+  "id": "another-sample",
+  "title": "Another Sample Paper",
+  "description": "Paper Information",
+  "source": "@site/docs/another-sample.md",
+  "sourceDirName": ".",
+  "slug": "/another-sample",
+  "permalink": "/docs/another-sample",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/JunhyunB/JunhyunB.github.io/tree/main/docs/another-sample.md",
+  "tags": [
+    {
+      "inline": true,
+      "label": "sample",
+      "permalink": "/docs/tags/sample"
+    },
+    {
+      "inline": true,
+      "label": "test",
+      "permalink": "/docs/tags/test"
+    }
+  ],
+  "version": "current",
+  "frontMatter": {
+    "title": "Another Sample Paper",
+    "authors": [
+      "Second Test"
+    ],
+    "tags": [
+      "sample",
+      "test"
+    ]
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Safety Guidance in Diffusion Models2",
+    "permalink": "/docs/trustworthy-ai/diffusion-based/test2"
+  },
+  "next": {
+    "title": "Paper Review Template",
+    "permalink": "/docs/paper-review-template"
+  }
+}

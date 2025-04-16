@@ -79,15 +79,20 @@ export default [
   },
   {
     path: '/docs',
-    component: ComponentCreator('/docs', '72b'),
+    component: ComponentCreator('/docs', '53d'),
     routes: [
       {
         path: '/docs',
-        component: ComponentCreator('/docs', '327'),
+        component: ComponentCreator('/docs', '63d'),
         routes: [
           {
             path: '/docs/tags',
             component: ComponentCreator('/docs/tags', 'fce'),
+            exact: true
+          },
+          {
+            path: '/docs/tags/sample',
+            component: ComponentCreator('/docs/tags/sample', '268'),
             exact: true
           },
           {
@@ -96,8 +101,13 @@ export default [
             exact: true
           },
           {
+            path: '/docs/tags/test',
+            component: ComponentCreator('/docs/tags/test', 'e13'),
+            exact: true
+          },
+          {
             path: '/docs',
-            component: ComponentCreator('/docs', '1f8'),
+            component: ComponentCreator('/docs', 'ea2'),
             routes: [
               {
                 path: '/docs/intro',
@@ -108,6 +118,18 @@ export default [
               {
                 path: '/docs/mechanistic-interpretability/',
                 component: ComponentCreator('/docs/mechanistic-interpretability/', 'b8b'),
+                exact: true,
+                sidebar: "tutorialSidebar"
+              },
+              {
+                path: '/docs/mechanistic-interpretability/another-sample',
+                component: ComponentCreator('/docs/mechanistic-interpretability/another-sample', '810'),
+                exact: true,
+                sidebar: "tutorialSidebar"
+              },
+              {
+                path: '/docs/mechanistic-interpretability/sample-paper',
+                component: ComponentCreator('/docs/mechanistic-interpretability/sample-paper', '710'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               },
@@ -138,6 +160,12 @@ export default [
               {
                 path: '/docs/trustworthy-ai/diffusion-based/safety-guidance',
                 component: ComponentCreator('/docs/trustworthy-ai/diffusion-based/safety-guidance', '2b0'),
+                exact: true,
+                sidebar: "tutorialSidebar"
+              },
+              {
+                path: '/docs/trustworthy-ai/diffusion-based/test2',
+                component: ComponentCreator('/docs/trustworthy-ai/diffusion-based/test2', 'def'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               }

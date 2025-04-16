@@ -1,0 +1,128 @@
+[
+  {
+    "id": "intro",
+    "title": "Paper Reviews Introduction",
+    "linkTo": [
+      "Robert Johnson",
+      "Alex Brown"
+    ],
+    "referencedBy": [
+      "John Doe",
+      "Jane Smith"
+    ]
+  },
+  {
+    "id": "Robert Johnson",
+    "title": "Robert Johnson",
+    "linkTo": [
+      "sample-paper"
+    ],
+    "referencedBy": [
+      "intro"
+    ]
+  },
+  {
+    "id": "Alex Brown",
+    "title": "Alex Brown",
+    "linkTo": [
+      "another-sample"
+    ],
+    "referencedBy": [
+      "intro",
+      "sample-paper"
+    ]
+  },
+  {
+    "id": "John Doe",
+    "title": "John Doe",
+    "linkTo": [
+      "intro"
+    ],
+    "referencedBy": [
+      "another-sample"
+    ]
+  },
+  {
+    "id": "Jane Smith",
+    "title": "Jane Smith",
+    "linkTo": [
+      "intro",
+      "another-sample",
+      "sample-paper"
+    ],
+    "referencedBy": []
+  },
+  {
+    "id": "another-sample",
+    "title": "another-sample",
+    "linkTo": [
+      "John Doe",
+      "Other Researcher"
+    ],
+    "referencedBy": [
+      "Jane Smith",
+      "Alex Brown",
+      "Michael Wilson"
+    ]
+  },
+  {
+    "id": "Other Researcher",
+    "title": "Other Researcher",
+    "linkTo": [],
+    "referencedBy": [
+      "another-sample"
+    ]
+  },
+  {
+    "id": "Michael Wilson",
+    "title": "Michael Wilson",
+    "linkTo": [
+      "another-sample"
+    ],
+    "referencedBy": [
+      "sample-paper"
+    ]
+  },
+  {
+    "id": "index",
+    "title": "Trustworthy AI",
+    "linkTo": [],
+    "referencedBy": []
+  },
+  {
+    "id": "sample-paper",
+    "title": "sample-paper",
+    "linkTo": [
+      "Alex Brown",
+      "Michael Wilson"
+    ],
+    "referencedBy": [
+      "Jane Smith",
+      "Robert Johnson"
+    ]
+  },
+  {
+    "id": "test",
+    "title": "TEst 2",
+    "linkTo": [],
+    "referencedBy": []
+  },
+  {
+    "id": "paper-review-template",
+    "title": "slug: prt",
+    "linkTo": [],
+    "referencedBy": []
+  },
+  {
+    "id": "safety-guidance",
+    "title": "Safety Guidance in Diffusion Models",
+    "linkTo": [],
+    "referencedBy": []
+  },
+  {
+    "id": "test2",
+    "title": "Safety Guidance in Diffusion Models2",
+    "linkTo": [],
+    "referencedBy": []
+  }
+]
