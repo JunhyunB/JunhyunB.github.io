@@ -4,13 +4,13 @@
  * Modify the docusaurus.config.js file at your site's root instead.
  */
 export default {
-  "title": "JunhyunB.github.io",
+  "title": "junhyunb.github.io",
   "tagline": "Dinosaurs are cool",
   "favicon": "img/favicon.ico",
   "url": "https://JunhyunB.github.io",
-  "baseUrl": "/JunhyunB.github.io/",
-  "organizationName": "facebook",
-  "projectName": "docusaurus",
+  "baseUrl": "/junhyunb.github.io/",
+  "organizationName": "JunhyunB",
+  "projectName": "junhyunb.github.io",
   "onBrokenLinks": "throw",
   "onBrokenMarkdownLinks": "warn",
   "i18n": {

@@ -1,68 +1,68 @@
 {
   "docusaurus-plugin-content-docs": {
     "default": {
-      "path": "/JunhyunB.github.io/docs",
+      "path": "/junhyunb.github.io/docs",
       "versions": [
         {
           "name": "current",
           "label": "Next",
           "isLast": true,
-          "path": "/JunhyunB.github.io/docs",
+          "path": "/junhyunb.github.io/docs",
           "mainDocId": "intro",
           "docs": [
             {
               "id": "intro",
-              "path": "/JunhyunB.github.io/docs/intro",
+              "path": "/junhyunb.github.io/docs/intro",
               "sidebar": "tutorialSidebar"
             },
             {
               "id": "tutorial-basics/congratulations",
-              "path": "/JunhyunB.github.io/docs/tutorial-basics/congratulations",
+              "path": "/junhyunb.github.io/docs/tutorial-basics/congratulations",
               "sidebar": "tutorialSidebar"
             },
             {
               "id": "tutorial-basics/create-a-blog-post",
-              "path": "/JunhyunB.github.io/docs/tutorial-basics/create-a-blog-post",
+              "path": "/junhyunb.github.io/docs/tutorial-basics/create-a-blog-post",
               "sidebar": "tutorialSidebar"
             },
             {
               "id": "tutorial-basics/create-a-document",
-              "path": "/JunhyunB.github.io/docs/tutorial-basics/create-a-document",
+              "path": "/junhyunb.github.io/docs/tutorial-basics/create-a-document",
               "sidebar": "tutorialSidebar"
             },
             {
               "id": "tutorial-basics/create-a-page",
-              "path": "/JunhyunB.github.io/docs/tutorial-basics/create-a-page",
+              "path": "/junhyunb.github.io/docs/tutorial-basics/create-a-page",
               "sidebar": "tutorialSidebar"
             },
             {
               "id": "tutorial-basics/deploy-your-site",
-              "path": "/JunhyunB.github.io/docs/tutorial-basics/deploy-your-site",
+              "path": "/junhyunb.github.io/docs/tutorial-basics/deploy-your-site",
               "sidebar": "tutorialSidebar"
             },
             {
               "id": "tutorial-basics/markdown-features",
-              "path": "/JunhyunB.github.io/docs/tutorial-basics/markdown-features",
+              "path": "/junhyunb.github.io/docs/tutorial-basics/markdown-features",
               "sidebar": "tutorialSidebar"
             },
             {
               "id": "tutorial-extras/manage-docs-versions",
-              "path": "/JunhyunB.github.io/docs/tutorial-extras/manage-docs-versions",
+              "path": "/junhyunb.github.io/docs/tutorial-extras/manage-docs-versions",
               "sidebar": "tutorialSidebar"
             },
             {
               "id": "tutorial-extras/translate-your-site",
-              "path": "/JunhyunB.github.io/docs/tutorial-extras/translate-your-site",
+              "path": "/junhyunb.github.io/docs/tutorial-extras/translate-your-site",
               "sidebar": "tutorialSidebar"
             },
             {
               "id": "/category/tutorial---basics",
-              "path": "/JunhyunB.github.io/docs/category/tutorial---basics",
+              "path": "/junhyunb.github.io/docs/category/tutorial---basics",
               "sidebar": "tutorialSidebar"
             },
             {
               "id": "/category/tutorial---extras",
-              "path": "/JunhyunB.github.io/docs/category/tutorial---extras",
+              "path": "/junhyunb.github.io/docs/category/tutorial---extras",
               "sidebar": "tutorialSidebar"
             }
           ],
@@ -70,7 +70,7 @@
           "sidebars": {
             "tutorialSidebar": {
               "link": {
-                "path": "/JunhyunB.github.io/docs/intro",
+                "path": "/junhyunb.github.io/docs/intro",
                 "label": "intro"
               }
             }

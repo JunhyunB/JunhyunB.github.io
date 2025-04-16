@@ -6,13 +6,13 @@
 
 import {themes as prismThemes} from 'prism-react-renderer';
 const username = 'JunhyunB';
-const repoName = 'JunhyunB.github.io';
+const repoName = 'junhyunb.github.io';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'JunhyunB.github.io',
+  title: 'junhyunb.github.io',
   tagline: 'Dinosaurs are cool',
   favicon: 'img/favicon.ico',
 
@@ -24,8 +24,8 @@ const config = {
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'facebook', // Usually your GitHub org/user name.
-  projectName: 'docusaurus', // Usually your repo name.
+  organizationName: username, // Usually your GitHub org/user name.
+  projectName: repoName, // Usually your repo name.
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
