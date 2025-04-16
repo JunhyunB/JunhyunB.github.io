@@ -8,7 +8,7 @@ export default {
   "tagline": "Dinosaurs are cool",
   "favicon": "img/favicon.ico",
   "url": "https://JunhyunB.github.io",
-  "baseUrl": "/junhyunb.github.io/",
+  "baseUrl": "/",
   "organizationName": "JunhyunB",
   "projectName": "junhyunb.github.io",
   "onBrokenLinks": "throw",

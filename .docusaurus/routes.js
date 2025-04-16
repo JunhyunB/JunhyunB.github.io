@@ -3,190 +3,190 @@ import ComponentCreator from '@docusaurus/ComponentCreator';
 
 export default [
   {
-    path: '/junhyunb.github.io/__docusaurus/debug',
-    component: ComponentCreator('/junhyunb.github.io/__docusaurus/debug', '84f'),
+    path: '/__docusaurus/debug',
+    component: ComponentCreator('/__docusaurus/debug', '5ff'),
     exact: true
   },
   {
-    path: '/junhyunb.github.io/__docusaurus/debug/config',
-    component: ComponentCreator('/junhyunb.github.io/__docusaurus/debug/config', '723'),
+    path: '/__docusaurus/debug/config',
+    component: ComponentCreator('/__docusaurus/debug/config', '5ba'),
     exact: true
   },
   {
-    path: '/junhyunb.github.io/__docusaurus/debug/content',
-    component: ComponentCreator('/junhyunb.github.io/__docusaurus/debug/content', 'c8c'),
+    path: '/__docusaurus/debug/content',
+    component: ComponentCreator('/__docusaurus/debug/content', 'a2b'),
     exact: true
   },
   {
-    path: '/junhyunb.github.io/__docusaurus/debug/globalData',
-    component: ComponentCreator('/junhyunb.github.io/__docusaurus/debug/globalData', 'ae1'),
+    path: '/__docusaurus/debug/globalData',
+    component: ComponentCreator('/__docusaurus/debug/globalData', 'c3c'),
     exact: true
   },
   {
-    path: '/junhyunb.github.io/__docusaurus/debug/metadata',
-    component: ComponentCreator('/junhyunb.github.io/__docusaurus/debug/metadata', 'e4a'),
+    path: '/__docusaurus/debug/metadata',
+    component: ComponentCreator('/__docusaurus/debug/metadata', '156'),
     exact: true
   },
   {
-    path: '/junhyunb.github.io/__docusaurus/debug/registry',
-    component: ComponentCreator('/junhyunb.github.io/__docusaurus/debug/registry', '6bd'),
+    path: '/__docusaurus/debug/registry',
+    component: ComponentCreator('/__docusaurus/debug/registry', '88c'),
     exact: true
   },
   {
-    path: '/junhyunb.github.io/__docusaurus/debug/routes',
-    component: ComponentCreator('/junhyunb.github.io/__docusaurus/debug/routes', '4da'),
+    path: '/__docusaurus/debug/routes',
+    component: ComponentCreator('/__docusaurus/debug/routes', '000'),
     exact: true
   },
   {
-    path: '/junhyunb.github.io/blog',
-    component: ComponentCreator('/junhyunb.github.io/blog', 'dbd'),
+    path: '/blog',
+    component: ComponentCreator('/blog', 'b2f'),
     exact: true
   },
   {
-    path: '/junhyunb.github.io/blog/archive',
-    component: ComponentCreator('/junhyunb.github.io/blog/archive', '486'),
+    path: '/blog/archive',
+    component: ComponentCreator('/blog/archive', '182'),
     exact: true
   },
   {
-    path: '/junhyunb.github.io/blog/authors',
-    component: ComponentCreator('/junhyunb.github.io/blog/authors', '749'),
+    path: '/blog/authors',
+    component: ComponentCreator('/blog/authors', '0b7'),
     exact: true
   },
   {
-    path: '/junhyunb.github.io/blog/authors/all-sebastien-lorber-articles',
-    component: ComponentCreator('/junhyunb.github.io/blog/authors/all-sebastien-lorber-articles', '924'),
+    path: '/blog/authors/all-sebastien-lorber-articles',
+    component: ComponentCreator('/blog/authors/all-sebastien-lorber-articles', '4a1'),
     exact: true
   },
   {
-    path: '/junhyunb.github.io/blog/authors/yangshun',
-    component: ComponentCreator('/junhyunb.github.io/blog/authors/yangshun', '290'),
+    path: '/blog/authors/yangshun',
+    component: ComponentCreator('/blog/authors/yangshun', 'a68'),
     exact: true
   },
   {
-    path: '/junhyunb.github.io/blog/first-blog-post',
-    component: ComponentCreator('/junhyunb.github.io/blog/first-blog-post', 'ccb'),
+    path: '/blog/first-blog-post',
+    component: ComponentCreator('/blog/first-blog-post', '89a'),
     exact: true
   },
   {
-    path: '/junhyunb.github.io/blog/long-blog-post',
-    component: ComponentCreator('/junhyunb.github.io/blog/long-blog-post', 'a7a'),
+    path: '/blog/long-blog-post',
+    component: ComponentCreator('/blog/long-blog-post', '9ad'),
     exact: true
   },
   {
-    path: '/junhyunb.github.io/blog/mdx-blog-post',
-    component: ComponentCreator('/junhyunb.github.io/blog/mdx-blog-post', '112'),
+    path: '/blog/mdx-blog-post',
+    component: ComponentCreator('/blog/mdx-blog-post', 'e9f'),
     exact: true
   },
   {
-    path: '/junhyunb.github.io/blog/tags',
-    component: ComponentCreator('/junhyunb.github.io/blog/tags', 'c12'),
+    path: '/blog/tags',
+    component: ComponentCreator('/blog/tags', '287'),
     exact: true
   },
   {
-    path: '/junhyunb.github.io/blog/tags/docusaurus',
-    component: ComponentCreator('/junhyunb.github.io/blog/tags/docusaurus', 'ff2'),
+    path: '/blog/tags/docusaurus',
+    component: ComponentCreator('/blog/tags/docusaurus', '704'),
     exact: true
   },
   {
-    path: '/junhyunb.github.io/blog/tags/facebook',
-    component: ComponentCreator('/junhyunb.github.io/blog/tags/facebook', 'efa'),
+    path: '/blog/tags/facebook',
+    component: ComponentCreator('/blog/tags/facebook', '858'),
     exact: true
   },
   {
-    path: '/junhyunb.github.io/blog/tags/hello',
-    component: ComponentCreator('/junhyunb.github.io/blog/tags/hello', '0f7'),
+    path: '/blog/tags/hello',
+    component: ComponentCreator('/blog/tags/hello', '299'),
     exact: true
   },
   {
-    path: '/junhyunb.github.io/blog/tags/hola',
-    component: ComponentCreator('/junhyunb.github.io/blog/tags/hola', 'f1e'),
+    path: '/blog/tags/hola',
+    component: ComponentCreator('/blog/tags/hola', '00d'),
     exact: true
   },
   {
-    path: '/junhyunb.github.io/blog/welcome',
-    component: ComponentCreator('/junhyunb.github.io/blog/welcome', '08e'),
+    path: '/blog/welcome',
+    component: ComponentCreator('/blog/welcome', 'd2b'),
     exact: true
   },
   {
-    path: '/junhyunb.github.io/markdown-page',
-    component: ComponentCreator('/junhyunb.github.io/markdown-page', '2ba'),
+    path: '/markdown-page',
+    component: ComponentCreator('/markdown-page', '3d7'),
     exact: true
   },
   {
-    path: '/junhyunb.github.io/docs',
-    component: ComponentCreator('/junhyunb.github.io/docs', 'dac'),
+    path: '/docs',
+    component: ComponentCreator('/docs', '733'),
     routes: [
       {
-        path: '/junhyunb.github.io/docs',
-        component: ComponentCreator('/junhyunb.github.io/docs', '967'),
+        path: '/docs',
+        component: ComponentCreator('/docs', '7e6'),
         routes: [
           {
-            path: '/junhyunb.github.io/docs',
-            component: ComponentCreator('/junhyunb.github.io/docs', '9ad'),
+            path: '/docs',
+            component: ComponentCreator('/docs', 'ba6'),
             routes: [
               {
-                path: '/junhyunb.github.io/docs/category/tutorial---basics',
-                component: ComponentCreator('/junhyunb.github.io/docs/category/tutorial---basics', '040'),
+                path: '/docs/category/tutorial---basics',
+                component: ComponentCreator('/docs/category/tutorial---basics', '20e'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               },
               {
-                path: '/junhyunb.github.io/docs/category/tutorial---extras',
-                component: ComponentCreator('/junhyunb.github.io/docs/category/tutorial---extras', '4d8'),
+                path: '/docs/category/tutorial---extras',
+                component: ComponentCreator('/docs/category/tutorial---extras', '9ad'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               },
               {
-                path: '/junhyunb.github.io/docs/intro',
-                component: ComponentCreator('/junhyunb.github.io/docs/intro', 'fa1'),
+                path: '/docs/intro',
+                component: ComponentCreator('/docs/intro', '61d'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               },
               {
-                path: '/junhyunb.github.io/docs/tutorial-basics/congratulations',
-                component: ComponentCreator('/junhyunb.github.io/docs/tutorial-basics/congratulations', '334'),
+                path: '/docs/tutorial-basics/congratulations',
+                component: ComponentCreator('/docs/tutorial-basics/congratulations', '458'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               },
               {
-                path: '/junhyunb.github.io/docs/tutorial-basics/create-a-blog-post',
-                component: ComponentCreator('/junhyunb.github.io/docs/tutorial-basics/create-a-blog-post', '967'),
+                path: '/docs/tutorial-basics/create-a-blog-post',
+                component: ComponentCreator('/docs/tutorial-basics/create-a-blog-post', '108'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               },
               {
-                path: '/junhyunb.github.io/docs/tutorial-basics/create-a-document',
-                component: ComponentCreator('/junhyunb.github.io/docs/tutorial-basics/create-a-document', '5d0'),
+                path: '/docs/tutorial-basics/create-a-document',
+                component: ComponentCreator('/docs/tutorial-basics/create-a-document', '8fc'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               },
               {
-                path: '/junhyunb.github.io/docs/tutorial-basics/create-a-page',
-                component: ComponentCreator('/junhyunb.github.io/docs/tutorial-basics/create-a-page', '0c2'),
+                path: '/docs/tutorial-basics/create-a-page',
+                component: ComponentCreator('/docs/tutorial-basics/create-a-page', '951'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               },
               {
-                path: '/junhyunb.github.io/docs/tutorial-basics/deploy-your-site',
-                component: ComponentCreator('/junhyunb.github.io/docs/tutorial-basics/deploy-your-site', '9a0'),
+                path: '/docs/tutorial-basics/deploy-your-site',
+                component: ComponentCreator('/docs/tutorial-basics/deploy-your-site', '4f5'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               },
               {
-                path: '/junhyunb.github.io/docs/tutorial-basics/markdown-features',
-                component: ComponentCreator('/junhyunb.github.io/docs/tutorial-basics/markdown-features', '9f7'),
+                path: '/docs/tutorial-basics/markdown-features',
+                component: ComponentCreator('/docs/tutorial-basics/markdown-features', 'b05'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               },
               {
-                path: '/junhyunb.github.io/docs/tutorial-extras/manage-docs-versions',
-                component: ComponentCreator('/junhyunb.github.io/docs/tutorial-extras/manage-docs-versions', '189'),
+                path: '/docs/tutorial-extras/manage-docs-versions',
+                component: ComponentCreator('/docs/tutorial-extras/manage-docs-versions', '978'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               },
               {
-                path: '/junhyunb.github.io/docs/tutorial-extras/translate-your-site',
-                component: ComponentCreator('/junhyunb.github.io/docs/tutorial-extras/translate-your-site', '7f9'),
+                path: '/docs/tutorial-extras/translate-your-site',
+                component: ComponentCreator('/docs/tutorial-extras/translate-your-site', 'f9a'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               }
@@ -197,8 +197,8 @@ export default [
     ]
   },
   {
-    path: '/junhyunb.github.io/',
-    component: ComponentCreator('/junhyunb.github.io/', 'caf'),
+    path: '/',
+    component: ComponentCreator('/', '2e1'),
     exact: true
   },
   {
