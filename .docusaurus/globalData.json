@@ -27,8 +27,7 @@
             },
             {
               "id": "nlp/index",
-              "path": "/docs/nlp/",
-              "sidebar": "tutorialSidebar"
+              "path": "/docs/nlp/"
             },
             {
               "id": "paper-review-template",

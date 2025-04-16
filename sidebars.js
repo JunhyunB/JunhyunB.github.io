@@ -42,18 +42,6 @@ const sidebars = {
         // Add specific paper reviews here
       ],
     },
-    {
-      type: 'category',
-      label: 'Natural Language Processing',
-      link: {
-        type: 'doc',
-        id: 'nlp/index',
-      },
-      items: [
-        'nlp/index',
-        // Add specific paper reviews here
-      ],
-    },
     'paper-review-template',
   ],
 

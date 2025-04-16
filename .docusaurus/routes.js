@@ -134,15 +134,15 @@ export default [
   },
   {
     path: '/docs',
-    component: ComponentCreator('/docs', 'd7b'),
+    component: ComponentCreator('/docs', 'ac2'),
     routes: [
       {
         path: '/docs',
-        component: ComponentCreator('/docs', '7d3'),
+        component: ComponentCreator('/docs', '7da'),
         routes: [
           {
             path: '/docs',
-            component: ComponentCreator('/docs', '170'),
+            component: ComponentCreator('/docs', '820'),
             routes: [
               {
                 path: '/docs/computer-vision/',
@@ -164,9 +164,8 @@ export default [
               },
               {
                 path: '/docs/nlp/',
-                component: ComponentCreator('/docs/nlp/', 'a81'),
-                exact: true,
-                sidebar: "tutorialSidebar"
+                component: ComponentCreator('/docs/nlp/', 'a7e'),
+                exact: true
               },
               {
                 path: '/docs/paper-review-template',

@@ -68,7 +68,7 @@ export default function About() {
                 You can reach me at:
               </p>
               <ul>
-                <li><strong>Email:</strong> your.email@example.com</li>
+                <li><strong>Email:</strong> junhyun.bae.kr@gmail.com</li>
                 <li><strong>GitHub:</strong> <a href="https://github.com/JunhyunB">JunhyunB</a></li>
                 {/* Add more contact methods as needed */}
               </ul>

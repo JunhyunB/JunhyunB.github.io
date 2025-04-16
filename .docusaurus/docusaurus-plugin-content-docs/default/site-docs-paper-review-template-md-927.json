@@ -17,7 +17,7 @@
   },
   "sidebar": "tutorialSidebar",
   "previous": {
-    "title": "Natural Language Processing",
-    "permalink": "/docs/nlp/"
+    "title": "Machine Learning",
+    "permalink": "/docs/machine-learning/"
   }
 }
