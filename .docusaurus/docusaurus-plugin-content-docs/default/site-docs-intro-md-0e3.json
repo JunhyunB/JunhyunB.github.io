@@ -13,7 +13,13 @@
   "version": "current",
   "sidebarPosition": 1,
   "frontMatter": {
-    "sidebar_position": 1
+    "sidebar_position": 1,
+    "id": "intro",
+    "title": "Paper Reviews Introduction",
+    "sources": [
+      "sample-paper",
+      "safety-guidance"
+    ]
   },
   "sidebar": "tutorialSidebar",
   "next": {

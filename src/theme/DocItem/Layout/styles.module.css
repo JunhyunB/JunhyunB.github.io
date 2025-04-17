@@ -1,0 +1,107 @@
+/**
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+.docItemContainer header + *,
+.docItemContainer article > *:first-child {
+  margin-top: 0;
+}
+
+.graphContainer {
+  margin-bottom: 2rem;
+}
+
+.graphHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem; /* Add some space below header */
+}
+
+.graphTitle {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--ifm-color-emphasis-700);
+  padding: 0.5rem 0;
+  letter-spacing: 0.05rem;
+}
+
+.expandButton {
+  background: none;
+  border: none;
+  padding: 0.25rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ifm-color-primary);
+}
+
+.expandButton svg {
+  width: 16px;
+  height: 16px;
+}
+
+.graphBox {
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 0.5rem;
+  height: 250px; /* 조금 더 작게 조정 */
+  overflow: hidden;
+  background-color: var(--ifm-background-surface-color);
+  position: relative; /* Needed for positioning elements inside if any */
+}
+
+/* --- Modal Styles --- */
+.graphModalBackdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4); /* 약간 더 투명하게 */
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.graphModalContent {
+  background-color: var(--ifm-card-background-color, var(--ifm-background-surface-color)); /* 카드의 배경색 사용, 없으면 기본 표면색 */
+  padding: 20px;
+  border-radius: 8px;
+  width: 90vw;
+  height: 85vh;
+  max-width: 1200px;
+  box-shadow: var(--ifm-global-shadow-lw);
+  position: relative;
+  overflow: hidden;
+}
+
+.graphModalCloseButton {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--ifm-color-emphasis-700);
+  padding: 0;
+}
+
+.graphModalContent > div { /* Ensure DocGraphView fills modal */
+  width: 100%;
+  height: 100%;
+}
+/* --- End Modal Styles --- */
+
+@media (min-width: 997px) {
+  .docItemCol {
+    max-width: 75% !important;
+  }
+}

@@ -44,7 +44,8 @@ export default {
           "en"
         ]
       }
-    ]
+    ],
+    "/Users/junhyun/JunhyunB.github.io/plugins/remark-link-graph/index.js"
   ],
   "presets": [
     [
@@ -90,6 +91,13 @@ export default {
   ],
   "themeConfig": {
     "image": "img/docusaurus-social-card.jpg",
+    "docs": {
+      "sidebar": {
+        "hideable": true,
+        "autoCollapseCategories": false
+      },
+      "versionPersistence": "localStorage"
+    },
     "navbar": {
       "title": "Jun-Hyun Bae",
       "logo": {
@@ -361,13 +369,6 @@ export default {
       "defaultMode": "light",
       "disableSwitch": false,
       "respectPrefersColorScheme": false
-    },
-    "docs": {
-      "versionPersistence": "localStorage",
-      "sidebar": {
-        "hideable": false,
-        "autoCollapseCategories": false
-      }
     },
     "blog": {
       "sidebar": {

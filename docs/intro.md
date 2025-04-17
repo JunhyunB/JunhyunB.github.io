@@ -1,5 +1,10 @@
 ---
 sidebar_position: 1
+id: intro
+title: Paper Reviews Introduction
+sources:
+  - sample-paper
+  - safety-guidance
 ---
 
 # Paper Reviews Introduction

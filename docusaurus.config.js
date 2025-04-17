@@ -64,6 +64,16 @@ const config = {
         language: ["en"],
       },
     ],
+    // GraphView plugin
+    [
+      'docusaurus-graph',
+      {
+        docsDir: 'docs',      // 문서가 들어있는 폴더
+        buildDir: 'build',    // 빌드 결과 폴더
+        sourcesTag: 'sources',      // 링크 출발용 태그
+        referencesTag: 'references' // 링크 도착용 태그
+      },
+    ],
   ],
 
   presets: [
@@ -111,6 +121,11 @@ const config = {
     ({
       // Replace with your project's social card
       image: 'img/docusaurus-social-card.jpg',
+      docs: {
+        sidebar: {
+          hideable: true,
+        },
+      },
       navbar: {
         title: 'Jun-Hyun Bae',
         logo: {

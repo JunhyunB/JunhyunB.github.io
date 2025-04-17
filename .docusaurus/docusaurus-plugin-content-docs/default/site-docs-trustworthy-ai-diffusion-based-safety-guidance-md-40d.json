@@ -13,7 +13,11 @@
   "version": "current",
   "sidebarPosition": 2,
   "frontMatter": {
-    "sidebar_position": 2
+    "sidebar_position": 2,
+    "id": "safety-guidance",
+    "references": [
+      "intro"
+    ]
   },
   "sidebar": "tutorialSidebar",
   "previous": {
@@ -21,7 +25,7 @@
     "permalink": "/docs/trustworthy-ai/diffusion-based/"
   },
   "next": {
-    "title": "Safety Guidance in Diffusion Models2",
-    "permalink": "/docs/trustworthy-ai/diffusion-based/test2"
+    "title": "Paper Review Template",
+    "permalink": "/docs/paper-review-template"
   }
 }

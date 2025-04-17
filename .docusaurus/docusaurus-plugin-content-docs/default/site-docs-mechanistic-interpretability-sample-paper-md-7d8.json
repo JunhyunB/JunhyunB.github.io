@@ -30,6 +30,10 @@
     "tags": [
       "sample",
       "test"
+    ],
+    "id": "sample-paper",
+    "references": [
+      "intro"
     ]
   },
   "sidebar": "tutorialSidebar",

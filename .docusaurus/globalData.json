@@ -51,11 +51,6 @@
               "sidebar": "tutorialSidebar"
             },
             {
-              "id": "trustworthy-ai/diffusion-based/test2",
-              "path": "/docs/trustworthy-ai/diffusion-based/test2",
-              "sidebar": "tutorialSidebar"
-            },
-            {
               "id": "trustworthy-ai/index",
               "path": "/docs/trustworthy-ai/",
               "sidebar": "tutorialSidebar"

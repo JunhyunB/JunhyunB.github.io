@@ -1,5 +1,8 @@
 ---
 sidebar_position: 2
+id: safety-guidance
+references:
+  - intro
 ---
 
 # Safety Guidance in Diffusion Models

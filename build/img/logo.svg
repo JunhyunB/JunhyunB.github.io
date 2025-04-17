@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- Background Circle -->
+  <circle cx="100" cy="100" r="90" fill="#f0f4f9" />
+  <circle cx="100" cy="100" r="85" fill="#ffffff" stroke="#4ead7f" stroke-width="2" />
+  
+  <!-- Academic/Research Elements -->
+  <!-- Book -->
+  <path d="M60,60 L60,140 L100,130 L140,140 L140,60 L100,70 Z" fill="#f0f4f9" stroke="#4ead7f" stroke-width="3" />
+  <path d="M100,70 L100,130" stroke="#4ead7f" stroke-width="3" />
+  
+  <!-- Magnifying Glass -->
+  <circle cx="130" cy="105" r="15" fill="none" stroke="#4ead7f" stroke-width="3" />
+  <line x1="140" y1="120" x2="150" y2="130" stroke="#4ead7f" stroke-width="3" stroke-linecap="round" />
+  
+  <!-- Initial Letters -->
+  <text x="65" y="115" font-family="Arial, sans-serif" font-weight="bold" font-size="26" fill="#4ead7f">JHB</text>
+</svg>

@@ -2,6 +2,9 @@
 title: "Sample Paper Review"
 authors: ["Test Author"]
 tags: [sample, test]
+id: sample-paper
+references:
+  - intro
 ---
 
 ## Paper Information
