@@ -39,6 +39,11 @@ class WikiLinkExtractor {
     // Remove "./" from the beginning if present
     filePath = filePath.replace(/^\.\//, '');
     
+    // Handle relative paths by resolving them
+    if (filePath.startsWith('./')) {
+      filePath = filePath.substring(2);
+    }
+    
     return filePath;
   }
 

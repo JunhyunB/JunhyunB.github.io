@@ -25,6 +25,11 @@ function getTargetInfo(linkPath) {
     linkPath = linkPath.substring(6); // Remove '/docs/'
   }
   
+  // Handle relative paths
+  if (linkPath.startsWith('./')) {
+    linkPath = linkPath.substring(2);
+  }
+  
   // Handle path with subdirectories
   const isSubdirectoryPath = linkPath.includes('/');
   const targetId = path.basename(linkPath, path.extname(linkPath));
