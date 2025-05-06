@@ -21,7 +21,7 @@
     "permalink": "/docs/trustworthy-ai/"
   },
   "next": {
-    "title": "Safety Guidance in Diffusion Models",
-    "permalink": "/docs/trustworthy-ai/diffusion-based/safety-guidance"
+    "title": "Prompt-to-Prompt Image Editing with Cross Attention Control",
+    "permalink": "/docs/trustworthy-ai/diffusion-based/prompt-to-prompt"
   }
 }

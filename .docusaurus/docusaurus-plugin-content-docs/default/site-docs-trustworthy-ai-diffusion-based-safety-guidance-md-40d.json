@@ -11,9 +11,7 @@
   "editUrl": "https://github.com/JunhyunB/JunhyunB.github.io/tree/main/docs/trustworthy-ai/diffusion-based/safety-guidance.md",
   "tags": [],
   "version": "current",
-  "sidebarPosition": 2,
   "frontMatter": {
-    "sidebar_position": 2,
     "id": "safety-guidance",
     "references": [
       "intro"
@@ -21,8 +19,8 @@
   },
   "sidebar": "tutorialSidebar",
   "previous": {
-    "title": "Diffusion-based Models",
-    "permalink": "/docs/trustworthy-ai/diffusion-based/"
+    "title": "Prompt-to-Prompt Image Editing with Cross Attention Control",
+    "permalink": "/docs/trustworthy-ai/diffusion-based/prompt-to-prompt"
   },
   "next": {
     "title": "Towards Understanding Cross and Self-Attention in Stable Diffusion for Text-Guided Image Editing",

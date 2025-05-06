@@ -1,0 +1,48 @@
+{
+  "id": "trustworthy-ai/diffusion-based/prompt-to-prompt",
+  "title": "Prompt-to-Prompt Image Editing with Cross Attention Control",
+  "description": "Paper Information",
+  "source": "@site/docs/trustworthy-ai/diffusion-based/prompt-to-prompt.md",
+  "sourceDirName": "trustworthy-ai/diffusion-based",
+  "slug": "/trustworthy-ai/diffusion-based/prompt-to-prompt",
+  "permalink": "/docs/trustworthy-ai/diffusion-based/prompt-to-prompt",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/JunhyunB/JunhyunB.github.io/tree/main/docs/trustworthy-ai/diffusion-based/prompt-to-prompt.md",
+  "tags": [
+    {
+      "inline": true,
+      "label": "stable diffusion",
+      "permalink": "/docs/tags/stable-diffusion"
+    },
+    {
+      "inline": true,
+      "label": "diffusion models",
+      "permalink": "/docs/tags/diffusion-models"
+    },
+    {
+      "inline": true,
+      "label": "image editing",
+      "permalink": "/docs/tags/image-editing"
+    }
+  ],
+  "version": "current",
+  "frontMatter": {
+    "id": "prompt-to-prompt",
+    "title": "Prompt-to-Prompt Image Editing with Cross Attention Control",
+    "tags": [
+      "stable diffusion",
+      "diffusion models",
+      "image editing"
+    ]
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Diffusion-based Models",
+    "permalink": "/docs/trustworthy-ai/diffusion-based/"
+  },
+  "next": {
+    "title": "Safety Guidance in Diffusion Models",
+    "permalink": "/docs/trustworthy-ai/diffusion-based/safety-guidance"
+  }
+}

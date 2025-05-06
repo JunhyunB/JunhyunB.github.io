@@ -11,6 +11,7 @@ export default {
   "baseUrl": "/",
   "organizationName": "JunhyunB",
   "projectName": "JunhyunB.github.io",
+  "deploymentBranch": "gh-pages",
   "onBrokenLinks": "warn",
   "onBrokenMarkdownLinks": "warn",
   "i18n": {

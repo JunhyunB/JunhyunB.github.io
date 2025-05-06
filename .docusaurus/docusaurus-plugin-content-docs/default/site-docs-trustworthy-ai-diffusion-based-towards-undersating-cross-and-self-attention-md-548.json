@@ -32,9 +32,7 @@
     }
   ],
   "version": "current",
-  "sidebarPosition": 2,
   "frontMatter": {
-    "sidebar_position": 2,
     "id": "towards-undersating-cross-and-self-attention",
     "title": "Towards Understanding Cross and Self-Attention in Stable Diffusion for Text-Guided Image Editing",
     "tags": [
