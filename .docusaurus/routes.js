@@ -79,11 +79,11 @@ export default [
   },
   {
     path: '/docs',
-    component: ComponentCreator('/docs', '32d'),
+    component: ComponentCreator('/docs', '82b'),
     routes: [
       {
         path: '/docs',
-        component: ComponentCreator('/docs', '26b'),
+        component: ComponentCreator('/docs', '3ee'),
         routes: [
           {
             path: '/docs/tags',
@@ -93,6 +93,11 @@ export default [
           {
             path: '/docs/tags/attention-mechanisms',
             component: ComponentCreator('/docs/tags/attention-mechanisms', '475'),
+            exact: true
+          },
+          {
+            path: '/docs/tags/controllable-generation',
+            component: ComponentCreator('/docs/tags/controllable-generation', '8b6'),
             exact: true
           },
           {

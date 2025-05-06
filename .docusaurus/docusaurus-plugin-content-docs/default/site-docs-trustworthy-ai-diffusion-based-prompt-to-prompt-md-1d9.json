@@ -1,7 +1,7 @@
 {
   "id": "trustworthy-ai/diffusion-based/prompt-to-prompt",
   "title": "Prompt-to-Prompt Image Editing with Cross Attention Control",
-  "description": "Paper Information",
+  "description": "This paper is part of the Trustworthy AI research collection and focuses on controllable generation techniques for diffusion models.",
   "source": "@site/docs/trustworthy-ai/diffusion-based/prompt-to-prompt.md",
   "sourceDirName": "trustworthy-ai/diffusion-based",
   "slug": "/trustworthy-ai/diffusion-based/prompt-to-prompt",
@@ -24,6 +24,11 @@
       "inline": true,
       "label": "image editing",
       "permalink": "/docs/tags/image-editing"
+    },
+    {
+      "inline": true,
+      "label": "controllable generation",
+      "permalink": "/docs/tags/controllable-generation"
     }
   ],
   "version": "current",
@@ -33,7 +38,11 @@
     "tags": [
       "stable diffusion",
       "diffusion models",
-      "image editing"
+      "image editing",
+      "controllable generation"
+    ],
+    "references": [
+      "intro"
     ]
   },
   "sidebar": "tutorialSidebar",

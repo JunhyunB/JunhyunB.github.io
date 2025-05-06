@@ -118,13 +118,13 @@
       "plugin": "plugin---search-138-688"
     }
   },
-  "/docs-32d": {
+  "/docs-82b": {
     "__comp": "__comp---theme-docs-root-5-e-9-0b6",
     "__context": {
       "plugin": "plugin---docsaba-d7c"
     }
   },
-  "/docs-26b": {
+  "/docs-3ee": {
     "__comp": "__comp---theme-doc-version-roota-7-b-5de",
     "__props": "__props---docs-005-788"
   },
@@ -135,6 +135,10 @@
   "/docs/tags/attention-mechanisms-475": {
     "__comp": "__comp---theme-doc-tag-doc-list-pagedf-2-9f0",
     "__props": "__props---docs-tags-attention-mechanisms-8-a-7-057"
+  },
+  "/docs/tags/controllable-generation-8b6": {
+    "__comp": "__comp---theme-doc-tag-doc-list-pagedf-2-9f0",
+    "__props": "__props---docs-tags-controllable-generation-2-cf-774"
   },
   "/docs/tags/diffusion-models-ac4": {
     "__comp": "__comp---theme-doc-tag-doc-list-pagedf-2-9f0",
