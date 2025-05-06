@@ -7,6 +7,8 @@ references:
 
 # Safety Guidance in Diffusion Models
 ****
+
+*This paper is part of the [Trustworthy AI](/docs/trustworthy-ai) research collection and focuses on safety techniques for diffusion models.*
 ## Paper Information
 
 - **Title**: Safety Guidance: Mitigating Harmful Outputs in Text-to-Image Models

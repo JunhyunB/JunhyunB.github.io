@@ -8,6 +8,9 @@ import {themes as prismThemes} from 'prism-react-renderer';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 
+// Import the wiki links plugins
+const remarkWikiLinks = require('./plugins/remark-wiki-link-graph/remark-wiki-links');
+
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 /** @type {import('@docusaurus/types').Config} */
@@ -64,14 +67,12 @@ const config = {
         language: ["en"],
       },
     ],
-    // GraphView plugin
+    // Wiki Link Extractor plugin
     [
-      'docusaurus-graph',
+      require.resolve('./plugins/wiki-link-extractor'),
       {
-        docsDir: 'docs',      // 문서가 들어있는 폴더
-        buildDir: 'build',    // 빌드 결과 폴더
-        sourcesTag: 'sources',      // 링크 출발용 태그
-        referencesTag: 'references' // 링크 도착용 태그
+        docsDir: 'docs',
+        outputFileName: 'docusaurus-graph.json'
       },
     ],
   ],
@@ -87,7 +88,14 @@ const config = {
           // Remove this to remove the "edit this page" links.
           editUrl:
             'https://github.com/JunhyunB/JunhyunB.github.io/tree/main/',
-          remarkPlugins: [remarkMath],
+          remarkPlugins: [
+            remarkMath,
+            // Add the wiki links transformer
+            [remarkWikiLinks, {
+              pageResolver: (name) => name,
+              hrefTemplate: (permalink) => `/docs/${permalink}`,
+            }]
+          ],
           rehypePlugins: [rehypeKatex],
         },
         blog: {

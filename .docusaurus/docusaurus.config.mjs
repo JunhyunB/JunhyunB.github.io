@@ -45,7 +45,13 @@ export default {
         ]
       }
     ],
-    "/Users/junhyun/JunhyunB.github.io/plugins/remark-link-graph/index.js"
+    [
+      "/Users/junhyun/JunhyunB.github.io/plugins/wiki-link-extractor/index.js",
+      {
+        "docsDir": "docs",
+        "outputFileName": "docusaurus-graph.json"
+      }
+    ]
   ],
   "presets": [
     [
@@ -55,7 +61,11 @@ export default {
           "sidebarPath": "./sidebars.js",
           "editUrl": "https://github.com/JunhyunB/JunhyunB.github.io/tree/main/",
           "remarkPlugins": [
-            null
+            null,
+            [
+              null,
+              {}
+            ]
           ],
           "rehypePlugins": [
             null

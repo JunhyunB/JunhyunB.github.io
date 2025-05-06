@@ -8,6 +8,20 @@ This repository contains the source code for my personal website, built with [Do
 - **Paper Reviews** - Summaries and analyses of research papers
 - **Research Notes** - Blog posts about research topics and experiments
 
+## Zettelkasten-style Wiki Links
+
+This website implements a Zettelkasten-style note-taking system with automatic link detection. You can create connections between documents using several types of links:
+
+1. **Double-bracket links**: `[[note-id]]` or `[[note-id|Custom text]]`
+2. **Wiki-style links**: `[Link text](note-id)`
+3. **Standard Docusaurus links**: `[Link text](/docs/note-id)`
+
+All links are automatically detected and visualized in an interactive graph view next to each document. This helps discover connections between ideas and navigate related content.
+
+For examples and a guide on how to use this system, see:
+- [Zettelkasten Example](/docs/zettelkasten-example)
+- [Zettelkasten Guide](/docs/zettelkasten-guide)
+
 ## Development
 
 ### Prerequisites

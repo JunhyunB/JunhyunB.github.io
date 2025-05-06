@@ -33,12 +33,21 @@
 .expandButton {
   background: none;
   border: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
   padding: 0.25rem;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--ifm-color-primary);
+  transition: all 0.2s ease;
+}
+
+.expandButton:hover {
+  background-color: var(--ifm-color-primary-lightest);
+  transform: scale(1.1);
 }
 
 .expandButton svg {
@@ -49,42 +58,96 @@
 .graphBox {
   border: 1px solid var(--ifm-color-emphasis-300);
   border-radius: 0.5rem;
-  height: 250px; /* 조금 더 작게 조정 */
+  height: 320px; /* 높이 더 증가 */
   overflow: hidden;
   background-color: var(--ifm-background-surface-color);
-  position: relative; /* Needed for positioning elements inside if any */
+  position: relative;
+  transition: all 0.3s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  padding: 20px; /* 내부 여백 증가 */
+  box-sizing: border-box; /* 패딩이 높이/너비에 포함되도록 설정 */
+  display: flex; /* 중앙 정렬을 위해 플렉스 사용 */
+  justify-content: center; /* 수평 중앙 정렬 */
+  align-items: center; /* 수직 중앙 정렬 */
 }
 
-/* --- Modal Styles --- */
+.graphBox:hover {
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  border-color: var(--ifm-color-primary-lightest);
+}
+
+/* --- Enhanced Modal Styles --- */
 .graphModalBackdrop {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.4); /* 약간 더 투명하게 */
+  background-color: rgba(0, 0, 0, 0.5);
   z-index: 1000;
   display: flex;
   align-items: center;
   justify-content: center;
+  backdrop-filter: blur(2px);
 }
 
 .graphModalContent {
-  background-color: var(--ifm-card-background-color, var(--ifm-background-surface-color)); /* 카드의 배경색 사용, 없으면 기본 표면색 */
-  padding: 20px;
-  border-radius: 8px;
+  background-color: var(--ifm-card-background-color, var(--ifm-background-surface-color));
+  border-radius: 12px;
   width: 90vw;
   height: 85vh;
   max-width: 1200px;
-  box-shadow: var(--ifm-global-shadow-lw);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
   position: relative;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--ifm-color-emphasis-300);
+}
+
+.graphModalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.graphModalTitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--ifm-heading-color);
+}
+
+.graphModalControls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.graphModeToggle {
+  background: var(--ifm-color-emphasis-200);
+  border: none;
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--ifm-color-emphasis-800);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.graphModeToggle:hover {
+  background: var(--ifm-color-emphasis-300);
+  color: var(--ifm-color-emphasis-900);
+}
+
+.graphModeToggle:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--ifm-color-primary-lighter);
 }
 
 .graphModalCloseButton {
-  position: absolute;
-  top: 10px;
-  right: 15px;
   background: none;
   border: none;
   font-size: 1.8rem;
@@ -92,11 +155,130 @@
   cursor: pointer;
   color: var(--ifm-color-emphasis-700);
   padding: 0;
+  transition: color 0.2s;
 }
 
-.graphModalContent > div { /* Ensure DocGraphView fills modal */
+.graphModalCloseButton:hover {
+  color: var(--ifm-color-primary);
+}
+
+.graphModalBody {
+  flex: 1;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+  background-color: var(--ifm-background-surface-color);
+  border-radius: 4px;
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* 전체 그래프 컨테이너 스타일 */
+.fullGraphContainer {
   width: 100%;
-  height: 100%;
+  height: 100%; 
+  padding: 30px; /* 더 많은 패딩으로 잘림 방지 */
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* 넘치는 부분 숨김 */
+  position: relative;
+  background-color: var(--ifm-background-surface-color);
+  border-radius: 8px;
+}
+
+/* 특별한 스타일 적용으로 텍스트 배경 개선 */
+.fullGraphContainer :global(.label-background) {
+  filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.1));
+  fill: var(--ifm-background-color);
+  fill-opacity: 0.9;
+  rx: 4;
+  ry: 4;
+}
+
+/* 노드 원의 스타일 개선 */
+.fullGraphContainer :global(circle) {
+  filter: drop-shadow(0px 2px 3px rgba(0, 0, 0, 0.2));
+  transition: all 0.2s ease;
+}
+
+/* 호버 시 강조 효과 */
+.fullGraphContainer :global(circle:hover) {
+  stroke-width: 2px;
+  filter: drop-shadow(0px 3px 5px rgba(0, 0, 0, 0.3));
+}
+
+/* 관련 문서 그래프 컨테이너 스타일 */
+.contextualGraphContainer {
+  width: 90%;
+  height: 90%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  overflow: hidden;
+  padding: 25px; /* 더 많은 패딩으로 잘림 방지 */
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* When a user hovers over the graph, show a subtle highlight */
+.graphModalBody:hover {
+  background-color: var(--ifm-color-emphasis-50);
+}
+
+.graphModalFooter {
+  padding: 12px 20px;
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.graphLegend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  padding: 8px;
+  background-color: var(--ifm-color-emphasis-100);
+  border-radius: 8px;
+  margin: 0 16px;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: var(--ifm-color-emphasis-800);
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.legendItem:hover {
+  background-color: var(--ifm-color-emphasis-200);
+}
+
+.legendDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.graphInstructions {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--ifm-color-emphasis-600);
+  margin-top: 4px;
 }
 /* --- End Modal Styles --- */
 

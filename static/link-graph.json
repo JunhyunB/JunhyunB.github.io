@@ -1,4 +1,288 @@
 {
-  "nodes": [],
-  "links": []
+  "nodes": [
+    {
+      "id": "intro",
+      "title": "Paper Reviews Introduction",
+      "path": "intro.md",
+      "group": "other",
+      "tags": [],
+      "authors": [],
+      "references": [],
+      "sources": [
+        "sample-paper",
+        "safety-guidance"
+      ]
+    },
+    {
+      "id": "sample-paper",
+      "title": "sample-paper",
+      "isPlaceholder": true
+    },
+    {
+      "id": "safety-guidance",
+      "title": "safety-guidance",
+      "isPlaceholder": true
+    },
+    {
+      "id": "another-sample",
+      "title": "Circuit Discovery in Transformer Models",
+      "path": "mechanistic-interpretability/another-sample.md",
+      "group": "mechanistic-interpretability",
+      "tags": [
+        "transformers",
+        "circuit-discovery",
+        "interpretability"
+      ],
+      "authors": [
+        "Sarah Lee",
+        "Michael Johnson"
+      ],
+      "references": [
+        "sample-paper"
+      ],
+      "sources": []
+    },
+    {
+      "id": "tag:transformers",
+      "title": "transformers",
+      "isTag": true,
+      "group": "tags"
+    },
+    {
+      "id": "tag:circuit-discovery",
+      "title": "circuit-discovery",
+      "isTag": true,
+      "group": "tags"
+    },
+    {
+      "id": "tag:interpretability",
+      "title": "interpretability",
+      "isTag": true,
+      "group": "tags"
+    },
+    {
+      "id": "author:Sarah Lee",
+      "title": "Sarah Lee",
+      "isAuthor": true,
+      "group": "authors"
+    },
+    {
+      "id": "author:Michael Johnson",
+      "title": "Michael Johnson",
+      "isAuthor": true,
+      "group": "authors"
+    },
+    {
+      "id": "index",
+      "title": "Mechanistic Interpretability",
+      "path": "mechanistic-interpretability/index.md",
+      "group": "mechanistic-interpretability",
+      "tags": [],
+      "authors": [],
+      "references": [],
+      "sources": []
+    },
+    {
+      "id": "tag:attention-patterns",
+      "title": "attention-patterns",
+      "isTag": true,
+      "group": "tags"
+    },
+    {
+      "id": "author:John Doe",
+      "title": "John Doe",
+      "isAuthor": true,
+      "group": "authors"
+    },
+    {
+      "id": "author:Jane Smith",
+      "title": "Jane Smith",
+      "isAuthor": true,
+      "group": "authors"
+    },
+    {
+      "id": "test",
+      "title": "TEst 2",
+      "path": "mechanistic-interpretability/test.md",
+      "group": "mechanistic-interpretability",
+      "tags": [],
+      "authors": [],
+      "references": [],
+      "sources": []
+    },
+    {
+      "id": "paper-review-template",
+      "title": "Paper Review Template",
+      "path": "paper-review-template.md",
+      "group": "other",
+      "tags": [
+        "template"
+      ],
+      "authors": [],
+      "references": [],
+      "sources": []
+    },
+    {
+      "id": "tag:template",
+      "title": "template",
+      "isTag": true,
+      "group": "tags"
+    },
+    {
+      "id": "tag:diffusion-models",
+      "title": "diffusion-models",
+      "isTag": true,
+      "group": "tags"
+    },
+    {
+      "id": "tag:safety",
+      "title": "safety",
+      "isTag": true,
+      "group": "tags"
+    },
+    {
+      "id": "tag:content-moderation",
+      "title": "content-moderation",
+      "isTag": true,
+      "group": "tags"
+    },
+    {
+      "id": "tag:guidance-techniques",
+      "title": "guidance-techniques",
+      "isTag": true,
+      "group": "tags"
+    }
+  ],
+  "links": [
+    {
+      "source": "sample-paper",
+      "target": "intro",
+      "type": "source"
+    },
+    {
+      "source": "safety-guidance",
+      "target": "intro",
+      "type": "source"
+    },
+    {
+      "source": "another-sample",
+      "target": "sample-paper",
+      "type": "reference"
+    },
+    {
+      "source": "another-sample",
+      "target": "tag:transformers",
+      "type": "tag"
+    },
+    {
+      "source": "another-sample",
+      "target": "tag:circuit-discovery",
+      "type": "tag"
+    },
+    {
+      "source": "another-sample",
+      "target": "tag:interpretability",
+      "type": "tag"
+    },
+    {
+      "source": "another-sample",
+      "target": "author:Sarah Lee",
+      "type": "author"
+    },
+    {
+      "source": "another-sample",
+      "target": "author:Michael Johnson",
+      "type": "author"
+    },
+    {
+      "source": "sample-paper",
+      "target": "intro",
+      "type": "reference"
+    },
+    {
+      "source": "sample-paper",
+      "target": "another-sample",
+      "type": "reference"
+    },
+    {
+      "source": "sample-paper",
+      "target": "tag:transformers",
+      "type": "tag"
+    },
+    {
+      "source": "sample-paper",
+      "target": "tag:attention-patterns",
+      "type": "tag"
+    },
+    {
+      "source": "sample-paper",
+      "target": "tag:interpretability",
+      "type": "tag"
+    },
+    {
+      "source": "sample-paper",
+      "target": "author:John Doe",
+      "type": "author"
+    },
+    {
+      "source": "sample-paper",
+      "target": "author:Jane Smith",
+      "type": "author"
+    },
+    {
+      "source": "paper-review-template",
+      "target": "tag:template",
+      "type": "tag"
+    },
+    {
+      "source": "safety-guidance",
+      "target": "intro",
+      "type": "reference"
+    },
+    {
+      "source": "safety-guidance",
+      "target": "another-sample",
+      "type": "reference"
+    },
+    {
+      "source": "safety-guidance",
+      "target": "tag:diffusion-models",
+      "type": "tag"
+    },
+    {
+      "source": "safety-guidance",
+      "target": "tag:safety",
+      "type": "tag"
+    },
+    {
+      "source": "safety-guidance",
+      "target": "tag:content-moderation",
+      "type": "tag"
+    },
+    {
+      "source": "safety-guidance",
+      "target": "tag:guidance-techniques",
+      "type": "tag"
+    },
+    {
+      "source": "safety-guidance",
+      "target": "author:Jane Smith",
+      "type": "author"
+    },
+    {
+      "source": "safety-guidance",
+      "target": "author:John Doe",
+      "type": "author"
+    },
+    {
+      "source": "safety-guidance",
+      "target": "author:Michael Johnson",
+      "type": "author"
+    },
+    {
+      "source": "safety-guidance",
+      "target": "author:Sarah Lee",
+      "type": "author"
+    }
+  ]
 }

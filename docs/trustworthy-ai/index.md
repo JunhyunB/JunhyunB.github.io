@@ -14,10 +14,10 @@ This section contains paper reviews related to Trustworthy AI research.
 - Safety
 - Interpretability
 - Alignment
-- [Diffusion-based Models](./diffusion-based/index.md)
+- [Diffusion-based Models](/docs/trustworthy-ai/diffusion-based)
 
 ## Latest Reviews
 
-- [Safety Guidance in Diffusion Models](./diffusion-based/safety-guidance.md) - Mitigating harmful outputs in text-to-image models
+- [Safety Guidance in Diffusion Models](/docs/trustworthy-ai/diffusion-based/safety-guidance) - Mitigating harmful outputs in text-to-image models
 
 <!-- More papers coming soon! -->

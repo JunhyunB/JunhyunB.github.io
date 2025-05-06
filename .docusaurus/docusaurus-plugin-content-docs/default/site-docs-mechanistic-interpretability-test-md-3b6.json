@@ -1,7 +1,7 @@
 {
   "id": "mechanistic-interpretability/test",
-  "title": "TEst 2",
-  "description": "",
+  "title": "Test for Linkage",
+  "description": "This section contains paper reviews Trustworthy AI related to Mechanistic Interpretability research.",
   "source": "@site/docs/mechanistic-interpretability/test.md",
   "sourceDirName": "mechanistic-interpretability",
   "slug": "/mechanistic-interpretability/test",
@@ -11,11 +11,17 @@
   "editUrl": "https://github.com/JunhyunB/JunhyunB.github.io/tree/main/docs/mechanistic-interpretability/test.md",
   "tags": [],
   "version": "current",
-  "frontMatter": {},
+  "sidebarPosition": 2,
+  "frontMatter": {
+    "title": "Test for Linkage",
+    "hide_title": false,
+    "hide_table_of_contents": false,
+    "sidebar_position": 2
+  },
   "sidebar": "tutorialSidebar",
   "previous": {
-    "title": "Sample Paper Review",
-    "permalink": "/docs/mechanistic-interpretability/sample-paper"
+    "title": "Mechanistic Interpretability",
+    "permalink": "/docs/mechanistic-interpretability/"
   },
   "next": {
     "title": "Trustworthy AI",
