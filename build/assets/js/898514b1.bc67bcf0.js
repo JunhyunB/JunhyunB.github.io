@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[9067],{9187:e=>{e.exports=JSON.parse('{"tags":[{"label":"template","permalink":"/docs/tags/template","count":1},{"label":"stable diffusion","permalink":"/docs/tags/stable-diffusion","count":1}]}')}}]);

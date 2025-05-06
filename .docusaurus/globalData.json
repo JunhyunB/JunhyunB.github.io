@@ -21,11 +21,6 @@
               "sidebar": "tutorialSidebar"
             },
             {
-              "id": "mechanistic-interpretability/test",
-              "path": "/docs/mechanistic-interpretability/test",
-              "sidebar": "tutorialSidebar"
-            },
-            {
               "id": "paper-review-template",
               "path": "/docs/paper-review-template",
               "sidebar": "tutorialSidebar"

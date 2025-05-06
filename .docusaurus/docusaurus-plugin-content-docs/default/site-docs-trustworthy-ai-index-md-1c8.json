@@ -17,8 +17,8 @@
   },
   "sidebar": "tutorialSidebar",
   "previous": {
-    "title": "Test for Linkage",
-    "permalink": "/docs/mechanistic-interpretability/test"
+    "title": "Mechanistic Interpretability",
+    "permalink": "/docs/mechanistic-interpretability/"
   },
   "next": {
     "title": "Diffusion-based Models",

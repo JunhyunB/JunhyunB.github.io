@@ -3,41 +3,6 @@ import ComponentCreator from '@docusaurus/ComponentCreator';
 
 export default [
   {
-    path: '/__docusaurus/debug',
-    component: ComponentCreator('/__docusaurus/debug', '5ff'),
-    exact: true
-  },
-  {
-    path: '/__docusaurus/debug/config',
-    component: ComponentCreator('/__docusaurus/debug/config', '5ba'),
-    exact: true
-  },
-  {
-    path: '/__docusaurus/debug/content',
-    component: ComponentCreator('/__docusaurus/debug/content', 'a2b'),
-    exact: true
-  },
-  {
-    path: '/__docusaurus/debug/globalData',
-    component: ComponentCreator('/__docusaurus/debug/globalData', 'c3c'),
-    exact: true
-  },
-  {
-    path: '/__docusaurus/debug/metadata',
-    component: ComponentCreator('/__docusaurus/debug/metadata', '156'),
-    exact: true
-  },
-  {
-    path: '/__docusaurus/debug/registry',
-    component: ComponentCreator('/__docusaurus/debug/registry', '88c'),
-    exact: true
-  },
-  {
-    path: '/__docusaurus/debug/routes',
-    component: ComponentCreator('/__docusaurus/debug/routes', '000'),
-    exact: true
-  },
-  {
     path: '/about',
     component: ComponentCreator('/about', 'c49'),
     exact: true
@@ -79,11 +44,11 @@ export default [
   },
   {
     path: '/docs',
-    component: ComponentCreator('/docs', '6ab'),
+    component: ComponentCreator('/docs', 'f8e'),
     routes: [
       {
         path: '/docs',
-        component: ComponentCreator('/docs', '6bc'),
+        component: ComponentCreator('/docs', 'b52'),
         routes: [
           {
             path: '/docs/tags',
@@ -102,7 +67,7 @@ export default [
           },
           {
             path: '/docs',
-            component: ComponentCreator('/docs', '013'),
+            component: ComponentCreator('/docs', 'ba5'),
             routes: [
               {
                 path: '/docs/intro',
@@ -113,12 +78,6 @@ export default [
               {
                 path: '/docs/mechanistic-interpretability/',
                 component: ComponentCreator('/docs/mechanistic-interpretability/', 'b8b'),
-                exact: true,
-                sidebar: "tutorialSidebar"
-              },
-              {
-                path: '/docs/mechanistic-interpretability/test',
-                component: ComponentCreator('/docs/mechanistic-interpretability/test', '7e2'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               },
