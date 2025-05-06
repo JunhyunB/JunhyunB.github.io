@@ -4,6 +4,9 @@
 echo "Building site to regenerate graph data..."
 npm run build
 
+echo "Fixing duplicate nodes in graph data..."
+node fix-duplicate-nodes.js
+
 echo "Copying updated graph data to static folder..."
 cp build/docusaurus-graph.json static/docusaurus-graph.json
 

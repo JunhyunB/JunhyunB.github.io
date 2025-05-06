@@ -263,9 +263,77 @@ class WikiLinkExtractor {
 
   // Save the graph data to a JSON file
   saveGraphData(graphData, outDir) {
+    // Handle the specific case of duplicate nodes
+    const processedData = this.deduplicateNodes(graphData);
+    
     const outputPath = path.join(outDir, this.outputFileName);
-    fs.writeFileSync(outputPath, JSON.stringify(graphData, null, 2));
+    fs.writeFileSync(outputPath, JSON.stringify(processedData, null, 2));
     console.log(`Wiki link graph generated: ${outputPath}`);
+  }
+  
+  // Process graph data to deduplicate nodes with same basename
+  deduplicateNodes(graphData) {
+    // Find short node IDs that have a corresponding full path version
+    // For our specific issue: "towards-undersating-cross-and-self-attention" vs "trustworthy-ai/diffusion-based/towards-undersating-cross-and-self-attention"
+    const nodesToMerge = [];
+    const nodeById = {};
+    
+    // Index nodes by ID
+    graphData.forEach(node => {
+      nodeById[node.id] = node;
+      
+      // Check if this is a short ID that might have a full path version
+      if (!node.id.includes('/')) {
+        const basename = node.id;
+        // Look for full path versions
+        const fullPathMatch = graphData.find(n => 
+          n.id !== basename && n.id.endsWith('/' + basename)
+        );
+        
+        if (fullPathMatch) {
+          nodesToMerge.push({
+            shortId: basename,
+            fullPathId: fullPathMatch.id
+          });
+        }
+      }
+    });
+    
+    // If we found nodes to merge, process the graph
+    if (nodesToMerge.length > 0) {
+      // Create ID mapping for redirects
+      const idMapping = {};
+      nodesToMerge.forEach(merge => {
+        idMapping[merge.shortId] = merge.fullPathId;
+      });
+      
+      // Filter out the short versions
+      const filteredNodes = graphData.filter(node => 
+        !nodesToMerge.some(merge => merge.shortId === node.id)
+      );
+      
+      // Update references in linkTo and referencedBy arrays
+      filteredNodes.forEach(node => {
+        // Update linkTo
+        if (node.linkTo) {
+          node.linkTo = node.linkTo.map(link => 
+            idMapping[link] || link
+          );
+        }
+        
+        // Update referencedBy
+        if (node.referencedBy) {
+          node.referencedBy = node.referencedBy.map(ref => 
+            idMapping[ref] || ref
+          );
+        }
+      });
+      
+      return filteredNodes;
+    }
+    
+    // If no nodes to merge, return the original data
+    return graphData;
   }
 }
 
