@@ -14,7 +14,7 @@ tags: [stable diffusion, diffusion models, image editing]
 
 
 ## TL; DR
-Prompt-to-Prompt(P2P)의 연구에서처럼, source에서 target image로 학습 없이 editing하려는 목적에서, cross-attention과 self-attention map의 replacement에 대한 효과를 구분해서 생각해야 할 필요가 있어보임.
+
 
 ## Abstract
 Stable diffusion과 같은 Deep Text-to-Image Synthesis (TIS) 모델들은 주로 attention layers들을 학습하게 되는데, 이 attention layer들의 semantic meaning이나 어떤 attention maps의 부분들이 이미지 생성에 기여하는지 등이 거의 분석되지 않았다. 그래서 이 논문에서는 in-depth probing analysis를 통해서 cross-attention보다 self-attention maps가 기하학적/모양 디테일을 source image에서 target image로의 변환에 더 크게 기여함을 분석하였다.
