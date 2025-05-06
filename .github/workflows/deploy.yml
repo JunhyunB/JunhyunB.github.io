@@ -20,8 +20,22 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+        
+      # Update reviews and graph data before building
+      - name: Update reviews and graph data
+        run: |
+          # Fix for Mac-specific commands in update scripts
+          sed -i 's/stat -f/stat --format/g' ./update-latest-reviews.sh || true
+          # Run update script
+          bash ./update-latest-reviews.sh || true
+          
       - name: Build website
         run: npm run build
+        
+      # Copy graph data to static directory to ensure it's included in the build
+      - name: Ensure graph data is copied to static directory
+        run: |
+          cp build/docusaurus-graph.json static/docusaurus-graph.json || true
 
       # Popular action to deploy to GitHub Pages:
       # Docs: https://github.com/peaceiris/actions-gh-pages

@@ -42,8 +42,23 @@ jobs:
       - name: Clear
         run: npm run clear
       
+      # Update reviews and graph data before building
+      - name: Update reviews and graph data
+        run: |
+          # Fix for Mac-specific commands in update scripts
+          sed -i 's/stat -f/stat --format/g' ./update-latest-reviews.sh || true
+          # Run update script
+          bash ./update-latest-reviews.sh || true
+          
       - name: Build website
         run: npm run build
+        
+      # Copy graph data to static directory to ensure it's included in the build
+      - name: Ensure graph data is copied to static directory
+        run: |
+          cp build/docusaurus-graph.json static/docusaurus-graph.json || true
+          # Copy the graph data back to build to ensure it's in the artifact
+          cp static/docusaurus-graph.json build/ || true
       
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
