@@ -93,7 +93,21 @@ class WikiLinkExtractor {
       const doubleBracketMatches = [...content.matchAll(DOUBLE_BRACKET_REGEX)];
       console.log(`Found ${doubleBracketMatches.length} double bracket links`);
       for (const match of doubleBracketMatches) {
-        const targetId = this.normalizePath(match[1].trim());
+        const targetPath = match[1].trim();
+        // Skip external links, fragments, or image files
+        if (targetPath.includes('://') || 
+            targetPath.startsWith('#') || 
+            targetPath.toLowerCase().endsWith('.png') ||
+            targetPath.toLowerCase().endsWith('.jpg') ||
+            targetPath.toLowerCase().endsWith('.jpeg') ||
+            targetPath.toLowerCase().endsWith('.gif') ||
+            targetPath.toLowerCase().endsWith('.svg') ||
+            targetPath.toLowerCase().includes('figures/') || // Skip figures directory
+            targetPath.startsWith('</figures/')) { // Skip markdown image syntax with figures
+          console.log(`  Skipping image link: ${targetPath}`);
+          continue;
+        }
+        const targetId = this.normalizePath(targetPath);
         console.log(`  Double bracket link: ${match[1]} -> ${targetId}`);
         this.addLink(sourceId, targetId);
       }
@@ -103,9 +117,17 @@ class WikiLinkExtractor {
       console.log(`Found ${wikiLinkMatches.length} wiki-style links`);
       for (const match of wikiLinkMatches) {
         const targetPath = match[2].trim();
-        // Skip external links or fragments
-        if (targetPath.includes('://') || targetPath.startsWith('#')) {
-          console.log(`  Skipping external/fragment link: ${targetPath}`);
+        // Skip external links, fragments, or image files
+        if (targetPath.includes('://') || 
+            targetPath.startsWith('#') || 
+            targetPath.toLowerCase().endsWith('.png') ||
+            targetPath.toLowerCase().endsWith('.jpg') ||
+            targetPath.toLowerCase().endsWith('.jpeg') ||
+            targetPath.toLowerCase().endsWith('.gif') ||
+            targetPath.toLowerCase().endsWith('.svg') ||
+            targetPath.toLowerCase().includes('figures/') || // Skip figures directory
+            targetPath.startsWith('</figures/')) { // Skip markdown image syntax with figures
+          console.log(`  Skipping external/fragment/image link: ${targetPath}`);
           continue;
         }
         const targetId = this.normalizePath(targetPath);
@@ -118,8 +140,17 @@ class WikiLinkExtractor {
       console.log(`Found ${docsLinkMatches.length} docs links`);
       for (const match of docsLinkMatches) {
         const targetPath = match[2].trim();
-        if (targetPath.includes('://') || targetPath.startsWith('#')) {
-          console.log(`  Skipping external/fragment link: ${targetPath}`);
+        // Skip external links, fragments, or image files
+        if (targetPath.includes('://') || 
+            targetPath.startsWith('#') || 
+            targetPath.toLowerCase().endsWith('.png') ||
+            targetPath.toLowerCase().endsWith('.jpg') ||
+            targetPath.toLowerCase().endsWith('.jpeg') ||
+            targetPath.toLowerCase().endsWith('.gif') ||
+            targetPath.toLowerCase().endsWith('.svg') ||
+            targetPath.toLowerCase().includes('figures/') || // Skip figures directory
+            targetPath.startsWith('</figures/')) { // Skip markdown image syntax with figures
+          console.log(`  Skipping external/fragment/image link: ${targetPath}`);
           continue;
         }
         const targetId = this.normalizePath(targetPath);

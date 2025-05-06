@@ -13,13 +13,7 @@
   {
     "id": "trustworthy-ai/diffusion-based/towards-undersating-cross-and-self-attention",
     "title": "Towards Understanding Cross and Self-Attention in Stable Diffusion for Text-Guided Image Editing",
-    "linkTo": [
-      "</figures/스크린샷 2025-05-06 오후 10.51.45.png>",
-      "</figures/스크린샷 2025-05-06 오후 11.04.47.png>",
-      "</figures/스크린샷 2025-05-06 오후 11.17.24.png>",
-      "</figures/스크린샷 2025-05-06 오후 11.01.53.png>",
-      "</figures/스크린샷 2025-05-06 오후 11.27.17.png>"
-    ],
+    "linkTo": [],
     "referencedBy": [
       "intro"
     ]
@@ -92,46 +86,6 @@
     "linkTo": [],
     "referencedBy": [
       "trustworthy-ai/diffusion-based/safety-guidance"
-    ]
-  },
-  {
-    "id": "</figures/스크린샷 2025-05-06 오후 10.51.45.png>",
-    "title": "스크린샷 2025 05 06 오후 10.51.45.png>",
-    "linkTo": [],
-    "referencedBy": [
-      "trustworthy-ai/diffusion-based/towards-undersating-cross-and-self-attention"
-    ]
-  },
-  {
-    "id": "</figures/스크린샷 2025-05-06 오후 11.04.47.png>",
-    "title": "스크린샷 2025 05 06 오후 11.04.47.png>",
-    "linkTo": [],
-    "referencedBy": [
-      "trustworthy-ai/diffusion-based/towards-undersating-cross-and-self-attention"
-    ]
-  },
-  {
-    "id": "</figures/스크린샷 2025-05-06 오후 11.17.24.png>",
-    "title": "스크린샷 2025 05 06 오후 11.17.24.png>",
-    "linkTo": [],
-    "referencedBy": [
-      "trustworthy-ai/diffusion-based/towards-undersating-cross-and-self-attention"
-    ]
-  },
-  {
-    "id": "</figures/스크린샷 2025-05-06 오후 11.01.53.png>",
-    "title": "스크린샷 2025 05 06 오후 11.01.53.png>",
-    "linkTo": [],
-    "referencedBy": [
-      "trustworthy-ai/diffusion-based/towards-undersating-cross-and-self-attention"
-    ]
-  },
-  {
-    "id": "</figures/스크린샷 2025-05-06 오후 11.27.17.png>",
-    "title": "스크린샷 2025 05 06 오후 11.27.17.png>",
-    "linkTo": [],
-    "referencedBy": [
-      "trustworthy-ai/diffusion-based/towards-undersating-cross-and-self-attention"
     ]
   },
   {

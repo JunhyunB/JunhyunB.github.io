@@ -83,6 +83,17 @@ function loadLinkMap() {
 let linkMap = loadLinkMap();
 
 // Remark plugin
+// Helper to check if a path is an image file
+function isImageFile(path) {
+  return path.toLowerCase().endsWith('.png') ||
+         path.toLowerCase().endsWith('.jpg') ||
+         path.toLowerCase().endsWith('.jpeg') ||
+         path.toLowerCase().endsWith('.gif') ||
+         path.toLowerCase().endsWith('.svg') ||
+         path.toLowerCase().includes('figures/') ||
+         path.startsWith('</figures/');
+}
+
 function remarkWikiLinks() {
   // Clear the link map at the start of each build
   linkMap = new Map();
@@ -119,6 +130,26 @@ function remarkWikiLinks() {
       // Process each match
       for (const match of matches) {
         const [fullMatch, linkPath, displayText] = match;
+        
+        // Skip image files
+        if (isImageFile(linkPath)) {
+          // Add the text before the match
+          if (match.index > lastIndex) {
+            const textBefore = newValue.substring(lastIndex, match.index);
+            if (textBefore) {
+              replacementNodes.push({ type: 'text', value: textBefore });
+            }
+          }
+          
+          // Keep the original text for image links
+          replacementNodes.push({ type: 'text', value: fullMatch });
+          
+          // Update the last index
+          lastIndex = match.index + fullMatch.length;
+          
+          continue;
+        }
+        
         const { nodeId, isSubdirectoryPath } = getTargetInfo(linkPath);
         const linkText = displayText || (isSubdirectoryPath ? path.basename(linkPath) : linkPath);
         
@@ -170,6 +201,11 @@ function remarkWikiLinks() {
       if (!node.url) return;
       
       const url = node.url;
+      
+      // Skip image files
+      if (isImageFile(url)) {
+        return;
+      }
       
       // Process docs links
       if (url.startsWith('/docs/')) {

@@ -94,8 +94,16 @@ module.exports = function(context, options) {
         for (const link of links) {
           let targetId = normalizeTargetId(link.target);
           
-          // Skip external links or anchors
-          if (targetId.startsWith('http') || targetId.startsWith('#')) {
+          // Skip external links, anchors, or image files
+          if (targetId.startsWith('http') || 
+              targetId.startsWith('#') || 
+              targetId.toLowerCase().endsWith('.png') ||
+              targetId.toLowerCase().endsWith('.jpg') ||
+              targetId.toLowerCase().endsWith('.jpeg') ||
+              targetId.toLowerCase().endsWith('.gif') ||
+              targetId.toLowerCase().endsWith('.svg') ||
+              targetId.toLowerCase().includes('figures/') ||
+              targetId.startsWith('</figures/')) {
             continue;
           }
           
