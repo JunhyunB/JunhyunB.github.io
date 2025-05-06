@@ -1,0 +1,27 @@
+{
+  "id": "wiki-test",
+  "title": "Wiki 링크 테스트",
+  "description": "이 문서는 다양한 Wiki 스타일 링크 형식을 테스트하기 위한 페이지입니다.",
+  "source": "@site/docs/wiki-test.md",
+  "sourceDirName": ".",
+  "slug": "/wiki-test",
+  "permalink": "/docs/wiki-test",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/JunhyunB/JunhyunB.github.io/tree/main/docs/wiki-test.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "title": "Wiki 링크 테스트",
+    "id": "wiki-test"
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Paper Review Template",
+    "permalink": "/docs/paper-review-template"
+  },
+  "next": {
+    "title": "Zettelkasten Example",
+    "permalink": "/docs/zettelkasten-example"
+  }
+}

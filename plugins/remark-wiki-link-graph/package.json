@@ -1,0 +1,14 @@
+{
+  "name": "docusaurus-remark-wiki-link-graph",
+  "version": "1.0.0",
+  "description": "A Docusaurus plugin that detects wiki-style links and generates a graph visualization",
+  "main": "index.js",
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "unist-util-visit": "^2.0.3"
+  },
+  "peerDependencies": {
+    "@docusaurus/core": ">=2.0.0"
+  }
+}

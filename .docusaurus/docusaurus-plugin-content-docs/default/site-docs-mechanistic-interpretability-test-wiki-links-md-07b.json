@@ -1,0 +1,27 @@
+{
+  "id": "mechanistic-interpretability/test-wiki-links",
+  "title": "Wiki Links Test",
+  "description": "This document demonstrates different types of wiki-style links that our plugin supports:",
+  "source": "@site/docs/mechanistic-interpretability/test-wiki-links.md",
+  "sourceDirName": "mechanistic-interpretability",
+  "slug": "/mechanistic-interpretability/test-wiki-links",
+  "permalink": "/docs/mechanistic-interpretability/test-wiki-links",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/JunhyunB/JunhyunB.github.io/tree/main/docs/mechanistic-interpretability/test-wiki-links.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "title": "Wiki Links Test",
+    "sidebar_label": "Wiki Links Test"
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Sample Paper Review",
+    "permalink": "/docs/mechanistic-interpretability/sample-paper"
+  },
+  "next": {
+    "title": "TEst 2",
+    "permalink": "/docs/mechanistic-interpretability/test"
+  }
+}

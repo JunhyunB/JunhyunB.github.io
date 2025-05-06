@@ -1,0 +1,38 @@
+{
+  "id": "trustworthy-ai/diffusion-based/towards-undersating-cross-and-self-attention",
+  "title": "Towards Understanding Cross and Self-Attention in Stable Diffusion for Text-Guided Image Editing",
+  "description": "Paper Information",
+  "source": "@site/docs/trustworthy-ai/diffusion-based/towards-undersating-cross-and-self-attention.md",
+  "sourceDirName": "trustworthy-ai/diffusion-based",
+  "slug": "/trustworthy-ai/diffusion-based/towards-undersating-cross-and-self-attention",
+  "permalink": "/docs/trustworthy-ai/diffusion-based/towards-undersating-cross-and-self-attention",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/JunhyunB/JunhyunB.github.io/tree/main/docs/trustworthy-ai/diffusion-based/towards-undersating-cross-and-self-attention.md",
+  "tags": [
+    {
+      "inline": true,
+      "label": "stable diffusion",
+      "permalink": "/docs/tags/stable-diffusion"
+    }
+  ],
+  "version": "current",
+  "sidebarPosition": 2,
+  "frontMatter": {
+    "sidebar_position": 2,
+    "id": "towards-undersating-cross-and-self-attention",
+    "title": "Towards Understanding Cross and Self-Attention in Stable Diffusion for Text-Guided Image Editing",
+    "tags": [
+      "stable diffusion"
+    ]
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Safety Guidance in Diffusion Models",
+    "permalink": "/docs/trustworthy-ai/diffusion-based/safety-guidance"
+  },
+  "next": {
+    "title": "Paper Review Template",
+    "permalink": "/docs/paper-review-template"
+  }
+}

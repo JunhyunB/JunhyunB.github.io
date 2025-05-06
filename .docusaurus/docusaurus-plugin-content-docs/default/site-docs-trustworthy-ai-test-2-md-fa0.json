@@ -1,0 +1,30 @@
+{
+  "id": "trustworthy-ai/test2",
+  "title": "Test for Linkage2",
+  "description": "This section contains paper reviews Trustworthy AI related to Mechanistic Interpretability research.",
+  "source": "@site/docs/trustworthy-ai/test2.md",
+  "sourceDirName": "trustworthy-ai",
+  "slug": "/trustworthy-ai/test2",
+  "permalink": "/docs/trustworthy-ai/test2",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/JunhyunB/JunhyunB.github.io/tree/main/docs/trustworthy-ai/test2.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 2,
+  "frontMatter": {
+    "title": "Test for Linkage2",
+    "hide_title": false,
+    "hide_table_of_contents": false,
+    "sidebar_position": 2
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Safety Guidance in Diffusion Models",
+    "permalink": "/docs/trustworthy-ai/diffusion-based/safety-guidance"
+  },
+  "next": {
+    "title": "Paper Review Template",
+    "permalink": "/docs/paper-review-template"
+  }
+}

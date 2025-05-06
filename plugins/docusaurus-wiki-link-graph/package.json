@@ -1,0 +1,10 @@
+{
+  "name": "docusaurus-wiki-link-graph",
+  "version": "1.0.0",
+  "description": "Docusaurus plugin to generate a graph from wiki-style links",
+  "main": "index.js",
+  "dependencies": {
+    "gray-matter": "^4.0.3",
+    "unist-util-visit": "^2.0.3"
+  }
+}

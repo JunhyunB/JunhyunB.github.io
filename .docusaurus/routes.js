@@ -79,15 +79,20 @@ export default [
   },
   {
     path: '/docs',
-    component: ComponentCreator('/docs', '19c'),
+    component: ComponentCreator('/docs', '6ab'),
     routes: [
       {
         path: '/docs',
-        component: ComponentCreator('/docs', 'c9a'),
+        component: ComponentCreator('/docs', '6bc'),
         routes: [
           {
             path: '/docs/tags',
             component: ComponentCreator('/docs/tags', 'fce'),
+            exact: true
+          },
+          {
+            path: '/docs/tags/stable-diffusion',
+            component: ComponentCreator('/docs/tags/stable-diffusion', '33a'),
             exact: true
           },
           {

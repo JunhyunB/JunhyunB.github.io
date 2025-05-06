@@ -1,0 +1,9 @@
+{
+  "name": "remark-wiki-links",
+  "version": "1.0.0",
+  "description": "Remark plugin to detect wiki-style links in markdown",
+  "main": "index.js",
+  "dependencies": {
+    "unist-util-visit": "^2.0.3"
+  }
+}

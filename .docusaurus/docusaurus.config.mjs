@@ -61,11 +61,7 @@ export default {
           "sidebarPath": "./sidebars.js",
           "editUrl": "https://github.com/JunhyunB/JunhyunB.github.io/tree/main/",
           "remarkPlugins": [
-            null,
-            [
-              null,
-              {}
-            ]
+            null
           ],
           "rehypePlugins": [
             null

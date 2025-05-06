@@ -118,19 +118,23 @@
       "plugin": "plugin---search-138-688"
     }
   },
-  "/docs-19c": {
+  "/docs-6ab": {
     "__comp": "__comp---theme-docs-root-5-e-9-0b6",
     "__context": {
       "plugin": "plugin---docsaba-d7c"
     }
   },
-  "/docs-c9a": {
+  "/docs-6bc": {
     "__comp": "__comp---theme-doc-version-roota-7-b-5de",
     "__props": "__props---docs-005-788"
   },
   "/docs/tags-fce": {
     "__comp": "__comp---theme-doc-tags-list-page-372-89e",
     "__props": "__props---docs-tags-898-65c"
+  },
+  "/docs/tags/stable-diffusion-33a": {
+    "__comp": "__comp---theme-doc-tag-doc-list-pagedf-2-9f0",
+    "__props": "__props---docs-tags-stable-diffusiona-0-c-22f"
   },
   "/docs/tags/template-1dd": {
     "__comp": "__comp---theme-doc-tag-doc-list-pagedf-2-9f0",

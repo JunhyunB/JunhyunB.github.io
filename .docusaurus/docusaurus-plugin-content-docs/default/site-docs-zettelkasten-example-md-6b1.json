@@ -1,0 +1,27 @@
+{
+  "id": "zettelkasten-example",
+  "title": "Zettelkasten Example",
+  "description": "This document demonstrates how to use wiki-style links to create a Zettelkasten in your Docusaurus site.",
+  "source": "@site/docs/zettelkasten-example.md",
+  "sourceDirName": ".",
+  "slug": "/zettelkasten-example",
+  "permalink": "/docs/zettelkasten-example",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/JunhyunB/JunhyunB.github.io/tree/main/docs/zettelkasten-example.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "title": "Zettelkasten Example",
+    "id": "zettelkasten-example"
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Wiki 링크 테스트",
+    "permalink": "/docs/wiki-test"
+  },
+  "next": {
+    "title": "Zettelkasten Guide",
+    "permalink": "/docs/zettelkasten-guide"
+  }
+}

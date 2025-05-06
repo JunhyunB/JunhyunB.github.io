@@ -1,0 +1,23 @@
+{
+  "id": "zettelkasten-guide",
+  "title": "Zettelkasten Guide",
+  "description": "This document provides practical tips for implementing a Zettelkasten system in your own research workflow.",
+  "source": "@site/docs/zettelkasten-guide.md",
+  "sourceDirName": ".",
+  "slug": "/zettelkasten-guide",
+  "permalink": "/docs/zettelkasten-guide",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/JunhyunB/JunhyunB.github.io/tree/main/docs/zettelkasten-guide.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "title": "Zettelkasten Guide",
+    "id": "zettelkasten-guide"
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Zettelkasten Example",
+    "permalink": "/docs/zettelkasten-example"
+  }
+}
