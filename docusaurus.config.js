@@ -9,7 +9,7 @@ import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 
 // Import the wiki links plugins
-const remarkWikiLinks = require('./plugins/remark-wiki-link-graph/remark-wiki-links');
+const remarkWikiLinks = require('./plugins/remark-wiki-link-graph/remark-wiki-links.js');
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
