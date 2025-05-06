@@ -1,15 +1,16 @@
 ---
-id: towards-undersating-cross-and-self-attention
-title: "Towards Understanding Cross and Self-Attention in Stable Diffusion for Text-Guided Image Editing"
-tags: [stable diffusion, diffusion models, attention mechanisms, image editing]
+id: prompt-to-prompt
+title: "Prompt-to-Prompt Image Editing with Cross Attention Control"
+tags: [stable diffusion, diffusion models, image editing]
 ---
 
 ## Paper Information
 
-- **Title**: Towards Understanding Cross and Self-Attention in Stable Diffusion for Text-Guided Image Editing
-- **Authors**: Bingyan Liu, Chengyu Wang, Tingfeng Cao, Kui Jia, Jun Huang
-- **Published**: CVPR 2024
-- **Link**: [arXiv:2403.03431](https://arxiv.org/pdf/2403.03431)
+- **Title**: Prompt-to-Prompt Image Editing with Cross Attention Control
+- **Authors**: Amir Hertz, Ron Mokady, Jay Tenenbaum, Kfir Aberman, Yael Pritch, Daniel Cohen-Or
+- **Published**: ICLR 2023
+- **Link**: [arXiv:2208.01626](https://arxiv.org/pdf/2208.01626)
+- **Code**: [prompt-to-prompt](https://github.com/google/prompt-to-prompt/)
 
 
 ## TL; DR

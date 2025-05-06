@@ -26,6 +26,7 @@ const config = {
   // If you aren't using GitHub pages, you don't need these.
   organizationName: 'JunhyunB', // Usually your GitHub org/user name.
   projectName: 'JunhyunB.github.io', // Usually your repo name.
+  deploymentBranch: 'gh-pages', // The branch to deploy to
 
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
