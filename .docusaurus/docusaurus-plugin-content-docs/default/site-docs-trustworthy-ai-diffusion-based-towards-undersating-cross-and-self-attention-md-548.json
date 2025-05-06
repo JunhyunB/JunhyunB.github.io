@@ -14,6 +14,21 @@
       "inline": true,
       "label": "stable diffusion",
       "permalink": "/docs/tags/stable-diffusion"
+    },
+    {
+      "inline": true,
+      "label": "diffusion models",
+      "permalink": "/docs/tags/diffusion-models"
+    },
+    {
+      "inline": true,
+      "label": "attention mechanisms",
+      "permalink": "/docs/tags/attention-mechanisms"
+    },
+    {
+      "inline": true,
+      "label": "image editing",
+      "permalink": "/docs/tags/image-editing"
     }
   ],
   "version": "current",
@@ -23,7 +38,10 @@
     "id": "towards-undersating-cross-and-self-attention",
     "title": "Towards Understanding Cross and Self-Attention in Stable Diffusion for Text-Guided Image Editing",
     "tags": [
-      "stable diffusion"
+      "stable diffusion",
+      "diffusion models",
+      "attention mechanisms",
+      "image editing"
     ]
   },
   "sidebar": "tutorialSidebar",

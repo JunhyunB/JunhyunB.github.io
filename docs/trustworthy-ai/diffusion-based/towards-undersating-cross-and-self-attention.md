@@ -2,7 +2,7 @@
 sidebar_position: 2
 id: towards-undersating-cross-and-self-attention
 title: "Towards Understanding Cross and Self-Attention in Stable Diffusion for Text-Guided Image Editing"
-tags: [stable diffusion, ]
+tags: [stable diffusion, diffusion models, attention mechanisms, image editing]
 ---
 
 ## Paper Information
@@ -25,7 +25,7 @@ Stable diffusion과 같은 Deep Text-to-Image Synthesis (TIS) 모델들은 주�
 3. 그러면 self-attention map을 사용하면 어떻게 될지 궁금하지 않은가요?
 
 
-![alt text](</static/figures/스크린샷 2025-05-06 오후 10.51.45.png>)
+![alt text](</figures/스크린샷 2025-05-06 오후 10.51.45.png>)
 
 (위 그림처럼 cross-attention은 결국 text embedding이 얼마나 들어갈지를 결정해주는거긴 하지?)
 
@@ -41,7 +41,7 @@ Stable diffusion과 같은 Deep Text-to-Image Synthesis (TIS) 모델들은 주�
 
 ## Probing Results
 ### What does the cross-attention map learn?
-![alt text](</static/figures/스크린샷 2025-05-06 오후 11.04.47.png>)
+![alt text](</figures/스크린샷 2025-05-06 오후 11.04.47.png>)
 Cross-attention에 달아준 classifier가 색상/동물 분류에 대해서 잘 맞추는걸 확인할 수 있다. 이는 cross-attention map이 각 클래스에 대한 특징도 포함하고 있음을 나타낸다고 할 수 있다. 
 
 이를 활용하여 target prompt (a coral car, a rabbit standing in the park)에 대해서 source image 생성 시의 cross attention map으로 교체를 살짝 해주면 어떻게 될지를 봤다.
@@ -50,11 +50,11 @@ Cross-attention에 달아준 classifier가 색상/동물 분류에 대해서 잘
 
 
 ### What does the self-attention map learn?
-![alt text](</static/figures/스크린샷 2025-05-06 오후 11.17.24.png>)
+![alt text](</figures/스크린샷 2025-05-06 오후 11.17.24.png>)
 Self-attention에 달아준 classifier는 분류 성능이 엉망진창이다. 그나마 동물은 잘 맞추는 경향이 있는 것 같은데, 아마 동물마다 갖고있는 구조적인 정보가 좀 영향을 주는게 아닌가 싶다. Figure 4를 보면, target prompt로 좀 더 자연스럽게 변화하는걸 볼 수 있다.
 
 
-![alt text](</static/figures/스크린샷 2025-05-06 오후 11.01.53.png>)
+![alt text](</figures/스크린샷 2025-05-06 오후 11.01.53.png>)
 
 
 ## Proposed Method: Free-Prompt-Editing (FPE)
@@ -67,4 +67,4 @@ P2P랑 다르게 source-target prompt mapping은 필요없긴하다. 그리고 r
 ## Results
 P2P랑 비교한 걸 보면 좀 더 명확한듯하다. 실험의 의도가 여기서 나오는 것 같은데, 사실 어느 attention map을 교체할지, mix해서 교체할지는 목적에 따라 달라질 듯.
 
-![alt text](</static/figures/스크린샷 2025-05-06 오후 11.27.17.png>)
+![alt text](</figures/스크린샷 2025-05-06 오후 11.27.17.png>)

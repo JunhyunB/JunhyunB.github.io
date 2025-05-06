@@ -3,6 +3,41 @@ import ComponentCreator from '@docusaurus/ComponentCreator';
 
 export default [
   {
+    path: '/__docusaurus/debug',
+    component: ComponentCreator('/__docusaurus/debug', '5ff'),
+    exact: true
+  },
+  {
+    path: '/__docusaurus/debug/config',
+    component: ComponentCreator('/__docusaurus/debug/config', '5ba'),
+    exact: true
+  },
+  {
+    path: '/__docusaurus/debug/content',
+    component: ComponentCreator('/__docusaurus/debug/content', 'a2b'),
+    exact: true
+  },
+  {
+    path: '/__docusaurus/debug/globalData',
+    component: ComponentCreator('/__docusaurus/debug/globalData', 'c3c'),
+    exact: true
+  },
+  {
+    path: '/__docusaurus/debug/metadata',
+    component: ComponentCreator('/__docusaurus/debug/metadata', '156'),
+    exact: true
+  },
+  {
+    path: '/__docusaurus/debug/registry',
+    component: ComponentCreator('/__docusaurus/debug/registry', '88c'),
+    exact: true
+  },
+  {
+    path: '/__docusaurus/debug/routes',
+    component: ComponentCreator('/__docusaurus/debug/routes', '000'),
+    exact: true
+  },
+  {
     path: '/about',
     component: ComponentCreator('/about', 'c49'),
     exact: true
@@ -44,15 +79,30 @@ export default [
   },
   {
     path: '/docs',
-    component: ComponentCreator('/docs', 'f8e'),
+    component: ComponentCreator('/docs', 'd89'),
     routes: [
       {
         path: '/docs',
-        component: ComponentCreator('/docs', 'b52'),
+        component: ComponentCreator('/docs', 'd69'),
         routes: [
           {
             path: '/docs/tags',
             component: ComponentCreator('/docs/tags', 'fce'),
+            exact: true
+          },
+          {
+            path: '/docs/tags/attention-mechanisms',
+            component: ComponentCreator('/docs/tags/attention-mechanisms', '475'),
+            exact: true
+          },
+          {
+            path: '/docs/tags/diffusion-models',
+            component: ComponentCreator('/docs/tags/diffusion-models', 'ac4'),
+            exact: true
+          },
+          {
+            path: '/docs/tags/image-editing',
+            component: ComponentCreator('/docs/tags/image-editing', '427'),
             exact: true
           },
           {
