@@ -79,11 +79,11 @@ export default [
   },
   {
     path: '/docs',
-    component: ComponentCreator('/docs', '20d'),
+    component: ComponentCreator('/docs', '5d5'),
     routes: [
       {
         path: '/docs',
-        component: ComponentCreator('/docs', '40f'),
+        component: ComponentCreator('/docs', '4ea'),
         routes: [
           {
             path: '/docs/tags',
@@ -122,7 +122,7 @@ export default [
           },
           {
             path: '/docs',
-            component: ComponentCreator('/docs', 'b34'),
+            component: ComponentCreator('/docs', '970'),
             routes: [
               {
                 path: '/docs/intro',
@@ -131,8 +131,8 @@ export default [
                 sidebar: "tutorialSidebar"
               },
               {
-                path: '/docs/mechanistic-interpretability/',
-                component: ComponentCreator('/docs/mechanistic-interpretability/', 'b8b'),
+                path: '/docs/mechanistic-interpretability',
+                component: ComponentCreator('/docs/mechanistic-interpretability', '021'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               },
@@ -143,14 +143,14 @@ export default [
                 sidebar: "tutorialSidebar"
               },
               {
-                path: '/docs/trustworthy-ai/',
-                component: ComponentCreator('/docs/trustworthy-ai/', '04f'),
+                path: '/docs/trustworthy-ai',
+                component: ComponentCreator('/docs/trustworthy-ai', 'b53'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               },
               {
-                path: '/docs/trustworthy-ai/diffusion-based/',
-                component: ComponentCreator('/docs/trustworthy-ai/diffusion-based/', 'a66'),
+                path: '/docs/trustworthy-ai/diffusion-based',
+                component: ComponentCreator('/docs/trustworthy-ai/diffusion-based', '521'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               },

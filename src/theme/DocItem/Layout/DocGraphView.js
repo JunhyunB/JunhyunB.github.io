@@ -14,6 +14,17 @@ function getNeighbors(data, docId) {
   
   if (!currentNode) {
     console.warn(`Document with ID ${docId} (normalized: ${normalizedDocId}) not found in graph data`);
+    // If current node is not found, add some popular nodes as fallback
+    const popularNodes = data
+      .sort((a, b) => {
+        const aConnections = (a.linkTo?.length || 0) + (a.referencedBy?.length || 0);
+        const bConnections = (b.linkTo?.length || 0) + (b.referencedBy?.length || 0);
+        return bConnections - aConnections;
+      })
+      .slice(0, 5);
+    
+    popularNodes.forEach(node => neighbors.add(node.id));
+    
     return neighbors;
   }
   
@@ -21,6 +32,7 @@ function getNeighbors(data, docId) {
   
   // Add outgoing links (documents this document links to)
   if (currentNode.linkTo && currentNode.linkTo.length > 0) {
+    // Add all outgoing links, not just a subset
     currentNode.linkTo.forEach(targetId => {
       neighbors.add(targetId);
       
@@ -37,6 +49,7 @@ function getNeighbors(data, docId) {
   
   // Add incoming links (documents that link to this document)
   if (currentNode.referencedBy && currentNode.referencedBy.length > 0) {
+    // Add all incoming links, not just a subset
     currentNode.referencedBy.forEach(sourceId => {
       neighbors.add(sourceId);
       
@@ -67,26 +80,61 @@ function getNeighbors(data, docId) {
   // First collect first-degree neighbors
   const firstDegreeNeighbors = Array.from(neighbors).filter(id => normalizeId(id) !== normalizedDocId);
   
-  // Then add their immediate neighbors (only if there are few first-degree neighbors)
-  if (firstDegreeNeighbors.length < 5) {
-    firstDegreeNeighbors.forEach(neighborId => {
-      const normalizedNeighborId = normalizeId(neighborId);
-      const neighborNode = data.find(item => normalizeId(item.id) === normalizedNeighborId);
+  // Always add second-degree connections to get a richer graph, but increased the number of links
+  firstDegreeNeighbors.forEach(neighborId => {
+    const normalizedNeighborId = normalizeId(neighborId);
+    const neighborNode = data.find(item => normalizeId(item.id) === normalizedNeighborId);
+    
+    if (neighborNode) {
+      // Add more outgoing links (increased from 3 to 5)
+      if (neighborNode.linkTo && neighborNode.linkTo.length > 0) {
+        neighborNode.linkTo.slice(0, 5).forEach(targetId => {
+          neighbors.add(targetId);
+        });
+      }
       
-      if (neighborNode) {
-        // Add a few outgoing links
-        if (neighborNode.linkTo && neighborNode.linkTo.length > 0) {
-          neighborNode.linkTo.slice(0, 3).forEach(targetId => {
-            neighbors.add(targetId);
-          });
-        }
-        
-        // Add a few incoming links
-        if (neighborNode.referencedBy && neighborNode.referencedBy.length > 0) {
-          neighborNode.referencedBy.slice(0, 3).forEach(sourceId => {
-            neighbors.add(sourceId);
-          });
-        }
+      // Add more incoming links (increased from 3 to 5)
+      if (neighborNode.referencedBy && neighborNode.referencedBy.length > 0) {
+        neighborNode.referencedBy.slice(0, 5).forEach(sourceId => {
+          neighbors.add(sourceId);
+        });
+      }
+    }
+  });
+  
+  // If we still have very few neighbors, add some of the most connected nodes in the graph
+  if (neighbors.size < 5) {
+    // Find popular nodes (nodes with most connections)
+    const popularNodes = data
+      .filter(item => !neighbors.has(item.id)) // Exclude already added nodes
+      .sort((a, b) => {
+        const aConnections = (a.linkTo?.length || 0) + (a.referencedBy?.length || 0);
+        const bConnections = (b.linkTo?.length || 0) + (b.referencedBy?.length || 0);
+        return bConnections - aConnections;
+      })
+      .slice(0, 5);
+    
+    // Add these popular nodes to provide more context
+    popularNodes.forEach(node => {
+      if (node && node.id) {
+        neighbors.add(node.id);
+        console.log(`Added popular node for context: ${node.id}`);
+      }
+    });
+  }
+  
+  // As a fallback, add random nodes if we still have very few
+  if (neighbors.size < 4) {
+    // Add a few random nodes from the dataset
+    const randomNodes = data
+      .filter(item => !neighbors.has(item.id)) // Exclude already added nodes
+      .sort(() => 0.5 - Math.random()) // Random shuffle
+      .slice(0, 4 - neighbors.size);
+    
+    randomNodes.forEach(node => {
+      if (node && node.id) {
+        neighbors.add(node.id);
+        console.log(`Added random node for visualization: ${node.id}`);
       }
     });
   }
@@ -510,6 +558,9 @@ export default function DocGraphView({ graphData, currentDocId, isContextual }) 
       console.warn("No valid graph data available for processing");
       return { nodes: [], links: [] };
     }
+    
+    // Maximum number of nodes to render for performance reasons
+    const MAX_NODES_FOR_PERFORMANCE = 150;
 
     // Additional runtime deduplication of nodes - specifically targeting trustworthy-ai
     // Check for duplicate nodes by ID with special handling for trustworthy-ai
@@ -646,13 +697,65 @@ export default function DocGraphView({ graphData, currentDocId, isContextual }) 
     } else {
       // Full graph view with error handling
       try {
-        // Transform raw data to nodes
-        const nodes = dedupedData
-          .filter(item => item && typeof item === 'object' && item.id)
-          .map(item => ({
-            id: item.id,
-            title: item.title || item.id
-          }));
+        // Transform raw data to nodes with potential node limiting for performance
+        let filteredData = dedupedData.filter(item => item && typeof item === 'object' && item.id);
+        
+        // Still filter out paper title nodes
+        filteredData = filteredData.filter(item => {
+          if (!item || !item.id) return true;
+          return !item.id.includes('paper-title') && !item.id.includes('category/paper-title');
+        });
+        
+        // Check if we need to limit nodes for performance
+        if (filteredData.length > MAX_NODES_FOR_PERFORMANCE && !isContextual) {
+          console.log(`Large graph detected (${filteredData.length} nodes) - limiting to ${MAX_NODES_FOR_PERFORMANCE} nodes for performance`);
+          
+          // Always include current node and its direct connections
+          const currentNodeId = effectiveDocId;
+          const currentNode = filteredData.find(item => item.id === currentNodeId);
+          
+          // Create a set of important node IDs to keep - start with the current node
+          const importantNodeIds = new Set();
+          if (currentNode) {
+            importantNodeIds.add(currentNode.id);
+            
+            // Add direct connections (both incoming and outgoing)
+            if (Array.isArray(currentNode.linkTo)) {
+              currentNode.linkTo.forEach(id => importantNodeIds.add(id));
+            }
+            if (Array.isArray(currentNode.referencedBy)) {
+              currentNode.referencedBy.forEach(id => importantNodeIds.add(id));
+            }
+          }
+          
+          // If we still have room, add nodes based on connection count (most connected nodes)
+          const remainingCount = MAX_NODES_FOR_PERFORMANCE - importantNodeIds.size;
+          if (remainingCount > 0) {
+            // Sort by connection count (descending)
+            const sortedByConnections = filteredData
+              .filter(item => !importantNodeIds.has(item.id))
+              .map(item => {
+                const connectionCount = (Array.isArray(item.linkTo) ? item.linkTo.length : 0) + 
+                                       (Array.isArray(item.referencedBy) ? item.referencedBy.length : 0);
+                return { ...item, connectionCount };
+              })
+              .sort((a, b) => b.connectionCount - a.connectionCount)
+              .slice(0, remainingCount);
+              
+            // Add these to our important nodes set
+            sortedByConnections.forEach(item => importantNodeIds.add(item.id));
+          }
+          
+          // Filter data to only include important nodes
+          filteredData = filteredData.filter(item => importantNodeIds.has(item.id));
+          console.log(`Reduced to ${filteredData.length} important nodes for better performance`);
+        }
+        
+        // Create node objects
+        const nodes = filteredData.map(item => ({
+          id: item.id,
+          title: item.title || item.id
+        }));
         
         const links = [];
         
@@ -775,11 +878,11 @@ export default function DocGraphView({ graphData, currentDocId, isContextual }) 
         placeholder: '#C0C0C0' // Placeholder nodes (gray)
       };
       
-      // Modify force simulation parameters based on contextual vs full view
-      const linkDistance = isContextual ? 80 : 150; // Adjusted for better spacing
-      const chargeStrength = isContextual ? -150 : -400; // Balanced repulsion
-      const nodeSize = isContextual ? 6 : 8; // Slightly larger nodes
-      const labelSize = isContextual ? '10px' : '12px'; // More readable text size
+      // Modify force simulation parameters based on contextual vs full view - with increased sizes for better readability
+      const linkDistance = isContextual ? 100 : 180; // Increased for better spacing
+      const chargeStrength = isContextual ? -200 : -500; // Stronger repulsion to prevent overlap
+      const nodeSize = isContextual ? 12 : 16; // Significantly larger nodes for better visibility
+      const labelSize = isContextual ? '13px' : '15px'; // Larger text size for better readability
       
       // Analyze link relationships
       processedData.nodes.forEach(node => {
@@ -1009,86 +1112,169 @@ export default function DocGraphView({ graphData, currentDocId, isContextual }) 
       // Use our validated node and link arrays for the simulation
       const validNodes = Array.from(nodeMap.values());
       
-      // Create D3 force simulation with validated data
+      // Create D3 force simulation with validated data and enhanced spacing parameters
       const simulation = d3.forceSimulation(validNodes)
         .force('link', d3.forceLink(validLinks)
           .distance(d => {
-            // Simple distance calculation with defaults
+            // Enhanced distance calculation with significantly increased values
             try {
-              if (!d) return linkDistance;
-              if (d.isPlaceholder) return linkDistance * 0.8;
+              if (!d) return linkDistance * 1.3;
+              if (d.isPlaceholder) return linkDistance * 1.1;
               
               const sourceId = d.source && d.source.id;
               const targetId = d.target && d.target.id;
               
               if (sourceId === effectiveDocId || targetId === effectiveDocId) {
-                return linkDistance * 1.2; // Connections to current node slightly longer
+                return linkDistance * 1.5; // Much longer connections to current node
               }
               
-              return linkDistance;
+              // Check if this is a bidirectional link
+              const isBidirectional = validLinks.some(otherLink => {
+                try {
+                  if (!otherLink || !otherLink.source || !otherLink.target) return false;
+                  
+                  const otherSourceId = otherLink.source.id;
+                  const otherTargetId = otherLink.target.id;
+                  
+                  return otherSourceId === targetId && otherTargetId === sourceId;
+                } catch (e) {
+                  return false;
+                }
+              });
+              
+              // Give bidirectional links a different length
+              if (isBidirectional) {
+                return linkDistance * 1.4;
+              }
+              
+              return linkDistance * 1.3; // Generally longer links for better spacing
             } catch (e) {
               console.error('Error in link distance calculation:', e);
-              return linkDistance;
+              return linkDistance * 1.3;
             }
-          }))
-        .force('charge', d3.forceManyBody().strength(chargeStrength))
+          })
+          .strength(0.6)) // Slightly weaker link strength for better spacing
+        .force('charge', d3.forceManyBody()
+          .strength(d => {
+            // Enhanced repulsion strength based on node type
+            try {
+              if (!d || typeof d !== 'object') return chargeStrength * 1.2;
+              
+              // Stronger repulsion for current node and its direct connections
+              if (d.type === 'current') return chargeStrength * 1.5;
+              if (d.type === 'incoming' || d.type === 'outgoing' || d.type === 'both') {
+                return chargeStrength * 1.3;
+              }
+              
+              return chargeStrength * 1.2; // Generally stronger repulsion overall
+            } catch (e) {
+              console.error('Error in charge strength calculation:', e);
+              return chargeStrength * 1.2;
+            }
+          })
+          .distanceMax(400)) // Extended force range
         .force('center', d3.forceCenter(0, 0))
-        .force('collision', d3.forceCollide().radius(d => {
-          try {
-            // Different collision radius based on node type
-            if (!d || typeof d !== 'object') return nodeSize * 3;
-            if (d.type === 'current') return nodeSize * 4;
-            return nodeSize * 3;
-          } catch (e) {
-            console.error('Error calculating collision radius:', e);
-            return nodeSize * 3;
-          }
-        }));
+        .force('collision', d3.forceCollide()
+          .radius(d => {
+            try {
+              // Much larger collision radius based on node type and text length
+              if (!d || typeof d !== 'object') return nodeSize * 5;
+              
+              // Estimate text length for better spacing around labels
+              const labelLength = () => {
+                try {
+                  if (!d.title) return 8;
+                  return Math.min(d.title.length, 30); // Cap at 30 chars
+                } catch (e) {
+                  return 8;
+                }
+              };
+              
+              // Scale collision radius by node type and label length
+              if (d.type === 'current') return nodeSize * 6 + labelLength() * 2;
+              if (d.type === 'both') return nodeSize * 5 + labelLength() * 1.8;
+              if (d.type === 'incoming' || d.type === 'outgoing') {
+                return nodeSize * 4.5 + labelLength() * 1.6;
+              }
+              
+              return nodeSize * 4 + labelLength() * 1.4;
+            } catch (e) {
+              console.error('Error calculating collision radius:', e);
+              return nodeSize * 5;
+            }
+          })
+          .strength(0.9) // Stronger collision prevention
+          .iterations(3)) // More iterations for better collision detection
+        .force('x', d3.forceX(0).strength(0.02)) // Very weak centering force
+        .force('y', d3.forceY(0).strength(0.02)); // Very weak centering force
       
       // If it's the full knowledge graph, reduce the alpha decay to allow more time for layout
       if (!isContextual) {
         simulation.alphaDecay(0.01);
       }
       
-      // Define arrow marker for directed links
+      // Define arrow marker for directed links with suitable size
       svg.append("defs").selectAll("marker")
         .data(["end"])
         .enter().append("marker")
         .attr("id", "arrow")
-        .attr("viewBox", "0 -5 10 10")
-        .attr("refX", nodeSize + 10)
+        .attr("viewBox", "0 -5 10 10") // Reduced viewBox for smaller arrow
+        .attr("refX", nodeSize + 12) // Position slightly further from node
         .attr("refY", 0)
-        .attr("markerWidth", 6)
-        .attr("markerHeight", 6)
+        .attr("markerWidth", 6) // Smaller marker
+        .attr("markerHeight", 6) // Smaller marker
         .attr("orient", "auto")
         .append("path")
-        .attr("d", "M0,-5L10,0L0,5")
-        .attr("fill", "#999");
+        .attr("d", "M0,-5L10,0L0,5") // Smaller arrow path
+        .attr("fill", "#666"); // Keep darker color for visibility
         
-      // Create links with safety checks - use validLinks array
+      // Create links with safety checks - use validLinks array with enhanced styling
       const link = svg.append('g')
         .selectAll('line')
         .data(validLinks)
         .enter()
         .append('line')
-        .attr('stroke', '#999')
+        .attr('stroke', d => {
+          try {
+            // Enhanced link colors based on relationship
+            if (!d || !d.source || !d.target) return '#777';
+            
+            const sourceId = d.source.id;
+            const targetId = d.target.id;
+            
+            // Check if this is a bidirectional link
+            const isBidirectional = validLinks.some(otherLink => 
+              otherLink.source.id === targetId && otherLink.target.id === sourceId
+            );
+            
+            if (isBidirectional) return '#E08E46'; // Bidirectional link color (orange)
+            
+            // Check if source or target is current node
+            if (sourceId === effectiveDocId) return '#3D6E8F'; // Outgoing link color (blue)
+            if (targetId === effectiveDocId) return '#1F8A7E'; // Incoming link color (teal)
+            
+            return '#777'; // Default color for other links
+          } catch (e) {
+            return '#777';
+          }
+        })
         .attr('stroke-opacity', d => {
           try {
-            return d && d.isPlaceholder ? 0.4 : 0.6;
+            return d && d.isPlaceholder ? 0.5 : 0.7; // Increased opacity for better visibility
           } catch (e) {
-            return 0.6;
+            return 0.7;
           }
         })
         .attr('stroke-width', d => {
           try {
-            return d && d.isPlaceholder ? 1 : 1.5;
+            return d && d.isPlaceholder ? 1.5 : 2.5; // Thicker lines for better visibility
           } catch (e) {
-            return 1.5;
+            return 2.5;
           }
         })
         .attr('stroke-dasharray', d => {
           try {
-            return d && d.isPlaceholder ? '3,3' : null;
+            return null; // Remove dashed pattern for all links, including placeholders
           } catch (e) {
             return null;
           }
@@ -1099,9 +1285,106 @@ export default function DocGraphView({ graphData, currentDocId, isContextual }) 
           } catch (e) {
             return 'url(#arrow)';
           }
+        })
+        .style('filter', d => {
+          try {
+            // Add subtle glow effect to important links
+            if (d.isPlaceholder) return 'none';
+            
+            const sourceId = d.source.id;
+            const targetId = d.target.id;
+            
+            // Add shadow to links connected to current node
+            if (sourceId === effectiveDocId || targetId === effectiveDocId) {
+              return 'drop-shadow(0 0 1px rgba(0,0,0,0.3))';
+            }
+            
+            return 'none';
+          } catch (e) {
+            return 'none';
+          }
+        })
+        // Add hover effects for links
+        .on('mouseover', function(event, d) {
+          try {
+            if (!d) return;
+            
+            d3.select(this)
+              .transition()
+              .duration(200)
+              .attr('stroke-width', d.isPlaceholder ? 2 : 3.5) // Even thicker on hover
+              .attr('stroke-opacity', 1)
+              .style('filter', 'drop-shadow(0 0 2px rgba(0,0,0,0.5))');
+          } catch (e) {
+            console.error('Error in link mouseover:', e);
+          }
+        })
+        .on('mouseout', function(event, d) {
+          try {
+            if (!d) return;
+            
+            // Restore original appearance
+            d3.select(this)
+              .transition()
+              .duration(200)
+              .attr('stroke-width', d.isPlaceholder ? 1.5 : 2.5)
+              .attr('stroke-opacity', d.isPlaceholder ? 0.5 : 0.7)
+              .style('filter', () => {
+                if (d.isPlaceholder) return 'none';
+                
+                // Check if connected to current node to restore correct shadow
+                const sourceId = d.source.id;
+                const targetId = d.target.id;
+                
+                if (sourceId === effectiveDocId || targetId === effectiveDocId) {
+                  return 'drop-shadow(0 0 1px rgba(0,0,0,0.3))';
+                }
+                
+                return 'none';
+              });
+          } catch (e) {
+            console.error('Error in link mouseout:', e);
+          }
         });
       
-      // Create nodes with safety checks - use validNodes array
+      // Calculate connection count for each node
+      const getConnectionCount = (nodeId) => {
+        try {
+          // Count both incoming and outgoing connections
+          let count = 0;
+          
+          // Count outgoing connections
+          const outgoingLinks = validLinks.filter(link => 
+            link.source && link.source.id === nodeId
+          ).length;
+          
+          // Count incoming connections
+          const incomingLinks = validLinks.filter(link => 
+            link.target && link.target.id === nodeId
+          ).length;
+          
+          count = outgoingLinks + incomingLinks;
+          return count > 0 ? count : 1; // Ensure minimum count of 1
+        } catch (e) {
+          console.error('Error counting connections:', e);
+          return 1;
+        }
+      };
+      
+      // Add connection counts to each node
+      validNodes.forEach(node => {
+        if (node && node.id) {
+          node.connectionCount = getConnectionCount(node.id);
+        }
+      });
+      
+      // Find the maximum connection count for scaling
+      const maxConnections = Math.max(
+        3, // Minimum to avoid division by near-zero
+        ...validNodes.map(d => d && d.connectionCount ? d.connectionCount : 0)
+      );
+      
+      // Create nodes with safety checks - use validNodes array with uniform sizing
       const node = svg.append('g')
         .selectAll('circle')
         .data(validNodes)
@@ -1110,8 +1393,15 @@ export default function DocGraphView({ graphData, currentDocId, isContextual }) 
         .attr('r', d => {
           try {
             if (!d || typeof d !== 'object' || !d.id) return nodeSize;
-            console.log(`Node ${d.id}: type=${d.type}, isCurrent=${d.id === effectiveDocId}`);
-            return d.type === 'current' ? nodeSize * 1.5 : nodeSize;
+            
+            // Use consistent node sizes regardless of connection count
+            if (d.type === 'current') {
+              // Only the current node is slightly larger
+              return nodeSize * 1.5;
+            } else {
+              // All other nodes have the same size
+              return nodeSize;
+            }
           } catch (e) {
             console.error('Error setting node radius:', e);
             return nodeSize;
@@ -1150,56 +1440,108 @@ export default function DocGraphView({ graphData, currentDocId, isContextual }) 
       // Add labels with background for better readability
       const labelGroup = svg.append('g');
       
-      // First add label backgrounds (only in full view)
+      // First add label backgrounds (only in full view) with improved Obsidian-style
       if (!isContextual) {
         labelGroup.selectAll('.label-bg')
           .data(validNodes)
           .enter()
           .append('rect')
           .attr('class', 'label-bg')
-          .attr('rx', 4)
-          .attr('ry', 4)
+          .attr('rx', 8) // More rounded corners (Obsidian-style)
+          .attr('ry', 8) 
           .attr('fill', d => {
             try {
-              // Different background colors based on node type with higher opacity
-              if (!d || !d.type) return 'rgba(255, 255, 255, 0.95)';
+              // Enhanced background colors based on node type with better contrast
+              if (!d || !d.type) return 'rgba(255, 255, 255, 0.97)';
               
               switch(d.type) {
-                case 'current': return 'rgba(255, 245, 245, 0.95)';
-                case 'incoming': return 'rgba(240, 255, 250, 0.95)';
-                case 'outgoing': return 'rgba(240, 250, 255, 0.95)';
-                case 'both': return 'rgba(255, 250, 240, 0.95)';
-                default: return 'rgba(255, 255, 255, 0.95)';
+                case 'current': return 'rgba(255, 245, 245, 0.97)'; // Light red tint
+                case 'incoming': return 'rgba(240, 255, 250, 0.97)'; // Light teal tint
+                case 'outgoing': return 'rgba(240, 250, 255, 0.97)'; // Light blue tint
+                case 'both': return 'rgba(255, 250, 240, 0.97)'; // Light orange tint
+                case 'placeholder': return 'rgba(245, 245, 245, 0.95)'; // Light gray
+                default: return 'rgba(250, 250, 250, 0.97)';
               }
             } catch (e) {
               console.error('Error setting label background:', e);
-              return 'rgba(255, 255, 255, 0.95)';
+              return 'rgba(255, 255, 255, 0.97)';
             }
           })
           .attr('width', 0) // Will be updated after text is measured
-          .attr('height', 24) // Taller background
-          .attr('y', -12) // Adjusted position
-          .attr('stroke', d => {
+          .attr('height', d => {
+            // Dynamic height based on node type
             try {
-              // Add border around label background based on node type
-              if (!d || !d.type) return 'rgba(168, 218, 220, 0.3)';
+              if (!d || !d.type) return 30;
               
               switch(d.type) {
-                case 'current': return 'rgba(230, 57, 70, 0.3)';
-                case 'incoming': return 'rgba(42, 157, 143, 0.3)';
-                case 'outgoing': return 'rgba(69, 123, 157, 0.3)';
-                case 'both': return 'rgba(244, 162, 97, 0.3)';
-                default: return 'rgba(168, 218, 220, 0.3)';
+                case 'current': return 34; // Tallest for current node
+                case 'placeholder': return 26; // Smallest for placeholders
+                default: return 30; // Standard height for other nodes
+              }
+            } catch (e) {
+              return 30;
+            }
+          })
+          .attr('pointer-events', 'auto') // 텍스트 배경도 클릭 가능하게 설정
+          .style('cursor', 'pointer') // 마우스 커서를 포인터로 변경
+          // 노드 클릭과 동일한 이벤트 핸들러 추가
+          .on('click', (event, d) => {
+            // Prevent default action
+            event.preventDefault();
+            event.stopPropagation();
+            
+            // Don't navigate if it's the current page
+            if (d.type === 'current') return;
+            
+            // Navigate to the document using the same function as node click
+            const nodeId = d.id;
+            navigateToDocument(nodeId);
+          })
+          .attr('y', d => {
+            // Vertical position based on node type
+            try {
+              if (!d || !d.type) return -15;
+              
+              switch(d.type) {
+                case 'current': return -17; // Higher for current node
+                case 'placeholder': return -13; // Lower for placeholders
+                default: return -15;
+              }
+            } catch (e) {
+              return -15;
+            }
+          })
+          .attr('stroke', d => {
+            try {
+              // Enhanced border colors matching node colors
+              if (!d || !d.type) return 'rgba(168, 218, 220, 0.5)';
+              
+              switch(d.type) {
+                case 'current': return 'rgba(230, 57, 70, 0.5)';
+                case 'incoming': return 'rgba(42, 157, 143, 0.5)';
+                case 'outgoing': return 'rgba(69, 123, 157, 0.5)';
+                case 'both': return 'rgba(244, 162, 97, 0.5)';
+                case 'placeholder': return 'rgba(192, 192, 192, 0.4)'; // Lighter for placeholders
+                default: return 'rgba(168, 218, 220, 0.5)';
               }
             } catch (e) {
               console.error('Error setting label stroke:', e);
-              return 'rgba(168, 218, 220, 0.3)';
+              return 'rgba(168, 218, 220, 0.5)';
             }
           })
-          .attr('stroke-width', 1);
+          .attr('stroke-width', d => {
+            // Dynamic stroke width based on node type
+            try {
+              if (!d || !d.type) return 1.5;
+              return d.type === 'placeholder' ? 0.5 : 1.5;
+            } catch (e) {
+              return 1.5;
+            }
+          })
+          .style('filter', 'drop-shadow(0px 1px 2px rgba(0,0,0,0.15))'); // Add subtle shadow for depth
       }
         
-      // Then add text labels with robust safety checks
+      // Then add text labels with robust safety checks and Obsidian-style enhancements
       const label = labelGroup.selectAll('text')
         .data(validNodes)
         .enter()
@@ -1209,7 +1551,7 @@ export default function DocGraphView({ graphData, currentDocId, isContextual }) 
             // Safely extract and truncate title
             if (!d || typeof d !== 'object') return "";
             const title = d.title || d.id || "Unknown";
-            const maxLength = isContextual ? 20 : 25;
+            const maxLength = isContextual ? 20 : 30; // Allow longer labels
             return title.length > maxLength ? 
                 title.substring(0, maxLength) + '...' : 
                 title;
@@ -1218,16 +1560,63 @@ export default function DocGraphView({ graphData, currentDocId, isContextual }) 
             return "";
           }
         })
-        .attr('dx', 15) // Horizontal offset from node
-        .attr('dy', '.35em') // Vertical alignment
-        .style('font-size', labelSize)
+        .attr('dx', d => {
+          try {
+            // Dynamic horizontal spacing based on node type
+            if (!d || !d.type) return 20;
+            
+            // More space for important node labels
+            return d.type === 'current' ? 23 : 20;
+          } catch (e) {
+            return 20;
+          }
+        })
+        .attr('dy', d => {
+          try {
+            // Finer vertical alignment adjustments by node type
+            if (!d || !d.type) return '.35em';
+            
+            switch(d.type) {
+              case 'current': return '0.4em';
+              case 'placeholder': return '0.3em';
+              default: return '0.35em';
+            }
+          } catch (e) {
+            return '.35em';
+          }
+        })
+        .style('font-size', d => {
+          try {
+            // Dynamic font sizing based on node importance (Obsidian-style)
+            if (!d || !d.type) return labelSize;
+            
+            switch(d.type) {
+              case 'current': return isContextual ? '14px' : '16px'; // Larger for current
+              case 'placeholder': return isContextual ? '12px' : '13px'; // Smaller for placeholder
+              case 'both': return isContextual ? '13px' : '15px'; // Slightly larger for bidirectional
+              default: return labelSize; // Default size
+            }
+          } catch (e) {
+            return labelSize;
+          }
+        })
         .style('font-weight', d => {
           try {
-            return d && d.type === 'current' ? 'bold' : 'normal';
+            // Improved weight differentiation
+            if (!d || !d.type) return 'normal';
+            
+            switch(d.type) {
+              case 'current': return 'bold';
+              case 'both': return '600'; // Semibold for bidirectional
+              case 'incoming': 
+              case 'outgoing': return '500'; // Medium for directly connected
+              default: return 'normal';
+            }
           } catch (e) {
             return 'normal';
           }
         })
+        .style('font-family', '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif')
         .style('font-style', d => {
           try {
             return d && d.type === 'placeholder' ? 'italic' : 'normal';
@@ -1235,24 +1624,58 @@ export default function DocGraphView({ graphData, currentDocId, isContextual }) 
             return 'normal';
           }
         })
-        .style('fill', 'var(--ifm-font-color-base)')
-        .style('background', 'white')
+        .style('fill', d => {
+          try {
+            // Enhanced text colors matching SimpleGraphView (Obsidian-style)
+            if (!d || !d.type) return 'var(--ifm-font-color-base)';
+            
+            switch(d.type) {
+              case 'current': return '#D32F2F'; // Darker red for current node
+              case 'incoming': return '#00796B'; // Darker teal
+              case 'outgoing': return '#1565C0'; // Darker blue
+              case 'both': return '#E65100'; // Darker orange
+              case 'placeholder': return 'var(--ifm-color-gray-700)';
+              default: return 'var(--ifm-font-color-base)';
+            }
+          } catch (e) {
+            return 'var(--ifm-font-color-base)';
+          }
+        })
         .style('paint-order', 'stroke')
         .style('stroke', 'white')
-        .style('stroke-width', '2px')
+        .style('stroke-width', '3px') // Thicker stroke for better text contrast
         .style('stroke-linecap', 'round')
         .style('stroke-linejoin', 'round')
-        .attr('pointer-events', 'none')
+        .style('text-shadow', '0 1px 2px rgba(255,255,255,0.95)') // Enhanced text shadow
+        .style('letter-spacing', '0.01em') // Improved letter spacing
+        .style('text-rendering', 'optimizeLegibility') // Better text rendering
+        .attr('pointer-events', 'auto') // 텍스트도 클릭 가능하게 변경
+        .style('cursor', 'pointer') // 마우스 커서를 포인터로 변경
+        // 텍스트에도 클릭 이벤트 추가
+        .on('click', (event, d) => {
+          // Prevent default action
+          event.preventDefault();
+          event.stopPropagation();
+          
+          // Don't navigate if it's the current page
+          if (d.type === 'current') return;
+          
+          // Navigate to the document
+          navigateToDocument(d.id);
+        })
         .each(function(d) {
           // If in full view, adjust label background based on text width
           if (!isContextual) {
             const textWidth = this.getComputedTextLength();
             d.labelWidth = textWidth;
             
+            // Apply Obsidian-style padding to labels
+            const padding = 14; // More generous padding 
+            
             labelGroup.selectAll('.label-bg')
               .filter(bg => bg.id === d.id)
-              .attr('width', textWidth + 10)
-              .attr('x', -5);
+              .attr('width', textWidth + padding * 2) // Double padding (left and right)
+              .attr('x', -padding); // Offset by padding
           }
         });
       
@@ -1919,12 +2342,15 @@ export default function DocGraphView({ graphData, currentDocId, isContextual }) 
       
       // Add zoom behavior (without visible controls)
       const zoom = d3.zoom()
-        .scaleExtent([0.3, 5]) // Allow more zoom range
+        .scaleExtent([0.2, 5]) // Allow even more zoom range for wider initial view
         .on('zoom', (event) => {
           svg.selectAll('g').attr('transform', event.transform);
         });
         
       svg.call(zoom);
+      
+      // Set initial transform to show more of the graph by default - original Obsidian style
+      svg.call(zoom.transform, d3.zoomIdentity.scale(0.6).translate(width/3, height/3));
       
       // For full knowledge graph, center and auto-zoom
       if (!isContextual) {
@@ -2001,17 +2427,17 @@ export default function DocGraphView({ graphData, currentDocId, isContextual }) 
             maxX += padding;
             maxY += padding;
             
-            // Find centroid - slightly bias toward (0,0) where the current node is
-            const centerX = (minX + maxX) / 2 * 0.9;
-            const centerY = (minY + maxY) / 2 * 0.9;
+            // Find centroid - original Obsidian-style centering
+            const centerX = (minX + maxX) / 2;
+            const centerY = (minY + maxY) / 2;
             
-            // Determine safe zoom level
+            // Determine safe zoom level with a much lower scale to show more of the graph
             const dx = maxX - minX;
             const dy = maxY - minY;
-            // Higher scale value (0.9 instead of 0.8) to show more of the graph
-            const scale = 0.9 / Math.max(dx / width, dy / height);
+            // Lower scale value (0.6 instead of 0.9) to show much more of the graph
+            const scale = 0.6 / Math.max(dx / width, dy / height);
             
-            // Create center transform
+            // Create center transform with original Obsidian-style positioning
             const transform = d3.zoomIdentity
               .translate(width/2, height/2)
               .scale(scale)

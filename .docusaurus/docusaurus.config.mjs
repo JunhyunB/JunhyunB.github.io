@@ -12,6 +12,7 @@ export default {
   "organizationName": "JunhyunB",
   "projectName": "JunhyunB.github.io",
   "deploymentBranch": "gh-pages",
+  "trailingSlash": false,
   "onBrokenLinks": "warn",
   "onBrokenMarkdownLinks": "warn",
   "i18n": {

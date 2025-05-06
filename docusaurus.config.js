@@ -27,6 +27,7 @@ const config = {
   organizationName: 'JunhyunB', // Usually your GitHub org/user name.
   projectName: 'JunhyunB.github.io', // Usually your repo name.
   deploymentBranch: 'gh-pages', // The branch to deploy to
+  trailingSlash: false, // Don't add trailing slashes to URLs
 
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
