@@ -3,7 +3,12 @@
     "id": "intro",
     "title": "Paper Reviews Introduction",
     "linkTo": [
+      "trustworthy-ai/diffusion-based/index",
       "trustworthy-ai/diffusion-based/towards-undersating-cross-and-self-attention",
+      "trustworthy-ai/diffusion-based/prompt-to-prompt",
+      "trustworthy-ai",
+      "trustworthy-ai/diffusion-based/safety-guidance",
+      "mechanistic-interpretability/index",
       "category/paper-title-1",
       "category/paper-title-2",
       "category/paper-title-3"
@@ -11,11 +16,62 @@
     "referencedBy": []
   },
   {
+    "id": "trustworthy-ai/diffusion-based/index",
+    "title": "Diffusion based",
+    "linkTo": [
+      "trustworthy-ai/diffusion-based/towards-undersating-cross-and-self-attention"
+    ],
+    "referencedBy": [
+      "intro"
+    ]
+  },
+  {
     "id": "trustworthy-ai/diffusion-based/towards-undersating-cross-and-self-attention",
     "title": "Towards Understanding Cross and Self-Attention in Stable Diffusion for Text-Guided Image Editing",
     "linkTo": [
       "trustworthy-ai/diffusion-based/prompt-to-prompt"
     ],
+    "referencedBy": [
+      "intro",
+      "trustworthy-ai/diffusion-based/index"
+    ]
+  },
+  {
+    "id": "trustworthy-ai/diffusion-based/prompt-to-prompt",
+    "title": "Prompt-to-Prompt Image Editing with Cross Attention Control",
+    "linkTo": [
+      "trustworthy-ai"
+    ],
+    "referencedBy": [
+      "intro",
+      "trustworthy-ai/diffusion-based/towards-undersating-cross-and-self-attention"
+    ]
+  },
+  {
+    "id": "trustworthy-ai",
+    "title": "Trustworthy ai",
+    "linkTo": [],
+    "referencedBy": [
+      "intro",
+      "trustworthy-ai/diffusion-based/prompt-to-prompt",
+      "trustworthy-ai/diffusion-based/safety-guidance"
+    ]
+  },
+  {
+    "id": "trustworthy-ai/diffusion-based/safety-guidance",
+    "title": "Safety Guidance in Diffusion Models",
+    "linkTo": [
+      "trustworthy-ai"
+    ],
+    "referencedBy": [
+      "intro",
+      "trustworthy-ai/index"
+    ]
+  },
+  {
+    "id": "mechanistic-interpretability/index",
+    "title": "Mechanistic interpretability",
+    "linkTo": [],
     "referencedBy": [
       "intro"
     ]
@@ -45,58 +101,10 @@
     ]
   },
   {
-    "id": "mechanistic-interpretability/index",
-    "title": "Mechanistic interpretability",
-    "linkTo": [],
-    "referencedBy": []
-  },
-  {
     "id": "paper-review-template",
     "title": "Paper Review Template",
     "linkTo": [],
     "referencedBy": []
-  },
-  {
-    "id": "trustworthy-ai/diffusion-based/index",
-    "title": "Diffusion based",
-    "linkTo": [
-      "towards-undersating-cross-and-self-attention"
-    ],
-    "referencedBy": []
-  },
-  {
-    "id": "towards-undersating-cross-and-self-attention",
-    "title": "Towards undersating cross and self attention",
-    "linkTo": [],
-    "referencedBy": [
-      "trustworthy-ai/diffusion-based/index"
-    ]
-  },
-  {
-    "id": "trustworthy-ai/diffusion-based/prompt-to-prompt",
-    "title": "Prompt-to-Prompt Image Editing with Cross Attention Control",
-    "linkTo": [],
-    "referencedBy": [
-      "trustworthy-ai/diffusion-based/towards-undersating-cross-and-self-attention"
-    ]
-  },
-  {
-    "id": "trustworthy-ai/diffusion-based/safety-guidance",
-    "title": "Safety Guidance in Diffusion Models",
-    "linkTo": [
-      "trustworthy-ai"
-    ],
-    "referencedBy": [
-      "trustworthy-ai/index"
-    ]
-  },
-  {
-    "id": "trustworthy-ai",
-    "title": "Trustworthy ai",
-    "linkTo": [],
-    "referencedBy": [
-      "trustworthy-ai/diffusion-based/safety-guidance"
-    ]
   },
   {
     "id": "trustworthy-ai/index",

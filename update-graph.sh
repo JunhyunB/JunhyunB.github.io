@@ -1,5 +1,8 @@
 #!/bin/bash
-# Script to update the graph data when adding new markdown files
+# Script to update the graph data and latest reviews when adding new markdown files
+
+echo "Updating latest paper reviews in intro.md..."
+bash ./update-latest-reviews.sh
 
 echo "Building site to regenerate graph data..."
 npm run build
@@ -10,5 +13,5 @@ node fix-duplicate-nodes.js
 echo "Copying updated graph data to static folder..."
 cp build/docusaurus-graph.json static/docusaurus-graph.json
 
-echo "Graph data updated successfully!"
+echo "All data updated successfully!"
 echo "You can now run 'npm start' to see the changes."

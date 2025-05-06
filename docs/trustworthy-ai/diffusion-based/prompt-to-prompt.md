@@ -2,13 +2,7 @@
 id: prompt-to-prompt
 title: "Prompt-to-Prompt Image Editing with Cross Attention Control"
 tags: [stable diffusion, diffusion models, image editing, controllable generation]
-references:
-  - intro
 ---
-
-# Prompt-to-Prompt Image Editing with Cross Attention Control
-
-*This paper is part of the [Trustworthy AI](/docs/trustworthy-ai) research collection and focuses on controllable generation techniques for diffusion models.*
 
 ## Paper Information
 

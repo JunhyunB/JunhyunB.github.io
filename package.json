@@ -12,7 +12,9 @@
     "serve": "docusaurus serve",
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
-    "update-graph": "npm run build && cp build/docusaurus-graph.json static/docusaurus-graph.json"
+    "update-graph": "npm run build && cp build/docusaurus-graph.json static/docusaurus-graph.json",
+    "update-reviews": "bash ./update-latest-reviews.sh",
+    "update-all": "npm run update-reviews && npm run update-graph"
   },
   "dependencies": {
     "@docusaurus/core": "3.7.0",

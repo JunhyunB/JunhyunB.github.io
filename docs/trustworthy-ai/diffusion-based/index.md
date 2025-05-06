@@ -16,4 +16,4 @@ This section contains paper reviews related to trust and safety issues in diffus
 
 ## Latest Reviews
 
-- [Towards Understanding Cross and Self-Attention in Stable Diffusion for Text-Guided Image Editing](./towards-undersating-cross-and-self-attention) - Investigation into the roles of cross-attention and self-attention maps in Stable Diffusion for effective image editing
+- [Towards Understanding Cross and Self-Attention in Stable Diffusion for Text-Guided Image Editing](/docs/trustworthy-ai/diffusion-based/towards-undersating-cross-and-self-attention) - Investigation into the roles of cross-attention and self-attention maps in Stable Diffusion for effective image editing

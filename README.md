@@ -12,15 +12,28 @@ This repository contains the source code for my personal website, built with [Do
 
 This website implements a Zettelkasten-style note-taking system with automatic link detection. You can create connections between documents using several types of links:
 
-1. **Double-bracket links**: `[[note-id]]` or `[[note-id|Custom text]]`
-2. **Wiki-style links**: `[Link text](note-id)`
-3. **Standard Docusaurus links**: `[Link text](/docs/note-id)`
+### IMPORTANT: Link Format Guidelines
+
+To ensure proper graph visualization and prevent broken links, follow these rules:
+
+✅ **DO**:
+- Use absolute paths with the `/docs/` prefix: `[Link Text](/docs/path/to/page)`
+- For index pages, link to the directory with trailing slash: `[Section Name](/docs/path/to/section/)`
+
+❌ **DON'T**:
+- Don't use relative paths: `[Link Text](./page)` or `[Link Text](../other-section/page)`
+- Don't include file extensions: `[Link Text](/docs/path/to/page.md)`
+- Don't directly link to index files: `[Link Text](/docs/path/to/section/index)`
 
 All links are automatically detected and visualized in an interactive graph view next to each document. This helps discover connections between ideas and navigate related content.
 
-For examples and a guide on how to use this system, see:
-- [Zettelkasten Example](/docs/zettelkasten-example)
-- [Zettelkasten Guide](/docs/zettelkasten-guide)
+### Updating Content
+
+After adding or modifying content:
+
+1. Run `npm run update-reviews` to update the latest paper reviews list
+2. Run `npm run update-graph` to update the relationship graph
+3. Or use `npm run update-all` to do both at once
 
 ## Development
 

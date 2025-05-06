@@ -1,7 +1,5 @@
 ---
 id: safety-guidance
-references:
-  - intro
 ---
 
 # Safety Guidance in Diffusion Models
