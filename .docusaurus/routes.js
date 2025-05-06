@@ -79,11 +79,11 @@ export default [
   },
   {
     path: '/docs',
-    component: ComponentCreator('/docs', '82b'),
+    component: ComponentCreator('/docs', '20d'),
     routes: [
       {
         path: '/docs',
-        component: ComponentCreator('/docs', '3ee'),
+        component: ComponentCreator('/docs', '40f'),
         routes: [
           {
             path: '/docs/tags',
@@ -122,7 +122,7 @@ export default [
           },
           {
             path: '/docs',
-            component: ComponentCreator('/docs', '03e'),
+            component: ComponentCreator('/docs', 'b34'),
             routes: [
               {
                 path: '/docs/intro',
@@ -157,12 +157,6 @@ export default [
               {
                 path: '/docs/trustworthy-ai/diffusion-based/prompt-to-prompt',
                 component: ComponentCreator('/docs/trustworthy-ai/diffusion-based/prompt-to-prompt', 'dc8'),
-                exact: true,
-                sidebar: "tutorialSidebar"
-              },
-              {
-                path: '/docs/trustworthy-ai/diffusion-based/safety-guidance',
-                component: ComponentCreator('/docs/trustworthy-ai/diffusion-based/safety-guidance', '2b0'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               },

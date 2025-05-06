@@ -15,11 +15,7 @@
   "frontMatter": {
     "sidebar_position": 1,
     "id": "intro",
-    "title": "Paper Reviews Introduction",
-    "sources": [
-      "sample-paper",
-      "safety-guidance"
-    ]
+    "title": "Paper Reviews Introduction"
   },
   "sidebar": "tutorialSidebar",
   "next": {

@@ -12,10 +12,7 @@
   "tags": [],
   "version": "current",
   "frontMatter": {
-    "id": "safety-guidance",
-    "references": [
-      "intro"
-    ]
+    "id": "safety-guidance"
   },
   "sidebar": "tutorialSidebar",
   "previous": {
