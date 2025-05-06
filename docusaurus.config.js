@@ -8,9 +8,6 @@ import {themes as prismThemes} from 'prism-react-renderer';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 
-// Import the wiki links plugins
-const remarkWikiLinks = require('./plugins/remark-wiki-link-graph/remark-wiki-links.js');
-
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 /** @type {import('@docusaurus/types').Config} */
@@ -89,12 +86,7 @@ const config = {
           editUrl:
             'https://github.com/JunhyunB/JunhyunB.github.io/tree/main/',
           remarkPlugins: [
-            remarkMath,
-            // Add the wiki links transformer
-            [remarkWikiLinks, {
-              pageResolver: (name) => name,
-              hrefTemplate: (permalink) => `/docs/${permalink}`,
-            }]
+            remarkMath
           ],
           rehypePlugins: [rehypeKatex],
         },
