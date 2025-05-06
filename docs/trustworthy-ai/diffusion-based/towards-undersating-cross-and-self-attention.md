@@ -22,7 +22,8 @@ Stable diffusion과 같은 Deep Text-to-Image Synthesis (TIS) 모델들은 주�
 ## Key Findings
 1. Diffusion model에서 cross-attnetion 맵을 수정하는것은 별로일 수도 있음.
 2. 왜냐하면 cross-attention map은 텍스트 프롬프트의 가중치 측정일 뿐인 것 처럼 보이지만, 객체 속성 정보까지 포함하고 있어서 해당 attention map만 교체해서 이미지를 편집하려는 건 자연스럽지 못하게 바꿀수도 있음.
-4. 그러면 self-attention map을 사용하면 어떻게 될지 궁금하지 않은가요?
+3. 그러면 self-attention map을 사용하면 어떻게 될지 궁금하지 않은가요?
+
 
 ![alt text](</figures/스크린샷 2025-05-06 오후 10.51.45.png>)
 
