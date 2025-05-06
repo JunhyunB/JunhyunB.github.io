@@ -7,40 +7,56 @@ on:
   pull_request:
     branches:
       - main
-# why not working?
-permissions: # Test on github pages
-  contents: write
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
 
 jobs:
-  deploy:
-    name: Deploy to GitHub Pages
+  build:
+    name: Build website
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
           node-version: 18
           cache: npm
-
+      
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+      
       - name: Install dependencies
         run: npm ci
+      
       - name: Clear
         run: npm run clear
+      
       - name: Build website
         run: npm run build
-
-      # 깃허브 페이지에 배포하기 위한 일반적인 액션
-      # Docs: https://github.com/peaceiris/actions-gh-pages#%EF%B8%8F-docusaurus
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+      
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          # `gh-pages` 브랜치에 게시할 결과물을 빌드합니다.
-          publish_dir: ./build
-          # 다음 줄에서는 `gh-pages` 브랜치에 배포하기 위해
-          # 공식 GH-Actions 봇에 커밋 권한을 할당합니다.
-          # https://github.com/actions/checkout/issues/13#issuecomment-724415212
-          # 아래 2개 필드를 지정하지 않으면 GH 액션 봇이 기본적으로 사용됩니다.
-          # 자신의 자격증명으로 교체할 수 있습니다.
-          user_name: github-actions[bot]
-          user_email: 41898282+github-actions[bot]@users.noreply.github.com
+          path: ./build
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
