@@ -8,7 +8,7 @@
           "label": "Next",
           "isLast": true,
           "path": "/docs",
-          "mainDocId": "intro",
+          "mainDocId": "mechanistic-interpretability/index",
           "docs": [
             {
               "id": "intro",
@@ -23,6 +23,16 @@
             {
               "id": "paper-review-template",
               "path": "/docs/paper-review-template",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "transformer-circuits/index",
+              "path": "/docs/transformer-circuits/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "transformer-circuits/mathematical-framework-for-transformer-circuits",
+              "path": "/docs/transformer-circuits/mathematical-framework-for-transformer-circuits",
               "sidebar": "tutorialSidebar"
             },
             {
@@ -50,8 +60,8 @@
           "sidebars": {
             "tutorialSidebar": {
               "link": {
-                "path": "/docs/intro",
-                "label": "intro"
+                "path": "/docs/mechanistic-interpretability/",
+                "label": "Mechanistic Interpretability"
               }
             }
           }

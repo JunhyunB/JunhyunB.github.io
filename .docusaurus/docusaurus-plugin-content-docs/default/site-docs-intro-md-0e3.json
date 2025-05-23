@@ -18,8 +18,12 @@
     "title": "Paper Reviews Introduction"
   },
   "sidebar": "tutorialSidebar",
-  "next": {
+  "previous": {
     "title": "Mechanistic Interpretability",
     "permalink": "/docs/mechanistic-interpretability/"
+  },
+  "next": {
+    "title": "Trustworthy AI",
+    "permalink": "/docs/trustworthy-ai/"
   }
 }

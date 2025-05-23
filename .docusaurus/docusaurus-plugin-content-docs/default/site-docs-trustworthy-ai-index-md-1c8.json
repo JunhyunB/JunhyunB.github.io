@@ -17,8 +17,8 @@
   },
   "sidebar": "tutorialSidebar",
   "previous": {
-    "title": "Mechanistic Interpretability",
-    "permalink": "/docs/mechanistic-interpretability/"
+    "title": "Paper Reviews Introduction",
+    "permalink": "/docs/intro"
   },
   "next": {
     "title": "Diffusion-based Models",

@@ -18,36 +18,42 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 0.5rem; /* Add some space below header */
+  margin-bottom: 0.5rem;
 }
 
 .graphTitle {
-  font-size: 0.8rem;
-  font-weight: 700;
+  font-size: 0.875rem;
+  font-weight: 600;
   text-transform: uppercase;
-  color: var(--ifm-color-emphasis-700);
+  color: var(--ifm-color-emphasis-800);
   padding: 0.5rem 0;
-  letter-spacing: 0.05rem;
+  letter-spacing: 0.08rem;
+  opacity: 0.9;
 }
 
 .expandButton {
-  background: none;
-  border: none;
-  width: 28px;
-  height: 28px;
+  background: var(--ifm-color-primary-lightest);
+  border: 1px solid var(--ifm-color-primary-light);
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
-  padding: 0.25rem;
+  padding: 0.5rem;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--ifm-color-primary);
-  transition: all 0.2s ease;
+  color: var(--ifm-color-primary-dark);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1),
+              inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .expandButton:hover {
-  background-color: var(--ifm-color-primary-lightest);
-  transform: scale(1.1);
+  background: var(--ifm-color-primary);
+  color: white;
+  transform: scale(1.15) rotate(5deg);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15),
+              inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
 .expandButton svg {
@@ -56,24 +62,42 @@
 }
 
 .graphBox {
-  border: 1px solid var(--ifm-color-emphasis-300);
-  border-radius: 0.5rem;
-  height: 320px; /* 높이 더 증가 */
-  overflow: hidden;
-  background-color: var(--ifm-background-surface-color);
+  border: 1px solid var(--ifm-color-emphasis-100);
+  border-radius: 1rem;
+  height: 350px;
+  overflow: visible;
+  background: linear-gradient(135deg, 
+    var(--ifm-background-surface-color) 0%, 
+    var(--ifm-background-color) 100%);
   position: relative;
-  transition: all 0.3s ease;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-  padding: 20px; /* 내부 여백 증가 */
-  box-sizing: border-box; /* 패딩이 높이/너비에 포함되도록 설정 */
-  display: flex; /* 중앙 정렬을 위해 플렉스 사용 */
-  justify-content: center; /* 수평 중앙 정렬 */
-  align-items: center; /* 수직 중앙 정렬 */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06), 
+              0 2px 4px rgba(0, 0, 0, 0.04),
+              inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  padding: 0;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .graphBox:hover {
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
-  border-color: var(--ifm-color-primary-lightest);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08), 
+              0 4px 8px rgba(0, 0, 0, 0.06),
+              inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  border-color: var(--ifm-color-primary-lighter);
+  transform: translateY(-1px);
+}
+
+/* Enhanced graph tooltip styles */
+:global(.graph-tooltip) {
+  font-family: var(--ifm-font-family-base);
+  max-width: 200px;
+  word-wrap: break-word;
+  opacity: 0.95;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
 }
 
 /* --- Enhanced Modal Styles --- */
@@ -89,20 +113,42 @@
   align-items: center;
   justify-content: center;
   backdrop-filter: blur(2px);
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .graphModalContent {
   background-color: var(--ifm-card-background-color, var(--ifm-background-surface-color));
-  border-radius: 12px;
+  border-radius: 16px;
   width: 90vw;
-  height: 85vh;
-  max-width: 1200px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+  height: 90vh;
+  max-width: 1400px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   display: flex;
   flex-direction: column;
-  border: 1px solid var(--ifm-color-emphasis-300);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: scale(0.95) translateY(10px);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
 }
 
 .graphModalHeader {
@@ -126,20 +172,22 @@
 }
 
 .graphModeToggle {
-  background: var(--ifm-color-emphasis-200);
-  border: none;
-  border-radius: 4px;
-  padding: 6px 12px;
-  font-size: 0.85rem;
+  background: var(--ifm-color-primary-lightest);
+  border: 1px solid var(--ifm-color-primary-light);
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-size: 0.875rem;
   font-weight: 500;
-  color: var(--ifm-color-emphasis-800);
+  color: var(--ifm-color-primary-dark);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .graphModeToggle:hover {
-  background: var(--ifm-color-emphasis-300);
-  color: var(--ifm-color-emphasis-900);
+  background: var(--ifm-color-primary);
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .graphModeToggle:focus {
@@ -154,17 +202,22 @@
   line-height: 1;
   cursor: pointer;
   color: var(--ifm-color-emphasis-700);
-  padding: 0;
-  transition: color 0.2s;
+  padding: 4px;
+  border-radius: 4px;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .graphModalCloseButton:hover {
-  color: var(--ifm-color-primary);
+  color: var(--ifm-color-danger);
+  background-color: var(--ifm-color-danger-lightest);
 }
 
 .graphModalBody {
   flex: 1;
-  overflow: hidden;
+  overflow: visible;
   padding: 0;
   position: relative;
   background-color: var(--ifm-background-surface-color);
@@ -175,59 +228,85 @@
   align-items: center;
   border: 1px solid var(--ifm-color-emphasis-200);
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+  min-height: 0;
 }
 
-/* 전체 그래프 컨테이너 스타일 */
+/* Full graph container styles */
 .fullGraphContainer {
   width: 100%;
   height: 100%; 
-  padding: 30px; /* 더 많은 패딩으로 잘림 방지 */
+  padding: 20px;
   box-sizing: border-box;
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden; /* 넘치는 부분 숨김 */
+  overflow: hidden;
   position: relative;
-  background-color: var(--ifm-background-surface-color);
-  border-radius: 8px;
+  background-color: transparent;
+  border-radius: 0;
 }
 
-/* 특별한 스타일 적용으로 텍스트 배경 개선 */
-.fullGraphContainer :global(.label-background) {
+/* Improve node and label visibility */
+.fullGraphContainer :global(.node) {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.fullGraphContainer :global(.node:hover) {
+  filter: brightness(1.1);
+}
+
+.fullGraphContainer :global(.node-label) {
+  pointer-events: none;
+  user-select: none;
+  text-shadow: 0 1px 2px rgba(255,255,255,0.8), 
+               0 -1px 2px rgba(255,255,255,0.8),
+               1px 0 2px rgba(255,255,255,0.8),
+               -1px 0 2px rgba(255,255,255,0.8);
+}
+
+/* Label background improvements */
+.fullGraphContainer :global(.label-bg) {
   filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.1));
-  fill: var(--ifm-background-color);
-  fill-opacity: 0.9;
-  rx: 4;
-  ry: 4;
+  transition: all 0.2s ease;
 }
 
-/* 노드 원의 스타일 개선 */
+/* Node circle improvements */
 .fullGraphContainer :global(circle) {
   filter: drop-shadow(0px 2px 3px rgba(0, 0, 0, 0.2));
   transition: all 0.2s ease;
 }
 
-/* 호버 시 강조 효과 */
+/* Hover effects */
 .fullGraphContainer :global(circle:hover) {
-  stroke-width: 2px;
+  stroke-width: 3px;
   filter: drop-shadow(0px 3px 5px rgba(0, 0, 0, 0.3));
 }
 
-/* 관련 문서 그래프 컨테이너 스타일 */
+/* Contextual graph container styles */
 .contextualGraphContainer {
-  width: 90%;
-  height: 90%;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
-  border-radius: 8px;
-  overflow: hidden;
-  padding: 25px; /* 더 많은 패딩으로 잘림 방지 */
+  width: 100%;
+  height: 100%;
+  box-shadow: none;
+  border-radius: 0;
+  overflow: visible;
+  padding: 20px 10px;
   box-sizing: border-box;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* When a user hovers over the graph, show a subtle highlight */
+/* Link styles */
+:global(.link) {
+  transition: all 0.2s ease;
+}
+
+:global(.link:hover) {
+  stroke-width: 3px !important;
+  opacity: 1 !important;
+}
+
 .graphModalBody:hover {
   background-color: var(--ifm-color-emphasis-50);
 }
@@ -254,24 +333,29 @@
 .legendItem {
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 0.85rem;
-  color: var(--ifm-color-emphasis-800);
-  padding: 4px 8px;
-  border-radius: 4px;
-  transition: background-color 0.2s ease;
+  gap: 8px;
+  font-size: 0.875rem;
+  color: var(--ifm-color-emphasis-900);
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  background: var(--ifm-background-color);
+  border: 1px solid transparent;
 }
 
 .legendItem:hover {
-  background-color: var(--ifm-color-emphasis-200);
+  background-color: var(--ifm-color-emphasis-100);
+  border-color: var(--ifm-color-emphasis-300);
+  transform: translateY(-1px);
 }
 
 .legendDot {
-  width: 12px;
-  height: 12px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
   display: inline-block;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 2px solid white;
 }
 
 .graphInstructions {
@@ -280,7 +364,24 @@
   color: var(--ifm-color-emphasis-600);
   margin-top: 4px;
 }
-/* --- End Modal Styles --- */
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .graphModalContent {
+    width: 95vw;
+    height: 95vh;
+  }
+  
+  .graphLegend {
+    gap: 8px;
+    padding: 4px;
+  }
+  
+  .legendItem {
+    padding: 4px 8px;
+    font-size: 0.75rem;
+  }
+}
 
 @media (min-width: 997px) {
   .docItemCol {

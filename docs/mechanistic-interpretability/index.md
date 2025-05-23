@@ -2,7 +2,7 @@
 title: Mechanistic Interpretability
 hide_title: false
 hide_table_of_contents: false
-sidebar_position: 2
+sidebar_position: 0
 ---
 
 This section contains paper reviews related to Mechanistic Interpretability research.

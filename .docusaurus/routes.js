@@ -79,11 +79,11 @@ export default [
   },
   {
     path: '/docs',
-    component: ComponentCreator('/docs', '5d5'),
+    component: ComponentCreator('/docs', '23e'),
     routes: [
       {
         path: '/docs',
-        component: ComponentCreator('/docs', '4ea'),
+        component: ComponentCreator('/docs', '425'),
         routes: [
           {
             path: '/docs/tags',
@@ -111,6 +111,11 @@ export default [
             exact: true
           },
           {
+            path: '/docs/tags/mechanistic-interpretability',
+            component: ComponentCreator('/docs/tags/mechanistic-interpretability', 'fc7'),
+            exact: true
+          },
+          {
             path: '/docs/tags/stable-diffusion',
             component: ComponentCreator('/docs/tags/stable-diffusion', '33a'),
             exact: true
@@ -121,8 +126,13 @@ export default [
             exact: true
           },
           {
+            path: '/docs/tags/transformer-circuits',
+            component: ComponentCreator('/docs/tags/transformer-circuits', '890'),
+            exact: true
+          },
+          {
             path: '/docs',
-            component: ComponentCreator('/docs', '970'),
+            component: ComponentCreator('/docs', '72a'),
             routes: [
               {
                 path: '/docs/intro',
@@ -139,6 +149,18 @@ export default [
               {
                 path: '/docs/paper-review-template',
                 component: ComponentCreator('/docs/paper-review-template', 'fc6'),
+                exact: true,
+                sidebar: "tutorialSidebar"
+              },
+              {
+                path: '/docs/transformer-circuits',
+                component: ComponentCreator('/docs/transformer-circuits', '5e8'),
+                exact: true,
+                sidebar: "tutorialSidebar"
+              },
+              {
+                path: '/docs/transformer-circuits/mathematical-framework-for-transformer-circuits',
+                component: ComponentCreator('/docs/transformer-circuits/mathematical-framework-for-transformer-circuits', 'f43'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               },

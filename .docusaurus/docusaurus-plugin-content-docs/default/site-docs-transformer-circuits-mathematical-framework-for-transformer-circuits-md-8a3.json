@@ -1,0 +1,38 @@
+{
+  "id": "transformer-circuits/mathematical-framework-for-transformer-circuits",
+  "title": "A Mathematical Framework for Transformer Circuits",
+  "description": "Paper Information",
+  "source": "@site/docs/transformer-circuits/mathematical-framework-for-transformer-circuits.md",
+  "sourceDirName": "transformer-circuits",
+  "slug": "/transformer-circuits/mathematical-framework-for-transformer-circuits",
+  "permalink": "/docs/transformer-circuits/mathematical-framework-for-transformer-circuits",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/JunhyunB/JunhyunB.github.io/tree/main/docs/transformer-circuits/mathematical-framework-for-transformer-circuits.md",
+  "tags": [
+    {
+      "inline": true,
+      "label": "transformer circuits",
+      "permalink": "/docs/tags/transformer-circuits"
+    },
+    {
+      "inline": true,
+      "label": "mechanistic interpretability",
+      "permalink": "/docs/tags/mechanistic-interpretability"
+    }
+  ],
+  "version": "current",
+  "frontMatter": {
+    "id": "mathematical-framework-for-transformer-circuits",
+    "title": "A Mathematical Framework for Transformer Circuits",
+    "tags": [
+      "transformer circuits",
+      "mechanistic interpretability"
+    ]
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Transformer Circuits Thread",
+    "permalink": "/docs/transformer-circuits/"
+  }
+}

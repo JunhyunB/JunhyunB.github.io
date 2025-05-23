@@ -118,13 +118,13 @@
       "plugin": "plugin---search-138-688"
     }
   },
-  "/docs-5d5": {
+  "/docs-23e": {
     "__comp": "__comp---theme-docs-root-5-e-9-0b6",
     "__context": {
       "plugin": "plugin---docsaba-d7c"
     }
   },
-  "/docs-4ea": {
+  "/docs-425": {
     "__comp": "__comp---theme-doc-version-roota-7-b-5de",
     "__props": "__props---docs-005-788"
   },
@@ -148,6 +148,10 @@
     "__comp": "__comp---theme-doc-tag-doc-list-pagedf-2-9f0",
     "__props": "__props---docs-tags-image-editing-5-d-9-db8"
   },
+  "/docs/tags/mechanistic-interpretability-fc7": {
+    "__comp": "__comp---theme-doc-tag-doc-list-pagedf-2-9f0",
+    "__props": "__props---docs-tags-mechanistic-interpretability-0-d-3-a83"
+  },
   "/docs/tags/stable-diffusion-33a": {
     "__comp": "__comp---theme-doc-tag-doc-list-pagedf-2-9f0",
     "__props": "__props---docs-tags-stable-diffusiona-0-c-22f"
@@ -156,7 +160,11 @@
     "__comp": "__comp---theme-doc-tag-doc-list-pagedf-2-9f0",
     "__props": "__props---docs-tags-template-5-fb-87c"
   },
-  "/docs-970": {
+  "/docs/tags/transformer-circuits-890": {
+    "__comp": "__comp---theme-doc-tag-doc-list-pagedf-2-9f0",
+    "__props": "__props---docs-tags-transformer-circuits-06-e-96b"
+  },
+  "/docs-72a": {
     "__comp": "__comp---theme-doc-roota-94-67a"
   },
   "/docs/intro-61d": {
@@ -170,6 +178,14 @@
   "/docs/paper-review-template-fc6": {
     "__comp": "__comp---theme-doc-item-178-a40",
     "content": "content---docs-paper-review-template-927-87d"
+  },
+  "/docs/transformer-circuits-5e8": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---docs-transformer-circuits-46-e-411"
+  },
+  "/docs/transformer-circuits/mathematical-framework-for-transformer-circuits-f43": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---docs-transformer-circuits-mathematical-framework-for-transformer-circuits-8-a-3-b9f"
   },
   "/docs/trustworthy-ai-b53": {
     "__comp": "__comp---theme-doc-item-178-a40",

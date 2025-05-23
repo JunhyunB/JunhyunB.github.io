@@ -11,20 +11,16 @@
   "editUrl": "https://github.com/JunhyunB/JunhyunB.github.io/tree/main/docs/mechanistic-interpretability/index.md",
   "tags": [],
   "version": "current",
-  "sidebarPosition": 2,
+  "sidebarPosition": 0,
   "frontMatter": {
     "title": "Mechanistic Interpretability",
     "hide_title": false,
     "hide_table_of_contents": false,
-    "sidebar_position": 2
+    "sidebar_position": 0
   },
   "sidebar": "tutorialSidebar",
-  "previous": {
+  "next": {
     "title": "Paper Reviews Introduction",
     "permalink": "/docs/intro"
-  },
-  "next": {
-    "title": "Trustworthy AI",
-    "permalink": "/docs/trustworthy-ai/"
   }
 }

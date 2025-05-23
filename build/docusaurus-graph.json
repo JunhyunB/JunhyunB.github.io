@@ -3,13 +3,31 @@
     "id": "intro",
     "title": "Paper Reviews Introduction",
     "linkTo": [
+      "transformer-circuits/mathematical-framework-for-transformer-circuits",
+      "transformer-circuits/index",
       "trustworthy-ai/diffusion-based/prompt-to-prompt",
       "trustworthy-ai/diffusion-based/index",
-      "trustworthy-ai/diffusion-based/towards-undersating-cross-and-self-attention",
-      "mechanistic-interpretability/index",
-      "trustworthy-ai/index"
+      "trustworthy-ai/diffusion-based/towards-undersating-cross-and-self-attention"
     ],
     "referencedBy": []
+  },
+  {
+    "id": "transformer-circuits/mathematical-framework-for-transformer-circuits",
+    "title": "A Mathematical Framework for Transformer Circuits",
+    "linkTo": [],
+    "referencedBy": [
+      "intro"
+    ]
+  },
+  {
+    "id": "transformer-circuits/index",
+    "title": "Transformer circuits",
+    "linkTo": [
+      "trustworthy-ai/diffusion-based/safety-guidance"
+    ],
+    "referencedBy": [
+      "intro"
+    ]
   },
   {
     "id": "trustworthy-ai/diffusion-based/prompt-to-prompt",
@@ -45,8 +63,21 @@
     "id": "mechanistic-interpretability/index",
     "title": "Mechanistic interpretability",
     "linkTo": [],
+    "referencedBy": []
+  },
+  {
+    "id": "paper-review-template",
+    "title": "Paper Review Template",
+    "linkTo": [],
+    "referencedBy": []
+  },
+  {
+    "id": "trustworthy-ai/diffusion-based/safety-guidance",
+    "title": "Safety guidance",
+    "linkTo": [],
     "referencedBy": [
-      "intro"
+      "transformer-circuits/index",
+      "trustworthy-ai/index"
     ]
   },
   {
@@ -56,27 +87,11 @@
       "trustworthy-ai/diffusion-based",
       "trustworthy-ai/diffusion-based/safety-guidance"
     ],
-    "referencedBy": [
-      "intro"
-    ]
-  },
-  {
-    "id": "paper-review-template",
-    "title": "Paper Review Template",
-    "linkTo": [],
     "referencedBy": []
   },
   {
     "id": "trustworthy-ai/diffusion-based",
     "title": "Diffusion based",
-    "linkTo": [],
-    "referencedBy": [
-      "trustworthy-ai/index"
-    ]
-  },
-  {
-    "id": "trustworthy-ai/diffusion-based/safety-guidance",
-    "title": "Safety guidance",
     "linkTo": [],
     "referencedBy": [
       "trustworthy-ai/index"

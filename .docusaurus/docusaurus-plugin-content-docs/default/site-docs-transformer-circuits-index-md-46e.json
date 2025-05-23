@@ -1,0 +1,24 @@
+{
+  "id": "transformer-circuits/index",
+  "title": "Transformer Circuits Thread",
+  "description": "Anthropic의 Transformer Circuits Thread를 읽고 정리",
+  "source": "@site/docs/transformer-circuits/index.md",
+  "sourceDirName": "transformer-circuits",
+  "slug": "/transformer-circuits/",
+  "permalink": "/docs/transformer-circuits/",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/JunhyunB/JunhyunB.github.io/tree/main/docs/transformer-circuits/index.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Paper Review Template",
+    "permalink": "/docs/paper-review-template"
+  },
+  "next": {
+    "title": "A Mathematical Framework for Transformer Circuits",
+    "permalink": "/docs/transformer-circuits/mathematical-framework-for-transformer-circuits"
+  }
+}
