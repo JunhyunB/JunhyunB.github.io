@@ -20,27 +20,49 @@ import { normalizeId } from './graphUtils';
 // Modal component for expanded graph view
 function GraphModal({ graphData, currentDocId, onClose }) {
   const [showFullGraph, setShowFullGraph] = useState(false);
-  
+
   const toggleFullGraph = () => {
     setShowFullGraph(!showFullGraph);
   };
+
+  // Close modal on Escape key for better accessibility
+  useEffect(() => {
+    function handleKeyDown(e) {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [onClose]);
   
   return (
     <div className={styles.graphModalBackdrop} onClick={onClose}>
-      <div className={styles.graphModalContent} onClick={(e) => e.stopPropagation()}>
+      <div
+        className={styles.graphModalContent}
+        onClick={(e) => e.stopPropagation()}
+        role="dialog"
+        aria-modal="true"
+      >
         <div className={styles.graphModalHeader}>
           <div className={styles.graphModalTitle}>
             {showFullGraph ? 'Complete Knowledge Graph' : 'Document Relationship Graph'}
           </div>
           <div className={styles.graphModalControls}>
-            <button 
-              className={styles.graphModeToggle} 
+            <button
+              className={styles.graphModeToggle}
               onClick={toggleFullGraph}
-              title={showFullGraph ? "Show only related documents" : "Show all documents"}
+              title={showFullGraph ? 'Show only related documents' : 'Show all documents'}
+              aria-label={showFullGraph ? 'Show only related documents' : 'Show all documents'}
             >
               {showFullGraph ? "Show Related" : "Show All Documents"}
             </button>
-            <button className={styles.graphModalCloseButton} onClick={onClose}>&times;</button>
+            <button
+              className={styles.graphModalCloseButton}
+              onClick={onClose}
+              aria-label="Close graph"
+            >&times;</button>
           </div>
         </div>
         <div className={styles.graphModalBody}>
