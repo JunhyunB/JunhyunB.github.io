@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="50 12 850 476" font-family="'CMU Sans Serif','Computer Modern Sans','Helvetica Neue',Arial,sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#234e70"/>
+    </marker>
+    <marker id="arrow-r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#CC785C"/>
+    </marker>
+  </defs>
+
+  <!-- Section labels -->
+  <text x="210" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="#234e70" letter-spacing="2.5">WRITE (each t)</text>
+  <text x="745" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="#CC785C" letter-spacing="2.5">READ (at query)</text>
+
+  <!-- ========== WRITE column ========== -->
+
+  <!-- input -->
+  <rect x="110" y="45" width="200" height="40" rx="6" fill="#fff" stroke="#234e70" stroke-width="1.4"/>
+  <text x="210" y="70" text-anchor="middle" font-size="14" fill="#1a1a1a">
+    input x<tspan font-size="11" baseline-shift="sub">t</tspan>
+    <tspan dx="6" fill="#667">(x</tspan><tspan font-size="10" baseline-shift="sub">1</tspan>
+    <tspan fill="#667">, …, x</tspan><tspan font-size="10" baseline-shift="sub">T</tspan><tspan fill="#667">)</tspan>
+  </text>
+  <line x1="210" y1="85" x2="210" y2="106" stroke="#234e70" stroke-width="1.6" marker-end="url(#arrow)"/>
+
+  <!-- modular encoder (write) -->
+  <rect x="60" y="108" width="300" height="96" rx="8" fill="rgba(35,78,112,0.06)" stroke="#234e70" stroke-width="1.4"/>
+  <text x="210" y="130" text-anchor="middle" font-size="13" font-weight="600" fill="#234e70">Modular RNN Encoder (RIMs)</text>
+  <g font-size="11">
+    <rect x="82" y="146" width="46" height="32" rx="4" fill="#234e70" stroke="#234e70"/>
+    <text x="105" y="166" text-anchor="middle" fill="#fff" font-weight="600">M₁</text>
+    <rect x="136" y="146" width="46" height="32" rx="4" fill="#fff" stroke="#234e70" stroke-dasharray="3 3"/>
+    <text x="159" y="166" text-anchor="middle" fill="#8a9aad">M₂</text>
+    <rect x="190" y="146" width="46" height="32" rx="4" fill="#234e70" stroke="#234e70"/>
+    <text x="213" y="166" text-anchor="middle" fill="#fff" font-weight="600">M₃</text>
+    <rect x="244" y="146" width="46" height="32" rx="4" fill="#fff" stroke="#234e70" stroke-dasharray="3 3"/>
+    <text x="267" y="166" text-anchor="middle" fill="#8a9aad">M₄</text>
+    <text x="317" y="166" text-anchor="middle" fill="#8a9aad">…</text>
+  </g>
+  <text x="210" y="196" text-anchor="middle" font-size="11" font-style="italic" fill="#556">competitive top-k selection</text>
+
+  <line x1="210" y1="204" x2="210" y2="226" stroke="#234e70" stroke-width="1.6" marker-end="url(#arrow)"/>
+
+  <!-- h_t -->
+  <rect x="160" y="226" width="100" height="30" rx="6" fill="#fff" stroke="#234e70" stroke-width="1.4"/>
+  <text x="210" y="246" text-anchor="middle" font-size="14" fill="#1a1a1a">h<tspan font-size="11" baseline-shift="sub">t</tspan></text>
+
+  <!-- split -->
+  <line x1="185" y1="256" x2="138" y2="280" stroke="#234e70" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <line x1="235" y1="256" x2="282" y2="280" stroke="#234e70" stroke-width="1.4" marker-end="url(#arrow)"/>
+
+  <rect x="88" y="282" width="100" height="34" rx="6" fill="#fff" stroke="#234e70" stroke-width="1.4"/>
+  <text x="138" y="304" text-anchor="middle" font-size="14" fill="#1a1a1a">role r<tspan font-size="11" baseline-shift="sub">t</tspan></text>
+
+  <rect x="232" y="282" width="100" height="34" rx="6" fill="#fff" stroke="#234e70" stroke-width="1.4"/>
+  <text x="282" y="304" text-anchor="middle" font-size="14" fill="#1a1a1a">filler f<tspan font-size="11" baseline-shift="sub">t</tspan></text>
+
+  <!-- bind -->
+  <line x1="155" y1="316" x2="195" y2="342" stroke="#234e70" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <line x1="265" y1="316" x2="225" y2="342" stroke="#234e70" stroke-width="1.4" marker-end="url(#arrow)"/>
+
+  <circle cx="210" cy="362" r="20" fill="#fff" stroke="#234e70" stroke-width="1.6"/>
+  <text x="210" y="369" text-anchor="middle" font-size="20" font-weight="700" fill="#234e70">⊗</text>
+  <text x="210" y="402" text-anchor="middle" font-size="11" fill="#556" font-style="italic">TPR binding</text>
+
+  <!-- write arrow → Memory -->
+  <line x1="232" y1="362" x2="418" y2="362" stroke="#234e70" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <text x="325" y="354" text-anchor="middle" font-size="11" fill="#556" font-style="italic">accumulate</text>
+
+  <!-- ========== Shared Memory ========== -->
+  <rect x="418" y="336" width="124" height="62" rx="8" fill="rgba(204,120,92,0.08)" stroke="#234e70" stroke-width="1.8"/>
+  <text x="480" y="358" text-anchor="middle" font-size="12" font-weight="700" fill="#234e70">External Memory</text>
+  <text x="480" y="380" text-anchor="middle" font-size="16" font-weight="600" fill="#1a1a1a">M<tspan font-size="11" baseline-shift="sub">t</tspan></text>
+  <text x="480" y="394" text-anchor="middle" font-size="10" fill="#556" font-style="italic">TPR superposition</text>
+
+  <!-- ========== READ column ========== -->
+
+  <!-- query -->
+  <rect x="645" y="45" width="200" height="40" rx="6" fill="#fff" stroke="#CC785C" stroke-width="1.4"/>
+  <text x="745" y="70" text-anchor="middle" font-size="14" fill="#1a1a1a">query q</text>
+  <line x1="745" y1="85" x2="745" y2="106" stroke="#CC785C" stroke-width="1.6" marker-end="url(#arrow-r)"/>
+
+  <!-- shared encoder (ghost) -->
+  <rect x="600" y="108" width="290" height="62" rx="8" fill="rgba(204,120,92,0.05)" stroke="#CC785C" stroke-width="1.2" stroke-dasharray="5 3"/>
+  <text x="745" y="130" text-anchor="middle" font-size="13" font-weight="600" fill="#CC785C">Modular Encoder (shared weights)</text>
+  <text x="745" y="152" text-anchor="middle" font-size="11" font-style="italic" fill="#556">extracts query role q<tspan font-size="9" baseline-shift="sub">r</tspan></text>
+
+  <line x1="745" y1="170" x2="745" y2="192" stroke="#CC785C" stroke-width="1.6" marker-end="url(#arrow-r)"/>
+
+  <!-- query role q_r -->
+  <rect x="695" y="192" width="100" height="34" rx="6" fill="#fff" stroke="#CC785C" stroke-width="1.4"/>
+  <text x="745" y="214" text-anchor="middle" font-size="14" fill="#1a1a1a">query q<tspan font-size="11" baseline-shift="sub">r</tspan></text>
+
+  <line x1="745" y1="226" x2="745" y2="330" stroke="#CC785C" stroke-width="1.6" marker-end="url(#arrow-r)"/>
+
+  <!-- Unbind operation box -->
+  <rect x="640" y="332" width="210" height="74" rx="8" fill="rgba(204,120,92,0.08)" stroke="#CC785C" stroke-width="1.4"/>
+  <text x="745" y="354" text-anchor="middle" font-size="12" font-weight="700" fill="#CC785C">Unbind (tensor contraction)</text>
+  <text x="745" y="381" text-anchor="middle" font-size="16" fill="#1a1a1a">
+    f<tspan font-size="11" baseline-shift="sub">ans</tspan>
+    <tspan dx="4">=</tspan>
+    <tspan dx="4" font-weight="600">M</tspan><tspan font-size="11" baseline-shift="sub">T</tspan>
+    <tspan dx="2">·</tspan>
+    <tspan dx="2">q</tspan><tspan font-size="11" baseline-shift="sub">r</tspan>
+  </text>
+  <text x="745" y="399" text-anchor="middle" font-size="10" font-style="italic" fill="#556">role r<tspan font-size="8" baseline-shift="sub">k</tspan> ⊥ r<tspan font-size="8" baseline-shift="sub">j</tspan> → retrieves matching filler</text>
+
+  <!-- Memory → Unbind arrow -->
+  <line x1="542" y1="368" x2="638" y2="368" stroke="#CC785C" stroke-width="1.6" marker-end="url(#arrow-r)"/>
+  <text x="590" y="360" text-anchor="middle" font-size="11" fill="#556" font-style="italic">read M<tspan font-size="9" baseline-shift="sub">T</tspan></text>
+
+  <!-- Unbind → retrieved filler -->
+  <line x1="745" y1="406" x2="745" y2="440" stroke="#CC785C" stroke-width="1.6" marker-end="url(#arrow-r)"/>
+
+  <rect x="665" y="440" width="160" height="36" rx="6" fill="#fff" stroke="#CC785C" stroke-width="1.4"/>
+  <text x="745" y="463" text-anchor="middle" font-size="14" fill="#1a1a1a">retrieved filler f<tspan font-size="11" baseline-shift="sub">ans</tspan></text>
+</svg>

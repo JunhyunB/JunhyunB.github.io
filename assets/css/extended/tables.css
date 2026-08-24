@@ -1,0 +1,578 @@
+/* Identity: single ink-blue accent, applied sparingly */
+:root {
+    --accent: #234e70;
+    --accent-soft: rgba(35, 78, 112, 0.08);
+}
+
+a {
+    color: var(--accent);
+}
+
+#menu .active {
+    border-bottom-color: var(--accent);
+    color: var(--accent);
+}
+
+.post-content .venue-badge {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+/* Booktabs-style academic tables */
+.post-content table {
+    display: table;
+    width: auto;
+    margin: 1.5rem auto;
+    border-collapse: collapse;
+    font-size: 0.92rem;
+}
+
+.post-content table thead th {
+    border-top: 2px solid var(--primary);
+    border-bottom: 1px solid var(--primary);
+    padding: 0.6rem 0.8rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.post-content table thead th:first-child {
+    text-align: left;
+}
+
+.post-content table tbody td {
+    padding: 0.45rem 0.8rem;
+    border: none;
+    text-align: center;
+}
+
+.post-content table tbody td:first-child {
+    text-align: left;
+}
+
+.post-content table tbody tr:last-child td {
+    border-bottom: 2px solid var(--primary);
+}
+
+.post-content table tbody tr:hover {
+    background: var(--code-bg);
+}
+
+/* Method-type row coloring for comparison tables (AAAI concept removal, etc.) */
+.post-content table tbody tr.method-base td {
+    color: var(--secondary);
+}
+.post-content table tbody tr.method-training {
+    background: rgba(0, 0, 0, 0.028);
+}
+.post-content table tbody tr.method-closed {
+    background: rgba(35, 78, 112, 0.07);
+}
+.post-content table tbody tr.method-inference {
+    background: rgba(45, 125, 70, 0.06);
+}
+.post-content table tbody tr.method-spectral {
+    background: rgba(35, 78, 112, 0.15);
+}
+.post-content table tbody tr.method-spectral td {
+    font-weight: 500;
+}
+/* First row of each type group: thin separator */
+.post-content table tbody tr.group-start td {
+    border-top: 1px solid rgba(35, 78, 112, 0.18);
+}
+/* Preserve grouping on hover: deepen the same tint instead of overriding */
+.post-content table tbody tr.method-training:hover {
+    background: rgba(0, 0, 0, 0.06);
+}
+.post-content table tbody tr.method-closed:hover {
+    background: rgba(35, 78, 112, 0.13);
+}
+.post-content table tbody tr.method-inference:hover {
+    background: rgba(45, 125, 70, 0.12);
+}
+.post-content table tbody tr.method-spectral:hover {
+    background: rgba(35, 78, 112, 0.22);
+}
+
+/* Center images */
+.post-content img {
+    display: block;
+    margin: 1.5rem auto;
+}
+
+/* Comparison panel: stack figures vertically inside a light academic card */
+.post-content .figure-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    margin: 2rem auto;
+    padding: 1.75rem 2rem 1.5rem;
+    background: #fff;
+    border: 1px solid rgba(35, 78, 112, 0.15);
+    border-radius: 10px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03), 0 4px 16px rgba(35, 78, 112, 0.04);
+    max-width: 600px;
+    width: 100%;
+}
+
+.post-content .figure-row figure {
+    margin: 0;
+    text-align: center;
+    max-width: 100%;
+}
+
+.post-content .figure-row img {
+    margin: 0 auto 0.5rem;
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.post-content .figure-row .fig-pi {
+    max-width: 260px;
+}
+
+.post-content .figure-row .fig-abd {
+    max-width: 540px;
+}
+
+.post-content .figure-row figcaption {
+    margin-top: 0.3rem;
+    font-size: 0.85rem;
+    color: var(--secondary);
+    line-height: 1.5;
+    letter-spacing: 0.01em;
+}
+
+/* thin divider between the two figures */
+.post-content .figure-row figure + figure {
+    padding-top: 1.25rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    width: 100%;
+}
+
+@media (max-width: 600px) {
+    .post-content .figure-row {
+        padding: 1.25rem 1rem 1rem;
+        gap: 1rem;
+    }
+}
+
+/* Figure/table captions */
+.post-content .caption {
+    color: var(--secondary);
+    font-size: 0.88rem;
+    margin-top: -0.3rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+}
+
+/* Venue badge */
+.post-content .venue-badge {
+    display: inline-block;
+    border: 1.5px solid var(--primary);
+    color: var(--primary);
+    padding: 0.15rem 0.7rem;
+    border-radius: 2px;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+}
+
+/* Unify page background — PaperMod applies --code-bg only to .list pages */
+body {
+    background: var(--code-bg);
+}
+
+[data-theme="dark"] body {
+    background: var(--theme);
+}
+
+/* Profile section — reduce height so content is visible without scrolling */
+.main .profile {
+    min-height: auto;
+    padding: 2rem 0 1rem;
+}
+
+/* Profile image — square with subtle rounding, retina-ready */
+.profile img {
+    border-radius: 12px !important;
+    max-width: 200px !important;
+    height: auto !important;
+}
+
+/* Homepage content below profile */
+.home-content {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.home-content h2 {
+    font-size: 1.2rem;
+    margin-top: 2rem;
+    margin-bottom: 0.8rem;
+    padding-bottom: 0.3rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.home-content ul {
+    list-style: none;
+    padding: 0;
+}
+
+.home-content ul li {
+    padding: 0.3rem 0;
+    line-height: 1.6;
+}
+
+/* Publication cards */
+.pub-card {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1.8rem;
+    padding-bottom: 1.8rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.pub-card:last-child {
+    border-bottom: none;
+}
+
+.pub-card .pub-thumb {
+    flex-shrink: 0;
+    width: 160px;
+}
+
+.pub-card .pub-thumb img {
+    width: 100%;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    margin: 0;
+}
+
+.pub-card .pub-info {
+    flex: 1;
+}
+
+.pub-card .pub-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.4;
+    margin-bottom: 0.3rem;
+}
+
+.pub-card .pub-title a {
+    text-decoration: none;
+}
+
+.pub-card .pub-authors {
+    font-size: 0.92rem;
+    margin-bottom: 0.2rem;
+}
+
+.pub-card .pub-venue {
+    font-style: italic;
+    font-size: 0.92rem;
+    color: var(--secondary);
+    margin-bottom: 0.6rem;
+}
+
+.pub-card {
+    transition: border-color 0.2s ease;
+}
+
+.pub-card:hover {
+    border-bottom-color: var(--accent);
+}
+
+.pub-card .pub-title a {
+    color: var(--primary);
+    transition: color 0.2s ease;
+}
+
+.pub-card:hover .pub-title a {
+    color: var(--accent);
+}
+
+.pub-card .pub-links a {
+    display: inline-block;
+    padding: 0.2rem 0.65rem;
+    border: 1.5px solid var(--primary);
+    border-radius: 4px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-right: 0.3rem;
+    margin-bottom: 0.3rem;
+    color: var(--primary);
+    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.pub-card .pub-links a:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+/* Staggered entrance for publication list */
+@keyframes pub-fade-in {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.pub-card {
+    animation: pub-fade-in 0.5s ease both;
+}
+
+.pub-card:nth-child(1) { animation-delay: 0.00s; }
+.pub-card:nth-child(2) { animation-delay: 0.06s; }
+.pub-card:nth-child(3) { animation-delay: 0.12s; }
+.pub-card:nth-child(4) { animation-delay: 0.18s; }
+.pub-card:nth-child(5) { animation-delay: 0.24s; }
+.pub-card:nth-child(6) { animation-delay: 0.30s; }
+
+@media (prefers-reduced-motion: reduce) {
+    .pub-card { animation: none; }
+}
+
+@media (max-width: 600px) {
+    .pub-card {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+    .pub-card .pub-thumb {
+        width: 100%;
+        max-width: 200px;
+    }
+}
+
+/* Table of Contents */
+.toc {
+    border: none;
+    background: none;
+    padding: 0;
+    margin-bottom: 1.5rem;
+}
+
+[data-theme="dark"] .toc {
+    background: none;
+}
+
+.toc details summary {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--secondary);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    list-style: none;
+    cursor: pointer;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+    margin-inline-start: 0;
+}
+
+.toc details summary::-webkit-details-marker {
+    display: none;
+}
+
+.toc details summary::before {
+    content: "→ ";
+}
+
+.toc details[open] summary::before {
+    content: "↓ ";
+}
+
+.toc .details {
+    font-weight: 600;
+}
+
+.toc .inner {
+    margin: 0.8rem 0 0 0;
+    padding: 0 0 0 1rem;
+    border-left: 2px solid var(--border);
+    opacity: 1;
+}
+
+.toc li {
+    padding: 0.2rem 0;
+    font-size: 0.9rem;
+}
+
+.toc li a {
+    text-decoration: none;
+    color: var(--secondary);
+    transition: color 0.15s;
+}
+
+.toc li a:hover {
+    color: var(--primary);
+}
+
+.toc li ul {
+    margin-inline-start: 1rem;
+}
+
+/* Code blocks — light academic style */
+.post-content .highlight:not(table) {
+    background: var(--code-bg) !important;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 6px;
+}
+
+.post-content pre code {
+    background: var(--code-bg) !important;
+    color: var(--content);
+    font-size: 0.85rem;
+    line-height: 1.6;
+    border-radius: 6px;
+    padding: 1rem !important;
+}
+
+.post-content .highlight table {
+    border-radius: 6px;
+}
+
+[data-theme="dark"] .post-content .highlight:not(table) {
+    background: var(--code-block-bg) !important;
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .post-content pre code {
+    background: var(--code-block-bg) !important;
+    color: rgb(213, 213, 214);
+}
+
+/* Inline code */
+.post-content code {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    font-size: 0.88em;
+    padding: 0.15em 0.4em;
+}
+
+.post-content pre code {
+    border: none;
+}
+
+/* Copy button */
+.copy-code {
+    background: var(--code-bg) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 4px !important;
+    color: var(--secondary) !important;
+    font-size: 0.75rem !important;
+    padding: 2px 8px !important;
+}
+
+/* Translation credit */
+/* Tag cloud */
+.tag-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    max-width: 680px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.tag-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.35rem 0.85rem;
+    border: 1.5px solid var(--border);
+    border-radius: 999px;
+    text-decoration: none;
+    color: var(--secondary);
+    font-size: 0.85rem;
+    line-height: 1.4;
+    transition: border-color 0.2s, color 0.2s, background 0.2s;
+    white-space: nowrap;
+}
+
+.tag-pill:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    background: var(--code-bg);
+}
+
+.tag-pill.tag-md {
+    font-size: 0.92rem;
+    padding: 0.4rem 0.95rem;
+    color: var(--content);
+    border-color: var(--secondary);
+}
+
+.tag-pill.tag-lg {
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0.45rem 1.05rem;
+    color: var(--primary);
+    border-color: var(--primary);
+}
+
+.tag-pill.tag-xl {
+    font-size: 1.1rem;
+    font-weight: 700;
+    padding: 0.5rem 1.15rem;
+    color: var(--primary);
+    border-color: var(--primary);
+}
+
+.tag-count {
+    font-size: 0.7em;
+    opacity: 0.45;
+    font-weight: 400;
+}
+
+/* Hide default PaperMod terms list */
+.terms-tags {
+    display: none;
+}
+
+/* Post list — border-bottom style to match pub-card */
+.post-entry {
+    background: none;
+    border: none;
+    border-bottom: 1px solid var(--border);
+    border-radius: 0;
+    padding: 1.2rem 0;
+    margin-bottom: 0;
+}
+
+.post-entry:active {
+    transform: none;
+}
+
+.post-entry:last-of-type {
+    border-bottom: none;
+}
+
+/* Mobile header: tighten density so nav stays on a single line */
+@media (max-width: 600px) {
+    .nav {
+        line-height: 3rem;
+    }
+    #menu,
+    .logo {
+        margin: auto calc(var(--gap) / 2);
+    }
+    #menu li + li {
+        margin-inline-start: calc(var(--gap) / 2);
+    }
+    #menu a,
+    .lang-switch a {
+        font-size: 14px;
+    }
+    .logo a {
+        font-size: 20px;
+    }
+}

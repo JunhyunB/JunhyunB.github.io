@@ -1,0 +1,127 @@
+baseURL: https://JunhyunB.github.io/
+defaultContentLanguage: ko
+defaultContentLanguageInSubdir: false
+theme: PaperMod
+
+languages:
+  ko:
+    languageName: "한국어"
+    languageCode: ko
+    weight: 1
+    title: "junhyun.bae"
+    menu:
+      main:
+        - identifier: projects
+          name: Publications
+          url: /projects/
+          weight: 5
+        - identifier: posts
+          name: Posts
+          url: /posts/
+          weight: 10
+        - identifier: tags
+          name: Tags
+          url: /tags/
+          weight: 20
+        - identifier: about
+          name: About
+          url: /about/
+          weight: 30
+        - identifier: search
+          name: Search
+          url: /search/
+          weight: 40
+  en:
+    languageName: "English"
+    languageCode: en
+    weight: 2
+    title: "junhyun.bae"
+    menu:
+      main:
+        - identifier: projects
+          name: Publications
+          url: /en/projects/
+          weight: 5
+        - identifier: posts
+          name: Posts
+          url: /en/posts/
+          weight: 10
+        - identifier: tags
+          name: Tags
+          url: /en/tags/
+          weight: 20
+        - identifier: about
+          name: About
+          url: /en/about/
+          weight: 30
+        - identifier: search
+          name: Search
+          url: /en/search/
+          weight: 40
+
+pagination:
+  pagerSize: 10
+
+params:
+  env: production
+  author: Jun-Hyun Bae
+  googleAnalytics: G-G31RB834Y7
+  profileMode:
+    enabled: true
+    title: "배준현 · Jun-Hyun Bae"
+    subtitle: "AI/ML Postdoctoral Researcher @ Kyungpook National University<br>Mechanistic Interpretability · Robust Generalization · AI Safety"
+    imageUrl: "images/profile.jpeg"
+    imageWidth: 400
+    imageHeight: 400
+    imageTitle: "Jun-Hyun Bae"
+    buttons:
+      - name: Google Scholar
+        url: "https://scholar.google.com/citations?user=ahigIHQAAAAJ"
+      - name: GitHub
+        url: "https://github.com/JunhyunB"
+      - name: Email
+        url: "mailto:junhyun.bae.kr@gmail.com"
+  description: "Mechanistic Interpretability, Vision-Language Models, AI Safety"
+  images: ["images/og-default.png"]
+  defaultTheme: light
+  disableThemeToggle: true
+  ShowReadingTime: true
+  ShowShareButtons: false
+  ShowPostNavLinks: true
+  ShowBreadCrumbs: true
+  ShowCodeCopyButtons: true
+  ShowToc: true
+  TocOpen: false
+  comments: false
+  math: true
+
+  assets:
+    favicon: "/favicon.ico"
+
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON
+
+markup:
+  goldmark:
+    extensions:
+      passthrough:
+        enable: true
+        delimiters:
+          block:
+            - ["$$", "$$"]
+          inline:
+            - ["$", "$"]
+    renderer:
+      unsafe: true
+  highlight:
+    codeFences: true
+    guessSyntax: true
+    lineNos: false
+    noClasses: false
+
+enableRobotsTXT: true
+buildDrafts: false
+buildFuture: false
