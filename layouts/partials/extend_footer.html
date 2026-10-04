@@ -1,0 +1,86 @@
+<script>
+(function () {
+    var header = document.querySelector('.header');
+    var nav = header && header.querySelector('.nav');
+    var trigger = document.getElementById('menu-trigger');
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* Sticky header: hide on scroll down, reveal on scroll up */
+    if (header) {
+        var lastY = window.pageYOffset;
+        var ticking = false;
+        var onScroll = function () {
+            var y = window.pageYOffset;
+            header.classList.toggle('header--scrolled', y > 4);
+            var menuOpen = nav && nav.classList.contains('nav--open');
+            if (!menuOpen) {
+                if (y > lastY && y > 96) {
+                    header.classList.add('header--hidden');
+                } else {
+                    header.classList.remove('header--hidden');
+                }
+            }
+            lastY = y;
+            ticking = false;
+        };
+        window.addEventListener('scroll', function () {
+            if (!ticking) {
+                window.requestAnimationFrame(onScroll);
+                ticking = true;
+            }
+        }, { passive: true });
+    }
+
+    /* Mobile menu toggle */
+    if (trigger && nav) {
+        var closeMenu = function () {
+            nav.classList.remove('nav--open');
+            trigger.setAttribute('aria-expanded', 'false');
+        };
+        trigger.addEventListener('click', function (e) {
+            e.stopPropagation();
+            var open = nav.classList.toggle('nav--open');
+            trigger.setAttribute('aria-expanded', String(open));
+            if (open) header.classList.remove('header--hidden');
+        });
+        nav.querySelectorAll('#menu a').forEach(function (a) {
+            a.addEventListener('click', closeMenu);
+        });
+        document.addEventListener('click', function (e) {
+            if (nav.classList.contains('nav--open') && !nav.contains(e.target)) closeMenu();
+        });
+        window.addEventListener('resize', function () {
+            if (window.innerWidth > 600) closeMenu();
+        });
+    }
+
+    /* Collapse the TOC by default on small screens */
+    if (window.innerWidth <= 768) {
+        document.querySelectorAll('.toc details[open]').forEach(function (d) {
+            d.removeAttribute('open');
+        });
+    }
+
+    /* Scroll reveal */
+    if (reduceMotion || !('IntersectionObserver' in window)) return;
+    var targets = document.querySelectorAll(
+        '.page-header, .post-header > *, .post-entry, .first-entry, ' +
+        '.pub-card, .archive-entry, .home-content > *, .post-content > *, ' +
+        '.profile .profile_inner > *'
+    );
+    if (!targets.length) return;
+    var io = new IntersectionObserver(function (entries) {
+        var i = 0;
+        entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            entry.target.style.transitionDelay = Math.min(i++ * 65, 390) + 'ms';
+            entry.target.classList.add('revealed');
+            io.unobserve(entry.target);
+        });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.02 });
+    targets.forEach(function (el) {
+        el.classList.add('will-reveal');
+        io.observe(el);
+    });
+})();
+</script>

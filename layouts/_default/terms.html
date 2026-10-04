@@ -1,0 +1,33 @@
+{{- define "main" }}
+
+{{- if .Title }}
+<header class="page-header">
+    <h1>{{ .Title }}</h1>
+    {{- if .Description }}
+    <div class="post-description">
+        {{ .Description }}
+    </div>
+    {{- end }}
+</header>
+{{- end }}
+
+<div class="tag-cloud">
+    {{- $type := .Type }}
+    {{- range $key, $value := .Data.Terms.ByCount }}
+    {{- $name := .Name }}
+    {{- $count := .Count }}
+    {{- with site.GetPage (printf "/%s/%s" $type $name) }}
+    {{- $sizeClass := "tag-sm" }}
+    {{- if ge $count 4 }}{{ $sizeClass = "tag-xl" }}
+    {{- else if ge $count 3 }}{{ $sizeClass = "tag-lg" }}
+    {{- else if ge $count 2 }}{{ $sizeClass = "tag-md" }}
+    {{- end }}
+    <a href="{{ .Permalink }}" class="tag-pill {{ $sizeClass }}">
+        <span class="tag-name">{{ .Name }}</span>
+        <span class="tag-count">{{ $count }}</span>
+    </a>
+    {{- end }}
+    {{- end }}
+</div>
+
+{{- end }}{{/* end main */ -}}

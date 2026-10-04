@@ -1,0 +1,23 @@
+{{- $limit := .Get "limit" -}}
+{{- $pubs := site.Data.publications -}}
+{{- if $limit -}}
+  {{- $pubs = first (int $limit) $pubs -}}
+{{- end -}}
+{{- range $pubs }}
+<div class="pub-card">
+<div class="pub-thumb">
+<img src="{{ .thumb }}" alt="{{ .thumb_alt }}">
+</div>
+<div class="pub-info">
+<div class="pub-title"><a href="{{ printf "/projects/%s/" .id | relLangURL }}">{{ .title }}</a></div>
+<div class="pub-authors">{{ .authors | safeHTML }}</div>
+<div class="pub-venue">{{ .venue }}</div>
+<div class="pub-links">
+<a href="{{ printf "/projects/%s/" .id | relLangURL }}">PROJECT</a>
+{{- range .external_links }}
+<a href="{{ .url }}">{{ .name }}</a>
+{{- end }}
+</div>
+</div>
+</div>
+{{ end -}}
