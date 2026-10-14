@@ -1,0 +1,77 @@
+# Curriculum vitae data — the single source for the home page sections
+# (Experience / Education / Honors & Awards) and for the About page, where
+# each section is rendered with {{< cv "experience" >}} and friends.
+#
+# Text is English on both language versions. `name_ko` / `desc_ko` override a
+# field on the Korean pages only. Inline Markdown is allowed in `details`.
+# An optional `logo: /images/logos/xxx.png` on an experience or education
+# entry shows a small logo next to it on the home page.
+
+experience:
+  - org: Kyungpook National University
+    org_url: https://en.knu.ac.kr/
+    role: Postdoctoral Researcher, Department of Artificial Intelligence
+    period: Sep 2026 – Present
+    details:
+      - "PI: Prof. [Heechul Jung](https://scholar.google.com/citations?user=J22J6CIAAAAJ)"
+
+  - org: Carnegie Mellon University
+    org_url: https://www.cmu.edu/
+    role: Visiting Scholar
+    period: Sep 2022 – Feb 2023
+    note: Full-time, Pittsburgh, PA
+    details:
+      - AI-intensive research program, fully funded by the Korean Government (IITP)
+
+education:
+  - org: Kyungpook National University
+    org_url: https://en.knu.ac.kr/
+    degree: Integrated M.S. & Ph.D. in Artificial Intelligence
+    period: Sep 2019 – Aug 2026
+    details:
+      - "Dissertation: *Mechanistic Decomposition of Cross-Attention OV Circuits in Text-to-Image Diffusion Models*"
+      - "Advisor: Prof. [Heechul Jung](https://scholar.google.com/citations?user=J22J6CIAAAAJ) | GPA: 4.46/4.5"
+
+  - org: Kyungpook National University
+    org_url: https://en.knu.ac.kr/
+    degree: B.E. in Electronics Engineering
+    period: Mar 2015 – Aug 2019
+    details:
+      - "GPA: 4.32/4.5"
+
+competitions:
+  - name: NeurIPS 2023 Machine Unlearning Challenge
+    url: /projects/neurips2023-unlearning/
+    result: 8th place (out of 1,121 teams), Google
+    year: "2023"
+
+  - name: AI Hackathon for Fashion Coordination
+    result: 3rd place, ETRI
+    year: "2020"
+
+  - name: AI Hackathon for Speech Recognition
+    result: 10th place, NAVER
+    year: "2019"
+
+scholarships:
+  - name: CMU Visiting Scholar Program
+    desc: Fully funded by Korean Government (IITP)
+    year: "2022"
+
+  - name: Full-Ride Scholarship
+    desc: Graduate, Academic Excellence, KNU
+    year: "2019 – 2023"
+
+  - name: KNU+ Honors Scholarship
+    name_ko: KNU+ 도전장학생
+    desc: Merit-based full-tuition award with semester stipend for outstanding entering students, KNU
+    desc_ko: Merit Scholarship for Outstanding Entrants, Full tuition + stipend
+    year: "2015 – 2019"
+
+service:
+  - role: Reviewer
+    items:
+      - AAAI 2027
+      - ICML 2026 (Gold Reviewer)
+      - ICML 2026 Mechanistic Interpretability Workshop
+      - AAAI 2026

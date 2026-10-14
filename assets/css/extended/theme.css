@@ -1,0 +1,401 @@
+/* ==========================================================================
+   Responsive & motion layer — anthropic.com-style smoothness.
+   Palette/typography identity untouched: colors come from PaperMod vars
+   and tables.css. This file only adds fluid sizing, mobile overflow fixes,
+   and motion (sticky header, mobile menu, scroll reveals).
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Fluid type — fixes oversized wrapping titles on small screens
+   -------------------------------------------------------------------------- */
+
+h1, h2, h3, h4,
+.post-title,
+.entry-header h2 {
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+}
+
+.page-header h1 {
+    font-size: clamp(1.9rem, 5.5vw, 2.5rem);
+    letter-spacing: -0.01em;
+}
+
+.post-title {
+    font-size: clamp(1.55rem, 5vw, 2.3rem);
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+}
+
+.post-content h2 {
+    font-size: clamp(1.4rem, 3.6vw, 1.75rem);
+}
+
+.post-content h3 {
+    font-size: clamp(1.18rem, 2.8vw, 1.35rem);
+}
+
+.entry-header h2 {
+    font-size: clamp(1.2rem, 4vw, 1.45rem);
+}
+
+/* --------------------------------------------------------------------------
+   Post header — centered hierarchy with generous air:
+   small breadcrumb label → title → one quiet meta line
+   -------------------------------------------------------------------------- */
+
+/* body.list marks section/list pages — those keep a left-aligned header.
+   Centered treatment applies to articles (posts, project pages, about). */
+body:not(.list) .post-header {
+    margin: clamp(2rem, 6vw, 3.2rem) auto clamp(1.6rem, 5vw, 2.4rem);
+    text-align: center;
+}
+
+body:not(.list) .post-header .breadcrumbs {
+    justify-content: center;
+    font-size: 12.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
+
+body:not(.list) .post-header .breadcrumbs a {
+    color: var(--secondary);
+    transition: color 0.15s ease;
+}
+
+body:not(.list) .post-header .breadcrumbs a:hover {
+    color: var(--primary);
+}
+
+/* PaperMod makes titles a space-between flexbox for the draft hint icon,
+   which defeats text-align on short titles — restore block flow */
+body:not(.list) .post-header .post-title {
+    display: block;
+    margin-bottom: 0.7rem;
+}
+
+body:not(.list) .post-header .post-description {
+    color: var(--secondary);
+}
+
+/* --------------------------------------------------------------------------
+   Reading rhythm — slower breath in body text and between sections
+   -------------------------------------------------------------------------- */
+
+.post-content {
+    line-height: 1.74;
+}
+
+.post-content p {
+    margin-bottom: 1.4rem;
+}
+
+.post-content h2 {
+    margin: 2.4em auto 0.8em;
+}
+
+.post-content h3 {
+    margin: 1.9em 0 0.7em;
+}
+
+.post-content blockquote {
+    margin: 1.7rem 0;
+    padding: 0.9rem 1.25rem;
+    background: rgba(0, 0, 0, 0.025);
+    border-radius: 0 10px 10px 0;
+}
+
+.post-content blockquote p {
+    margin-bottom: 0.6rem;
+}
+
+.post-content blockquote p:last-child {
+    margin-bottom: 0;
+}
+
+/* Images float as rounded cards, anthropic-style */
+.post-content img {
+    border-radius: 12px;
+}
+
+.post-content .figure-row img {
+    border-radius: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Mobile overflow fixes — wide tables and display math scroll, not clip
+   -------------------------------------------------------------------------- */
+
+.post-content img {
+    max-width: 100%;
+    height: auto;
+}
+
+@media (max-width: 768px) {
+    .post-content table {
+        display: block;
+        max-width: max-content;
+        margin-inline: auto;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+.post-content .katex-display {
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 0.25rem 0.1rem;
+}
+
+/* --------------------------------------------------------------------------
+   Smooth in-page scrolling; anchors clear the sticky header
+   -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: no-preference) {
+    html {
+        scroll-behavior: smooth;
+    }
+}
+
+.post-content :is(h1, h2, h3, h4, h5, h6),
+.footnotes :target,
+:target {
+    scroll-margin-top: calc(var(--header-height) + 16px);
+}
+
+/* Cross-document crossfade on browsers that support it (progressive) */
+@view-transition {
+    navigation: auto;
+}
+
+/* --------------------------------------------------------------------------
+   Sticky header — translucent blur, hides on scroll down, returns on up
+   -------------------------------------------------------------------------- */
+
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 90;
+    background: rgba(245, 245, 245, 0.82);
+    -webkit-backdrop-filter: blur(12px) saturate(160%);
+    backdrop-filter: blur(12px) saturate(160%);
+    border-bottom: 1px solid transparent;
+    transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+                border-color 0.25s ease;
+}
+
+.header--scrolled {
+    border-bottom-color: var(--border);
+}
+
+.header--hidden {
+    transform: translateY(-102%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .header {
+        transition: none;
+    }
+    .header--hidden {
+        transform: none;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   Mobile nav — single row + animated hamburger, menu slides down
+   (panel behavior only applies when JS is available: html.js)
+   -------------------------------------------------------------------------- */
+
+#menu-trigger {
+    display: none;
+}
+
+#menu {
+    scrollbar-width: none;
+}
+
+#menu::-webkit-scrollbar {
+    display: none;
+}
+
+@media (max-width: 600px) {
+    .nav {
+        position: relative;
+    }
+
+    /* single row: title left, lang switch + trigger right */
+    .logo {
+        flex: 1;
+        align-items: center;
+    }
+
+    .logo-switches {
+        margin-inline-start: auto;
+    }
+
+    html.js #menu-trigger {
+        display: inline-flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        width: 40px;
+        height: 40px;
+        margin: auto 0 auto 6px;
+        border-radius: 8px;
+    }
+
+    #menu-trigger span {
+        display: block;
+        width: 19px;
+        height: 2px;
+        border-radius: 2px;
+        background: var(--primary);
+        transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+                    opacity 0.2s ease;
+    }
+
+    .nav--open #menu-trigger span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+    }
+
+    .nav--open #menu-trigger span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .nav--open #menu-trigger span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+    }
+
+    html.js #menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        margin: 0;
+        padding: 6px 0 10px;
+        line-height: 1.5;
+        background: var(--code-bg);
+        border-bottom: 1px solid var(--border);
+        box-shadow: 0 14px 28px rgba(0, 0, 0, 0.07);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-8px);
+        transition: opacity 0.26s ease,
+                    transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+                    visibility 0s linear 0.32s;
+    }
+
+    html.js .nav--open #menu {
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        transition: opacity 0.26s ease,
+                    transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+                    visibility 0s;
+    }
+
+    html.js #menu li + li {
+        margin-inline-start: 0;
+    }
+
+    html.js #menu li a {
+        display: block;
+        padding: 11px 24px;
+        font-size: 15px;
+    }
+
+    /* underline marker doesn't suit a vertical list */
+    html.js #menu .active {
+        border-bottom: none;
+        font-weight: 600;
+    }
+
+    /* gentle stagger for menu items */
+    html.js #menu li {
+        opacity: 0;
+        transform: translateY(-6px);
+        transition: opacity 0.25s ease, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    html.js .nav--open #menu li {
+        opacity: 1;
+        transform: none;
+    }
+
+    html.js .nav--open #menu li:nth-child(2) { transition-delay: 0.035s; }
+    html.js .nav--open #menu li:nth-child(3) { transition-delay: 0.07s; }
+    html.js .nav--open #menu li:nth-child(4) { transition-delay: 0.105s; }
+    html.js .nav--open #menu li:nth-child(5) { transition-delay: 0.14s; }
+    html.js .nav--open #menu li:nth-child(6) { transition-delay: 0.175s; }
+}
+
+@media (max-width: 600px) and (prefers-reduced-motion: reduce) {
+    html.js #menu,
+    html.js #menu li,
+    #menu-trigger span {
+        transition: none;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   Scroll reveal — content drifts up into view as you scroll
+   (.will-reveal is added by JS only, so nothing hides without JS)
+   -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: no-preference) {
+    .will-reveal {
+        opacity: 0;
+        transform: translateY(16px);
+        transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+                    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .will-reveal.revealed {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/* The IntersectionObserver replaces the old load-time stagger */
+html.js .pub-card {
+    animation: none;
+}
+
+/* Print: everything visible regardless of reveal state, header in flow */
+@media print {
+    .will-reveal {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+    .header {
+        position: static;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   Micro-interactions
+   -------------------------------------------------------------------------- */
+
+.button,
+.pub-card .pub-links a,
+.paginav a,
+.pagination a {
+    transition: background 0.18s ease, color 0.18s ease,
+                border-color 0.18s ease, transform 0.12s ease;
+}
+
+.button:active,
+.pub-card .pub-links a:active {
+    transform: scale(0.96);
+}
+
+.top-link {
+    transition: visibility 0.4s, opacity 0.4s ease, transform 0.2s ease;
+}
+
+.top-link:hover {
+    transform: translateY(-2px);
+}

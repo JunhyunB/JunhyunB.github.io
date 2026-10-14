@@ -1,0 +1,7 @@
+{{- /* Selected publications — the first params.home.selectedPubs entries of data/publications.yaml */ -}}
+{{- $cfg := site.Params.home | default dict -}}
+{{- $limit := int ($cfg.selectedPubs | default 2) -}}
+<section class="home-section" id="publications">
+{{ partial "home/section-head.html" (dict "title" "Selected Publications" "link" "/projects/" "label" "View all") }}
+{{ partial "pub-cards.html" (dict "limit" $limit) }}
+</section>

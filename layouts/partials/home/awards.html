@@ -1,0 +1,25 @@
+{{- /* Honors & Awards — competitions followed by scholarships, from data/cv.yaml */ -}}
+{{- $comp := site.Data.cv.competitions | default slice -}}
+{{- $sch := site.Data.cv.scholarships | default slice -}}
+{{- $ko := eq site.Language.Lang "ko" -}}
+{{- if or $comp $sch }}
+<section class="home-section" id="awards">
+{{ partial "home/section-head.html" (dict "title" "Honors & Awards") }}
+<ul class="award-list">
+{{- range $comp }}
+<li>
+<span class="award-name">{{ with .url }}<a href="{{ . | relLangURL }}">{{ end }}{{ .name }}{{ with .url }}</a>{{ end }}{{ with .result }} <span class="award-desc">— {{ . }}</span>{{ end }}</span>
+<span class="award-year">{{ .year }}</span>
+</li>
+{{- end }}
+{{- range $sch }}
+{{- $name := .name }}{{ if and $ko .name_ko }}{{ $name = .name_ko }}{{ end }}
+{{- $desc := .desc }}{{ if and $ko .desc_ko }}{{ $desc = .desc_ko }}{{ end }}
+<li>
+<span class="award-name">{{ $name }}{{ with $desc }} <span class="award-desc">— {{ . }}</span>{{ end }}</span>
+<span class="award-year">{{ .year }}</span>
+</li>
+{{- end }}
+</ul>
+</section>
+{{- end }}

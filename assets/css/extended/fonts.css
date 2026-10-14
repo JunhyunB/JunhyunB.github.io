@@ -1,0 +1,7 @@
+/* Font imports moved to extend_head.html as <link> tags.
+   @import inside a concatenated CSS bundle is silently ignored by browsers
+   because it appears after other rules — the spec requires @import first. */
+
+body {
+    font-family: 'Computer Modern Sans', 'Pretendard Variable', 'Pretendard', sans-serif;
+}

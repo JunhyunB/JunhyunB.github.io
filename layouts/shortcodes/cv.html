@@ -1,0 +1,59 @@
+{{- /* Renders one section of data/cv.yaml as nested lists (About page).
+       Usage: {{< cv "experience" >}} — experience | education | competitions | scholarships | service */ -}}
+{{- $section := .Get 0 -}}
+{{- $ko := eq .Page.Language.Lang "ko" -}}
+{{- $data := index site.Data.cv $section -}}
+{{- if eq $section "experience" }}
+<ul>
+{{- range $data }}
+<li><strong>{{ with .org_url }}<a href="{{ . }}">{{ end }}{{ .org }}{{ with .org_url }}</a>{{ end }}</strong> — {{ .role }} ({{ .period }}){{ with .note }} · {{ . }}{{ end }}
+{{- with .details }}
+<ul>
+{{- range . }}
+<li>{{ . | markdownify }}</li>
+{{- end }}
+</ul>
+{{- end }}
+</li>
+{{- end }}
+</ul>
+{{- else if eq $section "education" }}
+<ul>
+{{- range $data }}
+<li><strong>{{ with .org_url }}<a href="{{ . }}">{{ end }}{{ .org }}{{ with .org_url }}</a>{{ end }}</strong> — {{ .degree }} ({{ .period }})
+{{- with .details }}
+<ul>
+{{- range . }}
+<li>{{ . | markdownify }}</li>
+{{- end }}
+</ul>
+{{- end }}
+</li>
+{{- end }}
+</ul>
+{{- else if eq $section "competitions" }}
+<ul>
+{{- range $data }}
+<li><strong>{{ with .url }}<a href="{{ . | relLangURL }}">{{ end }}{{ .name }}{{ with .url }}</a>{{ end }}</strong>{{ if and .year (not (in .name .year)) }} ({{ .year }}){{ end }} — {{ .result }}</li>
+{{- end }}
+</ul>
+{{- else if eq $section "scholarships" }}
+<ul>
+{{- range $data }}
+{{- $name := .name }}{{ if and $ko .name_ko }}{{ $name = .name_ko }}{{ end }}
+{{- $desc := .desc }}{{ if and $ko .desc_ko }}{{ $desc = .desc_ko }}{{ end }}
+<li><strong>{{ $name }}</strong>{{ with .year }} ({{ . }}){{ end }}{{ with $desc }} — {{ . }}{{ end }}</li>
+{{- end }}
+</ul>
+{{- else if eq $section "service" }}
+{{- range $data }}
+<p><strong>{{ .role }}</strong></p>
+<ul>
+{{- range .items }}
+<li>{{ . }}</li>
+{{- end }}
+</ul>
+{{- end }}
+{{- else }}
+{{- errorf "cv shortcode: unknown section %q (file %s)" $section .Page.File.Path }}
+{{- end }}

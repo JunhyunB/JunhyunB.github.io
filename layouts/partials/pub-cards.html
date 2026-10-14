@@ -1,0 +1,22 @@
+{{- /* Publication cards rendered from data/publications.yaml.
+       Usage: partial "pub-cards.html" (dict "limit" 2)  — "limit" is optional. */ -}}
+{{- $pubs := site.Data.publications -}}
+{{- with .limit }}{{ $pubs = first (int .) $pubs }}{{ end -}}
+{{- range $pubs }}
+<div class="pub-card">
+<div class="pub-thumb">
+<img src="{{ .thumb }}" alt="{{ .thumb_alt }}">
+</div>
+<div class="pub-info">
+<div class="pub-title"><a href="{{ printf "/projects/%s/" .id | relLangURL }}">{{ .title }}</a></div>
+<div class="pub-authors">{{ .authors | safeHTML }}</div>
+<div class="pub-venue">{{ .venue }}</div>
+<div class="pub-links">
+<a href="{{ printf "/projects/%s/" .id | relLangURL }}">PROJECT</a>
+{{- range .external_links }}
+<a href="{{ .url }}">{{ .name }}</a>
+{{- end }}
+</div>
+</div>
+</div>
+{{ end -}}

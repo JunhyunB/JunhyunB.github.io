@@ -1,0 +1,63 @@
+- id: aaai2026-ov-circuits
+  title: "Mechanistic Dissection of Cross-Attention Subspaces in Text-to-Image Diffusion Models"
+  authors: "<strong>Jun-Hyun Bae</strong>, Wonyong Jo, Jaehyup Lee, Heechul Jung"
+  venue: "AAAI Conference on Artificial Intelligence (AAAI), Jan 2026"
+  thumb: "/images/aaai2026/fig3-spectral-isolation.webp"
+  thumb_alt: "Spectral Isolation"
+  external_links:
+    - name: PAPER
+      url: "https://ojs.aaai.org/index.php/AAAI/article/view/39046"
+    - name: CODE
+      url: "https://github.com/JunhyunB/diffusion-ov-circuits"
+    - name: VIDEO
+      url: "https://underline.io/lecture/140292-mechanistic-dissection-of-cross-attention-subspaces-in-text-to-image-diffusion-models"
+
+- id: accv2024-abd
+  title: "Adaptive Bias Discovery for Learning Debiased Classifier"
+  authors: "<strong>Jun-Hyun Bae</strong>, Minho Lee, Heechul Jung"
+  venue: "Asian Conference on Computer Vision (ACCV), Dec 2024"
+  thumb: "/images/accv2024/method.webp"
+  thumb_alt: "ABD Framework"
+  external_links:
+    - name: PAPER
+      url: "https://openaccess.thecvf.com/content/ACCV2024/html/Bae_Adaptive_Bias_Discovery_for_Learning_Debiased_Classifier_ACCV_2024_paper.html"
+
+- id: iceic2024-modular-irm
+  title: "Invariant Risk Minimization in Medical Imaging with Modular Data Representation"
+  authors: "<strong>Jun-Hyun Bae</strong>, Chanwoo Kim, Taeyoung Chang"
+  venue: "International Conference on Electronics, Information, and Communication (ICEIC), Jan 2024"
+  thumb: "/images/iceic2024/diagram.webp"
+  thumb_alt: "Modular IRM"
+  external_links:
+    - name: PAPER
+      url: "https://ieeexplore.ieee.org/document/10457174/"
+
+- id: neurips2023-unlearning
+  title: "Stochastic Unlearning with Knowledge Preserving Loss"
+  authors: "Jaesin Ahn, Chaehyeon Lee, <strong>Jun-Hyun Bae</strong>, Junho Yim, Heechul Jung"
+  venue: "NeurIPS 2023 Machine Unlearning Challenge — 8th / 1,121 teams"
+  thumb: "/images/neurips2023-unlearning/overall.webp"
+  thumb_alt: "Stochastic Unlearning"
+  external_links:
+    - name: WRITEUP
+      url: "https://www.kaggle.com/competitions/neurips-2023-machine-unlearning/writeups/forget-9th-place-solution-forget-set-free-approach"
+
+- id: iconip2022-modular-tpr
+  title: "Learning Associative Reasoning Towards Systematicity Using Modular Networks"
+  authors: "<strong>Jun-Hyun Bae</strong>*, Taewon Park*, Minho Lee"
+  venue: "International Conference on Neural Information Processing (ICONIP), Nov 2022"
+  thumb: "/images/iconip2022/main-figure.webp"
+  thumb_alt: "Modular TPR"
+  external_links:
+    - name: PAPER
+      url: "https://link.springer.com/chapter/10.1007/978-3-031-30108-7_10"
+
+- id: meta-irm
+  title: "Meta-Learned Invariant Risk Minimization"
+  authors: "<strong>Jun-Hyun Bae</strong>, Inchul Choi, Minho Lee"
+  venue: "arXiv Preprint, 2021"
+  thumb: "/images/meta-irm/grad.png"
+  thumb_alt: "Meta-IRM"
+  external_links:
+    - name: PAPER
+      url: "https://arxiv.org/abs/2103.12947"
