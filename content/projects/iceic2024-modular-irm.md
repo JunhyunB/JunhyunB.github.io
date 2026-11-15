@@ -32,11 +32,9 @@ Despite the effectiveness of deep neural networks trained with Empirical Risk Mi
 
 ## Overview
 
-IRM이 가장 지배적인 invariant feature만 학습할 수 있다는 한계를 modular neural network로 보완하여, 의료 영상의 OoD 및 subpopulation shift 상황에서 일반화 성능을 높인다.
+IRM은 여러 환경에서 공통으로 유효한 예측 규칙을 학습하도록 제약하지만, 표현 모델의 구조를 정해 주지는 않는다. 이 연구에서는 표현 모델을 여러 모듈로 나누고 입력에 따라 출력을 조합한다. 모듈들이 서로 다른 특징을 학습하도록 경쟁시키면서 전체 모델에는 IRM 목표를 적용한다.
 
-1. **Modular encoder** — 데이터 표현 모델을 $N$개 모듈로 분할하여 각각이 서로 다른 invariant feature를 학습하도록 유도한다.
-2. **Competitive selection** — Multi-head dot product attention으로 입력에 가장 관련 있는 $k$개 모듈을 선택한다.
-3. **IRM optimization** — 경쟁으로 조정된 attention score로 모듈 출력을 가중합해 최종 표현 $\Phi(x)$를 만들고, 이를 IRM 목표로 학습한다.
+Camelyon17에서 ResNet-18 모듈 네 개를 조합한 구성은 학습에 쓰지 않은 병원에서 83.5%를 기록했다. ResNet-101을 사용한 IRM은 72.9%였다. CheXpert에서는 최악 그룹 정확도가 높아진 대신 평균 정확도가 낮아져, 두 실험에서 개선되는 성능의 종류가 달랐다.
 
 ![Modular IRM Framework](/images/iceic2024/diagram.webp)
 
@@ -46,7 +44,7 @@ IRM이 가장 지배적인 invariant feature만 학습할 수 있다는 한계�
 
 ## Method
 
-IRM은 여러 environment에 걸쳐 invariant한 predictor를 찾는 것을 목표로 하지만, data representation 모델 자체에는 아무 제약을 두지 않고 ERM 항에 기대어 표현을 학습한다. 그 결과 **가장 지배적인(dominant) invariant feature만 인코딩**하는 데 그칠 수 있다. 실제로 Camelyon17-wilds나 CheXpert 같은 의료 영상 데이터에서는 IRM이 ERM보다 오히려 낮은 성능을 보이기도 한다.
+IRM은 여러 environment에 걸쳐 invariant한 predictor를 찾는 목표를 주지만, 이를 위한 표현 모델의 구조까지 정해 주지는 않는다. 논문은 이때 **일부 지배적인 invariant feature만 학습할 수 있다**는 가능성에 주목한다. Camelyon17-wilds와 CheXpert에서 IRM이 ERM보다 낮은 OoD 또는 worst-case 성능을 보이는 결과가 문제의 배경이다. 다만 그 성능 차이만으로 원인이 표현의 다양성 부족이라고 입증되는 것은 아니다.
 
 이를 해결하기 위해 데이터 표현 모델 $\Phi$를 $N$개의 독립적인 모듈 $\{f_n\}_{n=1}^N$으로 분할한다. 각 모듈은 multi-head dot product attention을 통한 **competitive learning**으로 서로 다른 feature를 학습하도록 유도된다. 입력 자체가 query, 모듈 출력이 key/value로 작동하며, top-$k$ 모듈이 선택된다. Module collapse(소수 모듈만 계속 선택되는 현상)를 완화하기 위해, 비선택 모듈의 $QK^T$ 값을 negative infinity가 아닌 0으로 설정한다. 이렇게 하면 softmax 이후에도 비선택 모듈이 0이 아닌 가중치를 받아 soft selection이 유지된다.
 
@@ -75,14 +73,14 @@ IRM은 여러 environment에 걸쳐 invariant한 predictor를 찾는 것을 목�
 
 Camelyon17-wilds는 림프절 조직 패치에서 종양 유무를 판별하는 과제다. 병원 1–3의 데이터로 학습하고 병원 4로 검증하며, 학습에 쓰지 않은 병원 5의 데이터로 테스트한다. ERM과 IRM은 ResNet-101을, 제안 방법은 ResNet-18 모듈을 사용한다.
 
-| Algorithm | Val Accuracy (iid) | Test Accuracy (OoD) | # Params |
+| Algorithm | Validation Accuracy | Test Accuracy (OoD) | # Params |
 |---|---|---|---|
 | ERM | 91.9% | 73.3% | 42.8M |
 | IRM | 94.1% | 72.9% | 42.8M |
 | **Ours (N=4, k=2)** | 91.5% | **83.5%** | 45.6M |
 | Ours (N=2, k=1) | 90.4% | 74.5% | **22.8M** |
 
-이 결과에서 주목할 점은 **IRM(72.9%)이 ERM(73.3%)보다 오히려 낮은 OoD 정확도**를 보인다는 것이다. IRM의 제약만으로는 다양한 invariant feature 학습이 보장되지 않을 수 있다는 본 논문의 문제의식과 맞닿는 결과다. 제안 방법(N=4, k=2)은 ERM 대비 +10.2%p의 OoD 향상(83.5% vs 73.3%)을 달성한다. 한편 N=2, k=1 구성은 약 절반의 파라미터(22.8M vs 42.8M)로도 ERM·IRM보다 약간 높은 성능(74.5%)을 보인다.
+N=4, k=2 구성은 OoD 정확도 83.5%로 ERM(73.3%)보다 10.2%p 높다. N=2, k=1 구성은 약 절반의 파라미터(22.8M vs 42.8M)로 74.5%를 기록한다. Baseline과 제안 방법의 backbone이 다르므로, 이 비교에서 모듈 간 경쟁의 효과만 따로 분리할 수는 없다.
 
 ### CheXpert (Subpopulation Shift)
 

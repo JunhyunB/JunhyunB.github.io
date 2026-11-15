@@ -1,0 +1,19 @@
+{{- $u := urls.Parse .Destination -}}
+{{- $src := $u.String -}}
+{{- $dimensions := dict -}}
+{{- if not $u.IsAbs -}}
+  {{- $path := strings.TrimPrefix "./" $u.Path -}}
+  {{- with or (.PageInner.Resources.Get $path) (resources.Get (strings.TrimPrefix "/" $path)) -}}
+    {{- $src = .RelPermalink -}}
+    {{- if in (slice "jpeg" "png" "webp" "gif" "tiff" "bmp") .MediaType.SubType -}}
+      {{- $dimensions = dict "width" (printf "%d" .Width) "height" (printf "%d" .Height) -}}
+    {{- end -}}
+    {{- with $u.RawQuery }}{{ $src = printf "%s?%s" $src . }}{{ end -}}
+    {{- with $u.Fragment }}{{ $src = printf "%s#%s" $src . }}{{ end -}}
+  {{- end -}}
+{{- end -}}
+{{- $attributes := merge .Attributes $dimensions (dict "alt" .Text "src" $src "title" (.Title | transform.HTMLEscape) "loading" "lazy" "decoding" "async") -}}
+<img
+  {{- range $k, $v := $attributes -}}
+    {{- if $v }}{{ printf " %s=%q" $k $v | safeHTMLAttr }}{{ end -}}
+  {{- end -}}>

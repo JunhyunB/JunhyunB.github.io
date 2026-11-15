@@ -42,11 +42,9 @@ Text-to-image diffusion models utilize cross-attention to integrate textual info
 
 ## Overview
 
-We reveal how OV circuits in cross-attention transform text into visual features, and propose a retraining-free method for targeted concept removal.
+In Stable Diffusion, Van Gogh, Monet, and Picasso share cross-attention heads but have high contributions along different singular vectors within them. This paper decomposes the OV transformations inside each head to analyze these differences.
 
-1. **Spectral Decomposition** — Decompose $\mathbf{W}_{\text{OV}}$ via SVD to extract independent text-to-visual transformation pathways.
-2. **Concept Localization** — Discover that semantic concepts such as "Van Gogh style" or "nudity" concentrate in a small subset of spectral components.
-3. **Spectral Nullification** — Remove only these components to achieve targeted concept removal without retraining, with performance comparable to existing methods.
+We apply SVD to the OV matrices and compare prompt pairs such as “a mountain” and “a mountain in Van Gogh style”. Scaling components whose responses differ strongly between the prompts changes the style of generated images. When only style-related OV components are retained, characteristic brushstrokes and forms remain even as scene details disappear. The same analysis is also applied to removing nudity-related components.
 
 ![Spectral Isolation](/images/aaai2026/fig3-spectral-isolation.webp)
 
@@ -64,11 +62,11 @@ Text embeddings are known to organize semantic information along intrinsic axes,
 
 $$\mathbf{W}_{\text{OV}}^{(h)} = \sum_{i=1}^{r} \sigma_i^{(h)} \mathbf{u}_i^{(h)} (\mathbf{v}_i^{(h)})^\top$$
 
-Each rank-1 term (spectral component) is an independent text-to-visual pathway that maps a direction $\mathbf{u}_i$ in text embedding space to a direction $\mathbf{v}_i$ in the head's output space with strength $\sigma_i$. Semantic concepts like "Van Gogh style" or "nudity" **concentrate in a small subset of these components**.
+Each rank-1 term (spectral component) is an independent text-to-visual pathway that maps a direction $\mathbf{u}_i$ in text embedding space to a direction $\mathbf{v}_i$ in the head's output space with strength $\sigma_i$. Semantic concepts like "Van Gogh style" or "nudity" concentrate in a small subset of these components.
 
 ### Measuring Concept Contribution
 
-To locate where a concept is encoded, we compare prompt pairs that differ only in the concept (e.g., "a mountain" vs. "a mountain in Van Gogh style"). For each prompt, the mean-pooled token embedding $\bar{\mathbf{c}}$ expressed in head $h$'s singular basis, $\mathbf{s}^{(h)}(\bar{\mathbf{c}}) = \bar{\mathbf{c}}\,\mathbf{U}^{(h)}\mathbf{\Sigma}^{(h)}$, directly determines the head's output. The difference of this representation between the two prompts measures the concept's contribution:
+To locate a concept, we compare prompt pairs that differ only in that concept (e.g., “a mountain” and “a mountain in Van Gogh style”). We project each prompt's mean-pooled token embedding $\bar{\mathbf{c}}$ onto head $h$'s singular vectors and weight it by the singular values: $\mathbf{s}^{(h)}(\bar{\mathbf{c}}) = \bar{\mathbf{c}}\,\mathbf{U}^{(h)}\mathbf{\Sigma}^{(h)}$. Components with a large difference between prompts are candidates for carrying the concept. Actual spatial head outputs also depend on token-wise attention weights; this pooled score serves to identify candidate components.
 
 $$\Delta\mathbf{s}^{(h)} = \mathbf{s}^{(h)}(\bar{\mathbf{c}}_{\text{concept}}) - \mathbf{s}^{(h)}(\bar{\mathbf{c}}_{\text{base}}), \qquad [\Delta\mathbf{s}^{(h)}]_i = \sigma_i^{(h)} \langle \bar{\mathbf{c}}_{\text{concept}} - \bar{\mathbf{c}}_{\text{base}},\, \mathbf{u}_i^{(h)} \rangle$$
 
@@ -88,14 +86,14 @@ Head-level analysis shows which heads contribute to a concept, but not how the c
 
 $$\widetilde{\mathbf{W}}_{\text{OV}}^{(h)} = \mathbf{W}_{\text{OV}}^{(h)} + (\alpha - 1) \sum_{i:\,(h,i) \in \mathcal{S}_c} \sigma_i^{(h)} \mathbf{u}_i^{(h)} (\mathbf{v}_i^{(h)})^\top$$
 
-$\alpha = 0$ removes the concept components (Spectral Nullification), $\alpha = 1$ keeps the original model, and $\alpha > 1$ amplifies the concept. In SD v2.1, removing the top 15–20% of concept-related components is enough to eliminate the concept from generated images, while removing more than 30% can degrade overall generation quality.
+$\alpha = 0$ removes the selected components (Spectral Nullification), $\alpha = 1$ keeps the original model, and $\alpha > 1$ increases their contribution. In qualitative experiments on SD v2.1, removing the top 15–20% by concept contribution suppressed the target concept in the illustrated examples. Removing more than 30% could also degrade overall generation quality.
 
-The figure below shows that manipulating the same 10% gives different results depending on whether entire heads or only spectral components are scaled. Concepts are localized to specific spectral subspaces rather than whole heads, which enables precise identification and manipulation of concept components through spectral analysis.
+The figure below compares scaling high-contribution heads with scaling selected components within heads. The selections are 10% of all heads and 10% of all components, respectively, so the two percentages have different denominators. The comparison shows how finer-grained interventions change the way a concept can be controlled.
 
 ![Spectral vs Head](/images/aaai2026/fig2-spectral-vs-head.webp)
 
 <p class="caption">
-Spectral modulation (top; 10% of the components in $\mathcal{S}_c$) vs head-level modulation (bottom; the top 10% of high-contribution heads) with varying $\alpha$.
+Spectral modulation (top; the top 10% of all components by concept contribution) and head-level modulation (bottom; the top 10% of heads by contribution), with varying α.
 </p>
 
 The figure below takes the heads that score high for all three artistic styles (Van Gogh, Monet, and Picasso) and shows the contribution of each singular vector within them. Even within the same head, the three concepts activate different singular vectors, and the high-contribution singular vectors do not necessarily correspond to the largest singular values (lowest indices). The concepts thus share heads yet exhibit their own activation patterns, partially overlapping but distinguishable.
@@ -149,19 +147,21 @@ We evaluate Spectral Nullification (SN) for nudity removal on SD v1.4 across fiv
 </table>
 </div>
 
-SN ties with RECE for 2nd place on I2P (4.24%), ranks 2nd on MMA, P4D, and UnLearnDiffAtk, and, without any additional training, achieves lower ASR than every training-based method (ESD, CA, MACE, SDID) on all benchmarks. On Ring-A-Bell, however, its ASR (30.53–41.05%) is higher than that of the closed-form methods (UCE, RECE) and SLD-Strong. The spread from 4.24% on I2P to 41.05% on Ring-A-Bell K16 reflects differences in adversarial prompt design and attack sophistication across benchmarks. SLD-Strong, the best on most benchmarks, is an inference-time guidance method that intervenes throughout the generation process, while SN **removes only the spectral components of the weight matrix, with no additional training** — a fundamentally different approach. Generation quality is measured by CLIP score on 1,000 COCO captions; as the figure below shows, SN occupies a competitive position on the quality–removal trade-off.
+SN ties with RECE for second on I2P (4.24%) and ranks second on MMA, P4D, and UnLearnDiffAtk. It has lower ASR than the training-based methods in this table (ESD, CA, MACE, SDID) on every benchmark, but higher ASR than UCE, RECE, and SLD-Strong on Ring-A-Bell. Performance therefore varies with the attack prompts.
+
+SN removes the identified concept-related components from the OV matrices without additional training. The trade-off between removal and text–image alignment is evaluated with CLIP score on 1,000 COCO captions. CLIP score measures semantic alignment and does not cover every aspect of visual quality.
 
 ![Quality Tradeoff](/images/aaai2026/fig7-quality-tradeoff.webp)
 
 <p class="caption">
-Concept removal performance (P4D ASR) vs generation quality (CLIP score). SN achieves a competitive trade-off without retraining. SLD-Strong achieves the lowest ASR but at the cost of reduced generation quality.
+Concept removal performance (P4D ASR) versus text–image alignment (CLIP score). SN achieves a competitive balance without retraining. SLD-Strong has the lowest ASR but also a lower CLIP score.
 </p>
 
 ### Verifying the Semantics of Spectral Subspaces
 
 We verify that the identified spectral subspaces genuinely capture the semantics of their target concepts through two approaches.
 
-**Text space alignment**: We reconstruct the text-embedding difference between concept and base prompts using only the concept-specific spectral components, and compute its cosine similarity with all 49,408 CLIP vocabulary tokens. For nudity, tokens such as "nude", "naked", "topless", "erotica", and "nsfw" appear among the top 16 in both of the top-2 heads, showing that the subspace carries the concept's semantics. Tokens unrelated to nudity are mixed in as well, indicating that the subspace captures a semantic neighborhood (polysemanticity) rather than a perfectly isolated concept.
+**Text space alignment**: We reconstruct the text-embedding difference between concept and base prompts using the input directions of concept-specific components, then compute cosine similarity with all 49,408 CLIP vocabulary tokens. For the top two heads contributing to nudity, one head's top 16 tokens include “nudes”, “nsfw”, and “naked”; the other includes “topless”, “lingerie”, “erotica”, and “nude”. The lists differ, but both contain concept-related tokens. Unrelated tokens also appear, showing that the concept is not perfectly isolated.
 
 ![Token Alignment](/images/aaai2026/fig6-token-alignment.webp)
 
@@ -169,17 +169,17 @@ We verify that the identified spectral subspaces genuinely capture the semantics
 The 16 tokens with the highest cosine similarity to vectors reconstructed from nudity-related spectral components, for each of the top-2 heads. Highlighted tokens are explicitly nudity-related.
 </p>
 
-**Causal verification (t-SNE) and inter-concept structure (Jaccard)**: Removing concept-related spectral components causes the base/concept prompt clusters to merge in the t-SNE of head outputs. This provides causal evidence that these components are indeed responsible for encoding the concept. Jaccard similarity analysis reveals that semantically similar concepts (Van Gogh↔Monet) share more spectral components, while each concept retains a unique spectral signature.
+**Representations before and after intervention (t-SNE), and overlap between concepts (Jaccard)**: Removing concept-related components increases overlap between the base/concept prompt clusters in a t-SNE of head outputs. This visualization complements the generation experiments in which direct interventions change the images; t-SNE alone does not establish causality. Jaccard similarity shows that related concepts such as Van Gogh and Monet share more components while retaining distinguishable spectral signatures.
 
 ![t-SNE Jaccard](/images/aaai2026/fig4-tsne-jaccard.webp)
 
 <p class="caption">
-(a) t-SNE of head outputs before and after removing the top 10% of concept-related spectral components. Clusters merge after removal. (b) Jaccard similarity between concepts. Similar concepts overlap but each maintains a unique signature.
+(a) t-SNE of head outputs before and after removing the top 10% of components by concept contribution. Base/concept clusters overlap more after removal. (b) Jaccard similarity between concepts. Related concepts overlap while retaining distinguishable signatures.
 </p>
 
 ### Qualitative
 
-A comparison on adversarial prompts from the I2P benchmark shows that SN removes inappropriate content while preserving the scene composition.
+In the I2P adversarial examples below, SN suppresses the target content while preserving scene composition. As the quantitative table shows, removal does not succeed on every prompt.
 
 ![I2P Comparison](/images/aaai2026/fig8-i2p-comparison.webp)
 

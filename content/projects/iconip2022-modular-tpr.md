@@ -33,11 +33,9 @@ Learning associative reasoning is necessary to implement human-level artificial 
 
 ## Overview
 
-기존 MANN이 체계적으로 다른 테스트 데이터에서 실패하는 문제를 해결하기 위해, modular encoder와 TPR 기반 외부 메모리를 결합한 새로운 아키텍처를 제안한다.
+이 논문에서 만든 Systematic Associative Recall(SAR)은 학습과 테스트의 연관 관계를 다르게 구성한다. 학습 중 숫자와만 연결된 사람 이름을 테스트에서는 과일과 연결한다. 등장하는 단어는 이미 학습했지만 조합은 달라지는 설정이다.
 
-1. **Modular encoding** — Recurrent Independent Mechanisms(RIMs)를 encoder로 사용한다. 여러 RNN 모듈이 경쟁적으로 활성화되어 입력을 인코딩하면서 재조합 가능한 표현을 학습한다.
-2. **TPR binding** — Tensor Product Representation(TPR)으로 role과 filler를 묶어(binding) 연관 관계를 표현한다: $T = \sum_{k=1}^N \mathbf{r}_k \otimes \mathbf{f}_k$
-3. **Memory-based recall** — TPR 기반 외부 메모리에 연관 관계를 저장하고, 학습하지 않은 조합에서도 체계적으로 추론한다.
+DNC와 FWM은 학습과 같은 조합에서는 정확도가 높았지만, 조합을 바꾸면 성능이 크게 떨어졌다. 제안 모델은 modular RNN encoder와 TPR 기반 메모리를 결합해 이 격차를 줄였다. FWM도 TPR 메모리를 사용하므로, 두 모델의 비교에서는 encoder가 만드는 role·filler 표현을 함께 분석했다. 제안 모델은 같은 객체를 다른 조합에서 꺼낼 때 더 일관된 표현을 보였다.
 
 ![Modular TPR Architecture](/images/iconip2022/main-figure.webp)
 
@@ -49,9 +47,10 @@ Learning associative reasoning is necessary to implement human-level artificial 
 
 ## Method
 
-기존 memory augmented neural network (MANN)는 학습 데이터와 체계적으로 다른(systematically different) 테스트 데이터에서 성능이 급락한다. 핵심 원인은 encoder가 학습된 조합에 과적합해, 개별 구성 요소를 재조합 가능한(recomposable) 형태로 표현하지 못한다는 데 있다. 이를 해결하기 위해 **modular RNN encoder와 TPR 기반 외부 메모리**를 결합한다.
+메모리에 관계를 저장할 수 있다고 해서 새로운 조합도 잘 다루는 것은 아니다. 논문은 encoder가 학습에서 본 조합에 얽힌 표현을 만들 수 있다는 점에 주목한다. 그래서 **modular RNN encoder와 TPR 기반 외부 메모리**를 결합해, 구성 요소를 다시 조합하기 좋은 표현을 배우도록 유도한다.
 
 **핵심 구성:**
+
 - **Recurrent Independent Mechanisms (RIMs)**: 여러 RNN 모듈이 competitive learning으로 각자 독립적인 인코딩 메커니즘을 학습
 - **Tensor Product Representation (TPR)**: role과 filler를 tensor product로 묶어 연관 관계를 표현 — $T = \sum_{k=1}^N \mathbf{r}_k \otimes \mathbf{f}_k$
 - **TPR-based External Memory**: 각 시점 $t$에서 hidden state로부터 role/filler 표현을 추출해 메모리에 중첩(superpose)한다. 쓰기 강도 $\beta = \sigma(W_\beta h_t)$를 사용해 $\mathbf{M}_t = \mathbf{M}_{t-1} + \mathbf{r}_t \otimes (\beta \mathbf{f}_t - (1-\beta) \mathbf{f}_{t-1})$로 갱신한다.

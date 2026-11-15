@@ -32,11 +32,9 @@ Despite the effectiveness of deep neural networks trained with Empirical Risk Mi
 
 ## Overview
 
-We address a potential limitation of IRM (that it may learn only the most dominant invariant features) by integrating modular neural networks, improving generalization under OoD and subpopulation shift in medical imaging.
+IRM constrains prediction across environments but does not prescribe the representation architecture. This work divides the representation model into modules and combines their outputs according to the input. The modules compete to learn different features while the full model trains with the IRM objective.
 
-1. **Modular encoder** — Split the data representation model into $N$ modules, encouraging each to learn a distinct subset of invariant features.
-2. **Competitive selection** — Select the $k$ most relevant modules via multi-head dot product attention.
-3. **IRM optimization** — Form the final representation $\Phi(x)$ as a weighted sum of module outputs using the competition-adjusted attention scores, and train it with the IRM objective.
+On Camelyon17, a configuration with four ResNet-18 modules reaches 83.5% accuracy at a held-out hospital, compared with 72.9% for IRM using ResNet-101. On CheXpert, worst-group accuracy improves while average accuracy falls. The two experiments therefore show improvements in different performance measures.
 
 ![Modular IRM Framework](/images/iceic2024/diagram.webp)
 
@@ -46,7 +44,7 @@ We address a potential limitation of IRM (that it may learn only the most domina
 
 ## Method
 
-While IRM aims to learn invariant predictors across environments, it places no constraint on the representation model itself and relies on the ERM term to shape it, so it may end up encoding only the **most dominant invariant features**. Indeed, on medical imaging datasets such as Camelyon17-wilds and CheXpert, IRM can even underperform ERM.
+IRM sets an objective for invariant prediction across environments, but does not prescribe the representation architecture. The paper explores the possibility that a model learns **only a limited set of dominant invariant features**. Lower OoD or worst-case performance for IRM than ERM on Camelyon17-wilds and CheXpert motivates the investigation. That performance gap alone, however, does not establish insufficient feature diversity as its cause.
 
 To address this, we split the data representation model $\Phi$ into $N$ independent modules $\{f_n\}_{n=1}^N$. Each module is encouraged to learn different features through **competitive learning** via multi-head dot product attention. The input itself serves as the query, module outputs serve as keys/values, and the top-$k$ modules are selected. To mitigate module collapse (where only a few modules keep getting selected), the $QK^T$ values of non-selected modules are set to zero rather than negative infinity, so these modules still receive a non-zero weight after the softmax (soft selection).
 
@@ -75,14 +73,14 @@ Our method (N=3, k=1) improves OoD accuracy by 6.0pp over IRM (66.5% vs 60.5%) w
 
 Camelyon17-wilds asks whether lymph-node tissue patches contain tumor. Models are trained on data from hospitals 1–3, validated on hospital 4, and tested on hospital 5, which is unseen during training. ERM and IRM use ResNet-101, while our method uses ResNet-18 modules.
 
-| Algorithm | Val Accuracy (iid) | Test Accuracy (OoD) | # Params |
+| Algorithm | Validation Accuracy | Test Accuracy (OoD) | # Params |
 |---|---|---|---|
 | ERM | 91.9% | 73.3% | 42.8M |
 | IRM | 94.1% | 72.9% | 42.8M |
 | **Ours (N=4, k=2)** | 91.5% | **83.5%** | 45.6M |
 | Ours (N=2, k=1) | 90.4% | 74.5% | **22.8M** |
 
-Notably, **IRM (72.9%) performs even worse than ERM (73.3%)** on OoD accuracy. This is consistent with the paper's premise that IRM's constraints alone may not ensure that diverse invariant features are learned. Our method (N=4, k=2) achieves a +10.2pp OoD improvement over ERM (83.5% vs 73.3%). Meanwhile, the N=2, k=1 configuration slightly outperforms both baselines (74.5%) with roughly half the parameters (22.8M vs 42.8M).
+The N=4, k=2 configuration reaches 83.5% OoD accuracy, 10.2pp above ERM (73.3%). The N=2, k=1 configuration reaches 74.5% with roughly half the parameters (22.8M versus 42.8M). Because the baselines and the proposed method use different backbones, this comparison does not isolate the effect of module competition.
 
 ### CheXpert (Subpopulation Shift)
 

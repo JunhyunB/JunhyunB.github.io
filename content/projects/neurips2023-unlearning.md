@@ -34,11 +34,9 @@ Recently, machine unlearning has received considerable attention, in the context
 
 ## Overview
 
-Forget set에 접근하지 않고 retain set만으로, 처음부터 재학습하지 않고도 특정 데이터의 영향을 효과적으로 제거하는 machine unlearning 방법을 제안한다.
+NeurIPS 2023 Machine Unlearning Challenge에 제출한 방법이다. 모델의 일부 레이어를 무작위로 초기화한 뒤, 남겨야 할 데이터(retain set)에서 원본 모델의 출력을 재현하도록 학습한다. 이 과정을 3–4회 반복하며, 최종 알고리즘은 지울 데이터(forget set)를 사용하지 않는다.
 
-1. **Stochastic re-initialization** — 모델 레이어를 랜덤으로 선택하여 재초기화함으로써, 특정 데이터에 대한 기억을 확률적으로 파괴한다.
-2. **Knowledge preserving** — 원본 모델의 출력을 MSE loss로 재현하여 retain set에 대한 성능을 유지한다.
-3. **Forget-remember cycles** — Forgetting과 remembering phase를 3–4회 반복하여, 점진적으로 re-initialization 비율을 높이면서 retain set 성능을 유지한다.
+중간 실험에서는 forget set의 gradient를 이용한 FIM 기반 선택보다 무작위 초기화가 높은 점수를 얻었다. 대회는 512회 실행의 출력 분포를 재학습 모델의 분포와 비교했기 때문에, 실행마다 달라지는 초기화 위치도 평가에 영향을 줄 수 있었다. 또 한 번에 초기화 비율을 높이는 것보다, retain set 학습을 사이에 두고 여러 번 초기화하는 방식의 점수가 높았다.
 
 ![Overall Architecture](/images/neurips2023-unlearning/overall.webp)
 
@@ -54,7 +52,7 @@ Forget set에 접근하지 않고 retain set만으로, 처음부터 재학습하
 
 $$\text{Score} = F \times \frac{RA_U}{RA_R} \times \frac{TA_U}{TA_R}$$
 
-$F$는 forgetting quality, $RA_U / RA_R$은 retain accuracy 비율(unlearned vs retrained), $TA_U / TA_R$은 test accuracy 비율이다. 핵심은 이 메트릭이 **512회 독립 실행의 출력 분포**를 평가한다는 점이다. 단일 실행의 성능이 아니라 실행 간 분포가 retrained model의 분포와 유사해야 하므로, 알고리즘에 적절한 수준의 **randomness**가 필요하다.
+$F$는 forgetting quality, $RA_U / RA_R$은 retain accuracy 비율(unlearned vs retrained), $TA_U / TA_R$은 test accuracy 비율이다. $F$는 512회 독립 실행의 출력 분포를 재학습 모델의 분포와 비교해 계산한다. 따라서 retain/test 정확도가 같아도 실행 간 출력 분포가 다르면 점수가 달라질 수 있다.
 
 ---
 

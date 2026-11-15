@@ -32,27 +32,25 @@ Empirical Risk Minimization (ERM) based machine learning algorithms have suffere
 
 ## Overview
 
-IRM의 이상적인 bi-level 최적화를 MAML 프레임워크로 직접 수행하며, 서로 다른 environment를 inner/outer loop에 배정하여 invariant feature를 학습한다.
+IRMv1에서는 gradient penalty가 작아져도 OoD 성능이 낮을 수 있다. 이 논문은 환경별 데이터가 적거나 여러 spurious feature가 있는 조건에서 그 문제를 살펴보고, IRM의 bi-level 구조를 메타러닝으로 구현한다.
 
-1. **Environment-specific adaptation** — 각 training environment $e_i$에 대해 inner loop에서 모델 파라미터를 적응시킨다.
-2. **Cross-environment evaluation** — 적응된 파라미터 $\theta_i'$를 **다른** environment $e_j$에서 평가하여 meta-loss를 계산한다.
-3. **Invariant convergence** — 서로 다른 environment에서 계산한 meta-loss gradient를 합쳐, spurious correlation을 학습한 ERM 해가 아니라 invariant한 최적 해로 수렴하도록 한다.
+meta-IRM은 한 training environment에서 파라미터를 적응시킨 뒤, 다른 training environment의 손실로 원래 파라미터를 업데이트한다. MAML의 inner/outer loop 사이에서 환경을 바꾸는 구성이다. Colored MNIST에서 두 loop에 같은 환경을 배정한 변형의 OoD 정확도는 13.6%, 서로 다른 환경을 쓰는 전체 방법은 70.4%였다.
 
 ![Meta-IRM Diagram](/images/meta-irm/grad.png)
 
-<p class="caption">meta-IRM의 학습 다이어그램. ERM은 spurious correlation을 학습해 $\theta_{ERM}$으로 수렴하지만, meta-IRM은 한 environment에 적응한 파라미터($\theta'_1$, $\theta'_2$)를 다른 environment에서 평가한 meta-loss gradient를 합쳐 $\theta_{optimal}$에 도달한다.</p>
+<p class="caption">meta-IRM의 학습 아이디어를 나타낸 개념도. 한 environment에 적응한 파라미터($\theta'_1$, $\theta'_2$)를 다른 environment에서 평가하고, 그 gradient를 합쳐 환경에 덜 의존하는 해를 찾도록 유도한다. 그림의 $\theta_{optimal}$은 목표를 나타내며, 모든 조건에서 그 해에 도달한다는 수렴 보장을 뜻하지 않는다.</p>
 
 ---
 
 ## Method
 
-IRM은 여러 training environment에 걸쳐 invariant한 predictor를 찾는 것이 목표다. 원래의 IRM 목표는 bi-level 최적화라 직접 풀기 어려워서, 실제로는 classifier를 고정된 선형 함수로 두고 각 제약을 gradient penalty로 바꾼 IRMv1이 주로 쓰인다. 하지만 이 단순화에는 한계가 있다. IRMv1이 최적의 invariant classifier를 찾는다는 보장은 training environment 수가 spurious feature 수보다 많을 때에만 성립하고, environment별 학습 데이터가 부족하면 penalty가 0에 가까워져도 invariant한 예측을 찾지 못한다. 아래 Results의 Insufficient Data와 Two Spurious Features 실험이 바로 이 두 한계를 시험한다.
+IRM은 여러 training environment에서 공통으로 최적인 classifier를 사용할 수 있는 표현을 찾는 것이 목표다. 원래 목표에는 환경별 최적화가 제약으로 들어 있어 풀기 어렵다. 실용적인 IRMv1은 classifier를 고정된 스칼라로 두고 이 제약을 gradient penalty로 근사한다. 하지만 데이터가 부족하거나 환경 수에 비해 spurious feature가 많은 조건에서는, penalty가 작아도 OoD 성능이 나쁠 수 있다. 아래의 데이터 감소와 복수 편향 실험이 이런 경우를 살펴본다.
 
-meta-IRM은 이런 단순화 없이 IRM의 bi-level 목표를 MAML 프레임워크로 직접 푼다. 핵심 착안점은 **inner loop와 outer loop에 서로 다른 training environment를 배정**하는 것이다. Environment마다 spurious correlation의 강도가 다르므로, 서로 다른 environment에서 얻은 gradient를 결합하면 invariant feature 쪽으로 수렴할 수 있다.
+meta-IRM은 IRM의 bi-level 구조를 MAML 기반 학습 절차로 구현한다. 핵심 착안점은 **inner loop와 outer loop에 서로 다른 training environment를 배정**하는 것이다. 한 환경에 적응한 결과를 다른 환경에서 평가해, 환경을 넘어 유효한 특징을 학습하도록 유도한다. 원래의 제약 최적화 문제를 정확히 풀거나 전역 최적 해로 수렴한다는 보장을 제시하는 것은 아니다.
 
 ### Meta-Learning Framework
 
-MAML의 inner/outer 구조를 IRM의 bi-level 구조에 대응시킨다. Inner loop는 environment별 최적 classifier를 찾는 IRM의 하위 문제에, outer loop는 모든 environment의 risk를 줄이는 상위 문제에 해당한다. Inner loop에서는 한 environment에 적응하고, outer loop(meta-loss)에서는 **다른 environment**에서 평가한다. IRMv1과 달리 classifier가 선형이라는 가정도 두지 않는다.
+MAML의 inner/outer 구조를 IRM의 bi-level 구조에 대응시킨다. Inner loop는 환경별 적응을, outer loop는 다른 환경까지 고려한 risk 감소를 담당한다. 실제 inner update는 classifier만 고정적으로 골라 갱신하는 것이 아니라 모델 파라미터 $\theta$에 적용한다. IRMv1처럼 classifier를 고정된 선형 함수로 제한하지 않는다.
 
 **Inner optimization**: 각 training environment $e_i$에 대해 모델 파라미터를 적응시킨다:
 
@@ -91,7 +89,7 @@ Meta-loss의 표준편차 $\sigma$를 보조 손실로 추가하여, 모든 envi
 | *ERM (grayscale)* | *72.6 ± 0.3* | *72.7 ± 0.3* | *73.0 ± 0.5* |
 | *Optimal* | *75* | *75* | *75* |
 
-meta-IRM(70.4%)은 V-REx(68.6%), IRMv1(66.9%), MM-REx(66.1%)를 모두 상회하며, 비교한 방법 중 이론적 최적값(75%)에 가장 근접한다. OOD 표준편차도 0.9로 가장 낮다(V-REx 1.2, IRMv1 2.5, MM-REx 4.9). ERM (grayscale)은 spurious feature인 색을 없앤 grayscale 이미지로 학습한 참조값(73.0%)이다. 아래 그림처럼 meta-IRM은 test environment가 바뀌어도 정확도가 거의 일정해, 색에 의존하지 않고 예측함을 보여준다.
+색이 포함된 입력을 받는 비교 방법 중 meta-IRM(70.4%)이 가장 높고, V-REx(68.6%), IRMv1(66.9%), MM-REx(66.1%)보다 실행 간 표준편차도 작다. 색을 미리 제거한 ERM (grayscale)은 별도의 참조값으로 73.0%다. 아래 그림에서 색–레이블 관계를 바꾸어도 meta-IRM의 정확도가 거의 일정한 것은 색에 대한 의존도가 낮다는 해석을 뒷받침한다.
 
 ![Various Test Environments](/images/meta-irm/various_models.png)
 
@@ -117,7 +115,7 @@ meta-IRM(70.4%)은 V-REx(68.6%), IRMv1(66.9%), MM-REx(66.1%)를 모두 상회하
 | *ERM (grayscale)* | *10* | *73.2 ± 0.1* | *71.9 ± 0.5* |
 | *Optimal* | — | *75* | *75* |
 
-10 클래스 설정에서 meta-IRM(73.4%)은 IRMv1(58.6%)을 14.8%p 상회하며, ERM (grayscale) 참조값(71.9%)도 넘어선다. IRMv1은 train accuracy가 이론적 최적값 75%를 넘는데(82.2%, 83.4%), 이는 spurious correlation을 일부 흡수했다는 뜻이다. 반면 meta-IRM은 클래스 수가 늘어도 OOD 정확도를 유지한다. 다만 표준편차는 2-class 설정(0.9)보다 커진다(3.6, 3.2).
+10 클래스 설정에서 meta-IRM의 OoD 정확도는 73.4%로 IRMv1(58.6%)보다 14.8%p 높다. ERM (grayscale) 참조값은 71.9%다. 5·10 클래스 모두에서 meta-IRM의 평균 정확도가 높지만, 실행 간 표준편차도 2-class 설정(0.9)보다 커진다(3.6, 3.2).
 
 ### Insufficient Data
 
@@ -132,7 +130,7 @@ Training data가 절반(12,500)으로 줄었을 때, IRM 계열 방법들의 성
 | **meta-IRM (Ours)** | 70.6 ± 1.5 | 70.5 ± 1.6 | **68.3 ± 2.3** |
 | *Optimal* | *75* | *75* | *75* |
 
-데이터가 절반으로 줄었을 때, IRMv1은 66.9% → 58.5%로 8.4%p 하락하는 반면, meta-IRM은 70.4% → 68.3%로 2.1%p만 하락한다. Meta-learning 기반의 최적화가 데이터 부족 환경에서도 효율적으로 invariant feature를 추출함을 보여준다.
+데이터가 절반으로 줄었을 때, IRMv1은 66.9% → 58.5%로 8.4%p 하락하는 반면, meta-IRM은 70.4% → 68.3%로 2.1%p 하락한다. 이 설정에서는 meta-IRM이 데이터 감소에 따른 OoD 성능 저하를 더 잘 견딘다.
 
 ![Data Decrease](/images/meta-irm/data_decrease.webp)
 
@@ -149,7 +147,7 @@ Spurious correlation이 2개(color + patch)이고 training environment도 2개�
 | **meta-IRM (Ours)** | 58.1 ± 3.1 | 56.8 ± 2.9 | **54.5 ± 4.0** |
 | *Optimal* | *75* | *75* | *75* |
 
-IRMv1과 V-REx는 13.4–13.5%까지 떨어져 랜덤(50%)보다도 낮으며, 사실상 실패한다. 두 spurious feature를 모두 활용해 in-distribution에서는 정확도가 높지만, OOD에서 두 correlation이 동시에 역전되면서 성능이 급락한 것이다. meta-IRM은 54.5%로 최적에는 미치지 못하나, 랜덤 이상의 성능을 유지하여 invariant feature 방향의 학습이 부분적으로 이루어지고 있음을 보여준다.
+IRMv1과 V-REx는 학습 환경과 같은 상관관계에서는 정확도가 높지만, 두 상관관계가 역전된 OoD 환경에서는 13.4–13.5%로 떨어진다. meta-IRM은 54.5 ± 4.0%로 이 실패를 완화한다. 다만 평균이 랜덤 기준(50%)보다 조금 높은 수준이고 이상적 정확도(75%)와도 차이가 커, 복수 편향 문제를 해결했다고 보기는 어렵다.
 
 ![Two Spurious Features](/images/meta-irm/2s.png)
 

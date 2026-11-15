@@ -33,11 +33,9 @@ Learning associative reasoning is necessary to implement human-level artificial 
 
 ## Overview
 
-We propose a novel architecture combining a modular encoder with TPR-based external memory to achieve systematic generalization in associative reasoning, where conventional MANNs fail on systematically different test data.
+Systematic Associative Recall (SAR), introduced in this paper, changes the associations between training and test data. Human names associated only with numbers during training are paired with fruits at test time. The words are familiar, but their combinations are different.
 
-1. **Modular encoding** — The encoder is built from Recurrent Independent Mechanisms (RIMs): multiple RNN modules compete for activation to encode the input, learning recomposable representations.
-2. **TPR binding** — A Tensor Product Representation (TPR) binds each filler to its role via the tensor product: $T = \sum_{k=1}^N \mathbf{r}_k \otimes \mathbf{f}_k$
-3. **Memory-based recall** — Associations are stored in TPR-based external memory, enabling systematic reasoning over unseen combinations.
+DNC and FWM achieve high accuracy on familiar combinations but lose accuracy when those combinations change. The proposed model combines a modular RNN encoder with TPR-based memory to reduce this gap. Since FWM also uses TPR memory, the comparison includes an analysis of the encoders' role and filler representations. The proposed model produces more consistent representations when retrieving the same object in different combinations.
 
 ![Modular TPR Architecture](/images/iconip2022/main-figure.webp)
 
@@ -49,9 +47,10 @@ Overall architecture. At each time step $t$, a role $r_t$ and a filler $f_t$ are
 
 ## Method
 
-Conventional memory augmented neural networks (MANNs) suffer from severe performance degradation on systematically different test data. The core issue is that the encoder overfits to training combinations, failing to represent individual components in a recomposable form. We address this by combining a **modular RNN encoder with TPR-based external memory**.
+Being able to store associations does not ensure that a model can handle new combinations. The paper focuses on the possibility that an encoder's representations become tied to combinations seen during training. Combining a **modular RNN encoder with TPR-based external memory** encourages representations whose components can be recombined.
 
 **Key components:**
+
 - **Recurrent Independent Mechanisms (RIMs)**: Multiple RNN modules learn independent encoding mechanisms via competitive learning
 - **Tensor Product Representation (TPR)**: Roles and fillers are bound via tensor products to represent their associations — $T = \sum_{k=1}^N \mathbf{r}_k \otimes \mathbf{f}_k$
 - **TPR-based External Memory**: Role/filler representations are extracted at each time step and superposed into memory using a learned write strength $\beta = \sigma(W_\beta h_t)$: $\mathbf{M}_t = \mathbf{M}_{t-1} + \mathbf{r}_t \otimes (\beta \mathbf{f}_t - (1-\beta) \mathbf{f}_{t-1})$.

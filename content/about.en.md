@@ -12,11 +12,11 @@ AI/ML Postdoctoral Researcher @ Kyungpook National University
 
 ### Research Interests
 
-My research investigates the robustness and interpretability of deep learning models, with the goal of making their behavior more reliable and controllable.
-My current focus is **mechanistic interpretability**, which seeks to characterize how neural networks encode semantic concepts within their internal components.
-A representative direction is the analysis of cross-attention OV circuits in text-to-image diffusion models, where semantic concepts are represented within low-dimensional spectral subspaces, enabling targeted interventions such as concept removal without retraining.
-This work builds on my earlier research on **robust generalization**, including **modular architectures** for systematic and compositional reasoning and methods grounded in **causal inference and invariance** for out-of-distribution generalization and debiasing.
-My broader objective is to connect interpretability with the design of **safe and trustworthy** models.
+My research focuses on mechanistic interpretability. I currently study how text-to-image diffusion models represent concepts such as artistic style, analyzing cross-attention OV circuits and testing how changes to their spectral components affect generated images.
+
+My earlier work covers invariant risk minimization, debiasing, and systematic generalization with modular networks.
+
+Looking ahead, I want to connect mechanistic interpretability with AI alignment and safety. I am interested in whether understanding a model’s internal mechanisms can help us anticipate failures, intervene in unwanted behavior, and assess when the model can be trusted.
 
 ---
 

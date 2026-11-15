@@ -1,6 +1,7 @@
 # Hugo build output
 public/
 resources/_gen/
+assets/jsconfig.json
 
 # OS files
 .DS_Store

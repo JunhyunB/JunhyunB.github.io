@@ -3,6 +3,13 @@ defaultContentLanguage: ko
 defaultContentLanguageInSubdir: false
 theme: PaperMod
 
+module:
+  mounts:
+    - source: assets
+      target: assets
+    - source: static/images
+      target: assets/images
+
 languages:
   ko:
     languageName: "한국어"

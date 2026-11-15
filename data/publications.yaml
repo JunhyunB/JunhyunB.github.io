@@ -1,4 +1,13 @@
+- id: eacl2027-surgical-mlp-editing
+  title: "Surgical MLP Editing for Unlearning with Cross-Layer Transcoders"
+  selected: false
+  authors: "Sangjin Kim, <strong>Jun-Hyun Bae</strong>, Heechul Jung"
+  venue: "EACL 2027 — Accepted (Main)"
+  thumb: "/images/eacl2027/clt-mlp-unlearning.png"
+  thumb_alt: "CLT-guided MLP unlearning framework from Figure 1"
+
 - id: aaai2026-ov-circuits
+  selected: true
   title: "Mechanistic Dissection of Cross-Attention Subspaces in Text-to-Image Diffusion Models"
   authors: "<strong>Jun-Hyun Bae</strong>, Wonyong Jo, Jaehyup Lee, Heechul Jung"
   venue: "AAAI Conference on Artificial Intelligence (AAAI), Jan 2026"
@@ -13,6 +22,7 @@
       url: "https://underline.io/lecture/140292-mechanistic-dissection-of-cross-attention-subspaces-in-text-to-image-diffusion-models"
 
 - id: accv2024-abd
+  selected: true
   title: "Adaptive Bias Discovery for Learning Debiased Classifier"
   authors: "<strong>Jun-Hyun Bae</strong>, Minho Lee, Heechul Jung"
   venue: "Asian Conference on Computer Vision (ACCV), Dec 2024"

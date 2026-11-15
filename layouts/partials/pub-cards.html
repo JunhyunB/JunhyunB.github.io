@@ -1,22 +1,40 @@
-{{- /* Publication cards rendered from data/publications.yaml.
-       Usage: partial "pub-cards.html" (dict "limit" 2)  — "limit" is optional. */ -}}
+{{- /* Original publication-card layout, linking to project pages only when they exist. */ -}}
 {{- $pubs := site.Data.publications -}}
+{{- if .selectedOnly }}{{ $pubs = where $pubs "selected" true }}{{ end -}}
 {{- with .limit }}{{ $pubs = first (int .) $pubs }}{{ end -}}
 {{- range $pubs }}
-<div class="pub-card">
-<div class="pub-thumb">
-<img src="{{ .thumb }}" alt="{{ .thumb_alt }}">
-</div>
-<div class="pub-info">
-<div class="pub-title"><a href="{{ printf "/projects/%s/" .id | relLangURL }}">{{ .title }}</a></div>
-<div class="pub-authors">{{ .authors | safeHTML }}</div>
-<div class="pub-venue">{{ .venue }}</div>
-<div class="pub-links">
-<a href="{{ printf "/projects/%s/" .id | relLangURL }}">PROJECT</a>
-{{- range .external_links }}
-<a href="{{ .url }}">{{ .name }}</a>
-{{- end }}
-</div>
-</div>
-</div>
+{{- $projectPage := site.GetPage (printf "/projects/%s" .id) -}}
+{{- $titleID := printf "pub-%s" .id -}}
+{{- $title := .title -}}
+{{- $thumbAlt := .thumb_alt -}}
+<article class="pub-card" aria-labelledby="{{ $titleID }}">
+  <div class="pub-thumb">
+    {{- with resources.Get (strings.TrimPrefix "/" .thumb) -}}
+      {{- $small := .Resize (printf "%dx webp q84" (int (math.Min 480 .Width))) -}}
+      {{- $large := .Resize (printf "%dx webp q84" (int (math.Min 960 .Width))) -}}
+      <img src="{{ $small.RelPermalink }}"
+        srcset="{{ $small.RelPermalink }} {{ $small.Width }}w{{ if ne $small.Width $large.Width }}, {{ $large.RelPermalink }} {{ $large.Width }}w{{ end }}"
+        sizes="(max-width: 600px) 200px, 160px"
+        width="{{ $small.Width }}" height="{{ $small.Height }}"
+        alt="{{ $thumbAlt }}" loading="lazy" decoding="async">
+    {{- else -}}
+      <img src="{{ .thumb | relURL }}" alt="{{ $thumbAlt }}" loading="lazy" decoding="async">
+    {{- end }}
+  </div>
+  <div class="pub-info">
+    <div class="pub-title" id="{{ $titleID }}">{{ with $projectPage }}<a href="{{ .RelPermalink }}">{{ $title }}</a>{{ else }}{{ $title }}{{ end }}</div>
+    <div class="pub-authors">{{ .authors | safeHTML }}</div>
+    <div class="pub-venue">{{ .venue }}</div>
+    {{- if or $projectPage .external_links }}
+    <div class="pub-links">
+      {{- with $projectPage }}
+      <a href="{{ .RelPermalink }}" aria-label="{{ $title }} — Project">PROJECT</a>
+      {{- end }}
+      {{- range .external_links }}
+      <a href="{{ .url }}" aria-label="{{ $title }} — {{ .name }}">{{ .name }}</a>
+      {{- end }}
+    </div>
+    {{- end }}
+  </div>
+</article>
 {{ end -}}

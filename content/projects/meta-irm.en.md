@@ -32,27 +32,25 @@ Empirical Risk Minimization (ERM) based machine learning algorithms have suffere
 
 ## Overview
 
-We solve the ideal bi-level IRM objective directly with the MAML framework, assigning different training environments to the inner and outer loops to learn invariant features.
+A small IRMv1 gradient penalty can accompany poor OoD performance. This paper examines the problem with limited data per environment and multiple spurious features, and implements IRM's bi-level structure through meta-learning.
 
-1. **Environment-specific adaptation** — Adapt model parameters to each training environment $e_i$ in the inner loop.
-2. **Cross-environment evaluation** — Evaluate the adapted parameters $\theta_i'$ on a **different** environment $e_j$ to compute the meta-loss.
-3. **Invariant convergence** — Merging meta-loss gradients computed on different environments steers training toward the invariant optimum rather than the spurious ERM solution.
+meta-IRM adapts parameters in one training environment, then updates the original parameters using loss from another training environment. This assigns different environments to MAML's inner and outer loops. On Colored MNIST, the variant using the same environment in both loops reaches 13.6% OoD accuracy, compared with 70.4% for the full method using different environments.
 
 ![Meta-IRM Diagram](/images/meta-irm/grad.png)
 
-<p class="caption">Diagram of meta-IRM. While ERM converges to $\theta_{ERM}$ by learning spurious correlations, meta-IRM merges meta-loss gradients, each computed on one environment using parameters adapted to the other ($\theta'_1$, $\theta'_2$), to reach $\theta_{optimal}$.</p>
+<p class="caption">Conceptual diagram of meta-IRM. Parameters adapted to one environment ($\theta'_1$, $\theta'_2$) are evaluated in another, and their meta-loss gradients encourage a solution that depends less on the environment. The illustrated $\theta_{optimal}$ is the intended target, not a guarantee of convergence under all conditions.</p>
 
 ---
 
 ## Method
 
-IRM aims to find an invariant predictor across multiple training environments. Because the original IRM objective is a challenging bi-level optimization, practice mostly relies on IRMv1, which fixes the classifier to a linear function and replaces each constraint with a gradient penalty. This simplification has limits: IRMv1's guarantee of finding the optimal invariant classifier holds only when there are more training environments than spurious features, and with insufficient data per environment it fails to find invariant predictions even when its penalty is close to zero. The Insufficient Data and Two Spurious Features experiments below test exactly these two limitations.
+IRM seeks a representation for which a common classifier is optimal across training environments. The original objective is difficult because its constraints contain environment-specific optimization problems. The practical IRMv1 formulation fixes the classifier to a scalar and approximates these constraints with a gradient penalty. With insufficient data or many spurious features relative to the number of environments, a small penalty can still accompany poor OoD performance. The reduced-data and multiple-bias experiments below examine these cases.
 
-meta-IRM solves the bi-level IRM objective directly with the MAML framework, without this simplification. Its key insight is **assigning different training environments to the inner and outer loops**. Since spurious correlations vary across environments, combining gradients from different environments can steer training toward invariant features.
+meta-IRM implements IRM's bi-level structure through a MAML-based learning procedure. Its key choice is **assigning different training environments to the inner and outer loops**. Evaluating adaptation in another environment encourages features that transfer across environments. This is not a guarantee of exactly solving the original constrained problem or converging to its global optimum.
 
 ### Meta-Learning Framework
 
-The inner/outer structure of MAML maps onto IRM's bi-level structure: the inner loop plays the lower-level problem (an optimal classifier per environment), and the outer loop plays the upper-level problem (minimizing risk across environments). The inner loop adapts to one environment, while the outer loop (meta-loss) evaluates on a **different environment**. Unlike IRMv1, no linearity assumption is imposed on the classifier.
+MAML's inner loop handles environment-specific adaptation, while the outer loop reduces risk evaluated in other environments. The actual inner update applies to the model parameters $\theta$, rather than explicitly updating only the classifier. Unlike IRMv1, the classifier is not restricted to a fixed linear function.
 
 **Inner optimization**: Adapt model parameters to each training environment $e_i$:
 
@@ -91,7 +89,7 @@ Digits 0–4 and 5–9 form two classes, and labels are flipped with probability
 | *ERM (grayscale)* | *72.6 ± 0.3* | *72.7 ± 0.3* | *73.0 ± 0.5* |
 | *Optimal* | *75* | *75* | *75* |
 
-meta-IRM (70.4%) surpasses V-REx (68.6%), IRMv1 (66.9%), and MM-REx (66.1%), coming closest to the theoretical optimum (75%) among the compared methods. Its OOD standard deviation of 0.9 is also the lowest (V-REx 1.2, IRMv1 2.5, MM-REx 4.9). ERM (grayscale), trained on grayscale images with the spurious color removed, serves as a reference (73.0%). As the figure below shows, meta-IRM's accuracy stays nearly flat as the test environment shifts, indicating that its predictions do not rely on color.
+Among the compared methods receiving colored inputs, meta-IRM has the highest OoD accuracy (70.4%) and a smaller run-to-run standard deviation than V-REx (68.6%), IRMv1 (66.9%), and MM-REx (66.1%). ERM (grayscale), with color removed in advance, is a separate reference at 73.0%. The nearly flat accuracy curve as color–label correlations change supports the interpretation that meta-IRM relies less on color.
 
 ![Various Test Environments](/images/meta-irm/various_models.png)
 
@@ -117,7 +115,7 @@ As the number of classes increases, the structure of spurious correlations becom
 | *ERM (grayscale)* | *10* | *73.2 ± 0.1* | *71.9 ± 0.5* |
 | *Optimal* | — | *75* | *75* |
 
-In the 10-class setting, meta-IRM (73.4%) surpasses IRMv1 (58.6%) by 14.8pp and exceeds the ERM (grayscale) reference (71.9%). IRMv1's train accuracy exceeds the 75% optimum (82.2%, 83.4%), meaning it absorbs part of the spurious correlation. meta-IRM, in contrast, maintains its OOD accuracy as the number of classes grows, albeit with a larger standard deviation than in the 2-class setting (3.6 and 3.2 vs. 0.9).
+With ten classes, meta-IRM reaches 73.4% OoD accuracy, 14.8pp above IRMv1 (58.6%). The ERM (grayscale) reference is 71.9%. Mean accuracy is high for both five and ten classes, but run-to-run standard deviations are larger than in the two-class setting (3.6 and 3.2 versus 0.9).
 
 ### Insufficient Data
 
@@ -132,7 +130,7 @@ We evaluate how well IRM-family methods maintain performance when training data 
 | **meta-IRM (Ours)** | 70.6 ± 1.5 | 70.5 ± 1.6 | **68.3 ± 2.3** |
 | *Optimal* | *75* | *75* | *75* |
 
-When data is halved, IRMv1 drops from 66.9% to 58.5% (an 8.4pp decline), while meta-IRM drops only from 70.4% to 68.3% (2.1pp). This demonstrates that the meta-learning-based optimization efficiently extracts invariant features even under data-scarce conditions.
+When data is halved, IRMv1 drops from 66.9% to 58.5% (8.4pp), while meta-IRM drops from 70.4% to 68.3% (2.1pp). In this setting, meta-IRM better preserves OoD performance as data becomes scarce.
 
 ![Data Decrease](/images/meta-irm/data_decrease.webp)
 
@@ -149,7 +147,7 @@ This setting introduces 2 spurious correlations (color + patch) with only 2 trai
 | **meta-IRM (Ours)** | 58.1 ± 3.1 | 56.8 ± 2.9 | **54.5 ± 4.0** |
 | *Optimal* | *75* | *75* | *75* |
 
-IRMv1 and V-REx drop to 13.4–13.5%, falling below random chance (50%). Both methods exploit both spurious features to achieve high in-distribution accuracy, but when both correlations reverse simultaneously in the OOD setting, performance collapses. meta-IRM achieves 54.5% — suboptimal but above random — indicating that invariant feature learning is at least partially maintained.
+IRMv1 and V-REx perform well when correlations match the training environments, but fall to 13.4–13.5% when both correlations reverse. meta-IRM mitigates that failure at 54.5 ± 4.0%. Its mean remains only modestly above chance (50%) and well below the ideal 75%, so the multiple-bias problem is far from solved.
 
 ![Two Spurious Features](/images/meta-irm/2s.png)
 

@@ -42,11 +42,9 @@ Text-to-image diffusion models utilize cross-attention to integrate textual info
 
 ## Overview
 
-Cross-attention의 OV circuit이 텍스트를 어떻게 시각 특징으로 변환하는지 밝히고, 이를 활용해 재학습 없이 개념을 제거하는 방법을 제안한다.
+Stable Diffusion의 cross-attention에서 Van Gogh, Monet, Picasso는 같은 head를 공유하면서도 서로 다른 singular vector에 높은 기여도를 보였다. 이 논문은 head 내부의 OV 변환을 분해해 이런 개념별 차이를 분석한다.
 
-1. **Spectral Decomposition** — $\mathbf{W}_{\text{OV}}$를 SVD로 분해하여 독립적인 text-to-visual 변환 경로를 추출한다.
-2. **Concept Localization** — "Van Gogh 스타일", "nudity" 등의 의미 개념이 전체 spectrum 중 소수의 spectral component에 집중되어 있음을 발견한다.
-3. **Spectral Nullification** — 해당 component만 제거하면 재학습 없이도 기존 방법과 비슷한 수준의 targeted concept removal이 가능하다.
+OV 행렬을 SVD로 분해하고, “a mountain”과 “a mountain in Van Gogh style”처럼 개념 유무만 다른 prompt 쌍을 비교한다. 두 prompt 사이에서 반응이 크게 달라지는 성분을 골라 줄이거나 증폭하면, 생성 이미지의 화풍도 달라진다. 화풍 관련 OV 성분만 남기는 실험에서는 장면의 세부 내용이 사라진 뒤에도 붓질과 형태가 남았다. Nudity 관련 성분을 제거하는 데도 같은 분석을 적용했다.
 
 ![Spectral Isolation](/images/aaai2026/fig3-spectral-isolation.webp)
 
@@ -64,11 +62,11 @@ Text embedding은 의미 정보를 고유한 축(semantic axes)을 따라 조직
 
 $$\mathbf{W}_{\text{OV}}^{(h)} = \sum_{i=1}^{r} \sigma_i^{(h)} \mathbf{u}_i^{(h)} (\mathbf{v}_i^{(h)})^\top$$
 
-각 rank-1 성분(spectral component)은 text embedding 공간의 방향 $\mathbf{u}_i$를 head 출력 공간의 방향 $\mathbf{v}_i$로 세기 $\sigma_i$만큼 옮기는, 독립된 text-to-visual 변환 경로다. “Van Gogh 스타일”이나 “nudity” 같은 의미 개념은 **전체 spectrum 중 소수의 component에 집중**되어 있다.
+각 rank-1 성분(spectral component)은 text embedding 공간의 방향 $\mathbf{u}_i$를 head 출력 공간의 방향 $\mathbf{v}_i$로 세기 $\sigma_i$만큼 옮기는, 독립된 text-to-visual 변환 경로다. “Van Gogh 스타일”이나 “nudity” 같은 의미 개념은 전체 spectrum 중 소수의 component에 집중되어 있다.
 
 ### 개념 기여도 측정
 
-개념이 어디에 인코딩되는지 찾기 위해, 개념 유무만 다른 prompt 쌍(예: “a mountain”과 “a mountain in Van Gogh style”)을 비교한다. 각 prompt의 token embedding을 평균한 $\bar{\mathbf{c}}$를 head $h$의 singular vector로 나타낸 $\mathbf{s}^{(h)}(\bar{\mathbf{c}}) = \bar{\mathbf{c}}\,\mathbf{U}^{(h)}\mathbf{\Sigma}^{(h)}$는 그 head의 출력을 직접 결정한다. 두 prompt에 대한 이 표현의 차이가 개념의 기여를 나타낸다.
+개념이 어디에 인코딩되는지 찾기 위해, 개념 유무만 다른 prompt 쌍(예: “a mountain”과 “a mountain in Van Gogh style”)을 비교한다. 각 prompt의 token embedding을 평균한 $\bar{\mathbf{c}}$를 head $h$의 singular vector에 투영하고 singular value를 곱해 $\mathbf{s}^{(h)}(\bar{\mathbf{c}}) = \bar{\mathbf{c}}\,\mathbf{U}^{(h)}\mathbf{\Sigma}^{(h)}$를 얻는다. 두 prompt 사이에서 이 값이 크게 달라지는 성분을 개념에 많이 기여하는 후보로 본다. 실제 위치별 head 출력에는 토큰별 attention 가중치도 반영되므로, 이 평균 임베딩 기반 점수는 개념 성분을 찾기 위한 측정값이다.
 
 $$\Delta\mathbf{s}^{(h)} = \mathbf{s}^{(h)}(\bar{\mathbf{c}}_{\text{concept}}) - \mathbf{s}^{(h)}(\bar{\mathbf{c}}_{\text{base}}), \qquad [\Delta\mathbf{s}^{(h)}]_i = \sigma_i^{(h)} \langle \bar{\mathbf{c}}_{\text{concept}} - \bar{\mathbf{c}}_{\text{base}},\, \mathbf{u}_i^{(h)} \rangle$$
 
@@ -88,14 +86,14 @@ Head 단위 분석은 어떤 head가 개념에 기여하는지는 알려주지�
 
 $$\widetilde{\mathbf{W}}_{\text{OV}}^{(h)} = \mathbf{W}_{\text{OV}}^{(h)} + (\alpha - 1) \sum_{i:\,(h,i) \in \mathcal{S}_c} \sigma_i^{(h)} \mathbf{u}_i^{(h)} (\mathbf{v}_i^{(h)})^\top$$
 
-$\alpha = 0$이면 개념 component를 지우고(Spectral Nullification), $\alpha = 1$이면 원래 모델 그대로이며, $\alpha > 1$이면 개념이 증폭된다. SD v2.1에서는 개념 관련 component 상위 15–20%만 제거해도 생성 이미지에서 개념이 사라지지만, 30% 이상 제거하면 전반적인 생성 품질이 떨어질 수 있다.
+$\alpha = 0$이면 선택한 component를 지우고(Spectral Nullification), $\alpha = 1$이면 원래 모델 그대로이며, $\alpha > 1$이면 해당 component의 기여를 키운다. SD v2.1의 정성 실험에서는 개념 기여도 상위 15–20%를 제거했을 때 목표 개념이 억제되는 예시를 확인했다. 반면 30% 이상 제거하면 전반적인 생성 품질도 떨어질 수 있었다.
 
-아래 그림은 같은 10%를 조작하더라도 head 전체를 스케일링할 때와 spectral component만 스케일링할 때 결과가 달라지는 것을 보여준다. 개념이 head 전체가 아니라 특정 spectral subspace에 국한되어 있어, spectral 분석으로 개념 component를 정밀하게 찾아 조작할 수 있다는 뜻이다.
+아래 그림은 기여도가 높은 head 전체를 조절하는 경우와, head 내부의 spectral component를 골라 조절하는 경우를 비교한다. 각각 전체 head의 10%와 전체 component의 10%를 선택하므로, 두 “10%”의 기준은 다르다. 이 비교는 head 내부를 더 세밀하게 나누었을 때 개념을 조절하는 방식이 어떻게 달라지는지 보여준다.
 
 ![Spectral vs Head](/images/aaai2026/fig2-spectral-vs-head.webp)
 
 <p class="caption">
-Spectral modulation(위, $\mathcal{S}_c$의 component 10%)과 head-level modulation(아래, 기여도 상위 10% head)을 $\alpha$를 바꿔 가며 비교한 결과.
+Spectral modulation(위, 전체 component 중 개념 기여도 상위 10%)과 head-level modulation(아래, 기여도 상위 10% head)을 α를 바꿔 가며 비교한 결과.
 </p>
 
 아래 그림은 Van Gogh, Monet, Picasso 세 개념 모두에서 기여도가 높은 head들을 골라, head 안의 singular vector별 기여도를 나타낸 것이다. 같은 head 안에서도 세 개념은 서로 다른 singular vector를 활성화하며, 높은 기여를 하는 singular vector가 반드시 singular value가 큰 것(낮은 인덱스)은 아니다. 즉 개념들은 head를 공유하면서도, 부분적으로 겹치지만 구별되는 고유한 활성화 패턴을 가진다.
@@ -149,19 +147,21 @@ Spectral Nullification(SN)의 nudity 개념 제거 성능을 SD v1.4에서 5개 
 </table>
 </div>
 
-SN은 I2P에서 RECE와 공동 2위(4.24%), MMA·P4D·UnLearnDiffAtk에서 각각 2위를 기록하고, 추가 학습 없이도 모든 벤치마크에서 training-based 방법(ESD, CA, MACE, SDID)보다 ASR이 낮다. 반면 Ring-A-Bell에서는 30.53–41.05%로 closed-form 방법(UCE, RECE)과 SLD-Strong보다 높다. 벤치마크에 따라 결과가 I2P의 4.24%부터 Ring-A-Bell K16의 41.05%까지 벌어지는 것은 adversarial prompt의 설계와 공격 강도 차이를 반영한다. 대부분의 벤치마크에서 1위인 SLD-Strong은 inference-time guidance로 생성 과정 전반에 개입하는 방법이며, SN은 **추가 학습 없이 행렬의 spectral component만 제거**하는 것이므로 접근 방식이 근본적으로 다르다. 생성 품질은 COCO 캡션 1,000개에 대한 CLIP score로 평가하며, 아래 그림처럼 SN은 제거 성능과 생성 품질 사이의 trade-off에서 경쟁력 있는 위치에 있다.
+SN은 I2P에서 RECE와 공동 2위(4.24%), MMA·P4D·UnLearnDiffAtk에서 각각 2위를 기록한다. 표에 포함된 training-based 방법(ESD, CA, MACE, SDID)보다 모든 벤치마크에서 ASR이 낮지만, Ring-A-Bell에서는 UCE·RECE·SLD-Strong보다 높다. 따라서 성능은 공격 프롬프트의 구성에 따라 달라진다.
+
+SN은 앞서 분석한 개념별 성분을 OV 행렬에서 제거하며, 추가 학습은 하지 않는다. 제거 성능과 텍스트–이미지 일치도의 관계는 COCO 캡션 1,000개에 대한 CLIP score로 평가했다. CLIP score는 의미적 일치도를 측정하므로 시각적 품질의 모든 측면을 포함하지는 않는다.
 
 ![Quality Tradeoff](/images/aaai2026/fig7-quality-tradeoff.webp)
 
 <p class="caption">
-Concept removal 성능(P4D ASR) vs 생성 품질(CLIP score). SN은 재학습 없이 기존 방법과 비슷한 trade-off를 달성한다. SLD-Strong이 ASR은 가장 낮지만, 생성 품질도 함께 하락한다.
+Concept removal 성능(P4D ASR)과 텍스트–이미지 일치도(CLIP score)의 관계. SN은 재학습 없이 경쟁력 있는 균형을 보인다. SLD-Strong은 ASR이 가장 낮지만 CLIP score도 낮아진다.
 </p>
 
 ### Spectral Subspace의 의미 검증
 
 식별된 spectral subspace가 실제로 해당 개념의 의미를 포착하고 있는지를 두 가지 방식으로 검증한다.
 
-**텍스트 공간 정렬**: 개념 prompt와 base prompt의 text embedding 차이 벡터를 concept-specific spectral component만으로 재구성한 뒤, CLIP 어휘 49,408개 토큰 전체와의 cosine similarity를 계산한다. Nudity 개념의 경우 기여도 상위 2개 head 모두에서 "nude", "naked", "topless", "erotica", "nsfw" 같은 토큰이 상위 16개 안에 들어, 이 subspace가 해당 개념의 의미를 담고 있음을 보여준다. 다만 nudity와 직접 관련 없는 토큰도 섞여 있어, subspace가 개념 하나만 깔끔하게 분리하기보다 의미적으로 인접한 영역까지 함께 담는다는 점(polysemanticity)도 드러난다.
+**텍스트 공간 정렬**: 개념 prompt와 base prompt의 text embedding 차이 벡터를 concept-specific spectral component의 입력 방향으로 재구성한 뒤, CLIP 어휘 49,408개 토큰 전체와의 cosine similarity를 계산한다. Nudity 개념의 기여도 상위 2개 head를 보면, 한 head에서는 “nudes”, “nsfw”, “naked”가, 다른 head에서는 “topless”, “lingerie”, “erotica”, “nude”가 유사도 상위 16개에 포함된다. Head마다 목록은 다르지만 모두 개념과 관련된 토큰이 나타난다. 동시에 무관한 토큰도 섞여 있어, 개념이 완전히 분리되어 있지는 않음을 보여준다.
 
 ![Token Alignment](/images/aaai2026/fig6-token-alignment.webp)
 
@@ -169,17 +169,17 @@ Concept removal 성능(P4D ASR) vs 생성 품질(CLIP score). SN은 재학습 �
 Nudity 관련 spectral component로 재구성한 벡터와 cosine similarity가 가장 높은 16개 토큰(기여도 상위 2개 head). 음영 표시된 토큰이 nudity와 직접 관련된 토큰이다.
 </p>
 
-**인과적 검증(t-SNE) 및 개념 간 구조(Jaccard)**: 개념 관련 spectral component를 제거하면, head output의 t-SNE에서 base/concept prompt 클러스터가 합쳐진다. 이는 해당 component들이 실제로 개념을 인코딩하고 있음을 보여주는 인과적 증거이다. Jaccard similarity 분석에서는 의미적으로 유사한 개념(Van Gogh↔Monet)이 spectral component를 더 많이 공유하면서도, 각 개념은 고유한 spectral signature를 유지하는 것으로 나타난다.
+**개입 전후의 표현(t-SNE)과 개념 간 겹침(Jaccard)**: 개념 관련 component를 제거하면, head output의 t-SNE에서 base/concept prompt 클러스터가 더 많이 겹친다. 이 시각화는 앞서 성분을 직접 조절했을 때 생성 결과가 달라진 실험을 보완한다. t-SNE만으로 인과관계를 입증하는 것은 아니다. Jaccard similarity에서는 Van Gogh와 Monet처럼 유사한 개념들이 성분을 더 많이 공유하면서도 서로 구별되는 spectral signature를 갖는 모습을 확인한다.
 
 ![t-SNE Jaccard](/images/aaai2026/fig4-tsne-jaccard.webp)
 
 <p class="caption">
-(a) 개념 관련 spectral component 상위 10%를 제거하기 전후의 head output t-SNE. 제거 후 base/concept 클러스터가 합쳐진다. (b) 개념 간 Jaccard similarity. 유사한 개념끼리 겹치지만, 각 개념은 고유한 signature를 유지한다.
+(a) 개념 기여도 상위 10% component 제거 전후의 head output t-SNE. 제거 후 base/concept 클러스터의 겹침이 늘어난다. (b) 개념 간 Jaccard similarity. 유사한 개념끼리 겹치지만, 서로 구별되는 signature를 보인다.
 </p>
 
 ### Qualitative
 
-I2P benchmark의 adversarial prompt로 기존 방법들과 SN의 생성 결과를 비교하면, SN은 장면 구성을 유지하면서 부적절한 콘텐츠를 제거한다.
+아래 I2P adversarial prompt 예시에서는 SN이 장면 구성을 유지하면서 목표 콘텐츠를 억제하는 모습을 볼 수 있다. 정량 표에서 보았듯 모든 프롬프트에서 제거가 성공하는 것은 아니다.
 
 ![I2P Comparison](/images/aaai2026/fig8-i2p-comparison.webp)
 

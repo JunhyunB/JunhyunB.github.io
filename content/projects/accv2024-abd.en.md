@@ -32,11 +32,9 @@ Training deep neural networks with empirical risk minimization (ERM) often captu
 
 ## Overview
 
-We propose a learning framework that sequentially discovers and removes multiple biases in data without any prior bias information.
+Adding both color and patch biases to Colored MNIST causes methods that handle color alone to fail. PI identifies the color bias but misses the patch: its OoD accuracy falls from 70.2% with color alone to 15.3% when the patch is added.
 
-1. **Bias-adapted model** — Obtain a bias-sensitive auxiliary model $f_\phi$ by taking one (or a few) gradient descent steps from the debiased parameters $\theta$.
-2. **Adaptive group formation** — Partition data into a bias-aligned group ($G^\odot$) and a bias-conflicting group ($G^\otimes$) based on $f_\phi$'s predictions.
-3. **Iterative debiasing** — Minimize worst-case group loss via group DRO; as $\theta$ becomes robust to one bias, $\phi$ naturally discovers the next.
+ABD rebuilds its auxiliary bias-discovery model at every training step. A few gradient updates from the current model produce an auxiliary model that partitions the data; group losses then update the current parameters. The groups change with the model instead of remaining tied to a fixed auxiliary model. In the experiments, patch bias emerges after color bias, and ABD reaches 62.3% OoD accuracy with both biases present.
 
 ![ABD Framework](/images/accv2024/method.webp)
 
@@ -48,17 +46,17 @@ Overview of the ABD framework, illustrated with two biases (Bias1, Bias2) and tw
 
 ## Method
 
-Models trained with ERM readily capture spurious correlations in the data, degrading generalization. Existing debiasing methods either require prior knowledge of biases (Group DRO) or rely on a separately trained biased model that tends to capture only the most dominant bias, which limits them when multiple biases coexist (PI, JTT).
+Models trained with ERM can rely on correlations that hold only in the training data. Group DRO emphasizes high-loss groups, so the choice of groups matters. Approaches such as PI and JTT use a separately trained biased model to partition data; if that model captures only the dominant bias, other biases can be missed.
 
-ABD alternates between two stages: bias discovery and bias mitigation. First, bias-adapted parameters $\phi = \theta - \alpha \nabla_\theta \mathcal{L}(f_\theta)$ are obtained by gradient descent from the debiased parameters $\theta$ (a single step is shown; multiple steps can be used, and three were used on Colored MNIST). Because neural networks tend to learn easy, superficial features first, the resulting $f_\phi$ is sensitive to superficial patterns in the data, i.e., biases. The samples it predicts correctly form the bias-aligned group ($G^\odot$), and those it gets wrong form the bias-conflicting group ($G^\otimes$).
+ABD alternates between bias discovery and mitigation. First, gradient descent from the current parameters gives $\phi = \theta - \alpha \nabla_\theta \mathcal{L}(f_\theta)$ (one step is shown; multiple steps are possible, with three used on Colored MNIST). This exploits the tendency to learn easy features quickly to obtain a bias-sensitive auxiliary model. Correct predictions form $G^\odot$ and incorrect predictions form $G^\otimes$. These are **proxies** for bias-aligned and bias-conflicting groups, not observed bias annotations.
 
 Next, $\theta$ is updated to minimize a weighted sum of the two group losses computed with $f_\phi$:
 
 $$J(\theta) = a\,\mathcal{L}_{G^\odot}(f_\phi) + b\,\mathcal{L}_{G^\otimes}(f_\phi), \qquad \theta \leftarrow \theta - \beta \nabla_\theta J(\theta)$$
 
-The group weights $a$ and $b = 1 - a$ are given by a softmax over the two group losses with temperature $\tau$ (online group DRO). The group with the larger loss receives the larger weight: a large $\tau$ approaches the average loss of ERM, while $\tau \ll 1$ approaches explicitly selecting the worst-case group (the bias-conflicting samples). The gradient with respect to $\theta$ flows through $\phi$, using a first-order approximation as in MAML.
+The weights $a$ and $b = 1 - a$ come from a softmax over group losses with temperature $\tau$ (online group DRO). Large $\tau$ gives similar weights to the two group-average losses; $\tau \ll 1$ concentrates on the higher-loss group. Equal group weighting is not necessarily the same as ERM's sample average when group sizes differ. The gradient with respect to $\theta$ flows through $\phi$, using a first-order approximation as in MAML.
 
-The key insight is that $\phi$ is regenerated from the updated $\theta$ at every step. Once $\theta$ becomes robust to the first bias, $\phi$, starting from that $\theta$, picks up the next bias that has not yet been addressed. This MAML-like structure, which ties bias discovery ($\phi$) and mitigation ($\theta$) into a single learning loop, enables sequential discovery and removal of multiple biases without any prior bias information.
+$\phi$ is regenerated from the updated $\theta$ at every step. As reliance on one bias decreases, the bias captured by the auxiliary model can change. The experiments observe Color followed by Patch on Colored MNIST, and Negation followed by Overlap on MultiNLI.
 
 The GradCAM visualizations below show how the biased model $f_\phi$'s attention shifts to different regions as training progresses, illustrating how ABD adaptively discovers diverse biases during learning.
 
@@ -70,11 +68,11 @@ GradCAM visualizations of an ERM-trained model and of ABD's biased model $f_\phi
 
 ### Theoretical Analysis
 
-Group DRO minimizes the worst-case group loss over a group set $\mathcal{G}$ predefined with bias information. ABD instead discovers only a subset of biases at each step, which can be viewed as a stochastic selection of groups ($\mathcal{G}' \sim \mathcal{B}$). The gap $\text{Gap}(\theta)$ between group DRO's worst-case risk and ABD's expected worst-case risk is bounded as follows (Theorem 1):
+Theorem 1 compares worst-case risk over the complete group set $\mathcal{G}$ with expected worst-case risk over selected groups $\mathcal{G}' \sim \mathcal{B}$. For fixed $\theta$, assuming every nonempty subset is selected with equal probability, the difference is bounded as follows:
 
 $$\text{Gap}(\theta) \le \frac{2^{m-1}-1}{2^{m}-1}\,\Delta(\theta), \qquad \Delta(\theta) = \max_{g \in \mathcal{G}} \mathcal{L}_g(f_\theta) - \min_{g \in \mathcal{G}} \mathcal{L}_g(f_\theta)$$
 
-where $m$ is the number of groups and $\Delta(\theta)$ is the maximum discrepancy in loss across groups. In other words, if ABD successfully identifies biases, it can perform comparably to group DRO, which relies on prior bias knowledge.
+Here $m$ is the number of groups, $\Delta(\theta)$ is the maximum difference between group losses, and each subset has probability $1/(2^m-1)$. This compares risk objectives under uniform group selection; it does not establish ABD's actual discovery probabilities or guarantee test accuracy after training. The proof is in the [supplement](https://openaccess.thecvf.com/content/ACCV2024/supplemental/Bae_Adaptive_Bias_Discovery_ACCV_2024_supplemental.pdf).
 
 ---
 
@@ -82,10 +80,10 @@ where $m$ is the number of groups and $\Delta(\theta)$ is the maximum discrepanc
 
 ### Colored MNIST — Handling Multiple Biases
 
-This experiment most clearly shows how ABD differs from existing methods, comparing a single-bias (Color) setting with a dual-bias (Color + Patch) setting.
+The experiment compares a single-bias (Color) setting with a dual-bias (Color + Patch) setting.
 
 <p class="caption">
-OoD test accuracy (%). Single bias vs. multiple biases.
+OoD test accuracy (%, mean of five runs). Single bias versus multiple biases. Group DRO in this table is not given explicit bias information.
 </p>
 
 | Algorithm | Color (OoD) | Color & Patch (OoD) |
@@ -97,7 +95,7 @@ OoD test accuracy (%). Single bias vs. multiple biases.
 | **ABD (Ours)** | **70.7** | **62.3** |
 | *Optimal* | *75.0* | *75.0* |
 
-PI discovers only the Color bias and fails to capture Patch, effectively collapsing to 15.3% (a 54.9pp drop) when two biases are present. IRM and Group DRO also remain at the ERM level in the multi-bias setting. ABD sequentially discovers Color then Patch, making it the only method to achieve meaningful OoD performance (62.3%) under multiple biases.
+PI reaches 70.2% with Color alone but falls to 15.3% when Patch is added. The group analysis below shows PI capturing Color and missing Patch, while ABD exposes Color followed by Patch. ABD is the strongest method in this comparison at 62.3%, but remains below the ideal bias-independent accuracy of 75.0%. Group DRO here should be distinguished from an oracle given the correct bias information.
 
 <div class="figure-row">
 <figure>
@@ -180,5 +178,9 @@ At the smallest distance (0.44), LISA (81.3%) holds a slight edge, but from 0.71
 <p class="caption">
 GradCAM visualizations on MetaShift test data. ERM relies on background features, while ABD focuses on the target object.
 </p>
+
+### Label Noise
+
+In the supplement's unbiased MNIST experiment with 25% training label noise, ABD reaches 58.0% while ERM reaches 73.0%. The authors attribute this degradation to the discovery stage treating label noise as bias. Grouping samples by prediction errors can also pick up errors caused by incorrect labels.
 
 ---

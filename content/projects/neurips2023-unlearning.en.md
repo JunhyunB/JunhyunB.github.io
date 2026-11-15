@@ -34,11 +34,9 @@ Recently, machine unlearning has received considerable attention, in the context
 
 ## Overview
 
-We propose a machine unlearning method that effectively removes the influence of specific data using only the retain set, without accessing the forget set or retraining from scratch.
+This method was submitted to the NeurIPS 2023 Machine Unlearning Challenge. It randomly re-initializes some model layers, then trains on the retain set to reproduce the original model's outputs. The process repeats for three or four cycles. The final algorithms do not use the forget set.
 
-1. **Stochastic re-initialization** — Randomly select and re-initialize model layers to probabilistically destroy memories of specific data.
-2. **Knowledge preserving** — Reproduce the original model's outputs on the retain set via MSE loss to maintain performance.
-3. **Forget-remember cycles** — Repeat forgetting and remembering phases 3–4 times, progressively increasing the re-initialization ratio while preserving retain set performance.
+In intermediate experiments, random selection scored higher than FIM-based selection using forget-set gradients. The competition compared output distributions across 512 runs with those of retrained models, so varying which layers were reset could affect the evaluation. Repeating smaller resets with retain-set training between them also scored higher than increasing the reset ratio in a single cycle.
 
 ![Overall Architecture](/images/neurips2023-unlearning/overall.webp)
 
@@ -54,7 +52,7 @@ The competition metric is a **distribution-based unlearning quality** measure, n
 
 $$\text{Score} = F \times \frac{RA_U}{RA_R} \times \frac{TA_U}{TA_R}$$
 
-$F$ is forgetting quality, $RA_U / RA_R$ is the retain accuracy ratio (unlearned vs retrained), and $TA_U / TA_R$ is the test accuracy ratio. Crucially, this metric evaluates the **output distribution across 512 independent runs**. Since the distribution across runs — not single-run performance — must resemble the retrained model's distribution, the algorithm requires an appropriate level of **randomness**.
+$F$ is forgetting quality, $RA_U / RA_R$ is the retain accuracy ratio (unlearned vs retrained), and $TA_U / TA_R$ is the test accuracy ratio. $F$ compares output distributions across 512 independent runs with those of retrained models. Models with the same retain/test accuracy can therefore receive different scores if their output distributions differ.
 
 ---
 
