@@ -12,11 +12,7 @@ AI/ML Postdoctoral Researcher @ Kyungpook National University
 
 ### Research Interests
 
-My research focuses on mechanistic interpretability. I currently study how text-to-image diffusion models represent concepts such as artistic style, analyzing cross-attention OV circuits and testing how changes to their spectral components affect generated images.
-
-My earlier work covers invariant risk minimization, debiasing, and systematic generalization with modular networks.
-
-Looking ahead, I want to connect mechanistic interpretability with AI alignment and safety. I am interested in whether understanding a model’s internal mechanisms can help us anticipate failures, intervene in unwanted behavior, and assess when the model can be trusted.
+My research interests include mechanistic interpretability, AI alignment and safety, and robust generalization. I'm particularly interested in understanding why models behave the way they do and when we can trust them.
 
 ---
 
