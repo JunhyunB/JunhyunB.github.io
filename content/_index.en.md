@@ -1,6 +1,6 @@
 ---
 ---
 
-I study the internal representations and behavior of AI models through mechanistic interpretability. My long-term goal is to develop ways to understand and control model behavior that can inform AI alignment and safety.
+My research focuses on mechanistic interpretability. Recently, I analyzed cross-attention OV circuits in text-to-image diffusion models and tested how changes to their spectral components affect generated images.
 
-My recent work analyzes cross-attention OV circuits in text-to-image diffusion models to understand how they transform textual meaning into visual features.
+I'm interested in building on this work to study AI alignment and safety.
