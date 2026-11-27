@@ -1,0 +1,274 @@
+{{- $isKo := eq .Page.Lang "ko" -}}
+{{- $uid := printf "mirm-%d" .Ordinal -}}
+<figure class="fig-interactive" id="{{ $uid }}">
+  <div class="fig-plate">
+    <svg viewBox="0 0 680 280" role="img" aria-label="Interactive meta-IRM second-order gradient vs ERM on diverging loss valleys">
+      <defs>
+        <marker id="{{ $uid }}-b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse"><path d="M0 1.2L9.5 5L0 8.8z" fill="#1E4E79"/></marker>
+        <marker id="{{ $uid }}-o" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse"><path d="M0 1.2L9.5 5L0 8.8z" fill="#A86A14"/></marker>
+        <marker id="{{ $uid }}-p" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 1.2L9.5 5L0 8.8z" fill="#634294"/></marker>
+        <marker id="{{ $uid }}-m" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse"><path d="M0 1.2L9.5 5L0 8.8z" fill="#64676E"/></marker>
+        <clipPath id="{{ $uid }}-clip"><rect x="16" y="14" width="648" height="236" rx="6"/></clipPath>
+      </defs>
+
+      <!-- Subtle parameter plane grid -->
+      <g clip-path="url(#{{ $uid }}-clip)">
+        <g stroke="#EAE6DC" stroke-width="0.9">
+          <line x1="68" y1="14" x2="68" y2="250"/>
+          <line x1="210" y1="14" x2="210" y2="250" stroke-opacity="0.55"/>
+          <line x1="352" y1="14" x2="352" y2="250" stroke-opacity="0.55"/>
+          <line x1="494" y1="14" x2="494" y2="250" stroke-opacity="0.55"/>
+          <line x1="16" y1="132" x2="664" y2="132"/>
+        </g>
+
+        <!-- Analytical contour rings for e1 (Prussian Blue) and e2 (Warm Ochre) -->
+        <g data-el="contours-e1" fill="none" stroke="#1E4E79"></g>
+        <g data-el="contours-e2" fill="none" stroke="#A86A14"></g>
+
+        <!-- Valley centerlines intersecting at theta_optimal -->
+        <line x1="68" y1="132" x2="664" y2="6" stroke="#1E4E79" stroke-width="1.6" opacity="0.72"/>
+        <line x1="68" y1="132" x2="664" y2="258" stroke="#A86A14" stroke-width="1.6" opacity="0.72"/>
+
+        <!-- Invariant optimum & exact ERM spurious target (x_ERM = 4.747) -->
+        <circle cx="68" cy="132" r="6" fill="#FFFFFF" stroke="#2A6F4E" stroke-width="2.4"/>
+        <text x="68" y="160" text-anchor="middle" font-size="12" font-weight="600" fill="#2A6F4E">θ<tspan baseline-shift="sub" font-size="8.5">opt</tspan></text>
+
+        <circle cx="542.7" cy="132" r="4.5" fill="#8E9199"/>
+        <text x="554" y="136" font-size="12" fill="#64676E">θ<tspan baseline-shift="sub" font-size="8.5">ERM</tspan></text>
+
+        <!-- Inner adaptation steps theta -> theta'_1, theta'_2 -->
+        <line data-el="in1" x1="380" y1="132" x2="390" y2="82" stroke="#1E4E79" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#{{ $uid }}-b)"/>
+        <line data-el="in2" x1="380" y1="132" x2="390" y2="182" stroke="#A86A14" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#{{ $uid }}-o)"/>
+        <circle data-el="p1" cx="390" cy="82" r="3.6" fill="#1E4E79"/>
+        <circle data-el="p2" cx="390" cy="182" r="3.6" fill="#A86A14"/>
+        <text data-el="p1-lbl" x="398" y="80" font-size="12.5" font-weight="600" fill="#1E4E79">θ′₁</text>
+        <text data-el="p2-lbl" x="398" y="190" font-size="12.5" font-weight="600" fill="#A86A14">θ′₂</text>
+
+        <!-- Cross-env outer gradient components (head-to-tail sum) -->
+        <line data-el="g12" x1="380" y1="132" x2="340" y2="165" stroke="#A86A14" stroke-width="1.8" opacity="0.72" marker-end="url(#{{ $uid }}-o)"/>
+        <line data-el="g21" x1="340" y1="165" x2="300" y2="132" stroke="#1E4E79" stroke-width="1.8" opacity="0.72" marker-end="url(#{{ $uid }}-b)"/>
+
+        <!-- Resulting ERM gradient vs meta-IRM update -->
+        <line data-el="erm" x1="380" y1="132" x2="438" y2="132" stroke="#64676E" stroke-width="2.5" marker-end="url(#{{ $uid }}-m)"/>
+        <text data-el="erm-lbl" x="438" y="150" text-anchor="middle" font-size="11.5" font-weight="600" fill="#64676E">ERM</text>
+
+        <line data-el="meta" x1="380" y1="132" x2="300" y2="132" stroke="#634294" stroke-width="3.2" marker-end="url(#{{ $uid }}-p)"/>
+        <text data-el="meta-lbl" x="332" y="119" text-anchor="middle" font-size="12" font-weight="700" fill="#634294">meta-IRM</text>
+
+        <!-- Draggable theta handle -->
+        <g class="drag-handle" data-el="handle-th">
+          <circle class="drag-halo" cx="380" cy="132" r="16" fill="#1A1C20" opacity="0.11"/>
+          <circle cx="380" cy="132" r="5.5" fill="#1A1C20" stroke="#FFFFFF" stroke-width="2"/>
+        </g>
+        <text data-el="th-lbl" x="387" y="122" font-size="13" font-weight="700" fill="#1A1C20" font-style="italic">θ</text>
+      </g>
+
+      <text x="340" y="268" text-anchor="middle" font-size="11" fill="#64676E">← less spurious color · more spurious color →</text>
+    </svg>
+
+    <div class="fig-controls">
+      <div class="fig-rail-wrap">
+        <span class="fig-param" data-el="a-readout">α = 0.44</span>
+        <div class="fig-rail" data-el="rail" role="slider" tabindex="0" aria-label="Inner step size alpha" aria-valuemin="0" aria-valuemax="0.48" aria-valuenow="0.44">
+          <div class="fig-rail-track">
+            <div class="fig-rail-fill" data-el="rail-fill" style="width:91.7%"></div>
+            <div class="fig-rail-thumb" data-el="rail-thumb" style="left:91.7%"></div>
+          </div>
+        </div>
+      </div>
+      <div class="fig-stops">
+        <button type="button" class="fig-stop" data-val="0">α = 0 (= ERM)</button>
+        <button type="button" class="fig-stop is-active" data-val="0.44">α = 0.44 (meta-IRM)</button>
+      </div>
+    </div>
+  </div>
+  <figcaption>
+    {{- if $isKo -}}
+    두 학습 환경(<span style="color:#1E4E79">e₁</span>, <span style="color:#A86A14">e₂</span>)의 손실 등고선 계곡 위에서 <strong>θ</strong>를 직접 끌거나 inner step 크기 <strong>α</strong>를 조절해 볼 수 있다. α = 0이면 meta-IRM은 ERM과 같이 오른쪽(θ<sub>ERM</sub>)을 향하지만, α &gt; 0으로 교차 환경 2차 그래디언트가 켜지면 벡터 합이 왼쪽(<strong>θ</strong><sub>opt</sub>)으로 뒤집힌다.
+    {{- else -}}
+    Drag <strong>θ</strong> directly across the diverging loss valleys of <span style="color:#1E4E79">e₁</span> and <span style="color:#A86A14">e₂</span>, or scrub the inner step size <strong>α</strong>. At α = 0, meta-IRM collapses to ERM pointing right toward θ<sub>ERM</sub>; raising α &gt; 0 engages second-order cross-environment gradients that flip the net update left toward <strong>θ</strong><sub>opt</sub>.
+    {{- end -}}
+  </figcaption>
+</figure>
+<script>
+(function () {
+  var root = document.getElementById('{{ $uid }}');
+  if (!root) return;
+  var svg = root.querySelector('svg');
+  var q = function (k) { return root.querySelector('[data-el="' + k + '"]'); };
+
+  // Exact analytical quadratic valleys matching meta-irm/sample.py (phi = 12 deg, aspect = 4)
+  // Coordinates: x in [0, 6] (0 = theta_opt, 4.747 = exact theta_ERM), y in [-2, 2]
+  var SX = 100, SY = 58, OX = 68, OY = 132;
+  var phi = 12 * Math.PI / 180;
+  var cp = Math.cos(phi), sp = Math.sin(phi);
+  var kPar = 0.125, kPerp = 2.0; // exact Hessian eigenvalues (2*A, 2*KAP)
+  var xStar = 8.0; // per-valley minimum along +/-phi; exact ERM minimum sits at x = 4.747
+
+  function toSvg(x, y) { return [OX + x * SX, OY - y * SY]; }
+  function fromSvg(px, py) { return [(px - OX) / SX, (OY - py) / SY]; }
+
+  // Build exact rotated quadratic Hessian & gradient for env sgn (+1 for e1, -1 for e2)
+  function envGradAndH(x, y, sgn) {
+    var c = cp, s = sgn * sp; // axis u = (c, s), normal n = (-s, c)
+    var dx = x - xStar * c, dy = y - xStar * s;
+    var u = dx * c + dy * s;
+    var n = -dx * s + dy * c;
+    var gu = kPar * u, gn = kPerp * n;
+    var gx = gu * c - gn * s;
+    var gy = gu * s + gn * c;
+    var hxx = kPar * c * c + kPerp * s * s;
+    var hxy = (kPar - kPerp) * c * s;
+    var hyy = kPar * s * s + kPerp * c * c;
+    return { g: [gx, gy], H: [[hxx, hxy], [hxy, hyy]] };
+  }
+
+  // Render subtle analytical contour ellipses once
+  function renderContours(group, sgn) {
+    var deg = -sgn * phi * 180 / Math.PI;
+    var cx = OX + xStar * cp * SX, cy = OY - xStar * sgn * sp * SY;
+    [0.85, 1.9, 3.3].forEach(function (lv, idx) {
+      var rx = Math.sqrt(2 * lv / kPar) * SX;
+      var ry = Math.sqrt(2 * lv / kPerp) * SY;
+      var el = document.createElementNS('http://www.w3.org/2000/svg', 'ellipse');
+      el.setAttribute('cx', cx.toFixed(1));
+      el.setAttribute('cy', cy.toFixed(1));
+      el.setAttribute('rx', rx.toFixed(1));
+      el.setAttribute('ry', ry.toFixed(1));
+      el.setAttribute('transform', 'rotate(' + deg.toFixed(2) + ' ' + cx.toFixed(1) + ' ' + cy.toFixed(1) + ')');
+      el.setAttribute('stroke-width', '1');
+      el.setAttribute('opacity', (0.34 - idx * 0.08).toFixed(2));
+      group.appendChild(el);
+    });
+  }
+  renderContours(q('contours-e1'), +1);
+  renderContours(q('contours-e2'), -1);
+
+  var th = [3.15, 0.0];
+  var alpha = 0.44;
+
+  function draw() {
+    var x = th[0], y = th[1];
+    var e1 = envGradAndH(x, y, +1);
+    var e2 = envGradAndH(x, y, -1);
+
+    // Inner steps theta'_1, theta'_2
+    var th1 = [x - alpha * e1.g[0], y - alpha * e1.g[1]];
+    var th2 = [x - alpha * e2.g[0], y - alpha * e2.g[1]];
+
+    // Exact cross-env second-order gradients: (I - alpha H_{e_i}) * grad R^{e_j}(theta'_i)
+    var g2_at_1 = envGradAndH(th1[0], th1[1], -1).g;
+    var g1_at_2 = envGradAndH(th2[0], th2[1], +1).g;
+
+    var meta1 = [
+      (1 - alpha * e1.H[0][0]) * g2_at_1[0] - alpha * e1.H[0][1] * g2_at_1[1],
+      -alpha * e1.H[1][0] * g2_at_1[0] + (1 - alpha * e1.H[1][1]) * g2_at_1[1]
+    ];
+    var meta2 = [
+      (1 - alpha * e2.H[0][0]) * g1_at_2[0] - alpha * e2.H[0][1] * g1_at_2[1],
+      -alpha * e2.H[1][0] * g1_at_2[0] + (1 - alpha * e2.H[1][1]) * g1_at_2[1]
+    ];
+
+    // Exact summed update directions (negative gradient) at identical scale
+    var u12 = [-meta1[0], -meta1[1]];
+    var u21 = [-meta2[0], -meta2[1]];
+    var uMeta = [u12[0] + u21[0], u12[1] + u21[1]];
+    var uErm = [-(e1.g[0] + e2.g[0]), -(e1.g[1] + e2.g[1])];
+
+    var P = toSvg(x, y);
+    var P1 = toSvg(th1[0], th1[1]);
+    var P2 = toSvg(th2[0], th2[1]);
+
+    // Shared visual scale for both ERM and meta-IRM (100% honest relative lengths)
+    var sc = 1.15;
+    var G12 = toSvg(x + sc * u12[0], y + sc * u12[1]);
+    var GMeta = toSvg(x + sc * uMeta[0], y + sc * uMeta[1]);
+    var GErm = toSvg(x + sc * uErm[0], y + sc * uErm[1]);
+
+    var h = q('handle-th').querySelectorAll('circle');
+    h[0].setAttribute('cx', P[0].toFixed(1)); h[0].setAttribute('cy', P[1].toFixed(1));
+    h[1].setAttribute('cx', P[0].toFixed(1)); h[1].setAttribute('cy', P[1].toFixed(1));
+    q('th-lbl').setAttribute('x', (P[0] - 13).toFixed(1)); q('th-lbl').setAttribute('y', (P[1] - 14).toFixed(1));
+
+    var showIn = alpha > 0.01;
+    q('in1').setAttribute('x1', P[0].toFixed(1)); q('in1').setAttribute('y1', P[1].toFixed(1));
+    q('in1').setAttribute('x2', P1[0].toFixed(1)); q('in1').setAttribute('y2', P1[1].toFixed(1));
+    q('in1').setAttribute('opacity', showIn ? '0.9' : '0');
+    q('p1').setAttribute('cx', P1[0].toFixed(1)); q('p1').setAttribute('cy', P1[1].toFixed(1));
+    q('p1').setAttribute('opacity', showIn ? '1' : '0');
+    q('p1-lbl').setAttribute('x', (P1[0] + 10).toFixed(1)); q('p1-lbl').setAttribute('y', (P1[1] - 5).toFixed(1));
+    q('p1-lbl').setAttribute('opacity', showIn ? '1' : '0');
+
+    q('in2').setAttribute('x1', P[0].toFixed(1)); q('in2').setAttribute('y1', P[1].toFixed(1));
+    q('in2').setAttribute('x2', P2[0].toFixed(1)); q('in2').setAttribute('y2', P2[1].toFixed(1));
+    q('in2').setAttribute('opacity', showIn ? '0.9' : '0');
+    q('p2').setAttribute('cx', P2[0].toFixed(1)); q('p2').setAttribute('cy', P2[1].toFixed(1));
+    q('p2').setAttribute('opacity', showIn ? '1' : '0');
+    q('p2-lbl').setAttribute('x', (P2[0] + 10).toFixed(1)); q('p2-lbl').setAttribute('y', (P2[1] + 13).toFixed(1));
+    q('p2-lbl').setAttribute('opacity', showIn ? '1' : '0');
+
+    q('g12').setAttribute('x1', P[0].toFixed(1)); q('g12').setAttribute('y1', P[1].toFixed(1));
+    q('g12').setAttribute('x2', G12[0].toFixed(1)); q('g12').setAttribute('y2', G12[1].toFixed(1));
+    q('g12').setAttribute('opacity', showIn ? '0.68' : '0');
+    q('g21').setAttribute('x1', G12[0].toFixed(1)); q('g21').setAttribute('y1', G12[1].toFixed(1));
+    q('g21').setAttribute('x2', GMeta[0].toFixed(1)); q('g21').setAttribute('y2', GMeta[1].toFixed(1));
+    q('g21').setAttribute('opacity', showIn ? '0.68' : '0');
+
+    q('erm').setAttribute('x1', P[0].toFixed(1)); q('erm').setAttribute('y1', P[1].toFixed(1));
+    q('erm').setAttribute('x2', GErm[0].toFixed(1)); q('erm').setAttribute('y2', GErm[1].toFixed(1));
+    q('erm-lbl').setAttribute('x', (GErm[0] + (GErm[0] >= P[0] ? 22 : -22)).toFixed(1));
+    q('erm-lbl').setAttribute('y', (GErm[1] + 4).toFixed(1));
+
+    q('meta').setAttribute('x1', P[0].toFixed(1)); q('meta').setAttribute('y1', P[1].toFixed(1));
+    q('meta').setAttribute('x2', GMeta[0].toFixed(1)); q('meta').setAttribute('y2', GMeta[1].toFixed(1));
+    q('meta-lbl').setAttribute('x', ((P[0] + GMeta[0]) / 2 - 16).toFixed(1));
+    q('meta-lbl').setAttribute('y', ((P[1] + GMeta[1]) / 2 - 14).toFixed(1));
+
+    var pct = (alpha / 0.48) * 100;
+    q('rail-fill').style.width = pct.toFixed(2) + '%';
+    q('rail-thumb').style.left = pct.toFixed(2) + '%';
+    q('a-readout').textContent = 'α = ' + alpha.toFixed(2);
+    q('rail').setAttribute('aria-valuenow', alpha.toFixed(2));
+    root.querySelectorAll('.fig-stop').forEach(function (b) {
+      b.classList.toggle('is-active', Math.abs(parseFloat(b.dataset.val) - alpha) < 0.02);
+    });
+  }
+
+  var dragT = false;
+  function updateTh(e) {
+    var rect = svg.getBoundingClientRect();
+    var sx = (e.clientX - rect.left) * (680 / rect.width);
+    var sy = (e.clientY - rect.top) * (280 / rect.height);
+    var xy = fromSvg(sx, sy);
+    th = [Math.max(0.8, Math.min(4.5, xy[0])), Math.max(-1.15, Math.min(1.15, xy[1]))];
+    draw();
+  }
+  q('handle-th').addEventListener('pointerdown', function (e) {
+    dragT = true; q('handle-th').setPointerCapture(e.pointerId); updateTh(e);
+  });
+  q('handle-th').addEventListener('pointermove', function (e) { if (dragT) updateTh(e); });
+  q('handle-th').addEventListener('pointerup', function () { dragT = false; });
+
+  var rail = q('rail'), dragA = false;
+  function setA(e) {
+    var r = rail.getBoundingClientRect();
+    var t = Math.min(Math.max((e.clientX - r.left) / r.width, 0), 1);
+    alpha = Math.round(t * 48) / 100;
+    if (alpha < 0.015) alpha = 0;
+    draw();
+  }
+  rail.addEventListener('pointerdown', function (e) {
+    dragA = true; rail.classList.add('is-dragging'); rail.setPointerCapture(e.pointerId); setA(e);
+  });
+  rail.addEventListener('pointermove', function (e) { if (dragA) setA(e); });
+  rail.addEventListener('pointerup', function () { dragA = false; rail.classList.remove('is-dragging'); });
+  rail.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowUp') { alpha = Math.min(0.48, +(alpha + 0.02).toFixed(2)); draw(); e.preventDefault(); }
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') { alpha = Math.max(0, +(alpha - 0.02).toFixed(2)); draw(); e.preventDefault(); }
+  });
+  root.querySelectorAll('.fig-stop').forEach(function (b) {
+    b.addEventListener('click', function () { alpha = parseFloat(b.dataset.val); draw(); });
+  });
+  draw();
+})();
+</script>

@@ -1,0 +1,211 @@
+{{- $isKo := eq .Page.Lang "ko" -}}
+{{- $uid := printf "tpro-%d" .Ordinal -}}
+<figure class="fig-interactive" id="{{ $uid }}">
+  <div class="fig-plate">
+    <svg viewBox="0 0 680 264" role="img" aria-label="Interactive TPR role-unbinding orthogonality and readout interference">
+      <defs>
+        <marker id="{{ $uid }}-r" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse"><path d="M0 1.2L9.5 5L0 8.8z" fill="#B84327"/></marker>
+        <marker id="{{ $uid }}-p" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse"><path d="M0 1.2L9.5 5L0 8.8z" fill="#634294"/></marker>
+        <marker id="{{ $uid }}-g" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse"><path d="M0 1.2L9.5 5L0 8.8z" fill="#2A6F4E"/></marker>
+        <marker id="{{ $uid }}-o" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse"><path d="M0 1.2L9.5 5L0 8.8z" fill="#A86A14"/></marker>
+      </defs>
+
+      <!-- Left: Role Space -->
+      <text x="18" y="22" font-size="11.5" fill="#634294">role space (2D slice)</text>
+      <g stroke="#EAE6DC" stroke-width="0.9">
+        <line x1="152" y1="36" x2="152" y2="244"/>
+        <line x1="36" y1="152" x2="268" y2="152"/>
+      </g>
+      <circle cx="152" cy="152" r="78" fill="rgba(99,66,148,0.035)" stroke="rgba(99,66,148,0.34)" stroke-width="1.2" stroke-dasharray="4 3"/>
+
+      <!-- Fixed r2 = u2 (12 deg) -->
+      <line x1="152" y1="152" x2="228.3" y2="135.8" stroke="#634294" stroke-width="2.4" marker-end="url(#{{ $uid }}-p)"/>
+      <text x="234" y="136" font-size="12.5" font-weight="700" fill="#634294">r₂ = u₂</text>
+
+      <!-- Angle arc & projection drop -->
+      <path data-el="arc" d="" fill="rgba(184,67,39,0.08)" stroke="#B84327" stroke-width="1.4"/>
+      <line data-el="drop" x1="152" y1="152" x2="152" y2="152" stroke="#B84327" stroke-width="1.2" stroke-dasharray="3 2.5"/>
+      <line data-el="proj" x1="152" y1="152" x2="152" y2="152" stroke="#B84327" stroke-width="3.2" opacity="0.85"/>
+      <text data-el="ang-lbl" x="176" y="128" font-size="11.5" fill="#B84327" font-family="var(--font-mono)">48°</text>
+
+      <!-- Draggable r1 vector -->
+      <line data-el="r1" x1="152" y1="152" x2="191" y2="85" stroke="#B84327" stroke-width="2.6" marker-end="url(#{{ $uid }}-r)"/>
+      <circle cx="152" cy="152" r="3" fill="#1A1C20"/>
+      <g class="drag-handle" data-el="handle-r1">
+        <circle class="drag-halo" cx="191" cy="85" r="15" fill="#B84327" opacity="0.13"/>
+        <circle cx="191" cy="85" r="5.5" fill="#FFFFFF" stroke="#B84327" stroke-width="2.3"/>
+      </g>
+      <text data-el="r1-lbl" x="197" y="75" font-size="13.5" font-weight="700" fill="#B84327" font-style="italic">r₁</text>
+
+      <!-- Center exact dot-product readout -->
+      <line x1="292" y1="148" x2="366" y2="148" stroke="#A86A14" stroke-width="1.8" marker-end="url(#{{ $uid }}-o)"/>
+      <text x="329" y="138" text-anchor="middle" font-size="12.5" font-weight="600" fill="#1A1C20">u₂ · T</text>
+      <text data-el="dot-val" x="329" y="168" text-anchor="middle" font-size="11.5" fill="#B84327" font-family="var(--font-mono)">u₂·r₁ = 0.67</text>
+
+      <!-- Right: Readout Space -->
+      <text x="404" y="22" font-size="11.5" fill="#2A6F4E">readout space</text>
+      <g stroke="#EAE6DC" stroke-width="0.9">
+        <line x1="472" y1="36" x2="472" y2="244"/>
+        <line x1="398" y1="196" x2="660" y2="196"/>
+      </g>
+
+      <!-- Filler f1 (Seven, ochre) & target filler f2 (Three, viridian) -->
+      <line x1="472" y1="196" x2="444" y2="96" stroke="#A86A14" stroke-width="2.1" opacity="0.72" marker-end="url(#{{ $uid }}-o)"/>
+      <text x="412" y="88" font-size="12" fill="#A86A14">f₁ (Seven)</text>
+
+      <line x1="472" y1="196" x2="588" y2="176" stroke="#2A6F4E" stroke-width="2.3" stroke-dasharray="4 3" marker-end="url(#{{ $uid }}-g)"/>
+      <circle cx="588" cy="176" r="3.8" fill="#2A6F4E"/>
+      <text x="594" y="182" font-size="12" font-weight="600" fill="#2A6F4E">f₂ (Three)</text>
+
+      <!-- Interference leak vector (u2.r1)*f1 & total readout u2.T -->
+      <line data-el="leak" x1="588" y1="176" x2="569" y2="109" stroke="#B84327" stroke-width="2.2" marker-end="url(#{{ $uid }}-r)"/>
+      <text data-el="leak-lbl" x="586" y="138" font-size="11" fill="#B84327">(u₂·r₁)f₁</text>
+      <line data-el="readout" x1="472" y1="196" x2="569" y2="109" stroke="#B84327" stroke-width="2.8" marker-end="url(#{{ $uid }}-r)"/>
+      <circle data-el="rdot" cx="569" cy="109" r="4.3" fill="#B84327"/>
+      <text data-el="eq-state" x="530" y="64" text-anchor="middle" font-size="13" font-weight="700" fill="#B84327">u₂ · T ≠ f₂</text>
+      <circle cx="472" cy="196" r="3" fill="#1A1C20"/>
+    </svg>
+
+    <div class="fig-controls">
+      <div class="fig-rail-wrap">
+        <span class="fig-param" data-el="th-readout">θ = 48°</span>
+        <div class="fig-rail" data-el="rail" role="slider" tabindex="0" aria-label="Angle theta between r1 and r2" aria-valuemin="20" aria-valuemax="120" aria-valuenow="48">
+          <div class="fig-rail-track">
+            <div class="fig-rail-fill" data-el="rail-fill" style="width:28%"></div>
+            <div class="fig-rail-thumb" data-el="rail-thumb" style="left:28%"></div>
+          </div>
+        </div>
+      </div>
+      <div class="fig-stops">
+        <button type="button" class="fig-stop" data-val="90">{{- if $isKo -}}90° (Ours · 직교){{- else -}}90° (Ours · orthogonal){{- end -}}</button>
+        <button type="button" class="fig-stop is-active" data-val="48">{{- if $isKo -}}48° (FWM · 결합){{- else -}}48° (FWM · coupled){{- end -}}</button>
+      </div>
+    </div>
+  </div>
+  <figcaption>
+    {{- if $isKo -}}
+    TPR 메모리 복원 식 <strong>u₂·T = (u₂·r₁)f₁ + (u₂·r₂)f₂</strong>. 왼쪽의 <span style="color:#B84327;font-weight:600">r₁</span>을 직접 회전시키면, θ = 90°(직교)일 때만 간섭항이 사라져 정확한 filler(<span style="color:#2A6F4E">f₂</span>)가 복원되고 각도가 기울어질수록 <span style="color:#A86A14">f₁</span>이 섞여 들어온다.
+    {{- else -}}
+    TPR unbinding <strong>u₂·T = (u₂·r₁)f₁ + (u₂·r₂)f₂</strong>. Drag <span style="color:#B84327;font-weight:600">r₁</span> around the circle: interference vanishes only at θ = 90° (orthogonal roles), cleanly recovering <span style="color:#2A6F4E">f₂</span>; tilting toward r₂ leaks <span style="color:#A86A14">f₁</span> into the readout.
+    {{- end -}}
+  </figcaption>
+</figure>
+<script>
+(function () {
+  var root = document.getElementById('{{ $uid }}');
+  if (!root) return;
+  var svg = root.querySelector('svg');
+  var q = function (k) { return root.querySelector('[data-el="' + k + '"]'); };
+
+  var OL = [152, 152], R = 78;
+  var baseDeg = 12; // r2 angle in deg
+  var thetaDeg = 48; // angle between r1 and r2
+  var F1 = [-28, -100], F2 = [116, -20], OR = [472, 196];
+
+  function draw() {
+    var rad2 = baseDeg * Math.PI / 180;
+    var rad1 = (baseDeg + thetaDeg) * Math.PI / 180;
+    var r1x = OL[0] + R * Math.cos(rad1), r1y = OL[1] - R * Math.sin(rad1);
+    var cosT = Math.cos(thetaDeg * Math.PI / 180);
+    if (Math.abs(thetaDeg - 90) < 0.8) cosT = 0;
+
+    // Projection foot onto r2
+    var px = OL[0] + R * cosT * Math.cos(rad2);
+    var py = OL[1] - R * cosT * Math.sin(rad2);
+
+    q('r1').setAttribute('x2', r1x.toFixed(1)); q('r1').setAttribute('y2', r1y.toFixed(1));
+    var h = q('handle-r1').querySelectorAll('circle');
+    h[0].setAttribute('cx', r1x.toFixed(1)); h[0].setAttribute('cy', r1y.toFixed(1));
+    h[1].setAttribute('cx', r1x.toFixed(1)); h[1].setAttribute('cy', r1y.toFixed(1));
+    q('r1-lbl').setAttribute('x', (OL[0] + (R + 17) * Math.cos(rad1) - 5).toFixed(1));
+    q('r1-lbl').setAttribute('y', (OL[1] - (R + 17) * Math.sin(rad1) + 4).toFixed(1));
+
+    q('drop').setAttribute('x1', r1x.toFixed(1)); q('drop').setAttribute('y1', r1y.toFixed(1));
+    q('drop').setAttribute('x2', px.toFixed(1));  q('drop').setAttribute('y2', py.toFixed(1));
+    q('proj').setAttribute('x2', px.toFixed(1));  q('proj').setAttribute('y2', py.toFixed(1));
+    q('proj').setAttribute('opacity', Math.abs(cosT) < 0.02 ? '0' : '0.85');
+
+    // Angle arc
+    var ar = 28;
+    var ax0 = OL[0] + ar * Math.cos(rad2), ay0 = OL[1] - ar * Math.sin(rad2);
+    var ax1 = OL[0] + ar * Math.cos(rad1), ay1 = OL[1] - ar * Math.sin(rad1);
+    q('arc').setAttribute('d', 'M' + OL[0] + ' ' + OL[1] + ' L' + ax0.toFixed(1) + ' ' + ay0.toFixed(1) +
+      ' A' + ar + ' ' + ar + ' 0 0 0 ' + ax1.toFixed(1) + ' ' + ay1.toFixed(1) + ' Z');
+    var midR = (rad1 + rad2) / 2;
+    q('ang-lbl').setAttribute('x', (OL[0] + 40 * Math.cos(midR) - 10).toFixed(1));
+    q('ang-lbl').setAttribute('y', (OL[1] - 40 * Math.sin(midR) + 4).toFixed(1));
+    q('ang-lbl').textContent = Math.round(thetaDeg) + '°';
+
+    // Readout space
+    var f2x = OR[0] + F2[0], f2y = OR[1] + F2[1];
+    var tx = f2x + cosT * F1[0], ty = f2y + cosT * F1[1];
+    var clean = Math.abs(cosT) < 0.03;
+    var col = clean ? '#2A6F4E' : '#B84327';
+
+    q('leak').setAttribute('x2', tx.toFixed(1)); q('leak').setAttribute('y2', ty.toFixed(1));
+    q('leak').setAttribute('opacity', clean ? '0' : '1');
+    q('leak-lbl').setAttribute('x', ((f2x + tx) / 2 + 8).toFixed(1));
+    q('leak-lbl').setAttribute('y', ((f2y + ty) / 2).toFixed(1));
+    q('leak-lbl').setAttribute('opacity', clean ? '0' : '1');
+
+    q('readout').setAttribute('x2', tx.toFixed(1)); q('readout').setAttribute('y2', ty.toFixed(1));
+    q('readout').setAttribute('stroke', col);
+    q('readout').setAttribute('marker-end', 'url(#{{ $uid }}-' + (clean ? 'g' : 'r') + ')');
+    q('rdot').setAttribute('cx', tx.toFixed(1)); q('rdot').setAttribute('cy', ty.toFixed(1));
+    q('rdot').setAttribute('fill', col);
+    q('eq-state').textContent = clean ? 'u₂ · T = f₂' : 'u₂ · T ≠ f₂';
+    q('eq-state').setAttribute('fill', col);
+    q('dot-val').textContent = 'u₂·r₁ = ' + cosT.toFixed(2);
+    q('dot-val').setAttribute('fill', col);
+
+    var pct = ((thetaDeg - 20) / 100) * 100;
+    q('rail-fill').style.width = pct.toFixed(2) + '%';
+    q('rail-thumb').style.left = pct.toFixed(2) + '%';
+    q('th-readout').textContent = 'θ = ' + Math.round(thetaDeg) + '°';
+    q('rail').setAttribute('aria-valuenow', Math.round(thetaDeg));
+    root.querySelectorAll('.fig-stop').forEach(function (b) {
+      b.classList.toggle('is-active', Math.abs(parseFloat(b.dataset.val) - thetaDeg) < 2.5);
+    });
+  }
+
+  var dragR = false;
+  function updateFromCircle(e) {
+    var rect = svg.getBoundingClientRect();
+    var sx = (e.clientX - rect.left) * (680 / rect.width);
+    var sy = (e.clientY - rect.top) * (264 / rect.height);
+    var deg = Math.atan2(OL[1] - sy, sx - OL[0]) * 180 / Math.PI - baseDeg;
+    deg = Math.max(20, Math.min(120, deg));
+    if (Math.abs(deg - 90) < 3) deg = 90;
+    thetaDeg = deg;
+    draw();
+  }
+  q('handle-r1').addEventListener('pointerdown', function (e) {
+    dragR = true; q('handle-r1').setPointerCapture(e.pointerId); updateFromCircle(e);
+  });
+  q('handle-r1').addEventListener('pointermove', function (e) { if (dragR) updateFromCircle(e); });
+  q('handle-r1').addEventListener('pointerup', function () { dragR = false; });
+
+  var rail = q('rail'), dragRail = false;
+  function setFromRail(e) {
+    var r = rail.getBoundingClientRect();
+    var t = Math.min(Math.max((e.clientX - r.left) / r.width, 0), 1);
+    var deg = 20 + t * 100;
+    if (Math.abs(deg - 90) < 3) deg = 90;
+    thetaDeg = deg;
+    draw();
+  }
+  rail.addEventListener('pointerdown', function (e) {
+    dragRail = true; rail.classList.add('is-dragging'); rail.setPointerCapture(e.pointerId); setFromRail(e);
+  });
+  rail.addEventListener('pointermove', function (e) { if (dragRail) setFromRail(e); });
+  rail.addEventListener('pointerup', function () { dragRail = false; rail.classList.remove('is-dragging'); });
+  rail.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowUp') { thetaDeg = Math.min(120, thetaDeg + 2); draw(); e.preventDefault(); }
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') { thetaDeg = Math.max(20, thetaDeg - 2); draw(); e.preventDefault(); }
+  });
+  root.querySelectorAll('.fig-stop').forEach(function (b) {
+    b.addEventListener('click', function () { thetaDeg = parseFloat(b.dataset.val); draw(); });
+  });
+  draw();
+})();
+</script>

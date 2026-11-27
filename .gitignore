@@ -1,0 +1,17 @@
+# Hugo build output
+public/
+resources/_gen/
+assets/jsconfig.json
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor
+*.swp
+*.swo
+*~
+
+# Claude Code local instructions (never publish)
+CLAUDE.local.md
+.omx/

@@ -1,0 +1,60 @@
+{{- /*
+  Editorial paper hero metadata + SVG pill buttons.
+  Parameters:
+    venue, authors (HTML allowed), affil (HTML allowed), note (HTML allowed, optional),
+    paper, paperLabel (default "Paper"), code, video, videoLabel (default "Poster & Video"),
+    competition
+*/ -}}
+{{- $venue := .Get "venue" -}}
+{{- $authors := .Get "authors" -}}
+{{- $affil := .Get "affil" -}}
+{{- $note := .Get "note" -}}
+{{- $paper := .Get "paper" -}}
+{{- $paperLabel := .Get "paperLabel" | default "Paper" -}}
+{{- $code := .Get "code" -}}
+{{- $video := .Get "video" -}}
+{{- $videoLabel := .Get "videoLabel" | default "Poster & Video" -}}
+{{- $competition := .Get "competition" -}}
+
+<div class="paper-hero">
+{{- with $venue }}
+<div class="paper-venue">{{ . }}</div>
+{{- end }}
+{{- with $authors }}
+<div class="paper-authors">{{ . | safeHTML }}</div>
+{{- end }}
+{{- with $affil }}
+<div class="paper-affil">{{ . | safeHTML }}</div>
+{{- end }}
+{{- with $note }}
+<div class="paper-note">{{ . | safeHTML }}</div>
+{{- end }}
+{{- if or $paper $code $video $competition }}
+<div class="paper-actions">
+{{- with $paper }}
+<a class="paper-btn paper-btn--primary" href="{{ . }}" target="_blank" rel="noopener">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+<span>{{ $paperLabel }}</span>
+</a>
+{{- end }}
+{{- with $code }}
+<a class="paper-btn" href="{{ . }}" target="_blank" rel="noopener">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+<span>Code</span>
+</a>
+{{- end }}
+{{- with $video }}
+<a class="paper-btn" href="{{ . }}" target="_blank" rel="noopener">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+<span>{{ $videoLabel }}</span>
+</a>
+{{- end }}
+{{- with $competition }}
+<a class="paper-btn" href="{{ . }}" target="_blank" rel="noopener">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+<span>Competition</span>
+</a>
+{{- end }}
+</div>
+{{- end }}
+</div>

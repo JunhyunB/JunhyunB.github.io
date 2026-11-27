@@ -1,0 +1,114 @@
+---
+title: "Invariant Risk Minimization in Medical Imaging with Modular Data Representation"
+date: 2024-01-01
+draft: false
+tags: ["invariant-risk-minimization", "out-of-distribution", "medical-imaging"]
+summary: "ICEIC 2024 — Jun-Hyun Bae, Chanwoo Kim, Taeyoung Chang"
+ShowToc: false
+ShowReadingTime: false
+ShowShareButtons: false
+hideMeta: true
+cover:
+  image: "/videos/iceic2024-modular-irm.jpg"
+  alt: "Modular IRM Soft Competition"
+  hidden: true
+---
+
+{{< paper-header
+  venue="ICEIC 2024"
+  authors="<strong>Jun-Hyun Bae</strong><sup>1</sup>, Chanwoo Kim<sup>2</sup>, Taeyoung Chang<sup>2</sup>"
+  affil="<sup>1</sup>Kyungpook National University · <sup>2</sup>Seoul National University"
+  paper="https://ieeexplore.ieee.org/document/10457174/"
+>}}
+
+{{< video src="/videos/iceic2024-modular-irm.mp4" poster="/videos/iceic2024-modular-irm.jpg" caption="Learning diverse causal cues in medical imaging with soft-competing modular representations" >}}
+
+## Abstract
+
+Despite the effectiveness of deep neural networks trained with Empirical Risk Minimization (ERM) in medical imaging tasks, these models often exhibit performance degradation when faced with Out-of-Distribution (OoD) data, owing to potential biases in their predictive accuracy. Invariant Risk Minimization (IRM) seeks to rectify this issue by identifying invariant or causal correlations across various environments. However, its practical application does not consistently deliver the expected generalization performance in real-world scenarios. This paper addresses a potential limitation of the IRM framework, positing that the constraints enforced by IRM might not sufficiently guide the model in learning all causal features. In response, we propose a novel methodology leveraging modular neural networks within the IRM framework. Our approach aims to generate more diverse data representations, thereby enhancing the generalization performance of models trained with IRM. Experimental validation on three tasks — two medical image classification tasks, namely, Camelyon17-wilds and CheXpert, and a synthetic task, Colored MNIST — demonstrates significant improvements in generalization performance in both OoD settings and subpopulation shift cases.
+
+---
+
+## Overview
+
+IRM constrains prediction across environments but does not prescribe the representation architecture. This work divides the representation model into modules and combines their outputs according to the input. The modules compete to learn different features while the full model trains with the IRM objective.
+
+On Camelyon17, a configuration with four ResNet-18 modules reaches 83.5% accuracy at a held-out hospital, compared with 72.9% for IRM using ResNet-101. On CheXpert, worst-group accuracy improves while average accuracy falls. The two experiments therefore show improvements in different performance measures.
+
+![Modular IRM Framework](/images/iceic2024/diagram.webp)
+
+<p class="caption">Overview of the proposed method: modular data representations integrated within the IRM framework.</p>
+
+---
+
+## Method
+
+IRM sets an objective for invariant prediction across environments, but does not prescribe the representation architecture. We explore the possibility that a monolithic model learns **only a limited set of dominant invariant features**. Lower OOD or worst-case performance for IRM than ERM on Camelyon17-wilds and CheXpert motivates this direction.
+
+To address this, we split the data representation model $\Phi$ into $N$ independent modules $\{f_n\}_{n=1}^N$. Each module is encouraged to learn different features through **competitive learning** via multi-head dot product attention. The input itself serves as the query, module outputs serve as keys/values, and the top-$k$ modules are selected. To mitigate module collapse (where only a few modules keep getting selected), the $QK^T$ values of non-selected modules are set to zero rather than negative infinity, so these modules still receive a non-zero weight after the softmax (soft selection).
+
+![Dataset Examples](/images/iceic2024/data.webp)
+
+<p class="caption">Example images from the Camelyon17-wilds and CheXpert datasets across different environments.</p>
+
+---
+
+## Results
+
+### Colored MNIST
+
+In the two training environments, digit color agrees with the label 90% and 80% of the time, while digit shape agrees only 75% of the time. In the test environment the color–label relation is reversed (10%), so a color-reliant model fails badly, whereas an ideal shape-only model stays at 75% in both training and test (Optimal in the table).
+
+<p class="caption">Accuracy (%) on Colored MNIST. Bold marks the value closest to the bias-free ideal (Optimal, 75.0%).</p>
+
+| Algorithm | Val Accuracy (iid) | Test Accuracy (OOD) | # Params |
+|---|---|---|---|
+| ERM | 88.6% | 16.4% | 1,198,337 |
+| IRM | 73.4% | 60.5% | 1,198,337 |
+| **Ours (N=3, k=1)** | **74.9%** | **66.5%** | 935,553 |
+| Optimal | 75.0% | 75.0% | N/A |
+
+Our method (N=3, k=1) improves OOD accuracy by 6.0pp over IRM (66.5% vs 60.5%) while using 22% fewer parameters. Its validation accuracy (74.9%) is close to that of an ideal shape-only predictor (75.0%), and its OOD accuracy is the highest of the three methods, indicating the weakest reliance on the spurious color feature, though still short of the ideal predictor's 75.0%.
+
+### Camelyon17-wilds (OOD Medical Imaging)
+
+Camelyon17-wilds asks whether lymph-node tissue patches contain tumor. Models are trained on data from hospitals 1–3, validated on hospital 4, and tested on hospital 5, which is unseen during training. ERM and IRM use ResNet-101, while our method uses ResNet-18 modules.
+
+| Algorithm | Validation Accuracy | Test Accuracy (OOD) | # Params |
+|---|---|---|---|
+| ERM | 91.9% | 73.3% | 42.8M |
+| IRM | 94.1% | 72.9% | 42.8M |
+| **Ours (N=4, k=2)** | 91.5% | **83.5%** | 45.6M |
+| Ours (N=2, k=1) | 90.4% | 74.5% | **22.8M** |
+
+The N=4, k=2 configuration reaches 83.5% OOD accuracy, 10.2pp above ERM (73.3%). The N=2, k=1 configuration reaches 74.5% with roughly half the parameters (22.8M versus 42.8M).
+
+### CheXpert (Subpopulation Shift)
+
+CheXpert classifies chest X-rays as "No Finding" or not, with environments defined by combinations of race (White, Black, Other) and gender. The goal here is not OOD generalization but raising the lowest accuracy across environments (worst-case accuracy). ERM and IRM use ResNet-50, while our method uses ResNet-18 modules.
+
+| Algorithm | Average Accuracy | Worst-case Accuracy |
+|---|---|---|
+| ERM | 86.9% | 50.2% |
+| IRM | 89.8% | 34.4% |
+| **Ours (N=3, k=1)** | 80.3% | **59.6%** |
+
+On CheXpert as well, IRM's worst-case accuracy is **15.8pp lower than ERM** (34.4% vs 50.2%). IRM attains higher average accuracy but much lower accuracy on the worst-off demographic group. Our method gives up average accuracy (80.3% vs. 86.9% for ERM and 89.8% for IRM) in exchange for a worst-case accuracy of 59.6%, +9.4pp over ERM and +25.2pp over IRM — trading some average accuracy to raise performance on the most vulnerable group.
+
+### Module & Winner Count Ablation (Camelyon17)
+
+<p class="caption">OOD test accuracy (%) by module count (N) and winner count (k).</p>
+
+| N (Modules) | k (Winners) | Test Accuracy (OOD) |
+|:---:|:---:|:---:|
+| 2 | 1 | 74.5 |
+| 3 | 1 | 73.1 |
+| 3 | 2 | 57.6 |
+| 4 | 1 | 73.4 |
+| **4** | **2** | **83.5** |
+| 5 | 1 | 74.6 |
+| 5 | 2 | 75.6 |
+
+With k=1, performance stays in the 73–75% range regardless of module count, showing limited improvement over baselines. The N=4, k=2 configuration is the best at 83.5%, but k=2 is sensitive to N: N=3 drops to 57.6% (the lowest) and N=5 reaches only 75.6%.
+
+---

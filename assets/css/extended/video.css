@@ -1,0 +1,25 @@
+/* Self-hosted explainer video (the "video" shortcode).
+   Same frame as the AAAI underline.io embed: 720 px column, 8 px radius, soft shadow. */
+.post-content .paper-video {
+    max-width: 720px;
+    margin: 0 auto 2rem;
+}
+
+.post-content .paper-video video {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background: #fff;
+}
+
+.post-content .paper-video figcaption {
+    margin: 0.6rem 0 0;
+    color: var(--secondary);
+    font-size: 0.88rem;
+    font-weight: normal;
+    line-height: 1.5;
+    text-align: center;
+}

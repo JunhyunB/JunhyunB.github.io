@@ -1,0 +1,178 @@
+{{- $isKo := eq .Page.Lang "ko" -}}
+{{- $uid := printf "cltsurg-%d" .Ordinal -}}
+<figure class="fig-interactive" id="{{ $uid }}">
+  <div class="fig-plate">
+    <svg viewBox="0 0 680 258" role="img" aria-label="Interactive CLT cross-layer MLP vector surgery">
+      <defs>
+        <marker id="{{ $uid }}-o" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse"><path d="M0 1.2L9.5 5L0 8.8z" fill="#A86A14"/></marker>
+        <marker id="{{ $uid }}-r" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse"><path d="M0 1.2L9.5 5L0 8.8z" fill="#B84327"/></marker>
+        <marker id="{{ $uid }}-p" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse"><path d="M0 1.2L9.5 5L0 8.8z" fill="#634294"/></marker>
+        <marker id="{{ $uid }}-k" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse"><path d="M0 1.2L9.5 5L0 8.8z" fill="#1A1C20"/></marker>
+      </defs>
+
+      <!-- Left: Source Layer l_s -->
+      <text x="18" y="22" font-size="11.5" fill="#A86A14">source layer ℓ<tspan baseline-shift="sub" font-size="8.5">s</tspan> ∈ L<tspan baseline-shift="sub" font-size="8.5">source</tspan></text>
+      <g stroke="#EAE6DC" stroke-width="0.9">
+        <line x1="56" y1="36" x2="56" y2="232"/>
+        <line x1="22" y1="202" x2="278" y2="202"/>
+        <line x1="126" y1="36" x2="126" y2="232" stroke-opacity="0.55"/>
+        <line x1="196" y1="36" x2="196" y2="232" stroke-opacity="0.55"/>
+        <line x1="22" y1="132" x2="278" y2="132" stroke-opacity="0.55"/>
+        <line x1="22" y1="62" x2="278" y2="62" stroke-opacity="0.55"/>
+      </g>
+      <!-- Source baseline CLT write: a^2 W_dec^{2->2} -->
+      <line x1="56" y1="202" x2="244" y2="162" stroke="#A86A14" stroke-width="2.2" opacity="0.72" marker-end="url(#{{ $uid }}-o)"/>
+      <text x="188" y="186" font-size="12" fill="#A86A14">a²W<tspan baseline-shift="sub" font-size="8.5">dec</tspan><tspan baseline-shift="super" font-size="8.5">2→2</tspan></text>
+      <!-- Live subtracted forget write -alpha Delta y^{2->2} -->
+      <line data-el="s-sub" x1="244" y1="162" x2="146" y2="86" stroke="#B84327" stroke-width="2.3" marker-end="url(#{{ $uid }}-r)"/>
+      <text data-el="s-sub-lbl" x="206" y="114" font-size="11.5" fill="#B84327">−αΔy<tspan baseline-shift="sub" font-size="8">rm</tspan></text>
+      <!-- Live source target y_tilde^2 -->
+      <line data-el="s-tgt" x1="56" y1="202" x2="146" y2="86" stroke="#634294" stroke-width="2.7" marker-end="url(#{{ $uid }}-p)"/>
+      <circle data-el="s-dot" cx="146" cy="86" r="4.2" fill="#634294"/>
+      <text data-el="s-tgt-lbl" x="116" y="76" font-size="13" font-weight="700" fill="#634294">ỹ<tspan baseline-shift="sub" font-size="8.5">rm</tspan><tspan baseline-shift="super" font-size="8.5">2</tspan></text>
+      <circle cx="56" cy="202" r="3" fill="#1A1C20"/>
+
+      <!-- Cross-layer write dashed arc -->
+      <path data-el="arc" d="M 294 134 Q 338 118 380 134" fill="none" stroke="#B84327" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#{{ $uid }}-r)"/>
+      <text data-el="arc-lbl" x="338" y="113" text-anchor="middle" font-size="11.5" fill="#B84327">Δy<tspan baseline-shift="sub" font-size="8">rm</tspan><tspan baseline-shift="super" font-size="8">2→3</tspan></text>
+
+      <!-- Right: Downstream Layer l_t -->
+      <text x="402" y="22" font-size="11.5" fill="#1E4E79">downstream layer ℓ<tspan baseline-shift="sub" font-size="8.5">t</tspan> ∉ L<tspan baseline-shift="sub" font-size="8.5">source</tspan></text>
+      <g stroke="#EAE6DC" stroke-width="0.9">
+        <line x1="436" y1="36" x2="436" y2="232"/>
+        <line x1="402" y1="202" x2="660" y2="202"/>
+        <line x1="506" y1="36" x2="506" y2="232" stroke-opacity="0.55"/>
+        <line x1="576" y1="36" x2="576" y2="232" stroke-opacity="0.55"/>
+        <line x1="402" y1="132" x2="660" y2="132" stroke-opacity="0.55"/>
+        <line x1="402" y1="62" x2="660" y2="62" stroke-opacity="0.55"/>
+      </g>
+      <!-- Real unmodified downstream MLP output y_orig^3 -->
+      <line x1="436" y1="202" x2="624" y2="128" stroke="#1A1C20" stroke-width="2.3" marker-end="url(#{{ $uid }}-k)"/>
+      <text x="588" y="152" font-size="12.5" font-weight="600" fill="#1A1C20">y<tspan baseline-shift="sub" font-size="8.5">orig</tspan><tspan baseline-shift="super" font-size="8.5">3</tspan></text>
+      <!-- Live subtracted cross-layer write -->
+      <line data-el="d-sub" x1="624" y1="128" x2="556" y2="78" stroke="#B84327" stroke-width="2.2" stroke-dasharray="4 3" marker-end="url(#{{ $uid }}-r)"/>
+      <text data-el="d-sub-lbl" x="598" y="92" font-size="11.5" fill="#B84327">−αΔy<tspan baseline-shift="sub" font-size="8">rm</tspan><tspan baseline-shift="super" font-size="8">2→3</tspan></text>
+      <!-- Live downstream target y_tilde^3 -->
+      <line data-el="d-tgt" x1="436" y1="202" x2="556" y2="78" stroke="#634294" stroke-width="2.7" marker-end="url(#{{ $uid }}-p)"/>
+      <circle data-el="d-dot" cx="556" cy="78" r="4.2" fill="#634294"/>
+      <text data-el="d-tgt-lbl" x="524" y="70" font-size="13" font-weight="700" fill="#634294">ỹ<tspan baseline-shift="sub" font-size="8.5">rm</tspan><tspan baseline-shift="super" font-size="8.5">3</tspan></text>
+      <circle cx="436" cy="202" r="3" fill="#1A1C20"/>
+    </svg>
+
+    <div class="fig-controls">
+      <div class="fig-rail-wrap">
+        <span class="fig-param" data-el="a-readout">α = 1.00</span>
+        <div class="fig-rail" data-el="rail" role="slider" tabindex="0" aria-label="Steering scale alpha" aria-valuemin="0" aria-valuemax="1.5" aria-valuenow="1">
+          <div class="fig-rail-track">
+            <div class="fig-rail-fill" data-el="rail-fill" style="width:66.7%"></div>
+            <div class="fig-rail-thumb" data-el="rail-thumb" style="left:66.7%"></div>
+          </div>
+        </div>
+      </div>
+      <div class="fig-stops" aria-label="Selected forget features">
+        <button type="button" class="fig-chip-btn" data-feat="0" aria-pressed="true">f₁</button>
+        <button type="button" class="fig-chip-btn" data-feat="1" aria-pressed="true">f₂</button>
+        <button type="button" class="fig-chip-btn" data-feat="2" aria-pressed="true">f₃</button>
+        <button type="button" class="fig-stop" data-val="0">α = 0</button>
+        <button type="button" class="fig-stop is-active" data-val="1">α = 1</button>
+      </div>
+    </div>
+  </div>
+  <figcaption>
+    {{- if $isKo -}}
+    Source layer와 downstream layer의 목표 출력 구성. <strong>α</strong>를 조절하거나 제거 집합 <span style="color:#B84327"><i>F</i><sub>rm</sub></span>의 feature(f₁–f₃)를 켜고 끄면, source layer는 자기 층 decoder 기여에서 선택 몫을 빼고 downstream layer는 실제 출력 <strong>y</strong><sub>orig</sub>를 유지한 채 앞선 층에서 넘어온 cross-layer 기여만 제거한다.
+    {{- else -}}
+    Constructing distillation targets across source and downstream layers. Scrub <strong>α</strong> or toggle features in <span style="color:#B84327"><i>F</i><sub>rm</sub></span> (f₁–f₃): source layers subtract selected same-layer decoder writes, while downstream layers preserve real <strong>y</strong><sub>orig</sub> and remove only incoming cross-layer writes.
+    {{- end -}}
+  </figcaption>
+</figure>
+<script>
+(function () {
+  var root = document.getElementById('{{ $uid }}');
+  if (!root) return;
+  var q = function (k) { return root.querySelector('[data-el="' + k + '"]'); };
+
+  var alpha = 1.0;
+  var active = [true, true, true];
+  // Per-feature contributions in source layer and downstream cross-layer write
+  var sVecs = [[-42, -30], [-34, -28], [-22, -18]];
+  var dVecs = [[-28, -22], [-24, -18], [-16, -10]];
+
+  function draw() {
+    var sx = 0, sy = 0, dx = 0, dy = 0, count = 0;
+    for (var i = 0; i < 3; i++) {
+      if (active[i]) {
+        sx += sVecs[i][0]; sy += sVecs[i][1];
+        dx += dVecs[i][0]; dy += dVecs[i][1];
+        count++;
+      }
+    }
+    var stx = 244 + alpha * sx, sty = 162 + alpha * sy;
+    var dtx = 624 + alpha * dx, dty = 128 + alpha * dy;
+    var activeScale = count > 0 && alpha > 0.02;
+
+    q('s-sub').setAttribute('x2', stx.toFixed(1)); q('s-sub').setAttribute('y2', sty.toFixed(1));
+    q('s-sub').setAttribute('opacity', activeScale ? '1' : '0.12');
+    q('s-sub-lbl').setAttribute('x', ((244 + stx) / 2 + 10).toFixed(1));
+    q('s-sub-lbl').setAttribute('y', ((162 + sty) / 2 - 8).toFixed(1));
+    q('s-sub-lbl').setAttribute('opacity', activeScale ? '1' : '0.25');
+
+    q('s-tgt').setAttribute('x2', stx.toFixed(1)); q('s-tgt').setAttribute('y2', sty.toFixed(1));
+    q('s-dot').setAttribute('cx', stx.toFixed(1)); q('s-dot').setAttribute('cy', sty.toFixed(1));
+    q('s-tgt-lbl').setAttribute('x', (stx - 26).toFixed(1)); q('s-tgt-lbl').setAttribute('y', (sty - 10).toFixed(1));
+
+    q('d-sub').setAttribute('x2', dtx.toFixed(1)); q('d-sub').setAttribute('y2', dty.toFixed(1));
+    q('d-sub').setAttribute('opacity', activeScale ? '1' : '0.12');
+    q('d-sub-lbl').setAttribute('x', ((624 + dtx) / 2 + 10).toFixed(1));
+    q('d-sub-lbl').setAttribute('y', ((128 + dty) / 2 - 10).toFixed(1));
+    q('d-sub-lbl').setAttribute('opacity', activeScale ? '1' : '0.25');
+
+    q('d-tgt').setAttribute('x2', dtx.toFixed(1)); q('d-tgt').setAttribute('y2', dty.toFixed(1));
+    q('d-dot').setAttribute('cx', dtx.toFixed(1)); q('d-dot').setAttribute('cy', dty.toFixed(1));
+    q('d-tgt-lbl').setAttribute('x', (dtx - 28).toFixed(1)); q('d-tgt-lbl').setAttribute('y', (dty - 10).toFixed(1));
+
+    q('arc').setAttribute('opacity', count > 0 ? (0.35 + 0.65 * Math.min(alpha, 1)).toFixed(2) : '0.15');
+    q('arc-lbl').setAttribute('opacity', count > 0 ? '1' : '0.3');
+
+    var pct = (alpha / 1.5) * 100;
+    q('rail-fill').style.width = pct.toFixed(2) + '%';
+    q('rail-thumb').style.left = pct.toFixed(2) + '%';
+    q('a-readout').textContent = 'α = ' + alpha.toFixed(2);
+    q('rail').setAttribute('aria-valuenow', alpha.toFixed(2));
+    root.querySelectorAll('.fig-stop').forEach(function (b) {
+      b.classList.toggle('is-active', Math.abs(parseFloat(b.dataset.val) - alpha) < 0.03);
+    });
+  }
+
+  var rail = q('rail'), drag = false;
+  function setFromEvent(e) {
+    var r = rail.getBoundingClientRect();
+    var t = Math.min(Math.max((e.clientX - r.left) / r.width, 0), 1);
+    alpha = Math.round(t * 150) / 100;
+    if (Math.abs(alpha - 1.0) < 0.03) alpha = 1.0;
+    if (alpha < 0.03) alpha = 0.0;
+    draw();
+  }
+  rail.addEventListener('pointerdown', function (e) {
+    drag = true; rail.classList.add('is-dragging'); rail.setPointerCapture(e.pointerId); setFromEvent(e);
+  });
+  rail.addEventListener('pointermove', function (e) { if (drag) setFromEvent(e); });
+  rail.addEventListener('pointerup', function () { drag = false; rail.classList.remove('is-dragging'); });
+  rail.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowUp') { alpha = Math.min(1.5, +(alpha + 0.05).toFixed(2)); draw(); e.preventDefault(); }
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') { alpha = Math.max(0, +(alpha - 0.05).toFixed(2)); draw(); e.preventDefault(); }
+  });
+  root.querySelectorAll('.fig-stop').forEach(function (b) {
+    b.addEventListener('click', function () { alpha = parseFloat(b.dataset.val); draw(); });
+  });
+  root.querySelectorAll('.fig-chip-btn').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var idx = parseInt(b.dataset.feat, 10);
+      active[idx] = !active[idx];
+      b.setAttribute('aria-pressed', String(active[idx]));
+      draw();
+    });
+  });
+  draw();
+})();
+</script>

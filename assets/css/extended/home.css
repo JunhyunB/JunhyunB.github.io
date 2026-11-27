@@ -1,0 +1,229 @@
+/* ==========================================================================
+   Home page sections — one-page profile below the intro:
+   Selected Publications · Experience · Education · Honors & Awards ·
+   Recent Posts. Typography stays CMU Sans; dates and periods use the
+   matching Computer Modern Typewriter face (already loaded by fonts.css).
+   Loaded before tables.css/theme.css, so selectors here are kept specific.
+   ========================================================================== */
+
+:root {
+    --home-mono: 'Computer Modern Typewriter', ui-monospace, SFMono-Regular, Menlo, monospace;
+    --home-rule: rgba(0, 0, 0, 0.06);
+}
+
+/* --------------------------------------------------------------------------
+   Section heading row — title left, quiet link right, shared underline
+   -------------------------------------------------------------------------- */
+
+.home-content .home-section {
+    margin-top: 2.6rem;
+}
+
+.home-content .section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    margin: 0 0 0.9rem;
+    padding-bottom: 0.35rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.home-content .section-head h2 {
+    margin: 0;
+    padding: 0;
+    border: none;
+    font-size: 1.2rem;
+    line-height: 1.3;
+}
+
+.home-content .section-head a {
+    flex-shrink: 0;
+    font-size: 0.82rem;
+    color: var(--secondary);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    transition: color 0.15s ease;
+}
+
+.home-content .section-head a:hover {
+    color: var(--accent);
+}
+
+/* --------------------------------------------------------------------------
+   Shared pieces — reset list chrome, monospace date/period column
+   -------------------------------------------------------------------------- */
+
+.home-content .home-section ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.home-content .cv-period,
+.home-content .award-year,
+.home-content .post-mini-date {
+    font-family: var(--home-mono);
+    font-size: 0.8rem;
+    color: var(--secondary);
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+}
+
+/* --------------------------------------------------------------------------
+   Experience / Education — org + role left, period right, optional logo
+   -------------------------------------------------------------------------- */
+
+.home-content .cv-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.9rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--home-rule);
+    line-height: 1.45;
+}
+
+.home-content .cv-list li:last-child {
+    border-bottom: none;
+}
+
+.home-content .cv-logo {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    margin: 0.1rem 0 0;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: #fff;
+    object-fit: contain;
+}
+
+.home-content .cv-main {
+    flex: 1;
+    min-width: 0;
+}
+
+.home-content .cv-org {
+    font-size: 0.98rem;
+    font-weight: 600;
+}
+
+.home-content .cv-org a {
+    color: var(--primary);
+    text-decoration: none;
+    transition: color 0.15s ease;
+}
+
+.home-content .cv-org a:hover {
+    color: var(--accent);
+}
+
+.home-content .cv-role {
+    margin-top: 0.1rem;
+    font-size: 0.9rem;
+    color: var(--secondary);
+}
+
+.home-content .cv-period {
+    margin-left: auto;
+    padding-top: 0.2rem;
+}
+
+/* --------------------------------------------------------------------------
+   Honors & Awards — name + muted description, year right
+   -------------------------------------------------------------------------- */
+
+.home-content .award-list li {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 0.32rem 0;
+    font-size: 0.95rem;
+    line-height: 1.55;
+}
+
+.home-content .award-name {
+    flex: 1;
+    min-width: 0;
+}
+
+.home-content .award-name a {
+    color: var(--primary);
+    text-decoration: none;
+    transition: color 0.15s ease;
+}
+
+.home-content .award-name a:hover {
+    color: var(--accent);
+}
+
+.home-content .award-desc {
+    color: var(--secondary);
+}
+
+.home-content .award-year {
+    margin-left: auto;
+}
+
+/* --------------------------------------------------------------------------
+   Recent posts — date column, title + one-line summary
+   -------------------------------------------------------------------------- */
+
+.home-content .post-mini-list li {
+    display: grid;
+    grid-template-columns: 6.2rem 1fr;
+    column-gap: 1rem;
+    align-items: baseline;
+    padding: 0.5rem 0;
+    line-height: 1.5;
+}
+
+.home-content .post-mini-title {
+    font-size: 0.98rem;
+    font-weight: 600;
+    color: var(--primary);
+    text-decoration: none;
+    transition: color 0.15s ease;
+}
+
+.home-content .post-mini-title:hover {
+    color: var(--accent);
+}
+
+.home-content .post-mini-summary {
+    margin-top: 0.15rem;
+    font-size: 0.88rem;
+    color: var(--secondary);
+}
+
+/* --------------------------------------------------------------------------
+   Narrow screens — periods and years drop under their entry
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 600px) {
+    .home-content .cv-list li {
+        flex-wrap: wrap;
+        row-gap: 0.15rem;
+    }
+
+    .home-content .cv-period {
+        flex-basis: 100%;
+        margin-left: 0;
+        padding-top: 0;
+    }
+
+    .home-content .cv-logo + .cv-main + .cv-period {
+        padding-left: calc(40px + 0.9rem);
+    }
+
+    .home-content .award-list li {
+        flex-wrap: wrap;
+        row-gap: 0;
+    }
+
+    .home-content .award-year {
+        flex-basis: 100%;
+        margin-left: 0;
+    }
+}

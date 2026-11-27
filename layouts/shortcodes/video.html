@@ -1,0 +1,23 @@
+{{- /*
+  Self-hosted explainer video (mp4 in static/videos/).
+  {{< video src="/videos/x.mp4" poster="/videos/x.jpg" title="..." caption="..." >}}
+  src is required. poster, title (accessible name) and caption (markdown) are optional.
+*/ -}}
+{{- $src := .Get "src" -}}
+{{- if not $src }}{{ errorf "video shortcode: missing src in %s" .Position }}{{ end -}}
+{{- $caption := .Get "caption" -}}
+{{- $title := .Get "title" | default (.Page.Title) -}}
+<figure class="paper-video">
+<div class="paper-video-stage">
+<video controls playsinline preload="metadata"{{ with .Get "poster" }} poster="{{ . | relURL }}"{{ end }} aria-label="{{ $title }}">
+<source src="{{ $src | relURL }}" type="video/mp4">
+<a href="{{ $src | relURL }}">{{ $title }} (mp4)</a>
+</video>
+<button type="button" class="paper-video-play" aria-label="Play {{ $title }}">
+<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="7,4.5 20,12 7,19.5"/></svg>
+</button>
+</div>
+{{- with $caption }}
+<figcaption>{{ . | markdownify }}</figcaption>
+{{- end }}
+</figure>

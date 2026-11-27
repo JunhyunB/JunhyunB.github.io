@@ -1,0 +1,18 @@
+{{- /* Education from data/cv.yaml */ -}}
+{{- with site.Data.cv.education }}
+<section class="home-section" id="education">
+{{ partial "home/section-head.html" (dict "title" "Education") }}
+<ul class="cv-list">
+{{- range . }}
+<li>
+{{- with .logo }}<img class="cv-logo" src="{{ . | relURL }}" alt="" loading="lazy">{{ end }}
+<div class="cv-main">
+<div class="cv-org">{{ with .org_url }}<a href="{{ . }}">{{ end }}{{ .org }}{{ with .org_url }}</a>{{ end }}</div>
+<div class="cv-role">{{ .degree }}</div>
+</div>
+<div class="cv-period">{{ .period }}</div>
+</li>
+{{- end }}
+</ul>
+</section>
+{{- end }}

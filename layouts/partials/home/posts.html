@@ -1,0 +1,19 @@
+{{- /* Recent posts — latest params.home.recentPosts entries of the posts section (current language, drafts excluded by the build) */ -}}
+{{- $cfg := site.Params.home | default dict -}}
+{{- $limit := int ($cfg.recentPosts | default 3) -}}
+{{- with where site.RegularPages "Section" "posts" }}
+<section class="home-section" id="recent-posts">
+{{ partial "home/section-head.html" (dict "title" "Recent Posts" "link" "/posts/" "label" "View all") }}
+<ul class="post-mini-list">
+{{- range first $limit . }}
+<li>
+<span class="post-mini-date">{{ .Date.Format "Jan 2, 2006" }}</span>
+<div class="post-mini-main">
+<a class="post-mini-title" href="{{ .RelPermalink }}">{{ .Title }}</a>
+{{- with .Params.summary }}<div class="post-mini-summary">{{ . }}</div>{{ end }}
+</div>
+</li>
+{{- end }}
+</ul>
+</section>
+{{- end }}

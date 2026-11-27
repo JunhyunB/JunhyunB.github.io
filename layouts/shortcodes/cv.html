@@ -1,0 +1,86 @@
+{{- /* Renders one section of data/cv.yaml (or data/publications.yaml for "publications") as lists (About page).
+       Usage: {{< cv "experience" >}} — experience | education | publications | competitions | scholarships | service */ -}}
+{{- $section := .Get 0 -}}
+{{- $ko := eq .Page.Language.Lang "ko" -}}
+{{- $data := index site.Data.cv $section -}}
+{{- if eq $section "publications" }}
+{{- $confs := where site.Data.publications "type" "conference" -}}
+{{- $preprints := where site.Data.publications "type" "preprint" -}}
+{{- $hasEqual := false -}}
+<ul>
+{{- range $idx, $pub := $confs }}
+{{- $num := sub (len $confs) $idx -}}
+{{- $projectPage := site.GetPage (printf "/projects/%s" $pub.id) -}}
+{{- $parts := split $pub.venue ", " -}}
+{{- $date := index $parts (sub (len $parts) 1) -}}
+{{- $venueName := delimit (first (sub (len $parts) 1) $parts) ", " -}}
+{{- if strings.Contains $pub.authors "*" }}{{ $hasEqual = true }}{{ end -}}
+<li><strong>[C{{ $num }}]</strong> {{ $pub.authors | safeHTML }}. "{{ with $projectPage }}<a href="{{ .RelPermalink }}">{{ $pub.title }}.</a>{{ else }}{{ $pub.title }}.{{ end }}" <em>{{ $venueName }},</em> {{ $date }}.</li>
+{{- end }}
+{{- range $idx, $pub := $preprints }}
+{{- $num := sub (len $preprints) $idx -}}
+{{- $projectPage := site.GetPage (printf "/projects/%s" $pub.id) -}}
+{{- $parts := split $pub.venue ", " -}}
+{{- $date := index $parts (sub (len $parts) 1) -}}
+{{- $venueName := delimit (first (sub (len $parts) 1) $parts) ", " -}}
+{{- if strings.Contains $pub.authors "*" }}{{ $hasEqual = true }}{{ end -}}
+<li><strong>[P{{ $num }}]</strong> {{ $pub.authors | safeHTML }}. "{{ with $projectPage }}<a href="{{ .RelPermalink }}">{{ $pub.title }}.</a>{{ else }}{{ $pub.title }}.{{ end }}" <em>{{ $venueName }},</em> {{ $date }}.</li>
+{{- end }}
+</ul>
+{{- if $hasEqual }}
+<p><small>* Equal Contribution</small></p>
+{{- end }}
+{{- else if eq $section "experience" }}
+<ul>
+{{- range $data }}
+<li><strong>{{ with .org_url }}<a href="{{ . }}">{{ end }}{{ .org }}{{ with .org_url }}</a>{{ end }}</strong> — {{ .role }} ({{ .period }}){{ with .note }} · {{ . }}{{ end }}
+{{- with .details }}
+<ul>
+{{- range . }}
+<li>{{ . | markdownify }}</li>
+{{- end }}
+</ul>
+{{- end }}
+</li>
+{{- end }}
+</ul>
+{{- else if eq $section "education" }}
+<ul>
+{{- range $data }}
+<li><strong>{{ with .org_url }}<a href="{{ . }}">{{ end }}{{ .org }}{{ with .org_url }}</a>{{ end }}</strong> — {{ .degree }} ({{ .period }})
+{{- with .details }}
+<ul>
+{{- range . }}
+<li>{{ . | markdownify }}</li>
+{{- end }}
+</ul>
+{{- end }}
+</li>
+{{- end }}
+</ul>
+{{- else if eq $section "competitions" }}
+<ul>
+{{- range $data }}
+<li><strong>{{ with .url }}<a href="{{ . | relLangURL }}">{{ end }}{{ .name }}{{ with .url }}</a>{{ end }}</strong>{{ if and .year (not (in .name .year)) }} ({{ .year }}){{ end }} — {{ .result }}</li>
+{{- end }}
+</ul>
+{{- else if eq $section "scholarships" }}
+<ul>
+{{- range $data }}
+{{- $name := .name }}{{ if and $ko .name_ko }}{{ $name = .name_ko }}{{ end }}
+{{- $desc := .desc }}{{ if and $ko .desc_ko }}{{ $desc = .desc_ko }}{{ end }}
+<li><strong>{{ $name }}</strong>{{ with .year }} ({{ . }}){{ end }}{{ with $desc }} — {{ . }}{{ end }}</li>
+{{- end }}
+</ul>
+{{- else if eq $section "service" }}
+{{- range $data }}
+<p><strong>{{ .role }}</strong></p>
+<ul>
+{{- range .items }}
+<li>{{ . }}</li>
+{{- end }}
+</ul>
+{{- end }}
+{{- else }}
+{{- errorf "cv shortcode: unknown section %q (file %s)" $section .Page.File.Path }}
+{{- end }}

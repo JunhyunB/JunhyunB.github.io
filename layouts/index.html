@@ -1,0 +1,22 @@
+{{- define "main" }}
+
+{{- if site.Params.profileMode.enabled }}
+{{- partial "index_profile.html" . }}
+{{- end }}
+
+<div class="home-content">
+{{- with .Content }}
+<div class="post-content home-intro">
+{{- if not ($.Param "disableAnchoredHeadings") }}
+{{- partial "anchored_headings.html" . -}}
+{{- else }}{{ . }}{{ end }}
+</div>
+{{- end }}
+{{ partial "home/publications.html" . }}
+{{ partial "home/experience.html" . }}
+{{ partial "home/education.html" . }}
+{{ partial "home/awards.html" . }}
+{{ partial "home/posts.html" . }}
+</div>
+
+{{- end }}{{- /* end main */ -}}

@@ -1,0 +1,18 @@
+{{- /* Experience from data/cv.yaml */ -}}
+{{- with site.Data.cv.experience }}
+<section class="home-section" id="experience">
+{{ partial "home/section-head.html" (dict "title" "Experience" "link" "/about/" "label" "Full CV") }}
+<ul class="cv-list">
+{{- range . }}
+<li>
+{{- with .logo }}<img class="cv-logo" src="{{ . | relURL }}" alt="" loading="lazy">{{ end }}
+<div class="cv-main">
+<div class="cv-org">{{ with .org_url }}<a href="{{ . }}">{{ end }}{{ .org }}{{ with .org_url }}</a>{{ end }}</div>
+<div class="cv-role">{{ .role }}</div>
+</div>
+<div class="cv-period">{{ .period }}</div>
+</li>
+{{- end }}
+</ul>
+</section>
+{{- end }}

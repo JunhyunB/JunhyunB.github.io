@@ -1,0 +1,233 @@
+{{- $isKo := eq .Page.Lang "ko" -}}
+{{- $uid := printf "ovsvd-%d" .Ordinal -}}
+<figure class="fig-interactive" id="{{ $uid }}">
+  <div class="fig-plate">
+    <svg viewBox="0 0 680 264" role="img" aria-label="Interactive SVD circle-to-ellipse map for Eq. 9">
+      <defs>
+        <marker id="{{ $uid }}-b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse"><path d="M0 1.2L9.5 5L0 8.8z" fill="#1E4E79"/></marker>
+        <marker id="{{ $uid }}-g" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse"><path d="M0 1.2L9.5 5L0 8.8z" fill="#2A6F4E"/></marker>
+        <marker id="{{ $uid }}-r" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse"><path d="M0 1.2L9.5 5L0 8.8z" fill="#B84327"/></marker>
+        <marker id="{{ $uid }}-o" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse"><path d="M0 1.2L9.5 5L0 8.8z" fill="#A86A14"/></marker>
+      </defs>
+
+      <!-- Left: Text-embedding space -->
+      <text x="20" y="22" font-size="11.5" fill="#1E4E79" font-family="var(--font-sans)">text-embedding space</text>
+      <g stroke="#EAE6DC" stroke-width="0.9">
+        <line x1="150" y1="36" x2="150" y2="244"/>
+        <line x1="36" y1="142" x2="264" y2="142"/>
+      </g>
+      <circle cx="150" cy="142" r="76" fill="rgba(30,78,121,0.04)" stroke="rgba(30,78,121,0.34)" stroke-width="1.2" stroke-dasharray="4 3"/>
+
+      <!-- Orthonormal input axes u1 (18 deg, kept) & u2 (108 deg, concept axis in S_c) -->
+      <line x1="150" y1="142" x2="222.3" y2="118.5" stroke="#1E4E79" stroke-width="2" marker-end="url(#{{ $uid }}-b)"/>
+      <line x1="150" y1="142" x2="126.5" y2="69.7" stroke="#B84327" stroke-width="2" marker-end="url(#{{ $uid }}-r)"/>
+      <!-- right angle square -->
+      <path d="M 161.4 138.3 L 157.7 126.9 L 146.3 130.6" fill="none" stroke="rgba(26,28,32,0.35)" stroke-width="1"/>
+      <text x="228" y="121" font-size="13.5" font-weight="700" fill="#1E4E79" font-style="italic">u₁</text>
+      <text x="111" y="64" font-size="13.5" font-weight="700" fill="#B84327" font-style="italic">u₂</text>
+      <text x="131" y="64" font-size="10.5" fill="#B84327" font-family="var(--font-mono)">∈ S<tspan baseline-shift="sub" font-size="8">c</tspan></text>
+
+      <!-- Live projections of c onto u1 and u2 -->
+      <line data-el="proj1" x1="150" y1="142" x2="150" y2="142" stroke="#1E4E79" stroke-width="1.1" stroke-dasharray="3 2.5" opacity="0.65"/>
+      <line data-el="proj2" x1="150" y1="142" x2="150" y2="142" stroke="#B84327" stroke-width="1.1" stroke-dasharray="3 2.5" opacity="0.72"/>
+      <!-- Live vector c -->
+      <line data-el="cvec" x1="150" y1="142" x2="200" y2="85" stroke="#A86A14" stroke-width="2.4" marker-end="url(#{{ $uid }}-o)"/>
+      <circle cx="150" cy="142" r="3" fill="#1A1C20"/>
+
+      <!-- Draggable handle for c on unit circle -->
+      <g class="drag-handle" data-el="handle-c">
+        <circle class="drag-halo" cx="200" cy="85" r="15" fill="#A86A14" opacity="0.13"/>
+        <circle cx="200" cy="85" r="5.5" fill="#FFFFFF" stroke="#A86A14" stroke-width="2.3"/>
+      </g>
+      <text data-el="clbl" x="210" y="79" font-size="13" font-weight="700" fill="#A86A14" font-style="italic">c</text>
+
+      <!-- Center curved map arrow -->
+      <path d="M 284 134 Q 332 114 378 134" fill="none" stroke="#A86A14" stroke-width="1.8" marker-end="url(#{{ $uid }}-o)"/>
+      <text x="331" y="114" text-anchor="middle" font-size="13" font-weight="600" fill="#1A1C20"><tspan font-style="italic">W</tspan><tspan baseline-shift="sub" font-size="9">OV</tspan><tspan font-size="11.5" fill="#B84327">(α)</tspan></text>
+      <text data-el="mid-a" x="331" y="148" text-anchor="middle" font-size="11" fill="#B84327" font-family="var(--font-mono)">α = 0.35</text>
+
+      <!-- Right: Head output space -->
+      <text x="404" y="22" font-size="11.5" fill="#2A6F4E" font-family="var(--font-sans)">head output space</text>
+      <g stroke="#EAE6DC" stroke-width="0.9">
+        <line x1="534" y1="36" x2="534" y2="244"/>
+        <line x1="406" y1="142" x2="662" y2="142"/>
+      </g>
+
+      <!-- Ghost alpha=1 ellipse & live modulated ellipse (exact polygon paths) -->
+      <path data-el="ell-ghost" d="" fill="none" stroke="rgba(26,28,32,0.22)" stroke-width="1.2" stroke-dasharray="4 3"/>
+      <path data-el="ell-live" d="" fill="rgba(184,67,39,0.08)" stroke="#B84327" stroke-width="1.9"/>
+
+      <!-- Output semi-axes: fixed sigma1*v1 (Viridian) and scaled alpha*sigma2*v2 (Terracotta) -->
+      <line data-el="v1" x1="534" y1="142" x2="626" y2="97" stroke="#2A6F4E" stroke-width="2.3" marker-end="url(#{{ $uid }}-g)"/>
+      <line data-el="v2" x1="534" y1="142" x2="510" y2="92" stroke="#B84327" stroke-width="2.3" marker-end="url(#{{ $uid }}-r)"/>
+
+      <!-- Live mapped vector c W_OV -->
+      <line data-el="yvec" x1="534" y1="142" x2="600" y2="90" stroke="#A86A14" stroke-width="2.5" marker-end="url(#{{ $uid }}-o)"/>
+      <circle data-el="ydot" cx="600" cy="90" r="4.2" fill="#A86A14"/>
+      <circle cx="534" cy="142" r="3" fill="#1A1C20"/>
+
+      <text data-el="v1-lbl" x="631" y="96" font-size="12.5" font-weight="600" fill="#2A6F4E">σ₁v₁</text>
+      <text data-el="v2-lbl" x="468" y="88" font-size="12.5" font-weight="600" fill="#B84327">ασ₂v₂</text>
+      <text data-el="ylbl" x="606" y="82" font-size="12" font-weight="600" fill="#A86A14" font-style="italic">cW<tspan baseline-shift="sub" font-size="8.5" font-style="normal">α</tspan></text>
+    </svg>
+
+    <div class="fig-controls">
+      <div class="fig-rail-wrap">
+        <span class="fig-param" data-el="a-readout">α = 0.35</span>
+        <div class="fig-rail" data-el="rail" role="slider" tabindex="0" aria-label="Modulation factor alpha" aria-valuemin="0" aria-valuemax="2" aria-valuenow="0.35">
+          <div class="fig-rail-track">
+            <div class="fig-rail-fill" data-el="rail-fill" style="width:17.5%"></div>
+            <div class="fig-rail-thumb" data-el="rail-thumb" style="left:17.5%"></div>
+          </div>
+        </div>
+      </div>
+      <div class="fig-stops">
+        <button type="button" class="fig-stop" data-val="0">α = 0</button>
+        <button type="button" class="fig-stop" data-val="1">α = 1</button>
+        <button type="button" class="fig-stop" data-val="1.8">α = 1.8</button>
+      </div>
+      <div class="fig-readout-row" data-el="coords"></div>
+    </div>
+  </div>
+  <figcaption>
+    {{- if $isKo -}}
+    Eq. 9의 기하학적 작용. 왼쪽 단위원 위의 입력 벡터 <span style="color:#A86A14;font-weight:600">c</span>를 직접 끌거나 아래 <strong>α</strong>를 조절해 보면, α = 0에서 개념 축(<span style="color:#B84327">u₂ → v₂</span>)의 출력만 0으로 붕괴하고 직교 축(<span style="color:#2A6F4E">σ₁v₁</span>)은 변하지 않음을 확인할 수 있다.
+    {{- else -}}
+    Geometry of Eq. 9. Drag the input vector <span style="color:#A86A14;font-weight:600">c</span> directly around the unit circle or scrub <strong>α</strong>: at α = 0 the concept axis (<span style="color:#B84327">u₂ → v₂</span>) collapses flat while the orthogonal axis (<span style="color:#2A6F4E">σ₁v₁</span>) stays invariant.
+    {{- end -}}
+  </figcaption>
+</figure>
+<script>
+(function () {
+  var root = document.getElementById('{{ $uid }}');
+  if (!root) return;
+  var svg = root.querySelector('svg');
+  var q = function (k) { return root.querySelector('[data-el="' + k + '"]'); };
+
+  // Exact 2x2 SVD matching aaai2026/sample.py
+  var uAng = 18 * Math.PI / 180, vAng = 26 * Math.PI / 180;
+  var U1 = [Math.cos(uAng), Math.sin(uAng)], U2 = [-Math.sin(uAng), Math.cos(uAng)];
+  var V1 = [Math.cos(vAng), Math.sin(vAng)], V2 = [-Math.sin(vAng), Math.cos(vAng)];
+  var S1 = 1.54, S2 = 0.84;
+  var OL = [150, 142], OR = [534, 142], SL = 76, SR = 66;
+
+  var alpha = 0.35;
+  var theta = 62 * Math.PI / 180; // angle of c on unit circle
+
+  function toSvg(o, s, x, y) { return [o[0] + s * x, o[1] - s * y]; }
+  function mapVec(c, a) {
+    var p1 = c[0] * U1[0] + c[1] * U1[1];
+    var p2 = c[0] * U2[0] + c[1] * U2[1];
+    return [S1 * p1 * V1[0] + a * S2 * p2 * V2[0], S1 * p1 * V1[1] + a * S2 * p2 * V2[1], p1, p2];
+  }
+  function ellipsePath(a) {
+    var d = '', N = 72;
+    for (var i = 0; i <= N; i++) {
+      var t = (i / N) * Math.PI * 2;
+      var y = mapVec([Math.cos(t), Math.sin(t)], a);
+      var pt = toSvg(OR, SR, y[0], y[1]);
+      d += (i === 0 ? 'M' : 'L') + pt[0].toFixed(1) + ' ' + pt[1].toFixed(1) + ' ';
+    }
+    return d + 'Z';
+  }
+
+  q('ell-ghost').setAttribute('d', ellipsePath(1.0));
+  var v1Tip = toSvg(OR, SR, S1 * V1[0], S1 * V1[1]);
+  q('v1').setAttribute('x2', v1Tip[0].toFixed(1));
+  q('v1').setAttribute('y2', v1Tip[1].toFixed(1));
+  q('v1-lbl').setAttribute('x', (v1Tip[0] + 6).toFixed(1));
+  q('v1-lbl').setAttribute('y', (v1Tip[1] - 4).toFixed(1));
+
+  function draw() {
+    var c = [Math.cos(theta), Math.sin(theta)];
+    var cPt = toSvg(OL, SL, c[0], c[1]);
+    var res = mapVec(c, alpha);
+    var p1 = res[2], p2 = res[3];
+    var f1 = toSvg(OL, SL, p1 * U1[0], p1 * U1[1]);
+    var f2 = toSvg(OL, SL, p2 * U2[0], p2 * U2[1]);
+
+    q('proj1').setAttribute('x1', cPt[0].toFixed(1)); q('proj1').setAttribute('y1', cPt[1].toFixed(1));
+    q('proj1').setAttribute('x2', f1[0].toFixed(1));  q('proj1').setAttribute('y2', f1[1].toFixed(1));
+    q('proj2').setAttribute('x1', cPt[0].toFixed(1)); q('proj2').setAttribute('y1', cPt[1].toFixed(1));
+    q('proj2').setAttribute('x2', f2[0].toFixed(1));  q('proj2').setAttribute('y2', f2[1].toFixed(1));
+
+    q('cvec').setAttribute('x2', cPt[0].toFixed(1)); q('cvec').setAttribute('y2', cPt[1].toFixed(1));
+    var hc = q('handle-c').querySelectorAll('circle');
+    hc[0].setAttribute('cx', cPt[0].toFixed(1)); hc[0].setAttribute('cy', cPt[1].toFixed(1));
+    hc[1].setAttribute('cx', cPt[0].toFixed(1)); hc[1].setAttribute('cy', cPt[1].toFixed(1));
+    var cLab = toSvg(OL, SL + 17, c[0], c[1]);
+    q('clbl').setAttribute('x', (cLab[0] - 4).toFixed(1)); q('clbl').setAttribute('y', (cLab[1] + 4).toFixed(1));
+
+    q('ell-live').setAttribute('d', ellipsePath(alpha));
+    q('ell-live').setAttribute('fill-opacity', alpha < 0.04 ? '0' : '1');
+
+    var v2Tip = toSvg(OR, SR, alpha * S2 * V2[0], alpha * S2 * V2[1]);
+    q('v2').setAttribute('x2', v2Tip[0].toFixed(1)); q('v2').setAttribute('y2', v2Tip[1].toFixed(1));
+    q('v2').setAttribute('opacity', alpha < 0.03 ? '0.12' : '1');
+    var v2Lab = toSvg(OR, SR, Math.max(alpha, 0.35) * S2 * V2[0], Math.max(alpha, 0.35) * S2 * V2[1]);
+    q('v2-lbl').setAttribute('x', (v2Lab[0] - 34).toFixed(1)); q('v2-lbl').setAttribute('y', (v2Lab[1] - 6).toFixed(1));
+    q('v2-lbl').textContent = alpha < 0.03 ? '0' : (Math.abs(alpha - 1) < 0.02 ? 'σ₂v₂' : alpha.toFixed(1) + 'σ₂v₂');
+
+    var yPt = toSvg(OR, SR, res[0], res[1]);
+    q('yvec').setAttribute('x2', yPt[0].toFixed(1)); q('yvec').setAttribute('y2', yPt[1].toFixed(1));
+    q('ydot').setAttribute('cx', yPt[0].toFixed(1)); q('ydot').setAttribute('cy', yPt[1].toFixed(1));
+    var yn = Math.hypot(res[0], res[1]) || 1;
+    q('ylbl').setAttribute('x', (yPt[0] + 19 * res[0] / yn - 10).toFixed(1));
+    q('ylbl').setAttribute('y', (yPt[1] - 18 * res[1] / yn + 4).toFixed(1));
+
+    var pct = (alpha / 2.0) * 100;
+    q('rail-fill').style.width = pct.toFixed(2) + '%';
+    q('rail-thumb').style.left = pct.toFixed(2) + '%';
+    q('a-readout').textContent = 'α = ' + alpha.toFixed(2);
+    q('mid-a').textContent = 'α = ' + alpha.toFixed(2);
+    q('rail').setAttribute('aria-valuenow', alpha.toFixed(2));
+    q('coords').innerHTML =
+      '<span style="color:#2A6F4E">σ₁⟨c,u₁⟩=' + (S1 * p1).toFixed(2) + '</span>' +
+      '<span style="color:#B84327">ασ₂⟨c,u₂⟩=' + (alpha * S2 * p2).toFixed(2) + '</span>';
+
+    root.querySelectorAll('.fig-stop').forEach(function (b) {
+      b.classList.toggle('is-active', Math.abs(parseFloat(b.dataset.val) - alpha) < 0.04);
+    });
+  }
+
+  // Direct drag on c handle
+  var dragC = false;
+  function updateCFromEvent(e) {
+    var rect = svg.getBoundingClientRect();
+    var sx = (e.clientX - rect.left) * (680 / rect.width);
+    var sy = (e.clientY - rect.top) * (264 / rect.height);
+    theta = Math.atan2(OL[1] - sy, sx - OL[0]);
+    draw();
+  }
+  q('handle-c').addEventListener('pointerdown', function (e) {
+    dragC = true; q('handle-c').setPointerCapture(e.pointerId); updateCFromEvent(e);
+  });
+  q('handle-c').addEventListener('pointermove', function (e) { if (dragC) updateCFromEvent(e); });
+  q('handle-c').addEventListener('pointerup', function () { dragC = false; });
+
+  // Precision hairline rail for alpha
+  var rail = q('rail'), dragA = false;
+  function setAlphaFromEvent(e) {
+    var r = rail.getBoundingClientRect();
+    var t = Math.min(Math.max((e.clientX - r.left) / r.width, 0), 1);
+    alpha = Math.round(t * 200) / 100;
+    if (Math.abs(alpha - 1.0) < 0.03) alpha = 1.0;
+    if (alpha < 0.03) alpha = 0.0;
+    draw();
+  }
+  rail.addEventListener('pointerdown', function (e) {
+    dragA = true; rail.classList.add('is-dragging'); rail.setPointerCapture(e.pointerId); setAlphaFromEvent(e);
+  });
+  rail.addEventListener('pointermove', function (e) { if (dragA) setAlphaFromEvent(e); });
+  rail.addEventListener('pointerup', function () { dragA = false; rail.classList.remove('is-dragging'); });
+  rail.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowUp') { alpha = Math.min(2, +(alpha + 0.05).toFixed(2)); draw(); e.preventDefault(); }
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') { alpha = Math.max(0, +(alpha - 0.05).toFixed(2)); draw(); e.preventDefault(); }
+  });
+
+  root.querySelectorAll('.fig-stop').forEach(function (b) {
+    b.addEventListener('click', function () { alpha = parseFloat(b.dataset.val); draw(); });
+  });
+  draw();
+})();
+</script>

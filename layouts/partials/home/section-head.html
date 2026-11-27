@@ -1,0 +1,6 @@
+{{- /* Section heading with an optional right-aligned link.
+       dict "title" "News" ["link" "/projects/" "label" "View all"] */ -}}
+<div class="section-head">
+<h2>{{ .title }}</h2>
+{{- with .link }}<a href="{{ . | relLangURL }}">{{ $.label }} →</a>{{ end }}
+</div>
